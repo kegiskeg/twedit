@@ -1,0 +1,1182 @@
+#![windows_subsystem = "windows"]
+
+mod descriptions;
+mod theme;
+
+use descriptions::Descriptions;
+use esf_parser::objects::{EsfDocument, EsfValue, NodeId, NodeKind, NO_PARENT};
+use std::collections::{HashMap, HashSet};
+use std::sync::Arc;
+use std::time::Duration;
+use windows_core::Result;
+use windows_reactor::*;
+use tracing::{info, error};
+use tracing_subscriber::fmt::writer::MakeWriterExt;
+
+const DEFAULT_SAVE_PATH: &str =
+    r"C:\Projects\Rust\_old\esfeditor\saves\test_save.empire_save_multiplayer";
+const DESCRIPTIONS_PATH: &str = r"C:\Projects\Rust\_old\esfeditor\NodesDescriptions.xml";
+
+/// Cap on materialized children per tree node; huge poly nodes (region lists,
+/// unit rosters) would otherwise stall the XAML tree view.
+const MAX_TREE_CHILDREN: usize = 1000;
+/// Cap on value rows in the grid; each row hosts a live XAML text box.
+const MAX_VALUE_ROWS: usize = 200;
+const SEARCH_RESULT_LIMIT: usize = 200;
+
+/// Arc-backed document handle with pointer-identity equality, so state
+/// comparisons never deep-compare a 100MB document.
+#[derive(Clone, Default)]
+struct DocState {
+    doc: Option<Arc<EsfDocument>>,
+    /// Path the document was loaded from / last saved to.
+    path: String,
+}
+
+impl PartialEq for DocState {
+    fn eq(&self, other: &Self) -> bool {
+        let same_doc = match (&self.doc, &other.doc) {
+            (Some(a), Some(b)) => Arc::ptr_eq(a, b),
+            (None, None) => true,
+            _ => false,
+        };
+        same_doc && self.path == other.path
+    }
+}
+
+#[derive(Clone, Default)]
+struct DescState(Option<Arc<Descriptions>>);
+
+impl PartialEq for DescState {
+    fn eq(&self, other: &Self) -> bool {
+        match (&self.0, &other.0) {
+            (Some(a), Some(b)) => Arc::ptr_eq(a, b),
+            (None, None) => true,
+            _ => false,
+        }
+    }
+}
+
+/// Edits staged in the UI, keyed by global value id.
+type Edits = HashMap<u32, EsfValue>;
+
+// The tree widget only reports the clicked label text, so the arena node id
+// must travel inside the label. To keep labels visually clean (like the old
+// editor), the id is appended as invisible characters: a U+2063 marker
+// followed by 32 bits encoded as U+200B (0) / U+200C (1).
+const ID_MARK: char = '\u{2063}';
+const ID_ZERO: char = '\u{200B}';
+const ID_ONE: char = '\u{200C}';
+
+fn encode_node_id(id: NodeId) -> String {
+    let mut out = String::with_capacity(33);
+    out.push(ID_MARK);
+    for bit in (0..32).rev() {
+        out.push(if (id >> bit) & 1 == 1 { ID_ONE } else { ID_ZERO });
+    }
+    out
+}
+
+/// Extract the invisible arena node id from a tree label.
+fn label_node_id(label: &str) -> Option<NodeId> {
+    let start = label.rfind(ID_MARK)?;
+    let mut id: NodeId = 0;
+    let mut bits = 0;
+    for c in label[start..].chars().skip(1) {
+        match c {
+            ID_ZERO => id <<= 1,
+            ID_ONE => id = (id << 1) | 1,
+            _ => break,
+        }
+        bits += 1;
+        if bits == 32 {
+            return Some(id);
+        }
+    }
+    None
+}
+
+fn node_label(doc: &EsfDocument, id: NodeId, record_index: usize) -> String {
+    let node = doc.node(id);
+    let visible = match node.kind {
+        NodeKind::Record => format!("{} ({})", doc.node_name(id), record_index),
+        NodeKind::Poly => format!("{} ({})", doc.node_name(id), doc.child_count(id)),
+        NodeKind::Single => doc.node_name(id).to_string(),
+    };
+    format!("{visible}{}", encode_node_id(id))
+}
+
+/// Materialize the visible portion of the arena into TreeNodeDefs.
+///
+/// The tree_view widget is declarative with no on_expanding callback, so we
+/// materialize children of every expanded node plus one extra level (so
+/// collapsed-but-visible nodes still show an expander chevron). Invoking a
+/// node toggles it in the expanded set, which rebuilds the defs one level
+/// deeper — click-to-drill-down lazy loading.
+fn build_node_def(
+    doc: &EsfDocument,
+    id: NodeId,
+    record_index: usize,
+    expanded: &HashSet<NodeId>,
+    materialize_children: bool,
+) -> TreeNodeDef {
+    let mut def = tree_node(node_label(doc, id, record_index));
+    let is_expanded = expanded.contains(&id);
+    if is_expanded {
+        def = def.expanded();
+    }
+    if materialize_children || is_expanded {
+        let total = doc.child_count(id);
+        for (index, child) in doc.children(id).take(MAX_TREE_CHILDREN).enumerate() {
+            def = def.child(build_node_def(doc, child, index, expanded, is_expanded));
+        }
+        if total > MAX_TREE_CHILDREN {
+            def = def.child(tree_node(format!(
+                "… {} more entries not shown",
+                total - MAX_TREE_CHILDREN
+            )));
+        }
+    }
+    def
+}
+
+fn build_tree(doc: &EsfDocument, expanded: &HashSet<NodeId>) -> Vec<TreeNodeDef> {
+    vec![build_node_def(doc, doc.root, 0, expanded, true)]
+}
+
+/// Expand every ancestor of `id` so it becomes visible in the tree.
+fn expand_path_to(doc: &EsfDocument, id: NodeId, expanded: &mut HashSet<NodeId>) {
+    let mut current = id;
+    loop {
+        let parent = doc.node(current).parent;
+        if parent == NO_PARENT {
+            break;
+        }
+        expanded.insert(parent);
+        current = parent;
+    }
+}
+
+// Column widths for the value grid (Value | Original | Type | Description).
+const COL_VALUE: f64 = 230.0;
+const COL_ORIGINAL: f64 = 200.0;
+const COL_TYPE: f64 = 110.0;
+
+/// Shared horizontal inset so header and rows line up column-for-column.
+const ROW_INSET: f64 = 8.0;
+/// Width of the draggable gap between the tree pane and the content pane.
+const SPLITTER_W: f64 = 10.0;
+
+/// Wrap content in layered translucent borders that approximate a soft
+/// drop shadow (reactor has no composition ThemeShadow support yet).
+fn shadowed(content: impl Into<Element>) -> Element {
+    let inner = border(content)
+        .border_brush(Color { a: 0x40, r: 0, g: 0, b: 0 })
+        .border_thickness(Thickness {
+            left: 0.0,
+            top: 0.0,
+            right: 1.0,
+            bottom: 2.0,
+        })
+        .corner_radius(7.0);
+    let mid = border(inner)
+        .border_brush(Color { a: 0x20, r: 0, g: 0, b: 0 })
+        .border_thickness(Thickness {
+            left: 1.0,
+            top: 0.0,
+            right: 1.0,
+            bottom: 2.0,
+        })
+        .corner_radius(8.0);
+    border(mid)
+        .border_brush(Color { a: 0x0E, r: 0, g: 0, b: 0 })
+        .border_thickness(Thickness {
+            left: 1.0,
+            top: 1.0,
+            right: 2.0,
+            bottom: 2.0,
+        })
+        .corner_radius(9.0)
+        .into()
+}
+
+/// A rounded, stroked, shadowed panel.
+fn card(content: impl Into<Element>, background: Color) -> Element {
+    shadowed(
+        border(content)
+            .background(background)
+            .border_brush(theme::BORDER)
+            .border_thickness(Thickness::uniform(1.0))
+            .corner_radius(6.0),
+    )
+}
+
+/// Thin vertical separator for toolbar groups.
+fn toolbar_divider() -> Element {
+    Element::from(border(text_block("")))
+        .background(theme::BORDER)
+        .width(1.0)
+        .height(22.0)
+        .margin(Thickness::xy(4.0, 0.0))
+        .vertical_alignment(VerticalAlignment::Center)
+}
+
+/// Format an integer with thousands separators (2164695 -> "2,164,695").
+fn fmt_count(n: usize) -> String {
+    let digits = n.to_string();
+    let mut out = String::with_capacity(digits.len() + digits.len() / 3);
+    for (i, c) in digits.chars().enumerate() {
+        if i > 0 && (digits.len() - i) % 3 == 0 {
+            out.push(',');
+        }
+        out.push(c);
+    }
+    out
+}
+
+// --- Recent files, persisted to %APPDATA%\twedit\recent.txt ---
+
+const MAX_RECENT: usize = 8;
+
+fn recent_file_path() -> Option<std::path::PathBuf> {
+    let appdata = std::env::var_os("APPDATA")?;
+    Some(std::path::PathBuf::from(appdata).join("twedit").join("recent.txt"))
+}
+
+fn load_recent() -> Vec<String> {
+    let Some(path) = recent_file_path() else {
+        return Vec::new();
+    };
+    std::fs::read_to_string(path)
+        .map(|text| {
+            text.lines()
+                .map(str::trim)
+                .filter(|l| !l.is_empty())
+                .take(MAX_RECENT)
+                .map(String::from)
+                .collect()
+        })
+        .unwrap_or_default()
+}
+
+/// Move `path` to the front of the recent list on disk; returns the new list.
+fn push_recent(path: &str) -> Vec<String> {
+    let mut list = load_recent();
+    list.retain(|p| p != path);
+    list.insert(0, path.to_string());
+    list.truncate(MAX_RECENT);
+    if let Some(file) = recent_file_path() {
+        if let Some(dir) = file.parent() {
+            let _ = std::fs::create_dir_all(dir);
+        }
+        let _ = std::fs::write(file, list.join("\n"));
+    }
+    list
+}
+
+/// Well-known nodes worth one-click jumps in Total War saves. Each entry
+/// just runs a node-name search, so names missing from a particular game's
+/// saves simply return no results.
+const GO_TO_TARGETS: &[&str] = &[
+    "WORLD",
+    "FACTION_ARRAY",
+    "REGIONS_ARRAY",
+    "PLAYERS_ARRAY",
+    "CREATED_CHARACTER_ARRAY",
+    "PENDING_BATTLE",
+    "TRADE_ROUTES",
+    "CAMPAIGN_MODEL",
+];
+
+fn grid_header() -> Element {
+    border(
+        hstack((
+            text_block("Value").width(COL_VALUE).foreground(ThemeRef::SecondaryText),
+            text_block("Original").width(COL_ORIGINAL).foreground(ThemeRef::SecondaryText),
+            text_block("Type").width(COL_TYPE).foreground(ThemeRef::SecondaryText),
+            text_block("Description").foreground(ThemeRef::SecondaryText),
+        ))
+        .spacing(8.0),
+    )
+    .background(theme::HEADER)
+    .border_brush(theme::BORDER)
+    .border_thickness(Thickness {
+        left: 0.0,
+        top: 0.0,
+        right: 0.0,
+        bottom: 1.0,
+    })
+    .padding(Thickness {
+        left: ROW_INSET,
+        top: 6.0,
+        right: ROW_INSET,
+        bottom: 6.0,
+    })
+    .into()
+}
+
+/// One row of the value grid.
+#[allow(clippy::too_many_arguments)]
+fn value_row(
+    doc: &EsfDocument,
+    value_id: u32,
+    original: &EsfValue,
+    current: &EsfValue,
+    description: Option<&str>,
+    edits: &Edits,
+    set_edits: &AsyncSetState<Edits>,
+    edit_mode: bool,
+) -> Element {
+    let is_edited = edits.contains_key(&value_id);
+
+    let value_cell: Element = if edit_mode && original.is_editable() {
+        let original = original.clone();
+        let edits = edits.clone();
+        let set_edits = set_edits.clone();
+        let mut cell = text_box(doc.format_value(current)).width(COL_VALUE).on_text_changed(
+            move |text: String| {
+                let mut next = edits.clone();
+                match original.parse_same_type(&text) {
+                    Some(parsed) if parsed != original => {
+                        next.insert(value_id, parsed);
+                    }
+                    Some(_) => {
+                        // Text matches the original again: unstage.
+                        next.remove(&value_id);
+                    }
+                    // Unparseable (often a typing intermediate like "-"):
+                    // leave staged edits untouched.
+                    None => return,
+                }
+                set_edits.call(next);
+            },
+        );
+        if is_edited {
+            cell = cell.foreground(ThemeRef::AccentText);
+        }
+        cell.into()
+    } else {
+        let mut cell = text_block(doc.format_value(current)).width(COL_VALUE);
+        if is_edited {
+            cell = cell.foreground(ThemeRef::AccentText);
+        }
+        cell.into()
+    };
+
+    border(
+        hstack((
+            value_cell,
+            text_block(doc.format_value(original))
+                .width(COL_ORIGINAL)
+                .foreground(if is_edited {
+                    ThemeRef::PrimaryText
+                } else {
+                    ThemeRef::SecondaryText
+                }),
+            text_block(EsfDocument::value_type_name(original))
+                .width(COL_TYPE)
+                .foreground(ThemeRef::SecondaryText),
+            text_block(description.unwrap_or_default()).foreground(ThemeRef::SecondaryText),
+        ))
+        .spacing(8.0),
+    )
+    .border_brush(theme::BORDER)
+    .border_thickness(Thickness {
+        left: 0.0,
+        top: 0.0,
+        right: 0.0,
+        bottom: 1.0,
+    })
+    .padding(Thickness {
+        left: ROW_INSET,
+        top: 3.0,
+        right: ROW_INSET,
+        bottom: 3.0,
+    })
+    .into()
+}
+
+fn value_rows(
+    doc: &EsfDocument,
+    id: NodeId,
+    descs: &DescState,
+    edits: &Edits,
+    set_edits: &AsyncSetState<Edits>,
+    edit_mode: bool,
+) -> Vec<Element> {
+    let node_descs = descs
+        .0
+        .as_ref()
+        .and_then(|map| map.get(doc.node_name(id)));
+
+    let mut rows = Vec::new();
+    for (index, (value_id, record)) in doc.node_value_entries(id).enumerate() {
+        if index >= MAX_VALUE_ROWS {
+            let total = doc.node_value_entries(id).count();
+            rows.push(
+                text_block(format!("… {} more values not shown", total - MAX_VALUE_ROWS))
+                    .foreground(ThemeRef::SecondaryText)
+                    .into(),
+            );
+            break;
+        }
+        let description = node_descs
+            .and_then(|list| list.get(index))
+            .and_then(|d| d.as_deref());
+        let current = edits.get(&value_id).unwrap_or(&record.value);
+        rows.push(value_row(
+            doc,
+            value_id,
+            &record.value,
+            current,
+            description,
+            edits,
+            set_edits,
+            edit_mode,
+        ));
+    }
+    if rows.is_empty() {
+        rows.push(
+            text_block("This node has no values.")
+                .foreground(ThemeRef::SecondaryText)
+                .into(),
+        );
+    }
+    rows
+}
+
+fn app_shell(cx: &mut RenderCx) -> Element {
+    let (doc_state, set_doc_state) = cx.use_async_state(DocState::default());
+    let (descs, set_descs) = cx.use_async_state(DescState::default());
+    let (is_busy, set_is_busy) = cx.use_async_state(false);
+    let (status, set_status) = cx.use_async_state(String::new());
+    let (has_autoloaded, set_has_autoloaded) = cx.use_state(false);
+
+    let (expanded, set_expanded) = cx.use_async_state(HashSet::<NodeId>::from([0]));
+    let (selected, set_selected) = cx.use_async_state(None::<NodeId>);
+    let (edits, set_edits) = cx.use_async_state(Edits::new());
+
+    let (search_query, set_search_query) = cx.use_state(String::new());
+    let (search_results, set_search_results) = cx.use_async_state(Vec::<(NodeId, String)>::new());
+    let (is_searching, set_is_searching) = cx.use_async_state(false);
+
+    let (tree_width, set_tree_width) = cx.use_state(320.0_f64);
+    let (dragging, set_dragging) = cx.use_state(false);
+    let (edit_mode, set_edit_mode) = cx.use_state(false);
+    let (recent, set_recent) = cx.use_async_state(Vec::<String>::new());
+    // Flyout item clicks fire closures captured when the flyout was first
+    // built (menu items don't change, so the backend never re-wires them).
+    // Those stale closures must not touch document snapshots directly —
+    // instead they write the request into state, and render acts on it.
+    let (pending_goto, set_pending_goto) = cx.use_state(None::<String>);
+    let (pending_open, set_pending_open) = cx.use_state(None::<String>);
+
+    // --- File loading ---
+    let start_load = {
+        let set_doc = set_doc_state.clone();
+        let set_busy = set_is_busy.clone();
+        let set_status = set_status.clone();
+        let set_expanded = set_expanded.clone();
+        let set_selected = set_selected.clone();
+        let set_results = set_search_results.clone();
+        let set_edits = set_edits.clone();
+        let set_recent = set_recent.clone();
+        move |path: String| {
+            set_busy.call(true);
+            set_status.call(format!("Loading {path}…"));
+            set_expanded.call(HashSet::from([0]));
+            set_selected.call(None);
+            set_results.call(Vec::new());
+            set_edits.call(Edits::new());
+            let set_doc = set_doc.clone();
+            let set_busy = set_busy.clone();
+            let set_status = set_status.clone();
+            let set_recent = set_recent.clone();
+            std::thread::spawn(move || {
+                let started = std::time::Instant::now();
+                info!("Starting to load file: {}", path);
+                match esf_parser::parser::load_file(&path) {
+                    Ok(doc) => {
+                        let elapsed = started.elapsed();
+                        info!("Successfully loaded {} in {:?}", path, elapsed);
+                        set_status.call(format!(
+                            "Opened {path} in {:.2?}",
+                            elapsed
+                        ));
+                        set_recent.call(push_recent(&path));
+                        set_doc.call(DocState {
+                            doc: Some(Arc::new(doc)),
+                            path,
+                        });
+                    }
+                    Err(e) => {
+                        error!("Failed to open {}: {}", path, e);
+                        set_status.call(format!("Failed to open {path}: {e}"));
+                        set_doc.call(DocState::default());
+                        
+                        let _ = rfd::MessageDialog::new()
+                            .set_title("twedit - Load Error")
+                            .set_level(rfd::MessageLevel::Error)
+                            .set_description(&format!("Failed to open {}:\n\n{}", path, e))
+                            .show();
+                    }
+                }
+                set_busy.call(false);
+            });
+        }
+    };
+
+    if !has_autoloaded {
+        set_has_autoloaded.call(true);
+        // Pin the app to its own theme, independent of the Windows setting.
+        set_requested_theme(RequestedTheme::Dark);
+        // Window/taskbar icon: AppWindow.SetIcon wants a file path, so
+        // materialize the embedded .ico into the temp dir.
+        let icon_path = std::env::temp_dir().join("twedit-icon.ico");
+        if std::fs::write(&icon_path, include_bytes!("../assets/icon.ico") as &[u8]).is_ok() {
+            set_window_icon(icon_path.to_string_lossy().into_owned());
+        }
+        // Node descriptions from the legacy editor, if available.
+        let set_descs = set_descs.clone();
+        std::thread::spawn(move || {
+            if let Some(map) = descriptions::load_descriptions(DESCRIPTIONS_PATH) {
+                set_descs.call(DescState(Some(Arc::new(map))));
+            }
+        });
+        set_recent.call(load_recent());
+        if std::path::Path::new(DEFAULT_SAVE_PATH).exists() {
+            start_load(DEFAULT_SAVE_PATH.to_string());
+        } else {
+            set_status.call("Use Open to load a save file.".to_string());
+        }
+    }
+
+    // --- Open / Save / Save As ---
+    let on_open = {
+        let start_load = start_load.clone();
+        move || {
+            let start_load = start_load.clone();
+            std::thread::spawn(move || {
+                let picked = rfd::FileDialog::new()
+                    .add_filter("Total War saves / ESF", &["esf", "empire_save", "empire_save_multiplayer"])
+                    .add_filter("All files", &["*"])
+                    .pick_file();
+                if let Some(path) = picked {
+                    start_load(path.display().to_string());
+                }
+            });
+        }
+    };
+
+    let save_to = {
+        let doc_state = doc_state.clone();
+        let edits = edits.clone();
+        let set_doc = set_doc_state.clone();
+        let set_edits = set_edits.clone();
+        let set_status = set_status.clone();
+        let set_busy = set_is_busy.clone();
+        move |path: String| {
+            let Some(doc) = doc_state.doc.clone() else {
+                return;
+            };
+            let edits = edits.clone();
+            let set_doc = set_doc.clone();
+            let set_edits = set_edits.clone();
+            let set_status = set_status.clone();
+            let set_busy = set_busy.clone();
+            set_busy.call(true);
+            set_status.call(format!("Saving {path}…"));
+            std::thread::spawn(move || {
+                info!("Starting to save file: {}", path);
+                let (bytes, applied) = doc.bytes_with_edits(&edits);
+                match std::fs::write(&path, &bytes) {
+                    Ok(()) => {
+                        info!("Successfully wrote file {}. Applied {} edits. Re-parsing...", path, applied);
+                        // Refresh the document from the just-written bytes so
+                        // Original columns and future edits see current data.
+                        match esf_parser::parser::parse_bytes(bytes) {
+                            Ok(new_doc) => {
+                                info!("Successfully re-parsed file {}", path);
+                                set_doc.call(DocState {
+                                    doc: Some(Arc::new(new_doc)),
+                                    path: path.clone(),
+                                });
+                                set_edits.call(Edits::new());
+                                set_status
+                                    .call(format!("Saved {applied} change(s) to {path}"));
+                            }
+                            Err(e) => {
+                                error!("Saved, but failed to re-parse {}: {}", path, e);
+                                set_status.call(format!("Saved, but failed to re-parse: {e}"));
+                                let _ = rfd::MessageDialog::new()
+                                    .set_title("twedit - Re-parse Error")
+                                    .set_level(rfd::MessageLevel::Warning)
+                                    .set_description(&format!("The file was saved, but twedit failed to re-parse it:\n\n{}", e))
+                                    .show();
+                            }
+                        }
+                    }
+                    Err(e) => {
+                        error!("Failed to save {}: {}", path, e);
+                        set_status.call(format!("Failed to save {path}: {e}"));
+                        let _ = rfd::MessageDialog::new()
+                            .set_title("twedit - Save Error")
+                            .set_level(rfd::MessageLevel::Error)
+                            .set_description(&format!("Failed to save {}:\n\n{}", path, e))
+                            .show();
+                    }
+                }
+                set_busy.call(false);
+            });
+        }
+    };
+
+    let on_save = {
+        let save_to = save_to.clone();
+        let path = doc_state.path.clone();
+        move || {
+            if !path.is_empty() {
+                save_to(path.clone());
+            }
+        }
+    };
+
+    let on_save_as = {
+        let save_to = save_to.clone();
+        move || {
+            let save_to = save_to.clone();
+            std::thread::spawn(move || {
+                let picked = rfd::FileDialog::new()
+                    .add_filter("Total War saves / ESF", &["esf", "empire_save", "empire_save_multiplayer"])
+                    .add_filter("All files", &["*"])
+                    .save_file();
+                if let Some(path) = picked {
+                    save_to(path.display().to_string());
+                }
+            });
+        }
+    };
+
+    // --- Search (shared by the search box and the Go To menu) ---
+    let run_search = {
+        let doc_state = doc_state.clone();
+        let set_results = set_search_results.clone();
+        let set_searching = set_is_searching.clone();
+        move |query: String| {
+            let Some(doc) = doc_state.doc.clone() else {
+                return;
+            };
+            let set_results = set_results.clone();
+            let set_searching = set_searching.clone();
+            set_searching.call(true);
+            std::thread::spawn(move || {
+                let hits = doc.search_nodes(&query, SEARCH_RESULT_LIMIT);
+                let results: Vec<(NodeId, String)> = hits
+                    .into_iter()
+                    .map(|id| (id, doc.node_path(id)))
+                    .collect();
+                set_results.call(results);
+                set_searching.call(false);
+            });
+        }
+    };
+    let on_search = {
+        let run_search = run_search.clone();
+        let query = search_query.clone();
+        move || run_search(query.clone())
+    };
+
+    // Execute requests queued by flyout menu clicks (see state comment above).
+    if let Some(query) = pending_goto.clone() {
+        set_pending_goto.call(None);
+        run_search(query);
+    }
+    if let Some(path) = pending_open.clone() {
+        set_pending_open.call(None);
+        start_load(path);
+    }
+
+    // --- Toolbar ---
+    let has_doc = doc_state.doc.is_some();
+    let save_label = if edits.is_empty() {
+        "Save".to_string()
+    } else {
+        format!("Save ({})", edits.len())
+    };
+
+    let recent_button = {
+        let set_pending_open = set_pending_open.clone();
+        button("Recent")
+            .menu_flyout(recent.iter().map(|p| menu_item(p.clone())).collect())
+            .on_item_clicked(move |path: String| set_pending_open.call(Some(path)))
+            .enabled(!recent.is_empty())
+    };
+    let goto_button = {
+        let set_pending_goto = set_pending_goto.clone();
+        button("Go To")
+            .icon(Symbol::Go)
+            .menu_flyout(GO_TO_TARGETS.iter().map(|t| menu_item(*t)).collect())
+            .on_item_clicked(move |name: String| set_pending_goto.call(Some(name)))
+            .enabled(has_doc)
+    };
+    let collapse_button = {
+        let set_expanded = set_expanded.clone();
+        button("Collapse")
+            .icon(Symbol::Back)
+            .on_click(move || set_expanded.call(HashSet::from([0])))
+            .enabled(has_doc)
+    };
+    let logs_button = button("Logs")
+        .icon(Symbol::Document)
+        .on_click(|| {
+            let appdata = std::env::var_os("APPDATA")
+                .map(std::path::PathBuf::from)
+                .unwrap_or_else(|| std::path::PathBuf::from("."));
+            let log_dir = appdata.join("twedit").join("logs");
+            let _ = std::process::Command::new("explorer").arg(log_dir).spawn();
+        });
+
+    let toolbar_left = hstack((
+        text_block("twedit")
+            .font_size(14.0)
+            .bold()
+            .foreground(theme::TEXT)
+            .vertical_alignment(VerticalAlignment::Center)
+            .margin(Thickness {
+                left: 2.0,
+                top: 0.0,
+                right: 6.0,
+                bottom: 0.0,
+            }),
+        button("Open").icon(Symbol::OpenFile).on_click(on_open.clone()),
+        recent_button,
+        button(save_label)
+            .icon(Symbol::Save)
+            .on_click(on_save.clone())
+            .enabled(has_doc),
+        button("Save As")
+            .icon(Symbol::SaveLocal)
+            .on_click(on_save_as)
+            .enabled(has_doc),
+        toolbar_divider(),
+        goto_button,
+        collapse_button,
+        toolbar_divider(),
+        logs_button,
+    ))
+    .spacing(6.0);
+
+    let toolbar_right = hstack((
+        text_box(search_query.clone())
+            .placeholder_text("Search nodes…")
+            .width(220.0)
+            .on_text_changed({
+                let set_query = set_search_query.clone();
+                move |text| set_query.call(text)
+            }),
+        button(if is_searching { "Searching…" } else { "Search" })
+            .icon(Symbol::Find)
+            .on_click(on_search)
+            .enabled(has_doc),
+        toolbar_divider(),
+        Element::from(
+            ToggleSwitch::new(edit_mode)
+                .on_content("Edit")
+                .off_content("View")
+                .on_toggled({
+                    let set_edit_mode = set_edit_mode.clone();
+                    move |on| set_edit_mode.call(on)
+                }),
+        )
+        .vertical_alignment(VerticalAlignment::Center),
+    ))
+    .spacing(6.0);
+
+    let toolbar = grid((
+        toolbar_left.grid_column(0),
+        toolbar_right.grid_column(2),
+    ))
+    .columns([GridLength::Auto, GridLength::Star(1.0), GridLength::Auto]);
+
+    // --- Tree pane ---
+    let tree: Element = if is_busy && !has_doc {
+        Element::from(
+            vstack((
+                ProgressRing::indeterminate(),
+                text_block("Parsing save file…"),
+            ))
+            .spacing(8.0)
+            .padding(12.0),
+        )
+        .transition(
+            Some(AnimationConfig::fade_in(Duration::from_millis(200))),
+            None,
+        )
+    } else if let Some(doc) = &doc_state.doc {
+        let defs = build_tree(doc, &expanded);
+        let on_invoked = {
+            let doc = doc.clone();
+            let expanded = expanded.clone();
+            let set_expanded = set_expanded.clone();
+            let set_selected = set_selected.clone();
+            move |label: String| {
+                let Some(id) = label_node_id(&label) else {
+                    return;
+                };
+                if (id as usize) >= doc.nodes.len() {
+                    return;
+                }
+                set_selected.call(Some(id));
+                // Toggle drill-down on structural nodes with children.
+                if doc.child_count(id) > 0 {
+                    let mut next = expanded.clone();
+                    if !next.insert(id) {
+                        next.remove(&id);
+                    }
+                    set_expanded.call(next);
+                }
+            }
+        };
+        Element::from(tree_view(defs).on_item_invoked(on_invoked))
+            .font_size(13.0)
+            .padding(Thickness::xy(4.0, 4.0))
+            .with_key("tree-loaded")
+            .transition(
+                Some(AnimationConfig::fade_in(Duration::from_millis(250))),
+                None,
+            )
+    } else {
+        text_block("No file loaded.").padding(12.0).into()
+    };
+
+    // --- Value grid ---
+    let rows: Vec<Element> = match (&doc_state.doc, selected) {
+        (Some(doc), Some(id)) if (id as usize) < doc.nodes.len() => {
+            value_rows(doc, id, &descs, &edits, &set_edits, edit_mode)
+        }
+        (Some(_), None) => vec![text_block("Select a node to view its values.")
+            .foreground(ThemeRef::SecondaryText)
+            .into()],
+        _ => Vec::new(),
+    };
+
+    let node_info: Element = match (&doc_state.doc, selected) {
+        (Some(doc), Some(id)) if (id as usize) < doc.nodes.len() => {
+            let node = doc.node(id);
+            text_block(format!(
+                "{}   ({:?} v{}, offset 0x{:x}..0x{:x}, {} children, {} values)",
+                doc.node_path(id),
+                node.kind,
+                node.version,
+                node.offset,
+                node.offset_end,
+                fmt_count(doc.child_count(id)),
+                fmt_count(doc.node_values(id).count()),
+            ))
+            .foreground(ThemeRef::SecondaryText)
+            .font_size(12.0)
+            .into()
+        }
+        _ => text_block("").into(),
+    };
+
+    let mut right_rows: Vec<Element> = vec![
+        node_info.padding(Thickness::xy(8.0, 6.0)).grid_row(0),
+        grid_header().grid_row(1),
+        Element::from(scroll_viewer(vstack(rows).spacing(0.0)))
+            .with_key(format!("vals-{selected:?}"))
+            .transition(
+                Some(AnimationConfig::fade_in(Duration::from_millis(150))),
+                None,
+            )
+            .grid_row(2),
+    ];
+    let mut right_row_defs = vec![
+        GridLength::Auto,
+        GridLength::Auto,
+        GridLength::Star(1.0),
+    ];
+    if !search_results.is_empty() {
+        let result_labels: Vec<String> = search_results
+            .iter()
+            .map(|(_, path)| path.clone())
+            .collect();
+        let on_result_selected = {
+            let doc_state = doc_state.clone();
+            let results = search_results.clone();
+            let expanded = expanded.clone();
+            let set_expanded = set_expanded.clone();
+            let set_selected = set_selected.clone();
+            move |index: i32| {
+                let Some(doc) = doc_state.doc.as_ref() else {
+                    return;
+                };
+                let Some((id, _)) = results.get(index as usize) else {
+                    return;
+                };
+                set_selected.call(Some(*id));
+                let mut next = expanded.clone();
+                expand_path_to(doc, *id, &mut next);
+                set_expanded.call(next);
+            }
+        };
+        right_rows.push(
+            text_block(format!("Search results ({})", search_results.len()))
+                .bold()
+                .grid_row(3)
+                .into(),
+        );
+        right_rows.push(
+            Element::from(
+                list_box()
+                    .items(result_labels)
+                    .on_selection_changed(on_result_selected),
+            )
+            .max_height(220.0)
+            .transition(
+                Some(AnimationConfig::fade_in(Duration::from_millis(200))),
+                None,
+            )
+            .grid_row(4),
+        );
+        right_row_defs.push(GridLength::Auto);
+        right_row_defs.push(GridLength::Auto);
+    }
+    let right_pane = grid(right_rows).rows(right_row_defs);
+
+    // --- Status bar: muted dark strip with a small accent tick and
+    // right-aligned document stats / pending-edit count ---
+    let status_left = hstack((
+        Element::from(border(text_block("")))
+            .background(theme::STATUS_BLUE)
+            .width(3.0)
+            .height(14.0)
+            .vertical_alignment(VerticalAlignment::Center),
+        text_block(status.clone())
+            .font_size(12.0)
+            .foreground(ThemeRef::SecondaryText)
+            .vertical_alignment(VerticalAlignment::Center),
+    ))
+    .spacing(8.0);
+
+    let mut status_right_items: Vec<Element> = Vec::new();
+    if !edits.is_empty() {
+        status_right_items.push(
+            text_block(format!(
+                "{} pending edit{}",
+                edits.len(),
+                if edits.len() == 1 { "" } else { "s" }
+            ))
+            .font_size(12.0)
+            .foreground(ThemeRef::AccentText)
+            .into(),
+        );
+    }
+    if edit_mode {
+        status_right_items.push(
+            text_block("EDIT MODE")
+                .font_size(11.0)
+                .bold()
+                .foreground(ThemeRef::AccentText)
+                .into(),
+        );
+    }
+    if let Some(doc) = &doc_state.doc {
+        status_right_items.push(
+            text_block(format!(
+                "{} nodes · {} values",
+                fmt_count(doc.nodes.len()),
+                fmt_count(doc.values.len())
+            ))
+            .font_size(12.0)
+            .foreground(ThemeRef::SecondaryText)
+            .into(),
+        );
+    }
+    let status_right = hstack(status_right_items).spacing(14.0);
+
+    let status_bar = border(
+        grid((
+            status_left.grid_column(0),
+            status_right.grid_column(1),
+        ))
+        .columns([GridLength::Star(1.0), GridLength::Auto]),
+    )
+    .background(theme::HEADER)
+    .border_brush(theme::BORDER)
+    .border_thickness(Thickness {
+        left: 0.0,
+        top: 1.0,
+        right: 0.0,
+        bottom: 0.0,
+    })
+    .padding(Thickness::xy(10.0, 5.0));
+
+    // --- Body: tree card | draggable gap | content card ---
+    let left_card = card(tree, theme::PANEL)
+        .margin(Thickness {
+            left: 10.0,
+            top: 10.0,
+            right: 0.0,
+            bottom: 10.0,
+        })
+        .grid_column(0);
+
+    let handle_line = Element::from(border(text_block("")))
+        .background(if dragging { theme::ACCENT } else { theme::BORDER })
+        .width(2.0)
+        .height(48.0)
+        .horizontal_alignment(HorizontalAlignment::Center)
+        .vertical_alignment(VerticalAlignment::Center);
+    let splitter = {
+        let set_drag = set_dragging.clone();
+        Element::from(border(handle_line))
+            .background(theme::BASE)
+            .on_pointer_pressed(move |_: PointerEventInfo| set_drag.call(true))
+            .grid_column(1)
+    };
+
+    let right_card = card(right_pane, theme::PANEL)
+        .margin(Thickness {
+            left: 0.0,
+            top: 10.0,
+            right: 10.0,
+            bottom: 10.0,
+        })
+        .grid_column(2);
+
+    let mut body_children: Vec<Element> = vec![left_card, splitter, right_card];
+    if dragging {
+        // Full-body transparent layer so the drag keeps tracking even when
+        // the pointer leaves the thin splitter strip.
+        let set_width = set_tree_width.clone();
+        let stop_a = set_dragging.clone();
+        let stop_b = set_dragging.clone();
+        body_children.push(
+            Element::from(border(text_block("")))
+                .background(Color { a: 1, r: 0, g: 0, b: 0 })
+                .grid_column(0)
+                .grid_column_span(3)
+                .on_pointer_moved(move |info: PointerEventInfo| {
+                    if info.is_left_button_pressed {
+                        set_width.call((info.x - SPLITTER_W / 2.0).clamp(200.0, 680.0));
+                    } else {
+                        stop_a.call(false);
+                    }
+                })
+                .on_pointer_released(move |_: PointerEventInfo| stop_b.call(false)),
+        );
+    }
+    let body = grid(body_children).columns([
+        GridLength::Pixel(tree_width),
+        GridLength::Pixel(SPLITTER_W),
+        GridLength::Star(1.0),
+    ]);
+
+    let toolbar_strip = border(toolbar.padding(8.0))
+        .border_brush(theme::BORDER)
+        .border_thickness(Thickness {
+            left: 0.0,
+            top: 0.0,
+            right: 0.0,
+            bottom: 1.0,
+        });
+
+    Element::from(
+        grid((
+            toolbar_strip.grid_row(0),
+            body.grid_row(1),
+            status_bar.grid_row(2),
+        ))
+        .rows([GridLength::Auto, GridLength::Star(1.0), GridLength::Auto]),
+    )
+    .background(theme::BASE)
+    .keyboard_accelerator(KeyboardAccelerator::new(
+        VirtualKey::S,
+        VirtualKeyModifiers::Control,
+        move || on_save(),
+    ))
+    .keyboard_accelerator(KeyboardAccelerator::new(
+        VirtualKey::O,
+        VirtualKeyModifiers::Control,
+        move || on_open(),
+    ))
+}
+
+fn setup_logging_and_panic() -> tracing_appender::non_blocking::WorkerGuard {
+    let appdata = std::env::var_os("APPDATA")
+        .map(std::path::PathBuf::from)
+        .unwrap_or_else(|| std::path::PathBuf::from("."));
+    let log_dir = appdata.join("twedit").join("logs");
+    let _ = std::fs::create_dir_all(&log_dir);
+
+    let file_appender = tracing_appender::rolling::daily(log_dir, "twedit.log");
+    let (non_blocking, guard) = tracing_appender::non_blocking(file_appender);
+
+    // Write to both console and file.
+    tracing_subscriber::fmt()
+        .with_writer(non_blocking.and(std::io::stdout))
+        .with_env_filter("twedit_ui=debug,esf_parser=debug,info")
+        .init();
+
+    std::panic::set_hook(Box::new(|info| {
+        let msg = match info.payload().downcast_ref::<&'static str>() {
+            Some(s) => *s,
+            None => match info.payload().downcast_ref::<String>() {
+                Some(s) => &s[..],
+                None => "Box<dyn Any>",
+            },
+        };
+        let location = info
+            .location()
+            .map(|loc| format!("{}:{}:{}", loc.file(), loc.line(), loc.column()))
+            .unwrap_or_else(|| "".to_string());
+        
+        error!("FATAL PANIC: {} at {}", msg, location);
+
+        let _ = rfd::MessageDialog::new()
+            .set_title("twedit - Fatal Error")
+            .set_level(rfd::MessageLevel::Error)
+            .set_description(&format!(
+                "A fatal error occurred and the application must close.\n\nError: {}\nLocation: {}\n\nPlease check the logs in %APPDATA%\\twedit\\logs for more details.",
+                msg, location
+            ))
+            .show();
+    }));
+
+    guard
+}
+
+fn main() -> Result<()> {
+    let _log_guard = setup_logging_and_panic();
+    info!("twedit application starting");
+
+    App::new()
+        .title("twedit - Total War Save Editor")
+        .inner_size(1200.0, 800.0)
+        .theme_resources(theme::THEME_XAML)
+        .render(app_shell)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn node_id_round_trips_invisibly() {
+        for id in [0u32, 1, 42, 4711, 2_164_694, u32::MAX] {
+            let label = format!("CAMPAIGN_ENV (3){}", encode_node_id(id));
+            assert_eq!(label_node_id(&label), Some(id), "id {id}");
+        }
+        // The suffix must be invisible: no visible chars added.
+        let encoded = encode_node_id(123);
+        assert!(encoded.chars().all(|c| matches!(c, ID_MARK | ID_ZERO | ID_ONE)));
+        // Labels without an encoded id (placeholder rows) decode to None.
+        assert_eq!(label_node_id("… 500 more entries not shown"), None);
+        assert_eq!(label_node_id("plain label"), None);
+        // Truncated encoding decodes to None rather than a wrong id.
+        let mut truncated = format!("x{}", encode_node_id(99));
+        truncated.pop();
+        assert_eq!(label_node_id(&truncated), None);
+    }
+}
