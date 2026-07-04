@@ -1,4 +1,4 @@
-use crate::enums::EsfType;
+use crate::enums::{ArrayElem, EsfType};
 use std::collections::HashMap;
 
 /// Index of a structural node in [`EsfDocument::nodes`].
@@ -7,10 +7,16 @@ pub type NodeId = u32;
 /// Sentinel parent id for the root node.
 pub const NO_PARENT: NodeId = NodeId::MAX;
 
+/// Maximum array elements rendered by [`EsfDocument::format_value`] before
+/// truncating with an ellipsis.
+pub const ARRAY_DISPLAY_LIMIT: usize = 16;
+
 #[derive(Debug, Clone)]
 pub struct EsfHeader {
     pub magic: EsfType,
+    /// ABCE only: always observed as zero.
     pub unknown1: u32,
+    /// ABCE only: Unix timestamp of when the file was written.
     pub unknown2: u32,
     pub offset_node_names: u32,
 }
@@ -70,12 +76,12 @@ pub enum EsfEdit {
 
 impl EsfValue {
     /// Whether this value can be edited. Fixed-size scalars are patched in
-    /// place; strings are replaced via a rewrite with offset fixups. Only
-    /// opaque blobs remain read-only.
+    /// place; strings are replaced via a rewrite with offset fixups. Arrays
+    /// and opaque blocks are read-only for now.
     pub fn is_editable(&self) -> bool {
         !matches!(
             self,
-            EsfValue::Binary { .. } | EsfValue::Unknown109(_) | EsfValue::OptimizedBlock { .. }
+            EsfValue::Array { .. } | EsfValue::Unknown6D(_) | EsfValue::SizedBlock { .. }
         )
     }
 
@@ -103,7 +109,7 @@ impl EsfValue {
 
     /// Parse `text` as a new value of the same variant as `self`.
     /// Returns `None` when the text does not parse or the variant is not
-    /// editable.
+    /// editable in place.
     pub fn parse_same_type(&self, text: &str) -> Option<EsfValue> {
         let text = text.trim();
         Some(match self {
@@ -112,19 +118,23 @@ impl EsfValue {
                 "false" | "0" => EsfValue::Bool(false),
                 _ => return None,
             },
-            EsfValue::Byte(_) => EsfValue::Byte(text.parse().ok()?),
-            EsfValue::Short(_) => EsfValue::Short(text.parse().ok()?),
-            EsfValue::UInt16(_) => EsfValue::UInt16(text.parse().ok()?),
-            EsfValue::UShort(_) => EsfValue::UShort(text.parse().ok()?),
-            EsfValue::Int(_) => EsfValue::Int(text.parse().ok()?),
-            EsfValue::UInt(_) => EsfValue::UInt(text.parse().ok()?),
-            EsfValue::UInt64(_) => EsfValue::UInt64(text.parse().ok()?),
-            EsfValue::Float(_) => EsfValue::Float(text.parse().ok()?),
-            EsfValue::FloatPoint { .. } => {
+            EsfValue::I8(_) => EsfValue::I8(text.parse().ok()?),
+            EsfValue::I16(_) => EsfValue::I16(text.parse().ok()?),
+            EsfValue::LegacyShort(_) => EsfValue::LegacyShort(text.parse().ok()?),
+            EsfValue::I32(_) => EsfValue::I32(text.parse().ok()?),
+            EsfValue::I64(_) => EsfValue::I64(text.parse().ok()?),
+            EsfValue::U8(_) => EsfValue::U8(text.parse().ok()?),
+            EsfValue::U16(_) => EsfValue::U16(text.parse().ok()?),
+            EsfValue::U32(_) => EsfValue::U32(text.parse().ok()?),
+            EsfValue::U64(_) => EsfValue::U64(text.parse().ok()?),
+            EsfValue::F32(_) => EsfValue::F32(text.parse().ok()?),
+            EsfValue::F64(_) => EsfValue::F64(text.parse().ok()?),
+            EsfValue::Angle(_) => EsfValue::Angle(text.parse().ok()?),
+            EsfValue::Coord2D { .. } => {
                 let (x, y) = parse_float_pair(text)?;
-                EsfValue::FloatPoint { x, y }
+                EsfValue::Coord2D { x, y }
             }
-            EsfValue::FloatPoint3D { .. } => {
+            EsfValue::Coord3D { .. } => {
                 let mut parts = split_float_list(text);
                 let x = parts.next()?.parse().ok()?;
                 let y = parts.next()?.parse().ok()?;
@@ -132,7 +142,7 @@ impl EsfValue {
                 if parts.next().is_some() {
                     return None;
                 }
-                EsfValue::FloatPoint3D { x, y, z }
+                EsfValue::Coord3D { x, y, z }
             }
             _ => return None,
         })
@@ -143,19 +153,22 @@ impl EsfValue {
     pub fn payload_bytes(&self) -> Option<Vec<u8>> {
         Some(match self {
             EsfValue::Bool(v) => vec![*v as u8],
-            EsfValue::Byte(v) => vec![*v],
-            EsfValue::Short(v) => v.to_le_bytes().to_vec(),
-            EsfValue::UInt16(v) | EsfValue::UShort(v) => v.to_le_bytes().to_vec(),
-            EsfValue::Int(v) => v.to_le_bytes().to_vec(),
-            EsfValue::UInt(v) => v.to_le_bytes().to_vec(),
-            EsfValue::UInt64(v) => v.to_le_bytes().to_vec(),
-            EsfValue::Float(v) => v.to_le_bytes().to_vec(),
-            EsfValue::FloatPoint { x, y } => {
+            EsfValue::I8(v) => v.to_le_bytes().to_vec(),
+            EsfValue::U8(v) => vec![*v],
+            EsfValue::I16(v) | EsfValue::LegacyShort(v) => v.to_le_bytes().to_vec(),
+            EsfValue::U16(v) | EsfValue::Angle(v) => v.to_le_bytes().to_vec(),
+            EsfValue::I32(v) => v.to_le_bytes().to_vec(),
+            EsfValue::U32(v) => v.to_le_bytes().to_vec(),
+            EsfValue::I64(v) => v.to_le_bytes().to_vec(),
+            EsfValue::U64(v) => v.to_le_bytes().to_vec(),
+            EsfValue::F32(v) => v.to_le_bytes().to_vec(),
+            EsfValue::F64(v) => v.to_le_bytes().to_vec(),
+            EsfValue::Coord2D { x, y } => {
                 let mut out = x.to_le_bytes().to_vec();
                 out.extend_from_slice(&y.to_le_bytes());
                 out
             }
-            EsfValue::FloatPoint3D { x, y, z } => {
+            EsfValue::Coord3D { x, y, z } => {
                 let mut out = x.to_le_bytes().to_vec();
                 out.extend_from_slice(&y.to_le_bytes());
                 out.extend_from_slice(&z.to_le_bytes());
@@ -188,31 +201,54 @@ fn parse_float_pair(text: &str) -> Option<(f32, f32)> {
     Some((x, y))
 }
 
-/// Decoded leaf value. Strings and binary blobs are stored as ranges into
+/// Decoded leaf value. Strings and arrays are stored as ranges into
 /// [`EsfDocument::data`] and decoded on demand, so a 100MB save does not
-/// duplicate its string/blob payloads on the heap.
+/// duplicate its payloads on the heap.
+///
+/// Variant names follow the community taxonomy (taw's spec / RPFM); see
+/// [`crate::enums::EsfValueType`] for byte layouts and provenance notes.
 #[derive(Debug, Clone, PartialEq)]
 pub enum EsfValue {
+    /// Tag 0x01.
     Bool(bool),
-    Byte(u8),
-    Short(i16),
-    UInt16(u16),
-    UShort(u16),
-    Int(i32),
-    UInt(u32),
-    UInt64(u64),
-    Float(f32),
-    FloatPoint { x: f32, y: f32 },
-    FloatPoint3D { x: f32, y: f32, z: f32 },
-    /// UTF-16LE string: `chars` is the number of 2-byte code units at `start`.
+    /// Tag 0x02.
+    I8(i8),
+    /// Tag 0x03.
+    I16(i16),
+    /// Tag 0x00 — C# EsfEditor compatibility, not in the ESF spec.
+    LegacyShort(i16),
+    /// Tag 0x04.
+    I32(i32),
+    /// Tag 0x05.
+    I64(i64),
+    /// Tag 0x06.
+    U8(u8),
+    /// Tag 0x07.
+    U16(u16),
+    /// Tag 0x08.
+    U32(u32),
+    /// Tag 0x09.
+    U64(u64),
+    /// Tag 0x0A.
+    F32(f32),
+    /// Tag 0x0B.
+    F64(f64),
+    /// Tag 0x0C: map coordinates.
+    Coord2D { x: f32, y: f32 },
+    /// Tag 0x0D.
+    Coord3D { x: f32, y: f32, z: f32 },
+    /// Tag 0x0E: `chars` is the number of 2-byte code units at `start`.
     Utf16 { start: u32, chars: u16 },
-    /// ASCII string: `len` bytes at `start`.
+    /// Tag 0x0F: `len` bytes at `start`.
     Ascii { start: u32, len: u16 },
-    /// Opaque sized block (types 0x41-0x4d); byte range into the file data.
-    Binary { type_byte: u8, start: u32, end: u32 },
-    Unknown109([u8; 4]),
-    /// Optimized block (type 140); byte range into the file data.
-    OptimizedBlock { start: u32, end: u32 },
+    /// Tag 0x10: angle in degrees (0-360).
+    Angle(u16),
+    /// Tags 0x41-0x50: typed array; packed elements in `start..end`.
+    Array { elem: ArrayElem, start: u32, end: u32 },
+    /// Tag 0x6D: opaque 4 bytes — C# EsfEditor compatibility.
+    Unknown6D([u8; 4]),
+    /// Tag 0x8C: opaque sized block — C# EsfEditor compatibility.
+    SizedBlock { start: u32, end: u32 },
 }
 
 /// A fully parsed ESF file: the raw bytes plus a flat arena describing its
@@ -281,9 +317,9 @@ impl EsfDocument {
     /// variant and are written in place at the value's payload offset.
     /// `EsfEdit::Text` edits on string values re-encode the string; when the
     /// length changes, the file is rebuilt and every stored absolute offset
-    /// (node ends, sized-block ends, the header's name-table pointer) is
-    /// adjusted. Mismatched or non-editable edits are skipped and reported
-    /// back through the applied count.
+    /// (node ends, array/sized-block ends, the header's name-table pointer)
+    /// is adjusted. Mismatched or non-editable edits are skipped and
+    /// reported back through the applied count.
     pub fn bytes_with_edits(&self, edits: &HashMap<u32, EsfEdit>) -> (Vec<u8>, usize) {
         let mut out = self.data.clone();
         let mut applied = 0;
@@ -382,8 +418,8 @@ impl EsfDocument {
         // iff a splice lies inside the region it closes, and a field's own
         // position shifts iff a splice lies before it.
         let header_ptr_pos: u64 = match self.header.magic {
-            crate::enums::EsfType::ABCD => 4,
-            crate::enums::EsfType::ABCE => 12,
+            EsfType::ABCD => 4,
+            _ => 12,
         };
         let mut fixup = |field_pos: u64, stored: u32| {
             let new_stored = (stored as i64 + delta_at(stored as u64)) as u32;
@@ -401,8 +437,7 @@ impl EsfDocument {
             fixup(field_pos, node.offset_end);
         }
         for rec in &self.values {
-            if let EsfValue::Binary { end, .. } | EsfValue::OptimizedBlock { end, .. } = rec.value
-            {
+            if let EsfValue::Array { end, .. } | EsfValue::SizedBlock { end, .. } = rec.value {
                 fixup(rec.offset as u64 + 1, end);
             }
         }
@@ -480,29 +515,127 @@ impl EsfDocument {
         parts.join("/")
     }
 
+    /// Number of elements in an array value; `None` for non-arrays or when
+    /// the byte range is not a whole multiple of the element size.
+    pub fn array_len(&self, value: &EsfValue) -> Option<usize> {
+        let EsfValue::Array { elem, start, end } = value else {
+            return None;
+        };
+        let span = (*end as usize).checked_sub(*start as usize)?;
+        match elem.fixed_size() {
+            Some(size) => {
+                if span % size == 0 {
+                    Some(span / size)
+                } else {
+                    None
+                }
+            }
+            None => {
+                // String elements: walk u16 length prefixes.
+                let mut pos = *start as usize;
+                let end = *end as usize;
+                let mut count = 0usize;
+                while pos + 2 <= end {
+                    let n =
+                        u16::from_le_bytes([self.data[pos], self.data[pos + 1]]) as usize;
+                    let elem_bytes = if *elem == ArrayElem::Utf16 { n * 2 } else { n };
+                    pos += 2 + elem_bytes;
+                    if pos > end {
+                        return None;
+                    }
+                    count += 1;
+                }
+                if pos == end {
+                    Some(count)
+                } else {
+                    None
+                }
+            }
+        }
+    }
+
+    /// Decode up to `limit` elements of an array value into display strings,
+    /// returning them plus the total element count. `None` for non-arrays or
+    /// malformed ranges (caller should fall back to a raw-bytes label).
+    pub fn array_element_strings(
+        &self,
+        value: &EsfValue,
+        limit: usize,
+    ) -> Option<(Vec<String>, usize)> {
+        let EsfValue::Array { elem, start, end } = value else {
+            return None;
+        };
+        let total = self.array_len(value)?;
+        let bytes = self.data.get(*start as usize..*end as usize)?;
+        let mut out = Vec::with_capacity(total.min(limit));
+
+        match elem.fixed_size() {
+            Some(size) => {
+                for chunk in bytes.chunks_exact(size).take(limit) {
+                    out.push(format_fixed_elem(*elem, chunk));
+                }
+            }
+            None => {
+                let mut pos = 0usize;
+                while pos + 2 <= bytes.len() && out.len() < limit {
+                    let n = u16::from_le_bytes([bytes[pos], bytes[pos + 1]]) as usize;
+                    let elem_bytes = if *elem == ArrayElem::Utf16 { n * 2 } else { n };
+                    let data = bytes.get(pos + 2..pos + 2 + elem_bytes)?;
+                    out.push(if *elem == ArrayElem::Utf16 {
+                        let units: Vec<u16> = data
+                            .chunks_exact(2)
+                            .map(|p| u16::from_le_bytes([p[0], p[1]]))
+                            .collect();
+                        String::from_utf16_lossy(&units)
+                    } else {
+                        String::from_utf8_lossy(data).into_owned()
+                    });
+                    pos += 2 + elem_bytes;
+                }
+            }
+        }
+        Some((out, total))
+    }
+
     /// Decode a value for display.
     pub fn format_value(&self, value: &EsfValue) -> String {
         match value {
             EsfValue::Bool(v) => v.to_string(),
-            EsfValue::Byte(v) => v.to_string(),
-            EsfValue::Short(v) => v.to_string(),
-            EsfValue::UInt16(v) => v.to_string(),
-            EsfValue::UShort(v) => v.to_string(),
-            EsfValue::Int(v) => v.to_string(),
-            EsfValue::UInt(v) => v.to_string(),
-            EsfValue::UInt64(v) => v.to_string(),
-            EsfValue::Float(v) => v.to_string(),
-            EsfValue::FloatPoint { x, y } => format!("({x}, {y})"),
-            EsfValue::FloatPoint3D { x, y, z } => format!("({x}, {y}, {z})"),
+            EsfValue::I8(v) => v.to_string(),
+            EsfValue::I16(v) | EsfValue::LegacyShort(v) => v.to_string(),
+            EsfValue::I32(v) => v.to_string(),
+            EsfValue::I64(v) => v.to_string(),
+            EsfValue::U8(v) => v.to_string(),
+            EsfValue::U16(v) => v.to_string(),
+            EsfValue::U32(v) => v.to_string(),
+            EsfValue::U64(v) => v.to_string(),
+            EsfValue::F32(v) => v.to_string(),
+            EsfValue::F64(v) => v.to_string(),
+            EsfValue::Angle(v) => format!("{v}°"),
+            EsfValue::Coord2D { x, y } => format!("({x}, {y})"),
+            EsfValue::Coord3D { x, y, z } => format!("({x}, {y}, {z})"),
             EsfValue::Utf16 { .. } | EsfValue::Ascii { .. } => {
                 self.decode_string(value).unwrap_or_default()
             }
-            EsfValue::Binary { type_byte, start, end } => {
-                format!("<binary 0x{:02x}, {} bytes>", type_byte, end.saturating_sub(*start))
+            EsfValue::Array { elem, start, end } => {
+                match self.array_element_strings(value, ARRAY_DISPLAY_LIMIT) {
+                    Some((elems, total)) => {
+                        if total > elems.len() {
+                            format!("[{}, … {} items]", elems.join(", "), total)
+                        } else {
+                            format!("[{}]", elems.join(", "))
+                        }
+                    }
+                    None => format!(
+                        "<{} {} bytes>",
+                        elem.display_name(),
+                        end.saturating_sub(*start)
+                    ),
+                }
             }
-            EsfValue::Unknown109(bytes) => format!("<unknown109 {bytes:02x?}>"),
-            EsfValue::OptimizedBlock { start, end } => {
-                format!("<optimized block, {} bytes>", end.saturating_sub(*start))
+            EsfValue::Unknown6D(bytes) => format!("<unknown 0x6D {bytes:02x?}>"),
+            EsfValue::SizedBlock { start, end } => {
+                format!("<sized block, {} bytes>", end.saturating_sub(*start))
             }
         }
     }
@@ -529,36 +662,71 @@ impl EsfDocument {
         }
     }
 
-    /// Raw bytes of a binary/optimized block value; `None` for other values.
-    pub fn binary_bytes(&self, value: &EsfValue) -> Option<&[u8]> {
+    /// Raw bytes of an array/sized-block value; `None` for other values.
+    pub fn raw_bytes(&self, value: &EsfValue) -> Option<&[u8]> {
         match value {
-            EsfValue::Binary { start, end, .. } | EsfValue::OptimizedBlock { start, end } => {
+            EsfValue::Array { start, end, .. } | EsfValue::SizedBlock { start, end } => {
                 self.data.get(*start as usize..*end as usize)
             }
             _ => None,
         }
     }
 
-    /// Short type label for a value, for UI display.
+    /// Short type label for a value, for UI display. Names follow the
+    /// community taxonomy; legacy C#-compat types are flagged.
     pub fn value_type_name(value: &EsfValue) -> &'static str {
         match value {
             EsfValue::Bool(_) => "Boolean",
-            EsfValue::Byte(_) => "Byte",
-            EsfValue::Short(_) => "Int16",
-            EsfValue::UInt16(_) => "UInt16",
-            EsfValue::UShort(_) => "UInt16 (0x10)",
-            EsfValue::Int(_) => "Int32",
-            EsfValue::UInt(_) => "UInt32",
-            EsfValue::UInt64(_) => "UInt64",
-            EsfValue::Float(_) => "Float",
-            EsfValue::FloatPoint { .. } => "Point2D",
-            EsfValue::FloatPoint3D { .. } => "Point3D",
+            EsfValue::I8(_) => "Int8",
+            EsfValue::I16(_) => "Int16",
+            EsfValue::LegacyShort(_) => "Int16 (legacy 0x00)",
+            EsfValue::I32(_) => "Int32",
+            EsfValue::I64(_) => "Int64",
+            EsfValue::U8(_) => "UInt8",
+            EsfValue::U16(_) => "UInt16",
+            EsfValue::U32(_) => "UInt32",
+            EsfValue::U64(_) => "UInt64",
+            EsfValue::F32(_) => "Float32",
+            EsfValue::F64(_) => "Float64",
+            EsfValue::Angle(_) => "Angle",
+            EsfValue::Coord2D { .. } => "Point2D",
+            EsfValue::Coord3D { .. } => "Point3D",
             EsfValue::Utf16 { .. } => "UTF-16",
             EsfValue::Ascii { .. } => "ASCII",
-            EsfValue::Binary { .. } => "Binary",
-            EsfValue::Unknown109(_) => "Unknown109",
-            EsfValue::OptimizedBlock { .. } => "OptimizedBlock",
+            EsfValue::Array { elem, .. } => elem.display_name(),
+            EsfValue::Unknown6D(_) => "Unknown 0x6D",
+            EsfValue::SizedBlock { .. } => "Sized Block 0x8C",
         }
+    }
+}
+
+/// Format one fixed-size array element from its packed bytes.
+fn format_fixed_elem(elem: ArrayElem, b: &[u8]) -> String {
+    match elem {
+        ArrayElem::Bool => (b[0] != 0).to_string(),
+        ArrayElem::I8 => (b[0] as i8).to_string(),
+        ArrayElem::U8 => b[0].to_string(),
+        ArrayElem::I16 => i16::from_le_bytes([b[0], b[1]]).to_string(),
+        ArrayElem::U16 => u16::from_le_bytes([b[0], b[1]]).to_string(),
+        ArrayElem::Angle => format!("{}°", u16::from_le_bytes([b[0], b[1]])),
+        ArrayElem::I32 => i32::from_le_bytes([b[0], b[1], b[2], b[3]]).to_string(),
+        ArrayElem::U32 => u32::from_le_bytes([b[0], b[1], b[2], b[3]]).to_string(),
+        ArrayElem::F32 => f32::from_le_bytes([b[0], b[1], b[2], b[3]]).to_string(),
+        ArrayElem::I64 => i64::from_le_bytes(b[..8].try_into().unwrap()).to_string(),
+        ArrayElem::U64 => u64::from_le_bytes(b[..8].try_into().unwrap()).to_string(),
+        ArrayElem::F64 => f64::from_le_bytes(b[..8].try_into().unwrap()).to_string(),
+        ArrayElem::Coord2D => {
+            let x = f32::from_le_bytes(b[0..4].try_into().unwrap());
+            let y = f32::from_le_bytes(b[4..8].try_into().unwrap());
+            format!("({x}, {y})")
+        }
+        ArrayElem::Coord3D => {
+            let x = f32::from_le_bytes(b[0..4].try_into().unwrap());
+            let y = f32::from_le_bytes(b[4..8].try_into().unwrap());
+            let z = f32::from_le_bytes(b[8..12].try_into().unwrap());
+            format!("({x}, {y}, {z})")
+        }
+        ArrayElem::Utf16 | ArrayElem::Ascii => unreachable!("strings are variable-size"),
     }
 }
 
@@ -566,27 +734,89 @@ impl EsfDocument {
 mod tests {
     use super::*;
 
-    #[test]
-    fn test_format_value() {
-        // A minimal EsfDocument for testing format_value (string decoding needs data)
-        let doc = EsfDocument {
-            data: b"hello\0".to_vec(),
-            header: EsfHeader { magic: EsfType::ABCE, unknown1: 0, unknown2: 0, offset_node_names: 0 },
+    fn empty_doc(data: Vec<u8>) -> EsfDocument {
+        EsfDocument {
+            data,
+            header: EsfHeader {
+                magic: EsfType::ABCE,
+                unknown1: 0,
+                unknown2: 0,
+                offset_node_names: 0,
+            },
             node_names: vec![],
             nodes: vec![],
             items: vec![],
             values: vec![],
             root: 0,
-        };
+        }
+    }
 
-        assert_eq!(doc.format_value(&EsfValue::Int(-42)), "-42");
-        assert_eq!(doc.format_value(&EsfValue::FloatPoint { x: 1.0, y: 2.5 }), "(1, 2.5)");
+    #[test]
+    fn test_format_value() {
+        let doc = empty_doc(b"hello\0".to_vec());
+        assert_eq!(doc.format_value(&EsfValue::I32(-42)), "-42");
+        assert_eq!(doc.format_value(&EsfValue::Coord2D { x: 1.0, y: 2.5 }), "(1, 2.5)");
         assert_eq!(doc.format_value(&EsfValue::Ascii { start: 0, len: 5 }), "hello");
+        assert_eq!(doc.format_value(&EsfValue::Angle(90)), "90°");
+    }
+
+    #[test]
+    fn test_array_decoding() {
+        // Three u32 elements: 7, 0, 300.
+        let mut data = Vec::new();
+        data.extend_from_slice(&7u32.to_le_bytes());
+        data.extend_from_slice(&0u32.to_le_bytes());
+        data.extend_from_slice(&300u32.to_le_bytes());
+        let doc = empty_doc(data);
+        let arr = EsfValue::Array { elem: ArrayElem::U32, start: 0, end: 12 };
+        assert_eq!(doc.array_len(&arr), Some(3));
+        assert_eq!(doc.format_value(&arr), "[7, 0, 300]");
+
+        // Misaligned range -> raw fallback.
+        let bad = EsfValue::Array { elem: ArrayElem::U32, start: 0, end: 10 };
+        assert_eq!(doc.array_len(&bad), None);
+        assert_eq!(doc.format_value(&bad), "<UInt32 Array 10 bytes>");
+    }
+
+    #[test]
+    fn test_string_array_decoding() {
+        // Two ascii elements: "ab", "c".
+        let mut data = Vec::new();
+        data.extend_from_slice(&2u16.to_le_bytes());
+        data.extend_from_slice(b"ab");
+        data.extend_from_slice(&1u16.to_le_bytes());
+        data.extend_from_slice(b"c");
+        let len = data.len() as u32;
+        let doc = empty_doc(data);
+        let arr = EsfValue::Array { elem: ArrayElem::Ascii, start: 0, end: len };
+        assert_eq!(doc.array_len(&arr), Some(2));
+        assert_eq!(doc.format_value(&arr), "[ab, c]");
+    }
+
+    #[test]
+    fn test_array_display_truncation() {
+        let mut data = Vec::new();
+        for i in 0..20u32 {
+            data.extend_from_slice(&i.to_le_bytes());
+        }
+        let doc = empty_doc(data);
+        let arr = EsfValue::Array { elem: ArrayElem::U32, start: 0, end: 80 };
+        let text = doc.format_value(&arr);
+        assert!(text.ends_with("… 20 items]"), "got: {text}");
     }
 
     #[test]
     fn test_value_type_name() {
         assert_eq!(EsfDocument::value_type_name(&EsfValue::Bool(true)), "Boolean");
-        assert_eq!(EsfDocument::value_type_name(&EsfValue::Unknown109([0; 4])), "Unknown109");
+        assert_eq!(EsfDocument::value_type_name(&EsfValue::Unknown6D([0; 4])), "Unknown 0x6D");
+        assert_eq!(EsfDocument::value_type_name(&EsfValue::Angle(0)), "Angle");
+        assert_eq!(
+            EsfDocument::value_type_name(&EsfValue::Array {
+                elem: ArrayElem::U32,
+                start: 0,
+                end: 0
+            }),
+            "UInt32 Array"
+        );
     }
 }
