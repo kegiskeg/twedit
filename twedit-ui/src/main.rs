@@ -409,25 +409,28 @@ fn value_rows(
     set_edits: &AsyncSetState<Edits>,
     edit_mode: bool,
 ) -> Vec<Element> {
-    let node_descs = descs
-        .0
-        .as_ref()
-        .and_then(|map| map.get(doc.node_name(id)));
+    let name = doc.node_name(id);
+    let entries: Vec<_> = doc.node_value_entries(id).collect();
+    // Type class of every value, for typed ("s0"/"i1") label resolution.
+    let classes: Vec<&'static str> = entries
+        .iter()
+        .map(|(_, record)| descriptions::type_class(&record.value))
+        .collect();
 
     let mut rows = Vec::new();
-    for (index, (value_id, record)) in doc.node_value_entries(id).enumerate() {
+    for (index, (value_id, record)) in entries.iter().copied().enumerate() {
         if index >= MAX_VALUE_ROWS {
-            let total = doc.node_value_entries(id).count();
             rows.push(
-                text_block(format!("… {} more values not shown", total - MAX_VALUE_ROWS))
+                text_block(format!("… {} more values not shown", entries.len() - MAX_VALUE_ROWS))
                     .foreground(ThemeRef::SecondaryText)
                     .into(),
             );
             break;
         }
-        let description = node_descs
-            .and_then(|list| list.get(index))
-            .and_then(|d| d.as_deref());
+        let description = descs
+            .0
+            .as_ref()
+            .and_then(|d| d.label(name, &classes, index));
         let current_text = match edits.get(&value_id) {
             Some(EsfEdit::Value(v)) => doc.format_value(v),
             Some(EsfEdit::Text(s)) => s.clone(),
@@ -545,11 +548,13 @@ fn app_shell(cx: &mut RenderCx) -> Element {
         if std::fs::write(&icon_path, include_bytes!("../assets/icon.ico") as &[u8]).is_ok() {
             set_window_icon(icon_path.to_string_lossy().into_owned());
         }
-        // Node descriptions embedded in the executable.
+        // Node descriptions embedded in the executable: legacy XML plus
+        // twedit's curated schema (which wins on conflicts).
         let set_descs = set_descs.clone();
         std::thread::spawn(move || {
             let xml_str = include_str!("../assets/NodesDescriptions.xml");
-            let d = descriptions::parse_descriptions(xml_str);
+            let toml_str = include_str!("../assets/esf_schema.toml");
+            let d = descriptions::load(xml_str, toml_str);
             set_descs.call(DescState(Some(Arc::new(d))));
         });
         set_recent.call(load_recent());
@@ -872,7 +877,7 @@ fn app_shell(cx: &mut RenderCx) -> Element {
     let node_info: Element = match (&doc_state.doc, selected) {
         (Some(doc), Some(id)) if (id as usize) < doc.nodes.len() => {
             let node = doc.node(id);
-            text_block(format!(
+            let info = text_block(format!(
                 "{}   ({:?} v{}, offset 0x{:x}..0x{:x}, {} children, {} values)",
                 doc.node_path(id),
                 node.kind,
@@ -883,8 +888,27 @@ fn app_shell(cx: &mut RenderCx) -> Element {
                 fmt_count(doc.node_values(id).count()),
             ))
             .foreground(ThemeRef::SecondaryText)
-            .font_size(12.0)
-            .into()
+            .font_size(12.0);
+            // Schema doc line for the node type, when we have one.
+            // (text_block can't wrap in this reactor version, so long docs
+            // are truncated; the full text lives in esf_schema.toml.)
+            match descs.0.as_ref().and_then(|d| d.doc(doc.node_name(id))) {
+                Some(doc_line) => {
+                    let mut text: String = doc_line.chars().take(220).collect();
+                    if text.len() < doc_line.len() {
+                        text.push('…');
+                    }
+                    vstack((
+                        info,
+                        text_block(text)
+                            .foreground(ThemeRef::AccentText)
+                            .font_size(12.0),
+                    ))
+                    .spacing(2.0)
+                    .into()
+                }
+                None => info.into(),
+            }
         }
         _ => text_block("").into(),
     };
