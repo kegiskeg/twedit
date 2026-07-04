@@ -6,14 +6,11 @@
 use quick_xml::events::Event;
 use quick_xml::Reader;
 use std::collections::HashMap;
-use std::path::Path;
+
 
 pub type Descriptions = HashMap<String, Vec<Option<String>>>;
 
-pub fn load_descriptions(path: impl AsRef<Path>) -> Option<Descriptions> {
-    let xml = std::fs::read_to_string(path).ok()?;
-    Some(parse_descriptions(&xml))
-}
+
 
 pub fn parse_descriptions(xml: &str) -> Descriptions {
     let mut reader = Reader::from_str(xml);

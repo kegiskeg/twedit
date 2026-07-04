@@ -15,7 +15,6 @@ use tracing_subscriber::fmt::writer::MakeWriterExt;
 
 const DEFAULT_SAVE_PATH: &str =
     r"C:\Projects\Rust\_old\esfeditor\saves\test_save.empire_save_multiplayer";
-const DESCRIPTIONS_PATH: &str = r"C:\Projects\Rust\_old\esfeditor\NodesDescriptions.xml";
 
 /// Cap on materialized children per tree node; huge poly nodes (region lists,
 /// unit rosters) would otherwise stall the XAML tree view.
@@ -546,12 +545,12 @@ fn app_shell(cx: &mut RenderCx) -> Element {
         if std::fs::write(&icon_path, include_bytes!("../assets/icon.ico") as &[u8]).is_ok() {
             set_window_icon(icon_path.to_string_lossy().into_owned());
         }
-        // Node descriptions from the legacy editor, if available.
+        // Node descriptions embedded in the executable.
         let set_descs = set_descs.clone();
         std::thread::spawn(move || {
-            if let Some(map) = descriptions::load_descriptions(DESCRIPTIONS_PATH) {
-                set_descs.call(DescState(Some(Arc::new(map))));
-            }
+            let xml_str = include_str!("../assets/NodesDescriptions.xml");
+            let d = descriptions::parse_descriptions(xml_str);
+            set_descs.call(DescState(Some(Arc::new(d))));
         });
         set_recent.call(load_recent());
         if std::path::Path::new(DEFAULT_SAVE_PATH).exists() {
