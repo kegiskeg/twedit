@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2021"
 authors = ["twedit contributors"]
 description = "Total War Save Editor"
-license = "MIT"
+license = "GPL-3.0-or-later"
 
 [dependencies]
 windows-reactor = { path = "../../_lib/windows-rs/crates/libs/reactor" }

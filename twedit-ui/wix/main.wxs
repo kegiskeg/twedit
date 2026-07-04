@@ -98,7 +98,7 @@
                     <Component Id='License' Guid='*'>
                         <File Id='LicenseFile'
                             DiskId='1'
-                            Source='wix\License.rtf'
+                            Source='$(sys.SOURCEFILEDIR)License.rtf'
                             KeyPath='yes'/>
                     </Component>
                     
@@ -195,7 +195,7 @@
           Disabling the EULA dialog in the installer requires commenting out
           or removing the following `WixVariable` tag
         -->
-        <WixVariable Id='WixUILicenseRtf' Value='wix\License.rtf'/>
+        <WixVariable Id='WixUILicenseRtf' Value='$(sys.SOURCEFILEDIR)License.rtf'/>
         
         
         <!--
