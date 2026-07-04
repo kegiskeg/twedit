@@ -4,7 +4,7 @@ mod descriptions;
 mod theme;
 
 use descriptions::Descriptions;
-use esf_parser::objects::{EsfDocument, EsfValue, NodeId, NodeKind, NO_PARENT};
+use esf_parser::objects::{EsfDocument, EsfEdit, EsfValue, NodeId, NodeKind, NO_PARENT};
 use std::collections::{HashMap, HashSet};
 use std::sync::Arc;
 use std::time::Duration;
@@ -15,7 +15,6 @@ use tracing_subscriber::fmt::writer::MakeWriterExt;
 
 const DEFAULT_SAVE_PATH: &str =
     r"C:\Projects\Rust\_old\esfeditor\saves\test_save.empire_save_multiplayer";
-const DESCRIPTIONS_PATH: &str = r"C:\Projects\Rust\_old\esfeditor\NodesDescriptions.xml";
 
 /// Cap on materialized children per tree node; huge poly nodes (region lists,
 /// unit rosters) would otherwise stall the XAML tree view.
@@ -58,7 +57,7 @@ impl PartialEq for DescState {
 }
 
 /// Edits staged in the UI, keyed by global value id.
-type Edits = HashMap<u32, EsfValue>;
+type Edits = HashMap<u32, EsfEdit>;
 
 // The tree widget only reports the clicked label text, so the arena node id
 // must travel inside the label. To keep labels visually clean (like the old
@@ -321,7 +320,7 @@ fn value_row(
     doc: &EsfDocument,
     value_id: u32,
     original: &EsfValue,
-    current: &EsfValue,
+    current_text: String,
     description: Option<&str>,
     edits: &Edits,
     set_edits: &AsyncSetState<Edits>,
@@ -330,23 +329,29 @@ fn value_row(
     let is_edited = edits.contains_key(&value_id);
 
     let value_cell: Element = if edit_mode && original.is_editable() {
+        // For strings, the "matches the original again" check compares
+        // text, decoded up front so the closure stays document-free.
+        let original_text = doc.decode_string(original);
         let original = original.clone();
         let edits = edits.clone();
         let set_edits = set_edits.clone();
-        let mut cell = text_box(doc.format_value(current)).width(COL_VALUE).on_text_changed(
+        let mut cell = text_box(current_text).width(COL_VALUE).on_text_changed(
             move |text: String| {
                 let mut next = edits.clone();
-                match original.parse_same_type(&text) {
-                    Some(parsed) if parsed != original => {
-                        next.insert(value_id, parsed);
-                    }
-                    Some(_) => {
-                        // Text matches the original again: unstage.
-                        next.remove(&value_id);
-                    }
-                    // Unparseable (often a typing intermediate like "-"):
-                    // leave staged edits untouched.
-                    None => return,
+                // Unparseable (often a typing intermediate like "-"):
+                // leave staged edits untouched.
+                let Some(edit) = original.parse_edit(&text) else {
+                    return;
+                };
+                let unchanged = match &edit {
+                    EsfEdit::Value(parsed) => *parsed == original,
+                    EsfEdit::Text(s) => Some(s.as_str()) == original_text.as_deref(),
+                };
+                if unchanged {
+                    // Text matches the original again: unstage.
+                    next.remove(&value_id);
+                } else {
+                    next.insert(value_id, edit);
                 }
                 set_edits.call(next);
             },
@@ -356,7 +361,7 @@ fn value_row(
         }
         cell.into()
     } else {
-        let mut cell = text_block(doc.format_value(current)).width(COL_VALUE);
+        let mut cell = text_block(current_text).width(COL_VALUE);
         if is_edited {
             cell = cell.foreground(ThemeRef::AccentText);
         }
@@ -404,31 +409,38 @@ fn value_rows(
     set_edits: &AsyncSetState<Edits>,
     edit_mode: bool,
 ) -> Vec<Element> {
-    let node_descs = descs
-        .0
-        .as_ref()
-        .and_then(|map| map.get(doc.node_name(id)));
+    let name = doc.node_name(id);
+    let entries: Vec<_> = doc.node_value_entries(id).collect();
+    // Type class of every value, for typed ("s0"/"i1") label resolution.
+    let classes: Vec<&'static str> = entries
+        .iter()
+        .map(|(_, record)| descriptions::type_class(&record.value))
+        .collect();
 
     let mut rows = Vec::new();
-    for (index, (value_id, record)) in doc.node_value_entries(id).enumerate() {
+    for (index, (value_id, record)) in entries.iter().copied().enumerate() {
         if index >= MAX_VALUE_ROWS {
-            let total = doc.node_value_entries(id).count();
             rows.push(
-                text_block(format!("… {} more values not shown", total - MAX_VALUE_ROWS))
+                text_block(format!("… {} more values not shown", entries.len() - MAX_VALUE_ROWS))
                     .foreground(ThemeRef::SecondaryText)
                     .into(),
             );
             break;
         }
-        let description = node_descs
-            .and_then(|list| list.get(index))
-            .and_then(|d| d.as_deref());
-        let current = edits.get(&value_id).unwrap_or(&record.value);
+        let description = descs
+            .0
+            .as_ref()
+            .and_then(|d| d.label(name, &classes, index));
+        let current_text = match edits.get(&value_id) {
+            Some(EsfEdit::Value(v)) => doc.format_value(v),
+            Some(EsfEdit::Text(s)) => s.clone(),
+            None => doc.format_value(&record.value),
+        };
         rows.push(value_row(
             doc,
             value_id,
             &record.value,
-            current,
+            current_text,
             description,
             edits,
             set_edits,
@@ -536,12 +548,14 @@ fn app_shell(cx: &mut RenderCx) -> Element {
         if std::fs::write(&icon_path, include_bytes!("../assets/icon.ico") as &[u8]).is_ok() {
             set_window_icon(icon_path.to_string_lossy().into_owned());
         }
-        // Node descriptions from the legacy editor, if available.
+        // Node descriptions embedded in the executable: legacy XML plus
+        // twedit's curated schema (which wins on conflicts).
         let set_descs = set_descs.clone();
         std::thread::spawn(move || {
-            if let Some(map) = descriptions::load_descriptions(DESCRIPTIONS_PATH) {
-                set_descs.call(DescState(Some(Arc::new(map))));
-            }
+            let xml_str = include_str!("../assets/NodesDescriptions.xml");
+            let toml_str = include_str!("../assets/esf_schema.toml");
+            let d = descriptions::load(xml_str, toml_str);
+            set_descs.call(DescState(Some(Arc::new(d))));
         });
         set_recent.call(load_recent());
         if std::path::Path::new(DEFAULT_SAVE_PATH).exists() {
@@ -863,7 +877,7 @@ fn app_shell(cx: &mut RenderCx) -> Element {
     let node_info: Element = match (&doc_state.doc, selected) {
         (Some(doc), Some(id)) if (id as usize) < doc.nodes.len() => {
             let node = doc.node(id);
-            text_block(format!(
+            let info = text_block(format!(
                 "{}   ({:?} v{}, offset 0x{:x}..0x{:x}, {} children, {} values)",
                 doc.node_path(id),
                 node.kind,
@@ -874,8 +888,27 @@ fn app_shell(cx: &mut RenderCx) -> Element {
                 fmt_count(doc.node_values(id).count()),
             ))
             .foreground(ThemeRef::SecondaryText)
-            .font_size(12.0)
-            .into()
+            .font_size(12.0);
+            // Schema doc line for the node type, when we have one.
+            // (text_block can't wrap in this reactor version, so long docs
+            // are truncated; the full text lives in esf_schema.toml.)
+            match descs.0.as_ref().and_then(|d| d.doc(doc.node_name(id))) {
+                Some(doc_line) => {
+                    let mut text: String = doc_line.chars().take(220).collect();
+                    if text.len() < doc_line.len() {
+                        text.push('…');
+                    }
+                    vstack((
+                        info,
+                        text_block(text)
+                            .foreground(ThemeRef::AccentText)
+                            .font_size(12.0),
+                    ))
+                    .spacing(2.0)
+                    .into()
+                }
+                None => info.into(),
+            }
         }
         _ => text_block("").into(),
     };

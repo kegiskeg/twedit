@@ -1,23 +1,144 @@
-//! Loader for the original editor's NodesDescriptions.xml: a .NET-serialized
-//! list of `NodeDescription { Name, ValuesDesciption: [string...] }` entries
-//! mapping a node name to per-value descriptions (index-aligned with the
-//! node's values). The "Desciption" typo is part of the legacy format.
+//! Node/field documentation for the value grid.
+//!
+//! Two layered sources, merged at startup:
+//! 1. The original editor's NodesDescriptions.xml: a .NET-serialized list of
+//!    `NodeDescription { Name, ValuesDesciption: [string...] }` entries with
+//!    per-value descriptions (index-aligned). The "Desciption" typo is part
+//!    of the legacy format. Sparse: ~26 of 678 entries are populated.
+//! 2. twedit's own assets/esf_schema.toml: per-node `doc` plus field labels
+//!    in two addressing modes — `fields` (absolute value position) and
+//!    `typed` (nth occurrence of a type class, e.g. "s0" = first string,
+//!    robust when optional values shift positions). Curated from etwng's
+//!    semantic converter and empirical scans; wins over the legacy XML.
 
+use esf_parser::objects::EsfValue;
 use quick_xml::events::Event;
 use quick_xml::Reader;
+use serde::Deserialize;
 use std::collections::HashMap;
-use std::path::Path;
 
-pub type Descriptions = HashMap<String, Vec<Option<String>>>;
-
-pub fn load_descriptions(path: impl AsRef<Path>) -> Option<Descriptions> {
-    let xml = std::fs::read_to_string(path).ok()?;
-    Some(parse_descriptions(&xml))
+/// Documentation for one node name.
+#[derive(Debug, Default, Clone)]
+pub struct NodeSchema {
+    /// One-line description of what the node is, shown above the value grid.
+    pub doc: Option<String>,
+    /// Labels by absolute value position (legacy XML and TOML `fields`).
+    pub fields: Vec<Option<String>>,
+    /// Labels by type-class occurrence, e.g. "s0", "i1", "u_ary0".
+    pub typed: HashMap<String, String>,
 }
 
-pub fn parse_descriptions(xml: &str) -> Descriptions {
+/// Merged documentation, keyed by node name. Record nodes share their poly
+/// parent's name, so one entry covers both.
+#[derive(Debug, Default)]
+pub struct Descriptions {
+    nodes: HashMap<String, NodeSchema>,
+}
+
+impl Descriptions {
+    pub fn node(&self, name: &str) -> Option<&NodeSchema> {
+        self.nodes.get(name)
+    }
+
+    /// Node-level doc line for the header above the value grid.
+    pub fn doc(&self, name: &str) -> Option<&str> {
+        self.nodes.get(name)?.doc.as_deref()
+    }
+
+    /// Label for the value at `pos`, where `classes` is the type class of
+    /// every value of the node in order (see [`type_class`]). Typed labels
+    /// win over positional ones.
+    pub fn label(&self, name: &str, classes: &[&'static str], pos: usize) -> Option<&str> {
+        let schema = self.nodes.get(name)?;
+        let class = classes.get(pos)?;
+        let nth = classes[..pos].iter().filter(|c| *c == class).count();
+        if let Some(text) = schema.typed.get(&format!("{class}{nth}")) {
+            return Some(text);
+        }
+        schema.fields.get(pos)?.as_deref()
+    }
+}
+
+/// Type-class key of a value for `typed` addressing. The vocabulary follows
+/// etwng's converters (i/u/s/bool/flt/byte/u2/v2/v3, `_ary` suffix for
+/// arrays) so their annotations can be transcribed directly.
+pub fn type_class(value: &EsfValue) -> &'static str {
+    use esf_parser::enums::ArrayElem;
+    match value {
+        EsfValue::Bool(_) => "bool",
+        EsfValue::I8(_) => "i8",
+        EsfValue::I16(_) | EsfValue::LegacyShort(_) => "i16",
+        EsfValue::I32(_) => "i",
+        EsfValue::I64(_) => "i64",
+        EsfValue::U8(_) => "byte",
+        EsfValue::U16(_) => "u2",
+        EsfValue::U32(_) => "u",
+        EsfValue::U64(_) => "u64",
+        EsfValue::F32(_) => "flt",
+        EsfValue::F64(_) => "f64",
+        EsfValue::Angle(_) => "angle",
+        EsfValue::Coord2D { .. } => "v2",
+        EsfValue::Coord3D { .. } => "v3",
+        EsfValue::Utf16 { .. } | EsfValue::Ascii { .. } => "s",
+        EsfValue::Array { elem, .. } => match elem {
+            ArrayElem::Bool => "bool_ary",
+            ArrayElem::I32 => "i_ary",
+            ArrayElem::U8 => "byte_ary",
+            ArrayElem::U16 => "u2_ary",
+            ArrayElem::U32 => "u_ary",
+            ArrayElem::F32 => "flt_ary",
+            ArrayElem::Coord2D => "v2_ary",
+            _ => "ary",
+        },
+        EsfValue::Unknown6D(_) => "unk",
+        EsfValue::SizedBlock { .. } => "blk",
+    }
+}
+
+#[derive(Deserialize)]
+struct TomlNode {
+    doc: Option<String>,
+    fields: Option<Vec<String>>,
+    typed: Option<HashMap<String, String>>,
+}
+
+/// Parse both sources and merge: TOML doc/typed/fields win over the XML.
+pub fn load(legacy_xml: &str, schema_toml: &str) -> Descriptions {
+    let mut nodes: HashMap<String, NodeSchema> = HashMap::new();
+    for (name, fields) in parse_descriptions(legacy_xml) {
+        nodes.insert(name, NodeSchema { doc: None, fields, typed: HashMap::new() });
+    }
+
+    match toml::from_str::<HashMap<String, TomlNode>>(schema_toml) {
+        Ok(map) => {
+            for (name, entry) in map {
+                let node = nodes.entry(name).or_default();
+                if entry.doc.is_some() {
+                    node.doc = entry.doc;
+                }
+                if let Some(fields) = entry.fields {
+                    node.fields = fields
+                        .into_iter()
+                        .map(|s| if s.is_empty() { None } else { Some(s) })
+                        .collect();
+                }
+                if let Some(typed) = entry.typed {
+                    node.typed = typed;
+                }
+            }
+        }
+        Err(e) => {
+            tracing::error!("esf_schema.toml failed to parse: {e}");
+        }
+    }
+
+    Descriptions { nodes }
+}
+
+/// Parse the legacy NodesDescriptions.xml into name -> positional labels.
+pub fn parse_descriptions(xml: &str) -> HashMap<String, Vec<Option<String>>> {
     let mut reader = Reader::from_str(xml);
-    let mut map = Descriptions::new();
+    let mut map = HashMap::new();
 
     let mut current_name: Option<String> = None;
     let mut values: Vec<Option<String>> = Vec::new();
@@ -106,5 +227,82 @@ mod tests {
         assert_eq!(maps[1], None);
         assert_eq!(maps[2], None);
         assert_eq!(maps[3].as_deref(), Some("A & B"));
+    }
+
+    #[test]
+    fn toml_overlays_legacy_and_typed_wins() {
+        let xml = r#"<ArrayOfNodeDescription>
+  <NodeDescription>
+    <Name>REL</Name>
+    <ValuesDesciption><string>legacy 0</string><string>legacy 1</string></ValuesDesciption>
+  </NodeDescription>
+</ArrayOfNodeDescription>"#;
+        let toml = r#"
+[REL]
+doc = "A relationship."
+[REL.typed]
+s0 = "First string"
+i1 = "Second int"
+"#;
+        let descs = load(xml, toml);
+        assert_eq!(descs.doc("REL"), Some("A relationship."));
+
+        // Values: i32, string, i32, i32 -> classes i, s, i, i.
+        let classes = vec!["i", "s", "i", "i"];
+        // Position 0: class i nth 0 -> no typed "i0", falls back to legacy.
+        assert_eq!(descs.label("REL", &classes, 0), Some("legacy 0"));
+        // Position 1: class s nth 0 -> typed s0 wins over legacy 1.
+        assert_eq!(descs.label("REL", &classes, 1), Some("First string"));
+        // Position 2: class i nth 1 -> typed i1.
+        assert_eq!(descs.label("REL", &classes, 2), Some("Second int"));
+        // Position 3: class i nth 2 -> nothing.
+        assert_eq!(descs.label("REL", &classes, 3), None);
+    }
+
+    #[test]
+    fn real_assets_parse_and_resolve_diplomacy() {
+        let descs = load(
+            include_str!("../assets/NodesDescriptions.xml"),
+            include_str!("../assets/esf_schema.toml"),
+        );
+        assert!(descs.doc("DIPLOMACY_RELATIONSHIP").is_some());
+        assert!(descs.doc("FACTION").is_some());
+
+        // The DIPLOMACY_RELATIONSHIP value signature observed in a real
+        // Empire save (docs/scan_report.md).
+        let classes = vec![
+            "i", "bool", "i", "s", "i", "u", "i", "i", "i", "i", "i", "u", "u", "u", "u",
+            "u_ary", "u", "s", "bool", "bool", "i",
+        ];
+        assert_eq!(descs.label("DIPLOMACY_RELATIONSHIP", &classes, 0), Some("Target faction ID"));
+        assert_eq!(
+            descs.label("DIPLOMACY_RELATIONSHIP", &classes, 1),
+            Some("Trade agreement active")
+        );
+        assert_eq!(
+            descs.label("DIPLOMACY_RELATIONSHIP", &classes, 3),
+            Some("Relationship state (war / neutral / allied / patron / protectorate)")
+        );
+        assert_eq!(
+            descs.label("DIPLOMACY_RELATIONSHIP", &classes, 11),
+            Some("Turns at war")
+        );
+        assert_eq!(
+            descs.label("DIPLOMACY_RELATIONSHIP", &classes, 20),
+            Some("Overall relation (sum of attitude values)")
+        );
+    }
+
+    #[test]
+    fn type_class_vocabulary() {
+        use esf_parser::enums::ArrayElem;
+        assert_eq!(type_class(&EsfValue::I32(0)), "i");
+        assert_eq!(type_class(&EsfValue::U32(0)), "u");
+        assert_eq!(type_class(&EsfValue::Utf16 { start: 0, chars: 0 }), "s");
+        assert_eq!(type_class(&EsfValue::Ascii { start: 0, len: 0 }), "s");
+        assert_eq!(
+            type_class(&EsfValue::Array { elem: ArrayElem::U32, start: 0, end: 0 }),
+            "u_ary"
+        );
     }
 }

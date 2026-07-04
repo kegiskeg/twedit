@@ -92,8 +92,16 @@ impl<'a> Reader<'a> {
         Ok(u64::from_le_bytes(self.take(8)?.try_into().unwrap()))
     }
 
+    fn i64(&mut self) -> Result<i64, EsfError> {
+        Ok(i64::from_le_bytes(self.take(8)?.try_into().unwrap()))
+    }
+
     fn f32(&mut self) -> Result<f32, EsfError> {
         Ok(f32::from_le_bytes(self.take(4)?.try_into().unwrap()))
+    }
+
+    fn f64(&mut self) -> Result<f64, EsfError> {
+        Ok(f64::from_le_bytes(self.take(8)?.try_into().unwrap()))
     }
 
     /// Skip forward to an absolute offset (for sized blocks).
@@ -162,10 +170,15 @@ fn parse_header_and_names(data: &[u8]) -> Result<(EsfHeader, Vec<String>, usize)
     let magic =
         EsfType::try_from(magic_val).map_err(|_| EsfError::UnsupportedMagic(magic_val))?;
 
-    let (unknown1, unknown2) = if magic == EsfType::ABCE {
-        (reader.u32()?, reader.u32()?)
-    } else {
-        (0, 0)
+    let (unknown1, unknown2) = match magic {
+        EsfType::ABCD => (0, 0),
+        EsfType::ABCE => (reader.u32()?, reader.u32()?),
+        // ABCF (footer string tables) and ABCA (uintvar sizes, compact
+        // records) need different string/size decoding — recognized but
+        // not supported yet.
+        EsfType::ABCF | EsfType::ABCA => {
+            return Err(EsfError::UnsupportedMagic(magic_val));
+        }
     };
 
     let offset_node_names = reader.u32()?;
@@ -361,24 +374,28 @@ fn parse_leaf_value(
     type_byte: u8,
 ) -> Result<EsfValue, EsfError> {
     let value = match value_type {
-        EsfValueType::Short => EsfValue::Short(reader.i16()?),
-        EsfValueType::Boolean => EsfValue::Bool(reader.u8()? != 0),
-        EsfValueType::Int => EsfValue::Int(reader.i32()?),
-        EsfValueType::Byte => EsfValue::Byte(reader.u8()?),
-        EsfValueType::UInt16 => EsfValue::UInt16(reader.u16()?),
-        EsfValueType::UInt => EsfValue::UInt(reader.u32()?),
-        EsfValueType::UInt64 => EsfValue::UInt64(reader.u64()?),
-        EsfValueType::Float => EsfValue::Float(reader.f32()?),
-        EsfValueType::FloatPoint => EsfValue::FloatPoint {
+        EsfValueType::LegacyShort00 => EsfValue::LegacyShort(reader.i16()?),
+        EsfValueType::Bool => EsfValue::Bool(reader.u8()? != 0),
+        EsfValueType::I8 => EsfValue::I8(reader.u8()? as i8),
+        EsfValueType::I16 => EsfValue::I16(reader.i16()?),
+        EsfValueType::I32 => EsfValue::I32(reader.i32()?),
+        EsfValueType::I64 => EsfValue::I64(reader.i64()?),
+        EsfValueType::U8 => EsfValue::U8(reader.u8()?),
+        EsfValueType::U16 => EsfValue::U16(reader.u16()?),
+        EsfValueType::U32 => EsfValue::U32(reader.u32()?),
+        EsfValueType::U64 => EsfValue::U64(reader.u64()?),
+        EsfValueType::F32 => EsfValue::F32(reader.f32()?),
+        EsfValueType::F64 => EsfValue::F64(reader.f64()?),
+        EsfValueType::Coord2D => EsfValue::Coord2D {
             x: reader.f32()?,
             y: reader.f32()?,
         },
-        EsfValueType::FloatPoint3D => EsfValue::FloatPoint3D {
+        EsfValueType::Coord3D => EsfValue::Coord3D {
             x: reader.f32()?,
             y: reader.f32()?,
             z: reader.f32()?,
         },
-        EsfValueType::UTF16 => {
+        EsfValueType::Utf16 => {
             let chars = reader.u16()?;
             let start = reader.pos as u32;
             reader.take(chars as usize * 2)?;
@@ -390,38 +407,46 @@ fn parse_leaf_value(
             reader.take(len as usize)?;
             EsfValue::Ascii { start, len }
         }
-        EsfValueType::UShort => EsfValue::UShort(reader.u16()?),
-        EsfValueType::Binary41
-        | EsfValueType::Binary42
-        | EsfValueType::Binary43
-        | EsfValueType::Binary44
-        | EsfValueType::Binary45
-        | EsfValueType::Binary46
-        | EsfValueType::Binary47
-        | EsfValueType::Binary48
-        | EsfValueType::Binary49
-        | EsfValueType::Binary4A
-        | EsfValueType::Binary4B
-        | EsfValueType::Binary4C
-        | EsfValueType::Binary4D => {
+        EsfValueType::Angle => EsfValue::Angle(reader.u16()?),
+        EsfValueType::BoolArray
+        | EsfValueType::I8Array
+        | EsfValueType::I16Array
+        | EsfValueType::I32Array
+        | EsfValueType::I64Array
+        | EsfValueType::U8Array
+        | EsfValueType::U16Array
+        | EsfValueType::U32Array
+        | EsfValueType::U64Array
+        | EsfValueType::F32Array
+        | EsfValueType::F64Array
+        | EsfValueType::Coord2DArray
+        | EsfValueType::Coord3DArray
+        | EsfValueType::Utf16Array
+        | EsfValueType::AsciiArray
+        | EsfValueType::AngleArray => {
             let end = reader.u32()?;
             let start = reader.pos as u32;
             reader.skip_to(end)?;
-            EsfValue::Binary {
-                type_byte,
+            EsfValue::Array {
+                // Every arm above satisfies array_elem(); type_byte keeps
+                // the tag around for the error message if that ever breaks.
+                elem: value_type.array_elem().ok_or(EsfError::UnknownValueType {
+                    byte: type_byte,
+                    at: start as usize,
+                })?,
                 start,
                 end,
             }
         }
-        EsfValueType::Unknown109 => {
+        EsfValueType::Unknown6D => {
             let bytes: [u8; 4] = reader.take(4)?.try_into().unwrap();
-            EsfValue::Unknown109(bytes)
+            EsfValue::Unknown6D(bytes)
         }
-        EsfValueType::OptimizedBlock140 => {
+        EsfValueType::SizedBlock8C => {
             let end = reader.u32()?;
             let start = reader.pos as u32;
             reader.skip_to(end)?;
-            EsfValue::OptimizedBlock { start, end }
+            EsfValue::SizedBlock { start, end }
         }
         EsfValueType::SingleNode | EsfValueType::PolyNode => {
             unreachable!("structural nodes are handled by the frame stack")
@@ -493,9 +518,10 @@ mod tests {
 
     /// Builds an ABCD file:
     /// root (single, "root") {
-    ///   Bool(true), Int(-42), Ascii("hello"), Utf16("hi"),
-    ///   child (single, "child") { Float(1.5) },
-    ///   list (poly, "list") [ { Byte(7) }, { UInt(99) } ],
+    ///   Bool(true), I32(-42), Ascii("hello"), Utf16("hi"),
+    ///   I16(-2), Angle(270), U32Array[7, 0, 300],
+    ///   child (single, "child") { F32(1.5) },
+    ///   list (poly, "list") [ { U8(7) }, { U32(99) } ],
     /// }
     fn build_sample() -> Vec<u8> {
         let mut b = EsfBuilder::new();
@@ -507,12 +533,19 @@ mod tests {
         let root_end_slot = b.placeholder_u32();
 
         b.u8(1).u8(1); // Bool(true)
-        b.u8(4).i32(-42); // Int
+        b.u8(4).i32(-42); // I32
         b.u8(0x0f).u16(5).bytes(b"hello"); // Ascii
         b.u8(0x0e).u16(2); // Utf16 "hi"
         for unit in "hi".encode_utf16() {
             b.u16(unit);
         }
+        b.u8(0x03).u16((-2i16) as u16); // I16
+        b.u8(0x10).u16(270); // Angle
+        b.u8(0x48); // U32Array [7, 0, 300]
+        let array_end_slot = b.placeholder_u32();
+        b.u32(7).u32(0).u32(300);
+        let array_end = b.pos();
+        b.patch_u32(array_end_slot, array_end);
 
         // child single node
         b.u8(0x80).u16(1).u8(2);
@@ -559,13 +592,21 @@ mod tests {
         assert_eq!(doc.node(doc.root).version, 1);
         assert_eq!(doc.node(doc.root).parent, crate::objects::NO_PARENT);
 
-        // Root: 4 values + 2 child nodes, order preserved.
+        // Root: 7 values + 2 child nodes, order preserved.
         let root_values: Vec<_> = doc.node_values(doc.root).collect();
-        assert_eq!(root_values.len(), 4);
+        assert_eq!(root_values.len(), 7);
         assert_eq!(root_values[0].value, EsfValue::Bool(true));
-        assert_eq!(root_values[1].value, EsfValue::Int(-42));
+        assert_eq!(root_values[1].value, EsfValue::I32(-42));
         assert_eq!(doc.decode_string(&root_values[2].value).as_deref(), Some("hello"));
         assert_eq!(doc.decode_string(&root_values[3].value).as_deref(), Some("hi"));
+        assert_eq!(root_values[4].value, EsfValue::I16(-2));
+        assert_eq!(root_values[5].value, EsfValue::Angle(270));
+        assert!(matches!(
+            root_values[6].value,
+            EsfValue::Array { elem: crate::enums::ArrayElem::U32, .. }
+        ));
+        assert_eq!(doc.array_len(&root_values[6].value), Some(3));
+        assert_eq!(doc.format_value(&root_values[6].value), "[7, 0, 300]");
 
         let children: Vec<_> = doc.children(doc.root).collect();
         assert_eq!(children.len(), 2);
@@ -576,7 +617,7 @@ mod tests {
         assert_eq!(doc.node(child).version, 2);
         let child_values: Vec<_> = doc.node_values(child).collect();
         assert_eq!(child_values.len(), 1);
-        assert_eq!(child_values[0].value, EsfValue::Float(1.5));
+        assert_eq!(child_values[0].value, EsfValue::F32(1.5));
 
         let poly = children[1];
         assert_eq!(doc.node_name(poly), "list");
@@ -589,9 +630,9 @@ mod tests {
             assert_eq!(doc.node_name(*record), "list");
         }
         let rec1_values: Vec<_> = doc.node_values(records[0]).collect();
-        assert_eq!(rec1_values[0].value, EsfValue::Byte(7));
+        assert_eq!(rec1_values[0].value, EsfValue::U8(7));
         let rec2_values: Vec<_> = doc.node_values(records[1]).collect();
-        assert_eq!(rec2_values[0].value, EsfValue::UInt(99));
+        assert_eq!(rec2_values[0].value, EsfValue::U32(99));
     }
 
     #[test]
@@ -646,6 +687,7 @@ mod tests {
 
     #[test]
     fn edits_round_trip() {
+        use crate::objects::EsfEdit;
         use std::collections::HashMap;
 
         let doc = parse_bytes(build_sample()).expect("parse failed");
@@ -653,20 +695,20 @@ mod tests {
         // Locate value ids: root Int(-42), child Float(1.5), record Byte(7).
         let root_entries: Vec<_> = doc.node_value_entries(doc.root).collect();
         let int_id = root_entries[1].0;
-        assert_eq!(root_entries[1].1.value, EsfValue::Int(-42));
+        assert_eq!(root_entries[1].1.value, EsfValue::I32(-42));
 
         let children: Vec<_> = doc.children(doc.root).collect();
         let (float_id, float_record) = doc.node_value_entries(children[0]).next().unwrap();
-        assert_eq!(float_record.value, EsfValue::Float(1.5));
+        assert_eq!(float_record.value, EsfValue::F32(1.5));
         let record_node = doc.children(children[1]).next().unwrap();
         let (byte_id, _) = doc.node_value_entries(record_node).next().unwrap();
 
         let mut edits = HashMap::new();
-        edits.insert(int_id, EsfValue::Int(123456));
-        edits.insert(float_id, EsfValue::Float(-2.75));
-        edits.insert(byte_id, EsfValue::Byte(200));
+        edits.insert(int_id, EsfEdit::Value(EsfValue::I32(123456)));
+        edits.insert(float_id, EsfEdit::Value(EsfValue::F32(-2.75)));
+        edits.insert(byte_id, EsfEdit::Value(EsfValue::U8(200)));
         // Variant mismatch must be skipped, not corrupt the file.
-        edits.insert(byte_id + 1_000, EsfValue::Int(1));
+        edits.insert(byte_id + 1_000, EsfEdit::Value(EsfValue::I32(1)));
 
         let (bytes, applied) = doc.bytes_with_edits(&edits);
         assert_eq!(applied, 3);
@@ -674,27 +716,110 @@ mod tests {
 
         let redoc = parse_bytes(bytes).expect("edited file must re-parse");
         let root_values: Vec<_> = redoc.node_values(redoc.root).collect();
-        assert_eq!(root_values[1].value, EsfValue::Int(123456));
+        assert_eq!(root_values[1].value, EsfValue::I32(123456));
         // Untouched values survive.
         assert_eq!(root_values[0].value, EsfValue::Bool(true));
         assert_eq!(redoc.decode_string(&root_values[2].value).as_deref(), Some("hello"));
 
         let rechildren: Vec<_> = redoc.children(redoc.root).collect();
         let refloat = redoc.node_values(rechildren[0]).next().unwrap();
-        assert_eq!(refloat.value, EsfValue::Float(-2.75));
+        assert_eq!(refloat.value, EsfValue::F32(-2.75));
         let rerecord = redoc.children(rechildren[1]).next().unwrap();
         let rebyte = redoc.node_values(rerecord).next().unwrap();
-        assert_eq!(rebyte.value, EsfValue::Byte(200));
+        assert_eq!(rebyte.value, EsfValue::U8(200));
+    }
+
+    #[test]
+    fn string_edits_rewrite_and_fix_offsets() {
+        use crate::objects::EsfEdit;
+        use std::collections::HashMap;
+
+        let doc = parse_bytes(build_sample()).expect("parse failed");
+        let root_entries: Vec<_> = doc.node_value_entries(doc.root).collect();
+        let (ascii_id, ascii_rec) = root_entries[2];
+        let (utf16_id, utf16_rec) = root_entries[3];
+        assert_eq!(doc.decode_string(&ascii_rec.value).as_deref(), Some("hello"));
+        assert_eq!(doc.decode_string(&utf16_rec.value).as_deref(), Some("hi"));
+        let int_id = root_entries[1].0;
+
+        // Grow the ascii string, shrink the utf16 string, and mix in an
+        // in-place scalar edit whose value sits after both splices.
+        let mut edits = HashMap::new();
+        edits.insert(ascii_id, EsfEdit::Text("hey there".to_string()));
+        edits.insert(utf16_id, EsfEdit::Text("!".to_string()));
+        edits.insert(int_id, EsfEdit::Value(EsfValue::I32(7)));
+        // Text on a non-string value must be skipped.
+        let mut edits2 = edits.clone();
+        edits2.insert(root_entries[0].0, EsfEdit::Text("nope".to_string()));
+
+        let (bytes, applied) = doc.bytes_with_edits(&edits2);
+        assert_eq!(applied, 3, "bool Text edit must be skipped");
+        assert_ne!(bytes.len(), doc.data.len(), "length must change");
+
+        let redoc = parse_bytes(bytes).expect("rewritten file must re-parse");
+        assert_eq!(redoc.nodes.len(), doc.nodes.len());
+        assert_eq!(redoc.values.len(), doc.values.len());
+        assert_eq!(redoc.node_names, doc.node_names, "name table must survive");
+
+        let re_entries: Vec<_> = redoc.node_value_entries(redoc.root).collect();
+        assert_eq!(re_entries[0].1.value, EsfValue::Bool(true));
+        assert_eq!(re_entries[1].1.value, EsfValue::I32(7));
+        assert_eq!(redoc.decode_string(&re_entries[2].1.value).as_deref(), Some("hey there"));
+        assert_eq!(redoc.decode_string(&re_entries[3].1.value).as_deref(), Some("!"));
+        // The array sits after both splices: its stored end-offset must have
+        // been fixed up, or decoding would read garbage.
+        assert_eq!(re_entries[4].1.value, EsfValue::I16(-2));
+        assert_eq!(re_entries[5].1.value, EsfValue::Angle(270));
+        assert_eq!(redoc.format_value(&re_entries[6].1.value), "[7, 0, 300]");
+
+        // Structure after the splices survives intact.
+        let rechildren: Vec<_> = redoc.children(redoc.root).collect();
+        assert_eq!(rechildren.len(), 2);
+        let refloat = redoc.node_values(rechildren[0]).next().unwrap();
+        assert_eq!(refloat.value, EsfValue::F32(1.5));
+        let records: Vec<_> = redoc.children(rechildren[1]).collect();
+        assert_eq!(records.len(), 2);
+        assert_eq!(redoc.node_values(records[0]).next().unwrap().value, EsfValue::U8(7));
+        assert_eq!(redoc.node_values(records[1]).next().unwrap().value, EsfValue::U32(99));
+
+        // A second rewrite on the re-parsed doc must also work (utf16 grow).
+        let re_utf16_id = re_entries[3].0;
+        let mut edits3 = HashMap::new();
+        edits3.insert(re_utf16_id, EsfEdit::Text("longer again".to_string()));
+        let (bytes3, applied3) = redoc.bytes_with_edits(&edits3);
+        assert_eq!(applied3, 1);
+        let redoc3 = parse_bytes(bytes3).expect("second rewrite must re-parse");
+        let e3: Vec<_> = redoc3.node_value_entries(redoc3.root).collect();
+        assert_eq!(redoc3.decode_string(&e3[3].1.value).as_deref(), Some("longer again"));
+    }
+
+    #[test]
+    fn parse_edit_stages_strings_and_scalars() {
+        use crate::objects::EsfEdit;
+
+        let doc = parse_bytes(build_sample()).expect("parse failed");
+        let entries: Vec<_> = doc.node_value_entries(doc.root).collect();
+        let ascii = &entries[2].1.value;
+        let utf16 = &entries[3].1.value;
+
+        assert_eq!(ascii.parse_edit("new text"), Some(EsfEdit::Text("new text".into())));
+        assert_eq!(utf16.parse_edit(""), Some(EsfEdit::Text(String::new())));
+        assert_eq!(
+            EsfValue::I32(0).parse_edit("-5"),
+            Some(EsfEdit::Value(EsfValue::I32(-5)))
+        );
+        assert_eq!(EsfValue::I32(0).parse_edit("x"), None);
+        assert_eq!(EsfValue::Array { elem: crate::enums::ArrayElem::Bool, start: 0, end: 0 }.parse_edit("x"), None);
     }
 
     #[test]
     fn parse_same_type_accepts_and_rejects() {
         assert_eq!(
-            EsfValue::Int(0).parse_same_type(" -17 "),
-            Some(EsfValue::Int(-17))
+            EsfValue::I32(0).parse_same_type(" -17 "),
+            Some(EsfValue::I32(-17))
         );
-        assert_eq!(EsfValue::Int(0).parse_same_type("abc"), None);
-        assert_eq!(EsfValue::Int(0).parse_same_type("2.5"), None);
+        assert_eq!(EsfValue::I32(0).parse_same_type("abc"), None);
+        assert_eq!(EsfValue::I32(0).parse_same_type("2.5"), None);
         assert_eq!(
             EsfValue::Bool(false).parse_same_type("TRUE"),
             Some(EsfValue::Bool(true))
@@ -703,30 +828,32 @@ mod tests {
             EsfValue::Bool(false).parse_same_type("0"),
             Some(EsfValue::Bool(false))
         );
-        assert_eq!(EsfValue::Byte(0).parse_same_type("256"), None);
+        assert_eq!(EsfValue::U8(0).parse_same_type("256"), None);
         assert_eq!(
-            EsfValue::Float(0.0).parse_same_type("1.25"),
-            Some(EsfValue::Float(1.25))
+            EsfValue::F32(0.0).parse_same_type("1.25"),
+            Some(EsfValue::F32(1.25))
         );
         assert_eq!(
-            EsfValue::FloatPoint { x: 0.0, y: 0.0 }.parse_same_type("(3, -4.5)"),
-            Some(EsfValue::FloatPoint { x: 3.0, y: -4.5 })
+            EsfValue::Coord2D { x: 0.0, y: 0.0 }.parse_same_type("(3, -4.5)"),
+            Some(EsfValue::Coord2D { x: 3.0, y: -4.5 })
         );
         assert_eq!(
-            EsfValue::FloatPoint3D { x: 0.0, y: 0.0, z: 0.0 }.parse_same_type("1,2,3"),
-            Some(EsfValue::FloatPoint3D { x: 1.0, y: 2.0, z: 3.0 })
+            EsfValue::Coord3D { x: 0.0, y: 0.0, z: 0.0 }.parse_same_type("1,2,3"),
+            Some(EsfValue::Coord3D { x: 1.0, y: 2.0, z: 3.0 })
         );
         assert_eq!(
-            EsfValue::FloatPoint { x: 0.0, y: 0.0 }.parse_same_type("1,2,3"),
+            EsfValue::Coord2D { x: 0.0, y: 0.0 }.parse_same_type("1,2,3"),
             None
         );
-        // Strings are not editable yet (size changes shift offsets).
+        // Strings go through parse_edit/EsfEdit::Text, not parse_same_type.
         assert_eq!(
             EsfValue::Ascii { start: 0, len: 0 }.parse_same_type("x"),
             None
         );
-        assert!(!EsfValue::Ascii { start: 0, len: 0 }.is_editable());
-        assert!(EsfValue::UInt64(0).is_editable());
+        assert!(EsfValue::Ascii { start: 0, len: 0 }.is_editable());
+        assert!(EsfValue::Utf16 { start: 0, chars: 0 }.is_editable());
+        assert!(!EsfValue::Unknown6D([0; 4]).is_editable());
+        assert!(EsfValue::U64(0).is_editable());
     }
 
     #[test]

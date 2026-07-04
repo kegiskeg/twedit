@@ -1,0 +1,332 @@
+# twedit ESF schema: node docs and field labels for Empire: Total War saves.
+#
+# Sources: the etwng project's esf_semantic_converter.rb (github.com/taw/etwng,
+# community reverse-engineering), the legacy EsfEditor NodesDescriptions.xml,
+# and empirical verification against a real campaign save via schema_scan
+# (docs/scan_report.md). Labels were cross-checked against observed values;
+# a trailing "?" marks community guesses that could not be verified.
+#
+# Two addressing modes per node, both optional:
+#   fields = ["...", ...]   labels by absolute value position (0-based, only
+#                           the node's own values; child nodes don't count)
+#   [NODE.typed]            labels by nth-occurrence-of-type, robust when
+#     s0 = "First string"   optional values shift positions. Class keys:
+#     i1 = "Second int32"   i/u/s/bool/flt/byte/u2/i16/i64/u64/f64/angle/
+#     u_ary0 = "..."        v2/v3 and *_ary for arrays.
+#
+# typed labels win over fields; both win over the legacy XML descriptions.
+
+# ---------------------------------------------------------------- structure
+
+[MULTIPLAYER_CAMPAIGN_SAVE_GAME]
+doc = "Root of a multiplayer campaign save. The singleplayer equivalent is CAMPAIGN_SAVE_GAME."
+
+[CAMPAIGN_SAVE_GAME]
+doc = "Root of a singleplayer campaign save."
+
+[CAMPAIGN_ENV]
+doc = "Campaign environment: holds the campaign model plus setup/preopen data."
+
+[CAMPAIGN_MODEL]
+doc = "The live campaign state: world, players, trade, pathfinding, AI."
+
+[WORLD]
+doc = "The campaign world: factions, regions, theatres, climate, pending battles."
+
+[FACTION_ARRAY]
+doc = "All factions in the campaign, one FACTION record each."
+
+# ---------------------------------------------------------------- factions
+
+[FACTION]
+doc = "One faction's complete state. Diplomacy lives under DIPLOMACY_MANAGER; armies under ARMY_ARRAY; characters under CHARACTER_ARRAY."
+[FACTION.typed]
+i0 = "Faction ID"
+s0 = "Faction key (factions table)"
+s1 = "On-screen name"
+bool2 = "Major faction (false = minor)"
+u_ary0 = "Governor character ID per theatre"
+s2 = "Religion / nationality key"
+i1 = "Current capital region ID (0 if faction destroyed)"
+i2 = "Original capital region ID"
+bool6 = "Emergent faction"
+i3 = "Army upkeep"
+i4 = "Navy upkeep"
+s3 = "Campaign AI manager behaviour (patch.pack)"
+s4 = "Campaign AI personalities (patch.pack)"
+i5 = "Protectorate faction ID"
+
+[FACTION_TECHNOLOGY_MANAGER]
+doc = "Research state for one faction."
+[FACTION_TECHNOLOGY_MANAGER.typed]
+i1 = "Technology ID"
+
+[GOVERNMENT]
+doc = "A faction's government."
+[GOVERNMENT.typed]
+i0 = "Government ID"
+i2 = "Government popularity"
+
+[CHARACTER_POST]
+doc = "A cabinet/government post and the character holding it."
+[CHARACTER_POST.typed]
+i0 = "Cabinet post ID"
+s0 = "Cabinet post title"
+u0 = "Character ID of holder"
+bool0 = "Is governor post"
+i1 = "Government ID"
+i2 = "Government ID"
+
+[GOVERNORSHIP]
+doc = "A governorship: which regions one governor administers."
+[GOVERNORSHIP.typed]
+i1 = "Governor ID"
+u_ary0 = "Region IDs administered"
+u0 = "Faction ID"
+
+[GOVERNORSHIP_TAXES]
+doc = "Tax bands for a governorship."
+fields = ["Tax level, lower classes", "Tax level, upper classes", "Tax rate, lower classes", "Tax rate, upper classes"]
+
+# ---------------------------------------------------------------- diplomacy
+
+[DIPLOMACY_MANAGER]
+doc = "One faction's diplomatic relations with every other faction."
+
+[DIPLOMACY_RELATIONSHIPS_ARRAY]
+doc = "One DIPLOMACY_RELATIONSHIP record per other faction."
+
+[DIPLOMACY_RELATIONSHIP]
+doc = "This faction's stance toward one target faction. Wars/treaties are symmetric: the target faction holds a mirrored record, and both must agree. Observed states: allied, neutral, patron, protectorate, war."
+[DIPLOMACY_RELATIONSHIP.typed]
+i0 = "Target faction ID"
+bool0 = "Trade agreement active"
+i1 = "Military access (-1 = indefinite)"
+s0 = "Relationship state (war / neutral / allied / patron / protectorate)"
+i2 = "Supporting faction ID"
+u0 = "Alliance countdown (20 when allied, counts to 0)"
+i3 = "War declared: negative for aggressor, positive for victim"
+i4 = "Payment to patron"
+i5 = "Income from protectorate"
+i6 = "War opposition (opposite sign on other side)"
+i7 = "War declared: negative for aggressor, positive for victim"
+u1 = "Turns at war"
+u2 = "Turns at war without battle"
+u3 = "Alliance-ended countdown (10 when no longer allied)"
+s1 = "Relationship with protectorate?"
+i8 = "Overall relation (sum of attitude values)"
+
+[DIPLOMACY_RELATIONSHIP_ATTITUDES_ARRAY]
+doc = """One record per attitude slot, fixed order: 0 State gift received; 1 Military alliance (+1, -2 if broken); 2 Alliance broken; 3 Alliances not honoured; 4 War against enemy / enemy of my enemy; 5 Trade agreement; 6 Trade agreement broken; 7 War dragged by ally (-70) and/or declared war (-140); 8 Peace treaty; 9 Allied with enemy; 10 War declared on friend; 11 Unreliable ally; 12 Territorial expansion; 13 Backstabber; 14 Assassination attempts; 15 Religion; 16 Government type; 17 Historical friendship/grievance; 18 Acts of sabotage; 19 Acts of espionage; 20 Threats of attack; 21 Respect given to national leader."""
+fields = ["Drift per turn", "Current value", "Limit", "Active", "Secondary value", "Secondary active"]
+
+[ALLIED_IN_WAR_AGAINST]
+doc = "Faction IDs this relationship is jointly at war against."
+
+# ---------------------------------------------------------------- regions
+
+[REGION]
+doc = "One campaign map region: ownership, wealth, culture, settlement, slots."
+[REGION.typed]
+s0 = "Region key (regions table)"
+i0 = "Region ID"
+u2 = "Subsistence agriculture wealth"
+u3 = "Industrial wealth (gross)"
+u4 = "Industrial wealth minus trading losses"
+u5 = "Town wealth"
+u6 = "Minimum town wealth"
+i1 = "Town monetary growth"
+bool2 = "Exempt from tax"
+u9 = "Controlling faction ID"
+u10 = "Governor character ID"
+s1 = "Theatre (america / europe / india)"
+s2 = "Emergent nation key"
+s3 = "Region rebels"
+s4 = "Region culture (governs building types)"
+
+[REGION_SLOT]
+doc = "One building/resource slot in a region."
+[REGION_SLOT.typed]
+u2 = "Building slot ID"
+s0 = "Building slot key"
+i0 = "Commodity yield (1 meagre … 5 abundant)"
+i1 = "Town/port/road/wall level (1 very poor … 5 wealthy)"
+bool0 = "Town or port emerged"
+u3 = "Trade/finance ID (0xFFFFFFFF = none)"
+u4 = "Town/port emergence order"
+bool1 = "Available to build"
+
+[SETTLEMENT]
+doc = "A region's settlement."
+[SETTLEMENT.typed]
+i0 = "Settlement ID"
+
+[POPULATION]
+doc = "Region population summary."
+[POPULATION.typed]
+u1 = "Minimum population for army/navy recruitment"
+u2 = "Base population for region"
+u3 = "New minimum after settlement emergence?"
+
+[REGION_FACTORS]
+doc = "Population and growth factors for a region."
+[REGION_FACTORS.typed]
+u2 = "Current population"
+u3 = "Maximum supported population"
+u4 = "Base population for region"
+flt0 = "Population growth"
+bool1 = "Food shortages"
+
+[POPULATION__CLASSES]
+doc = "Per-social-class population state (POPULATION_CLASS child records)."
+
+# ---------------------------------------------------------------- military
+
+[MILITARY_FORCE]
+doc = "Links an army/navy to its commanding character."
+[MILITARY_FORCE.typed]
+u0 = "Army ID"
+u1 = "Commanding character ID"
+
+[ARMY]
+doc = "A land army."
+[ARMY.typed]
+i0 = "Army ID"
+u0 = "Building slot ID the army occupies"
+bool0 = "Under siege"
+u1 = "Army ID of escorting fleet"
+
+[NAVY]
+doc = "A fleet."
+[NAVY.typed]
+u0 = "Army ID embarked on this fleet"
+
+[LAND_UNIT]
+doc = "One land unit: identity, strength, and record. Commander and history live in child records."
+[LAND_UNIT.typed]
+i0 = "Unit ID"
+u0 = "Current size"
+u1 = "Maximum size"
+i1 = "Movement points"
+u2 = "Kills"
+u3 = "Deaths"
+u4 = "Commander character ID (0 = none)"
+u5 = "Kills (duplicate)"
+u6 = "Deaths (duplicate)"
+byte0 = "Experience"
+
+[CHARACTER]
+doc = "A named character (general, admiral, agent, minister)."
+[CHARACTER.typed]
+i0 = "Character ID"
+s0 = "Character type"
+u0 = "Army ID"
+u1 = "Unit ID"
+u3 = "Building slot ID the character occupies"
+u4 = "Cabinet post ID"
+bool1 = "Government opposition"
+flt0 = "Leadership (10 = land leader, 15 = navy leader)"
+
+[PORTRAIT_DETAILS]
+doc = "Character portrait: card path, template, info, number."
+
+[ORDINAL_PAIR]
+doc = "Localised name plus ordinal number (e.g. \"George III\")."
+
+[TRAITS]
+doc = "Character traits (TRAIT child records)."
+
+# ---------------------------------------------------------------- economy
+
+[CAMPAIGN_TRADE_MANAGER]
+doc = "Global trade state: commodity prices and demand."
+[CAMPAIGN_TRADE_MANAGER.typed]
+u_ary0 = "Commodities baseline price per unit"
+u_ary1 = "Commodities current price per unit"
+u_ary5 = "Resources trade value"
+flt_ary0 = "Demand"
+
+[INTERNATIONAL_TRADE_ROUTE]
+doc = "A trade route between factions. Leading UInt32 = number of connections, then start/end port-or-settlement index pairs; UInt32 arrays hold commodity and resource quantities."
+[INTERNATIONAL_TRADE_ROUTE.typed]
+u0 = "Number of connections"
+bool0 = "Trading over sea"
+u_ary0 = "Commodities quantity"
+u_ary1 = "Resources quantity"
+
+[DOMESTIC_TRADE_ROUTE]
+doc = "A trade route within one faction. Leading UInt32 = number of connections, then start/end port-or-settlement index pairs."
+[DOMESTIC_TRADE_ROUTE.typed]
+u0 = "Number of connections"
+u_ary0 = "Commodities quantity"
+
+[FACTION_DOMESTIC_TRADE_ROUTES_ARRAY]
+doc = "Route IDs of this faction's domestic trade routes."
+[FACTION_DOMESTIC_TRADE_ROUTES_ARRAY.typed]
+u0 = "Route ID"
+
+[FACTION_INTERNATIONAL_TRADE_ROUTES_ARRAY]
+doc = "Route IDs of this faction's international trade routes."
+
+# ---------------------------------------------------------------- campaign
+
+[THEATRES]
+doc = "The campaign theatres (america, europe, india)."
+[THEATRES.typed]
+s0 = "Theatre key"
+
+[CAMPAIGN_VICTORY_CONDITIONS]
+doc = "Victory conditions: region list, target year, region count, prestige flag, campaign type (0 short, 1 long, 2 prestige, 3 global domination, 4 unplayable)."
+[CAMPAIGN_VICTORY_CONDITIONS.typed]
+u0 = "Target year"
+u1 = "Regions required"
+bool1 = "Prestige victory"
+u2 = "Campaign type (0 short / 1 long / 2 prestige / 3 domination)"
+
+[CAMPAIGN_PLAYER_SETUP]
+doc = "Player slot configuration for this campaign."
+
+[REBEL_SETUP]
+doc = "Rebellion template: unit list, faction, religion, government, social class."
+
+# ---------------------------------------------------------------- campaign AI
+
+[CAI_FACTION]
+doc = "Campaign AI view of one faction. IDs here are AI-internal, not faction IDs."
+[CAI_FACTION.typed]
+u_ary0 = "Region AI IDs of owned regions"
+u_ary1 = "Theatre IDs"
+u_ary2 = "HLCIS IDs"
+u_ary3 = "Character resource AI IDs"
+u_ary4 = "Character AI IDs"
+u0 = "Region AI ID of capital"
+u1 = "Faction ID"
+u_ary5 = "World trade route IDs"
+u_ary6 = "World trade route segment IDs"
+u2 = "Technology AI ID"
+
+[CAI_GOVERNORSHIP]
+doc = "Campaign AI view of a governorship."
+[CAI_GOVERNORSHIP.typed]
+u0 = "Governor ID"
+u1 = "Theatre ID"
+u2 = "Character AI ID"
+u_ary0 = "Region AI IDs controlled by this governor"
+
+[CAI_WORLD_FACTIONS]
+doc = "AI world model: faction entries."
+[CAI_WORLD_FACTIONS.typed]
+u2 = "Faction AI ID"
+
+[CAI_WORLD_SETTLEMENTS]
+doc = "AI world model: settlement entries."
+[CAI_WORLD_SETTLEMENTS.typed]
+u3 = "Settlement AI ID"
+
+[CAI_TECHNOLOGY_TREE]
+doc = "AI technology tree reference."
+[CAI_TECHNOLOGY_TREE.typed]
+u0 = "Technology tree AI ID"
+
+[CAI_BDI_WAR_AND_PEACE_MANAGER]
+doc = "AI war/peace decision state. Rebuilt as the AI thinks; safe to leave alone when editing diplomacy."
