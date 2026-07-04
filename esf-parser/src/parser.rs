@@ -646,6 +646,7 @@ mod tests {
 
     #[test]
     fn edits_round_trip() {
+        use crate::objects::EsfEdit;
         use std::collections::HashMap;
 
         let doc = parse_bytes(build_sample()).expect("parse failed");
@@ -662,11 +663,11 @@ mod tests {
         let (byte_id, _) = doc.node_value_entries(record_node).next().unwrap();
 
         let mut edits = HashMap::new();
-        edits.insert(int_id, EsfValue::Int(123456));
-        edits.insert(float_id, EsfValue::Float(-2.75));
-        edits.insert(byte_id, EsfValue::Byte(200));
+        edits.insert(int_id, EsfEdit::Value(EsfValue::Int(123456)));
+        edits.insert(float_id, EsfEdit::Value(EsfValue::Float(-2.75)));
+        edits.insert(byte_id, EsfEdit::Value(EsfValue::Byte(200)));
         // Variant mismatch must be skipped, not corrupt the file.
-        edits.insert(byte_id + 1_000, EsfValue::Int(1));
+        edits.insert(byte_id + 1_000, EsfEdit::Value(EsfValue::Int(1)));
 
         let (bytes, applied) = doc.bytes_with_edits(&edits);
         assert_eq!(applied, 3);
@@ -685,6 +686,84 @@ mod tests {
         let rerecord = redoc.children(rechildren[1]).next().unwrap();
         let rebyte = redoc.node_values(rerecord).next().unwrap();
         assert_eq!(rebyte.value, EsfValue::Byte(200));
+    }
+
+    #[test]
+    fn string_edits_rewrite_and_fix_offsets() {
+        use crate::objects::EsfEdit;
+        use std::collections::HashMap;
+
+        let doc = parse_bytes(build_sample()).expect("parse failed");
+        let root_entries: Vec<_> = doc.node_value_entries(doc.root).collect();
+        let (ascii_id, ascii_rec) = root_entries[2];
+        let (utf16_id, utf16_rec) = root_entries[3];
+        assert_eq!(doc.decode_string(&ascii_rec.value).as_deref(), Some("hello"));
+        assert_eq!(doc.decode_string(&utf16_rec.value).as_deref(), Some("hi"));
+        let int_id = root_entries[1].0;
+
+        // Grow the ascii string, shrink the utf16 string, and mix in an
+        // in-place scalar edit whose value sits after both splices.
+        let mut edits = HashMap::new();
+        edits.insert(ascii_id, EsfEdit::Text("hey there".to_string()));
+        edits.insert(utf16_id, EsfEdit::Text("!".to_string()));
+        edits.insert(int_id, EsfEdit::Value(EsfValue::Int(7)));
+        // Text on a non-string value must be skipped.
+        let mut edits2 = edits.clone();
+        edits2.insert(root_entries[0].0, EsfEdit::Text("nope".to_string()));
+
+        let (bytes, applied) = doc.bytes_with_edits(&edits2);
+        assert_eq!(applied, 3, "bool Text edit must be skipped");
+        assert_ne!(bytes.len(), doc.data.len(), "length must change");
+
+        let redoc = parse_bytes(bytes).expect("rewritten file must re-parse");
+        assert_eq!(redoc.nodes.len(), doc.nodes.len());
+        assert_eq!(redoc.values.len(), doc.values.len());
+        assert_eq!(redoc.node_names, doc.node_names, "name table must survive");
+
+        let re_entries: Vec<_> = redoc.node_value_entries(redoc.root).collect();
+        assert_eq!(re_entries[0].1.value, EsfValue::Bool(true));
+        assert_eq!(re_entries[1].1.value, EsfValue::Int(7));
+        assert_eq!(redoc.decode_string(&re_entries[2].1.value).as_deref(), Some("hey there"));
+        assert_eq!(redoc.decode_string(&re_entries[3].1.value).as_deref(), Some("!"));
+
+        // Structure after the splices survives intact.
+        let rechildren: Vec<_> = redoc.children(redoc.root).collect();
+        assert_eq!(rechildren.len(), 2);
+        let refloat = redoc.node_values(rechildren[0]).next().unwrap();
+        assert_eq!(refloat.value, EsfValue::Float(1.5));
+        let records: Vec<_> = redoc.children(rechildren[1]).collect();
+        assert_eq!(records.len(), 2);
+        assert_eq!(redoc.node_values(records[0]).next().unwrap().value, EsfValue::Byte(7));
+        assert_eq!(redoc.node_values(records[1]).next().unwrap().value, EsfValue::UInt(99));
+
+        // A second rewrite on the re-parsed doc must also work (utf16 grow).
+        let re_utf16_id = re_entries[3].0;
+        let mut edits3 = HashMap::new();
+        edits3.insert(re_utf16_id, EsfEdit::Text("longer again".to_string()));
+        let (bytes3, applied3) = redoc.bytes_with_edits(&edits3);
+        assert_eq!(applied3, 1);
+        let redoc3 = parse_bytes(bytes3).expect("second rewrite must re-parse");
+        let e3: Vec<_> = redoc3.node_value_entries(redoc3.root).collect();
+        assert_eq!(redoc3.decode_string(&e3[3].1.value).as_deref(), Some("longer again"));
+    }
+
+    #[test]
+    fn parse_edit_stages_strings_and_scalars() {
+        use crate::objects::EsfEdit;
+
+        let doc = parse_bytes(build_sample()).expect("parse failed");
+        let entries: Vec<_> = doc.node_value_entries(doc.root).collect();
+        let ascii = &entries[2].1.value;
+        let utf16 = &entries[3].1.value;
+
+        assert_eq!(ascii.parse_edit("new text"), Some(EsfEdit::Text("new text".into())));
+        assert_eq!(utf16.parse_edit(""), Some(EsfEdit::Text(String::new())));
+        assert_eq!(
+            EsfValue::Int(0).parse_edit("-5"),
+            Some(EsfEdit::Value(EsfValue::Int(-5)))
+        );
+        assert_eq!(EsfValue::Int(0).parse_edit("x"), None);
+        assert_eq!(EsfValue::Binary { type_byte: 0x41, start: 0, end: 0 }.parse_edit("x"), None);
     }
 
     #[test]
@@ -720,12 +799,14 @@ mod tests {
             EsfValue::FloatPoint { x: 0.0, y: 0.0 }.parse_same_type("1,2,3"),
             None
         );
-        // Strings are not editable yet (size changes shift offsets).
+        // Strings go through parse_edit/EsfEdit::Text, not parse_same_type.
         assert_eq!(
             EsfValue::Ascii { start: 0, len: 0 }.parse_same_type("x"),
             None
         );
-        assert!(!EsfValue::Ascii { start: 0, len: 0 }.is_editable());
+        assert!(EsfValue::Ascii { start: 0, len: 0 }.is_editable());
+        assert!(EsfValue::Utf16 { start: 0, chars: 0 }.is_editable());
+        assert!(!EsfValue::Unknown109([0; 4]).is_editable());
         assert!(EsfValue::UInt64(0).is_editable());
     }
 

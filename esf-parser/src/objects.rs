@@ -56,19 +56,49 @@ pub struct EsfValueRecord {
     pub value: EsfValue,
 }
 
+/// A staged edit for one value.
+///
+/// `Value` replaces a fixed-size scalar in place. `Text` replaces a string
+/// value (`Utf16`/`Ascii`); because the payload length can change, applying
+/// one triggers a full rewrite that shifts the file and fixes up every
+/// stored absolute offset.
+#[derive(Debug, Clone, PartialEq)]
+pub enum EsfEdit {
+    Value(EsfValue),
+    Text(String),
+}
+
 impl EsfValue {
-    /// Whether this value can be edited in place. Fixed-size scalars keep
-    /// the file layout unchanged; strings and blobs would shift every
-    /// subsequent offset and need a full rewrite (not yet supported).
+    /// Whether this value can be edited. Fixed-size scalars are patched in
+    /// place; strings are replaced via a rewrite with offset fixups. Only
+    /// opaque blobs remain read-only.
     pub fn is_editable(&self) -> bool {
         !matches!(
             self,
-            EsfValue::Utf16 { .. }
-                | EsfValue::Ascii { .. }
-                | EsfValue::Binary { .. }
-                | EsfValue::Unknown109(_)
-                | EsfValue::OptimizedBlock { .. }
+            EsfValue::Binary { .. } | EsfValue::Unknown109(_) | EsfValue::OptimizedBlock { .. }
         )
+    }
+
+    /// Parse user `text` into a staged edit for this value. `None` when the
+    /// text does not parse for this variant (often a typing intermediate
+    /// like "-"), the string is too long for the u16 length field, or the
+    /// variant is not editable.
+    pub fn parse_edit(&self, text: &str) -> Option<EsfEdit> {
+        match self {
+            EsfValue::Utf16 { .. } => {
+                if text.encode_utf16().count() > u16::MAX as usize {
+                    return None;
+                }
+                Some(EsfEdit::Text(text.to_string()))
+            }
+            EsfValue::Ascii { .. } => {
+                if text.len() > u16::MAX as usize {
+                    return None;
+                }
+                Some(EsfEdit::Text(text.to_string()))
+            }
+            _ => self.parse_same_type(text).map(EsfEdit::Value),
+        }
     }
 
     /// Parse `text` as a new value of the same variant as `self`.
@@ -247,32 +277,137 @@ impl EsfDocument {
     }
 
     /// Produce the full file bytes with `edits` applied. Edits are keyed by
-    /// global value id and must be same-variant fixed-size values, so every
-    /// patch is written in place at the value's payload offset (the
-    /// equivalent of the original editor's QuickSave). Mismatched or
-    /// non-editable edits are skipped and reported back.
-    pub fn bytes_with_edits(&self, edits: &HashMap<u32, EsfValue>) -> (Vec<u8>, usize) {
+    /// global value id. `EsfEdit::Value` patches must match the original
+    /// variant and are written in place at the value's payload offset.
+    /// `EsfEdit::Text` edits on string values re-encode the string; when the
+    /// length changes, the file is rebuilt and every stored absolute offset
+    /// (node ends, sized-block ends, the header's name-table pointer) is
+    /// adjusted. Mismatched or non-editable edits are skipped and reported
+    /// back through the applied count.
+    pub fn bytes_with_edits(&self, edits: &HashMap<u32, EsfEdit>) -> (Vec<u8>, usize) {
         let mut out = self.data.clone();
         let mut applied = 0;
-        for (&value_id, new_value) in edits {
+
+        // (start of the value in the file, bytes it occupied, replacement)
+        struct Splice {
+            start: u32,
+            old_len: usize,
+            new_bytes: Vec<u8>,
+        }
+        let mut splices: Vec<Splice> = Vec::new();
+
+        for (&value_id, edit) in edits {
             let Some(record) = self.values.get(value_id as usize) else {
                 continue;
             };
-            if !record.value.same_variant(new_value) {
-                continue;
-            }
-            let Some(payload) = new_value.payload_bytes() else {
-                continue;
-            };
-            // Payload starts right after the 1-byte type tag.
-            let start = record.offset as usize + 1;
-            let end = start + payload.len();
-            if end <= out.len() {
-                out[start..end].copy_from_slice(&payload);
-                applied += 1;
+            match edit {
+                EsfEdit::Value(new_value) => {
+                    if !record.value.same_variant(new_value) {
+                        continue;
+                    }
+                    let Some(payload) = new_value.payload_bytes() else {
+                        continue;
+                    };
+                    // Payload starts right after the 1-byte type tag.
+                    let start = record.offset as usize + 1;
+                    let end = start + payload.len();
+                    if end <= out.len() {
+                        out[start..end].copy_from_slice(&payload);
+                        applied += 1;
+                    }
+                }
+                EsfEdit::Text(text) => {
+                    // Keep the original type tag, write a new u16 count and
+                    // payload: [tag][count][payload].
+                    let (old_payload_len, count, payload) = match record.value {
+                        EsfValue::Utf16 { chars, .. } => {
+                            let units: Vec<u16> = text.encode_utf16().collect();
+                            let Ok(count) = u16::try_from(units.len()) else {
+                                continue;
+                            };
+                            let bytes: Vec<u8> =
+                                units.iter().flat_map(|u| u.to_le_bytes()).collect();
+                            (chars as usize * 2, count, bytes)
+                        }
+                        EsfValue::Ascii { len, .. } => {
+                            let Ok(count) = u16::try_from(text.len()) else {
+                                continue;
+                            };
+                            (len as usize, count, text.as_bytes().to_vec())
+                        }
+                        _ => continue,
+                    };
+                    let mut new_bytes = Vec::with_capacity(3 + payload.len());
+                    new_bytes.push(self.data[record.offset as usize]);
+                    new_bytes.extend_from_slice(&count.to_le_bytes());
+                    new_bytes.extend_from_slice(&payload);
+                    splices.push(Splice {
+                        start: record.offset,
+                        old_len: 1 + 2 + old_payload_len,
+                        new_bytes,
+                    });
+                    applied += 1;
+                }
             }
         }
-        (out, applied)
+
+        if splices.is_empty() {
+            return (out, applied);
+        }
+
+        // Rebuild the file with the splices applied.
+        splices.sort_by_key(|s| s.start);
+        let delta_at = |pos: u64| -> i64 {
+            splices
+                .iter()
+                .take_while(|s| (s.start as u64) < pos)
+                .map(|s| s.new_bytes.len() as i64 - s.old_len as i64)
+                .sum()
+        };
+        let total_delta: i64 = splices
+            .iter()
+            .map(|s| s.new_bytes.len() as i64 - s.old_len as i64)
+            .sum();
+        let mut rebuilt = Vec::with_capacity((out.len() as i64 + total_delta) as usize);
+        let mut cursor = 0usize;
+        for s in &splices {
+            rebuilt.extend_from_slice(&out[cursor..s.start as usize]);
+            rebuilt.extend_from_slice(&s.new_bytes);
+            cursor = s.start as usize + s.old_len;
+        }
+        rebuilt.extend_from_slice(&out[cursor..]);
+
+        // Fix every absolute offset stored in the file. delta_at counts
+        // splices strictly before a position, so a stored END offset shifts
+        // iff a splice lies inside the region it closes, and a field's own
+        // position shifts iff a splice lies before it.
+        let header_ptr_pos: u64 = match self.header.magic {
+            crate::enums::EsfType::ABCD => 4,
+            crate::enums::EsfType::ABCE => 12,
+        };
+        let mut fixup = |field_pos: u64, stored: u32| {
+            let new_stored = (stored as i64 + delta_at(stored as u64)) as u32;
+            let new_pos = (field_pos as i64 + delta_at(field_pos)) as usize;
+            rebuilt[new_pos..new_pos + 4].copy_from_slice(&new_stored.to_le_bytes());
+        };
+        fixup(header_ptr_pos, self.header.offset_node_names);
+        for node in &self.nodes {
+            // Single/Poly store their end offset after [tag][name u16][ver];
+            // a Record's own offset IS its end-offset field.
+            let field_pos = match node.kind {
+                NodeKind::Single | NodeKind::Poly => node.offset as u64 + 4,
+                NodeKind::Record => node.offset as u64,
+            };
+            fixup(field_pos, node.offset_end);
+        }
+        for rec in &self.values {
+            if let EsfValue::Binary { end, .. } | EsfValue::OptimizedBlock { end, .. } = rec.value
+            {
+                fixup(rec.offset as u64 + 1, end);
+            }
+        }
+
+        (rebuilt, applied)
     }
 
     /// Write the document with `edits` applied to `path`. Returns the number
@@ -280,7 +415,7 @@ impl EsfDocument {
     pub fn save_with_edits(
         &self,
         path: impl AsRef<std::path::Path>,
-        edits: &HashMap<u32, EsfValue>,
+        edits: &HashMap<u32, EsfEdit>,
     ) -> std::io::Result<usize> {
         let (bytes, applied) = self.bytes_with_edits(edits);
         std::fs::write(path, bytes)?;

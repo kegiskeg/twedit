@@ -4,7 +4,7 @@ mod descriptions;
 mod theme;
 
 use descriptions::Descriptions;
-use esf_parser::objects::{EsfDocument, EsfValue, NodeId, NodeKind, NO_PARENT};
+use esf_parser::objects::{EsfDocument, EsfEdit, EsfValue, NodeId, NodeKind, NO_PARENT};
 use std::collections::{HashMap, HashSet};
 use std::sync::Arc;
 use std::time::Duration;
@@ -58,7 +58,7 @@ impl PartialEq for DescState {
 }
 
 /// Edits staged in the UI, keyed by global value id.
-type Edits = HashMap<u32, EsfValue>;
+type Edits = HashMap<u32, EsfEdit>;
 
 // The tree widget only reports the clicked label text, so the arena node id
 // must travel inside the label. To keep labels visually clean (like the old
@@ -321,7 +321,7 @@ fn value_row(
     doc: &EsfDocument,
     value_id: u32,
     original: &EsfValue,
-    current: &EsfValue,
+    current_text: String,
     description: Option<&str>,
     edits: &Edits,
     set_edits: &AsyncSetState<Edits>,
@@ -330,23 +330,29 @@ fn value_row(
     let is_edited = edits.contains_key(&value_id);
 
     let value_cell: Element = if edit_mode && original.is_editable() {
+        // For strings, the "matches the original again" check compares
+        // text, decoded up front so the closure stays document-free.
+        let original_text = doc.decode_string(original);
         let original = original.clone();
         let edits = edits.clone();
         let set_edits = set_edits.clone();
-        let mut cell = text_box(doc.format_value(current)).width(COL_VALUE).on_text_changed(
+        let mut cell = text_box(current_text).width(COL_VALUE).on_text_changed(
             move |text: String| {
                 let mut next = edits.clone();
-                match original.parse_same_type(&text) {
-                    Some(parsed) if parsed != original => {
-                        next.insert(value_id, parsed);
-                    }
-                    Some(_) => {
-                        // Text matches the original again: unstage.
-                        next.remove(&value_id);
-                    }
-                    // Unparseable (often a typing intermediate like "-"):
-                    // leave staged edits untouched.
-                    None => return,
+                // Unparseable (often a typing intermediate like "-"):
+                // leave staged edits untouched.
+                let Some(edit) = original.parse_edit(&text) else {
+                    return;
+                };
+                let unchanged = match &edit {
+                    EsfEdit::Value(parsed) => *parsed == original,
+                    EsfEdit::Text(s) => Some(s.as_str()) == original_text.as_deref(),
+                };
+                if unchanged {
+                    // Text matches the original again: unstage.
+                    next.remove(&value_id);
+                } else {
+                    next.insert(value_id, edit);
                 }
                 set_edits.call(next);
             },
@@ -356,7 +362,7 @@ fn value_row(
         }
         cell.into()
     } else {
-        let mut cell = text_block(doc.format_value(current)).width(COL_VALUE);
+        let mut cell = text_block(current_text).width(COL_VALUE);
         if is_edited {
             cell = cell.foreground(ThemeRef::AccentText);
         }
@@ -423,12 +429,16 @@ fn value_rows(
         let description = node_descs
             .and_then(|list| list.get(index))
             .and_then(|d| d.as_deref());
-        let current = edits.get(&value_id).unwrap_or(&record.value);
+        let current_text = match edits.get(&value_id) {
+            Some(EsfEdit::Value(v)) => doc.format_value(v),
+            Some(EsfEdit::Text(s)) => s.clone(),
+            None => doc.format_value(&record.value),
+        };
         rows.push(value_row(
             doc,
             value_id,
             &record.value,
-            current,
+            current_text,
             description,
             edits,
             set_edits,
