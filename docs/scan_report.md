@@ -1,0 +1,8494 @@
+# ESF schema scan
+
+- File: `C:/Users/boytr/AppData/Roaming/The Creative Assembly/Empire/save_games_multiplayer/multiplayer_campaign_76561198119124316_76561198165951372_72.empire_save_multiplayer`
+- Magic: ABCE; 2354956 nodes, 10002564 values, 710 node names
+
+## Global value-type histogram
+
+| Type | Count |
+|---|---|
+| UInt32 | 4156030 |
+| Boolean | 2003863 |
+| Float32 | 1521138 |
+| UInt32 Array | 1382725 |
+| Int32 | 620214 |
+| UTF-16 | 231247 |
+| Point2D | 49457 |
+| ASCII | 10151 |
+| UInt8 | 7224 |
+| Int32 Array | 7207 |
+| Float32 Array | 7198 |
+| UInt16 | 3288 |
+| Angle | 1956 |
+| UInt16 Array | 560 |
+| Boolean Array | 246 |
+| UInt8 Array | 57 |
+| UInt64 | 2 |
+| Point3D | 1 |
+
+Legacy C#-compat tags (0x00 / 0x6D / 0x8C) observed: **0** — consistent with them not being real ESF types.
+
+## Node types (902)
+
+Sorted by instance count. `NAME[]` = records inside a poly node.
+
+### MANAGED_OBSTACLE_BOUNDARY[]
+
+- Instances: 261704
+- 3 distinct signatures; most common:
+  - (130721×) Boolean, UInt32 Array
+  - (129619×) UInt32, UInt32, Boolean, UInt32 Array
+  - (1364×) Boolean
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Boolean / UInt32 | 0 … 84925 | 1129; 1198; 1401; 1635; 1636; 312; 313; true; … |
+| 1 | UInt32 / UInt32 Array | 0 … 7 | 0; 1; [1015024946, 0]; [1015131666, 0]; [841061386, 0, 1015024946, 0, 1015131666, 0]; [841061386, 0, 1015024946, 0]; [841061386, 0, 1015131666, 0]; [841061386, 0]; … |
+| 2 | Boolean |  | true |
+| 3 | UInt32 Array |  | [1015024946, 0, 1015131666, 0]; [1015024946, 0]; [1015131666, 0]; [837415242, 0]; [841061386, 0, 1015024946, 0, 1015131666, 0]; [841061386, 0, 1015024946, 0]; [841061386, 0, 1015131666, 0]; [841061386, 0]; … |
+
+### CAI_FACTION_RELATION_ENTRY
+
+- Instances: 228928
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1433 | 1265; 1268; 1271; 1274; 1277; 1280; 1283; 1286; … |
+| 1 | UInt32 | 1265 … 1430 | 1268; 1271; 1274; 1277; 1280; 1283; 1286; 1289; … |
+| 2 | UInt32 | 0 … 4 | 0; 1; 2; 3; 4 |
+| 3 | Boolean |  | false; true |
+| 4 | Boolean |  | false |
+| 5 | Boolean |  | false; true |
+| 6 | Float32 | 0 … 1 | 0; 0.21624999; 0.22208332; 0.225; 0.23083334; 0.23374999; 0.23666666; 0.334375; … |
+| 7 | Float32 | 0.00563068175688386 … 0.8728863596916199 | 0.10888353; 0.11012502; 0.2670587; 0.27288303; 0.27518702; 0.27975616; 0.28135037; 0.35107952; … |
+| 8 | UInt32 | 0 … 5 | 0; 1; 2; 3; 4; 5 |
+
+### CAI_FACTION_RELATION_TIMELINE_ENTRIES[]
+
+- Instances: 228928
+- Child nodes: CAI_FACTION_RELATION_ENTRY
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Boolean |  | true |
+
+### CAI_BDI_COMPONENT_BLOCK_OWNS[]
+
+- Instances: 216483
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 27 … 99910058 | 1307108; 1445937; 1464293; 1494931; 1526520; 1526544; 1527276; 1527634; … |
+| 1 | UInt32 | 4 … 1544327 | 5361; 5371; 5375; 5391; 5430; 5449; 5470; 5510; … |
+| 2 | Float32 | 0 | 0 |
+| 3 | Float32 | -1.2771271467208862 … 55 | 0; 0.2; 0.31153357; 0.3216098; 0.36354715; 0.4; 1; 3.521029; … |
+| 4 | UInt32 | 0 … 1 | 0; 1 |
+
+### CAI_BDI_COMPONENT_PROPERTY_SET
+
+- Instances: 122052
+- 43 distinct signatures; most common:
+  - (82025×) UInt32, UInt32, UInt32, Boolean, UInt32
+  - (18183×) UInt32
+  - (5285×) UInt32, UInt32, UInt32, Boolean, UInt32, UInt32, Boolean, UInt32
+  - (2588×) UInt32, UInt32, UInt32, Boolean, UInt32, UInt32, Boolean, UInt32, UInt32, Boolean, UInt32, UInt32, Boolean, UInt32
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 0 … 13 | 0; 1; 2; 3; 4; 5; 6; 7; … |
+| 1 | UInt32 | 0 … 78 | 0; 2; 65; 73; 78 |
+| 2 | UInt32 | 13 … 27 | 13; 18; 26; 27 |
+| 3 | Boolean |  | false |
+| 4 | UInt32 | 1 … 1544286 | 101; 102; 146; 163; 328; 79; 80; 81; … |
+| 5 | UInt32 | 18 … 74 | 18; 26; 27; 31; 35; 74 |
+| 6 | Boolean / UInt32 | 1 … 20 | 1; 10; 11; 12; 2; 20; false |
+| 7 | Boolean / UInt32 | 0 … 373 | 0; 12; 2; 322; 368; 4; 6; false; … |
+| 8 | Int32 / UInt32 | 0 … 1544248 | 1265; 1268; 1271; 1274; 1277; 1280; 1283; 1286; … |
+| 9 | Boolean / UInt32 | 10 … 73 | 10; 12; 20; 27; 35; 73; false; true; … |
+| 10 | Boolean / Int32 / UInt32 | -792461312 … 659417856 | 10; 12; 18; 2; 254; 255; 73; false; … |
+| 11 | Boolean / Int32 / UInt32 | 0 … 421643328 | 10; 1427; 1430; 18; 20; 24; 25; false; … |
+| 12 | Boolean / UInt32 | 2 … 1539502 | 1037; 1065; 1078; 1084; 1094; 1097; 1222; false; … |
+| 13 | Boolean / Int32 / UInt32 | -793509888 … 919520512 | 14; 16; 17; 29; 30; 31; 46; 56; … |
+| 14 | Boolean / Int32 / UInt32 | -202167488 … 494129184 | 1082; 1101; 1251; 1265; 31; 7408; 765; 809; … |
+| 15 | Boolean / UInt32 | 2 … 1535957 | 10; 18; 21; 24; 25; 31; 35; 73; … |
+| 16 | Boolean / Int32 / UInt32 | 0 … 1412079 | 1; 10; 12; 18; 2; 22; 7; false; … |
+| 17 | Boolean / Int32 / UInt32 | 0 … 1537017 | 1082; 1101; 1251; 223; 765; 809; 843; false; … |
+| 18 | Boolean / UInt32 | 2 … 1539502 | 203; 233; 235; 33; 34; 35; 769; 811; … |
+| 19 | Boolean / UInt32 | 0 … 1227 | 1097; 18; 20; 23; 27; 52; 73; false; … |
+| 20 | Boolean / Int32 / UInt32 | 5 … 1533744 | 18; 27; 295; 35; 5; 5371; 6; false; … |
+| 21 | Boolean / Int32 / UInt32 | -607914304 … 150732800 | 172; 222; 358; 7; 74; 7462; 7464; false; … |
+| 22 | Boolean / Int32 / UInt32 | 0 … 299856352 | 2186; 2188; 2190; 2192; 2194; 2196; 2198; 2200; … |
+| 23 | Boolean / UInt32 | 3 … 3594 | 15; 18; 2198; 2200; 2216; 2355; 3059; false; … |
+| 24 | Boolean / Int32 / UInt32 | -630980608 … 214171648 | 1; 172; 176; 180; 69218944; 7464; 7489; false; … |
+| 25 | Boolean / Int32 / UInt32 | 35 … 425984000 | 185; 1940; 2209; 2526; 256; 73; 90092344; 90181939; … |
+| 26 | Int32 / UInt32 | 0 … 74 | 0; 18; 35; 4; 53; 74 |
+| 27 | Boolean / UInt32 | 3 … 23 | 17; 20; 23; 3; false |
+| 28 | Boolean / UInt32 | 256 … 2478 | 2310; 2478; 256; 257; false |
+| 29 | Int32 / UInt32 / UTF-16 | 1 … 1537543 | 35; 6th_rate_british; 7462; 7463; galleon_fluyt; indiaman; jackdaw; sloop_british; … |
+| 30 | UInt32 | 3 … 74 | 16; 20; 3; 36; 74 |
+| 31 | Boolean / UInt32 | 14 … 20 | 14; 20; false |
+| 32 | Boolean / Int32 / UInt32 / UTF-16 | 0 … 1463650 | 1133825; 524123; 524157; 567448; 688436; 707925; 834168; false; … |
+| 33 | Int32 / UInt32 / UTF-16 | 0 … 74 | 0; 74; college; ironmasters_works; ordnance_factory; royal_observatory; tarmac_roads; water-powered_cloth_mill; … |
+| 34 | UInt32 | 20 … 74 | 20; 74 |
+| 35 | Boolean / UInt32 | 20 | 20; false |
+| 36 | Boolean / Int32 | 0 | 0; false |
+| 37 | Int32 / UInt32 | 0 … 1872 | 112; 350; 60; 600; 650; 74; 780; 80; … |
+| 38 | UInt32 | 20 … 74 | 20; 74 |
+| 39 | Boolean / UInt32 | 20 | 20; false |
+
+### CAI_BDI_COMPONENT_BLOCK_OWNS
+
+- Instances: 121608
+
+### QUAD_TREE_BIT_ARRAY_NODE
+
+- Instances: 105443
+- Child nodes: QUAD_TREE_BIT_ARRAY_NODE
+- 2 distinct signatures; most common:
+  - (79586×) UInt32, UInt32
+  - (25857×) 
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 0 … 4294967295 | 0; 117900035; 3773886712; 4042318048; 4177067260; 4277992696; 4294967295; 50792207; … |
+| 1 | UInt32 | 0 … 4294967295 | 0; 2147483648; 252645135; 3; 32992; 4128767; 4177066232; 4294967295; … |
+
+### CAI_BDI_POOL_BELIEFS[]
+
+- Instances: 89974
+- Child nodes: CAI_ACTIVE_RECRUITMENT_ANALYSIS, CAI_AREA_OF_INTEREST_ANALYSIS_BASE, CAI_AREA_OF_INTEREST_ANALYSIS_FORT, CAI_AREA_OF_INTEREST_ANALYSIS_REGION_SLOT, CAI_AREA_OF_INTEREST_ANALYSIS_RESOURCE_MOBILE, CAI_AREA_OF_INTEREST_ANALYSIS_SETTLEMENT, CAI_ARMED_CITIZENRY_ANALYSIS, CAI_BASE_VALUE, CAI_BASIC_BORDER_ANALYSIS_BASE, CAI_BASIC_BORDER_ANALYSIS_REGION, CAI_BASIC_BORDER_ANALYSIS_REGION_GROUP, CAI_BASIC_FACTION_ABSOLUTE_ANALYSIS, CAI_BASIC_FACTION_RELATIVE_ANALYSIS, CAI_BASIC_FREE_STRENGTH_FACTION_ANALYSIS, CAI_BASIC_REGION_GROUP_ANALYSIS, CAI_BASIC_REGION_GROUP_REGION_ANALYSIS, CAI_BDI_ACTIVE_OUTFIELD_AREAS, CAI_BDI_COMPONENT_BLOCK_OWNS, CAI_BDI_COMPONENT_PROPERTY_SET, CAI_BDI_FAILED_REGION_TARGET, CAI_BDI_FRONTIER_REGION_INFORMATION, CAI_BDI_REGISTERED_REGION_TARGET, CAI_BDI_RESERVED_NAVY, CAI_BDI_RESERVED_NAVY_RESERVATION, CAI_BDI_RESOURCE_MOBILE_SUITABILITY, CAI_BORDER_PATROL_ANALYSIS, CAI_BUILDING_AVAILABILITY_ANALYSIS, CAI_BUILDING_OPTIONS_ANALYSIS, CAI_BUILD_FORT_IN_REGION_ANALYSIS, CAI_COMPOSITE_REGION_ANALYSIS, CAI_COMPOSITE_REGION_GROUP_ANALYSIS, CAI_COMPOSITE_THEATRE_ANALYSIS, CAI_COMPOSITE_VALUE_ANALYSIS, CAI_CONSTRUCTION_BALANCE_ANALYSIS, CAI_CONSTRUCTION_BALANCE_ANALYSIS_FACTION, CAI_CONSTRUCTION_BALANCE_ANALYSIS_REGION, CAI_CONSTRUCTION_BALANCE_ANALYSIS_REGION_GROUP, CAI_DEFENCE_AND_INVASION_FORCE_STRENGTH_ANALYSIS_REGION, CAI_DEFEND_REGION_ANALYSIS, CAI_DEFEND_REGION_COAST_ANALYSIS, CAI_DIPLOMATIC_ANALYSIS, CAI_FACTION_CAPABLE_MILITARY_STRENGTHS, CAI_FACTION_RELATIVE_MILITARY_STRENGTHS, CAI_FACTION_RESEARCH_TECHNOLOGY_FACTION_ANALYSIS, CAI_FACTION_RESEARCH_TECHNOLOGY_UNIVERSITY_ANALYSIS, CAI_FACTION_SEA_GRID_ANALYSIS, CAI_FACTION_STEAL_TECHNOLOGY_FACTION_ANALYSIS, CAI_FACTION_TAXATION_GOVERNORSHIP_ANALYSIS, CAI_FACTION_TO_FACTION_ATTITUDE_ANALYSIS, CAI_FACTION_TRADE_ANALYSIS, CAI_FINANCIAL_ANALYSIS, CAI_FRIENDS_AND_ENEMIES_ANALYSIS, CAI_HIGH_LEVEL_PATH, CAI_HIGH_LEVEL_PATHS, CAI_INVADE_REGION_ANALYSIS, CAI_INVASION_STRENGTH_ANALYSIS_REGION, CAI_MILITARY_PRODUCTION_CAPACITY_ANALYSIS_BASE, CAI_MILITARY_PRODUCTION_CAPACITY_ANALYSIS_FACTION, CAI_MILITARY_PRODUCTION_CAPACITY_ANALYSIS_REGION, CAI_MILITARY_PRODUCTION_CAPACITY_ANALYSIS_REGION_GROUP, CAI_MILITARY_RANK_REGION_GROUP_ANALYSIS, CAI_MILITARY_RANK_RESOURCE_MOBILE_ANALYSIS, CAI_MILITARY_RANK_THEATRE_ANALYSIS, CAI_MILITARY_REGION_GROUP_ANALYSIS, CAI_MILITARY_REGION_GROUP_REGION_ANALYSIS, CAI_NAVAL_UNIT_DAMAGE_ANALYSIS, CAI_NAVY_DAMAGE_ANALYSIS, CAI_NAVY_RECRUITMENT_FACTION_ANALYSIS, CAI_NAVY_RECRUITMENT_PORT_ANALYSIS, CAI_NAVY_STRENGTH_MOBILE_ANALYSIS, CAI_NAVY_STRENGTH_THEATRE_ANALYSIS, CAI_OWNED_AND_ACTIVE_REGIONS_ANALYSIS, CAI_OWNED_REGIONS_ANALYSIS, CAI_PLACE_RESERVES_IN_REGION_ANALYSIS, CAI_PORT_ANALYSIS, CAI_POSITION_AND_STRENGTH_ANALYSIS_REGION, CAI_RECRUITMENT_LINK, CAI_REGIONSLOT_BASE_VALUE, CAI_REGION_BASE_VALUE, CAI_REGION_DEFENCE_STRENGTH_ANALYSIS, CAI_REGION_MILITARY_STRENGTH, CAI_REGION_OCCUPANCY_ANALYSIS, CAI_REGION_PATH_TRANSITION_ANALYSIS, CAI_REGION_PROTECTION_AREA_ANALYSIS, CAI_REGION_TARGET_PATHS_ANALYSIS, CAI_RELATION_ANALYSIS, CAI_RELATIVE_ABSOLUTE_STRENGTH_ANALYSIS_BASE, CAI_RELATIVE_ABSOLUTE_STRENGTH_ANALYSIS_MOBILE, CAI_RELATIVE_ABSOLUTE_STRENGTH_ANALYSIS_UNIT, CAI_RELIGION_MISSIONARY_ANALYSIS, CAI_RELIGION_REGION_ANALYSIS, CAI_RESOURCE_MOBILE_MILITARY_STRENGTH, CAI_RTPA_REGION_GROUP_INFO, CAI_SETTLEMENT_BASE_VALUE, CAI_SUPPORT_STRENGTH_ANALYSIS_REGION, CAI_TARGET_ANALYSIS, CAI_TAS_ANALYSIS, CAI_THEATRE_RELATIVE_MILITARY_STRENGTHS, CAI_TRADE_ROUTE_FACTION_ANALYSIS, CAI_TRADE_ROUTE_POI_RAID_ANALYSIS, CAI_TRADE_ROUTE_PORT_ANALYSIS, CAI_UNIT_AVAILABILITY_ANALYSIS_BASE, CAI_UNIT_AVAILABILITY_ANALYSIS_FACTION, CAI_UNIT_AVAILABILITY_ANALYSIS_REGION, CAI_UNIT_AVAILABILITY_ANALYSIS_REGION_GROUP, CAI_UNIT_AVAILABILITY_ANALYSIS_REGION_SLOT, CAI_UNIT_AVAILABILITY_ANALYSIS_SETTLEMENT, CAI_UNIT_BALANCE_ANALYSIS_FACTION, CAI_UNIT_BALANCE_ANALYSIS_MOBILE, CAI_UNIT_MILITARY_STRENGTH, CAI_VISIBILITY_ANALYSIS_REGION, CAI_VISIBILITY_ANALYSIS_RESOURCE_MOBILE, CDIR_PLAYER_RIVAL_SCORE_ANALYSIS, CDIR_RELATION_GRAPH, CDIR_TIME, CDIR_WORLD
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 2 … 372 | 101; 102; 146; 163; 328; 79; 80; 81; … |
+| 1 | UInt32 | 7348 … 1544315 | 7348; 7349; 7350; 7351; 7352; 7353; 7354; 7355; … |
+| 2 | Float32 | 0 | 0 |
+| 3 | Float32 | 0 … 10056.083984375 | 0; 1470.7732; 1655.79; 1746.5115; 2211.1902; 2533.7273; 3970.2566; 8778.583; … |
+| 4 | Float32 | 0 | 0 |
+| 5 | Float32 | 0 … 10056.083984375 | 0; 1470.7732; 1655.79; 1746.5115; 2211.1902; 2533.7273; 3970.2566; 8778.583; … |
+| 6 | UInt32 | 1 … 2 | 1; 2 |
+| 7 | Boolean |  | false; true |
+| 8 | UInt32 Array |  | [1265]; [203, 0]; [317]; [3]; [553]; [769, 0]; [988]; []; … |
+| 9 | UInt32 Array |  | [5, 0]; [5, 1]; [5, 2]; [5, 3]; [5, 4]; [5, 5]; [5, 6]; [5, 7]; … |
+| 10 | UInt32 | 0 … 2 | 0; 1; 2 |
+| 11 | UInt32 | 0 … 136 | 1; 11; 12; 16; 26; 54; 55; 9; … |
+| 12 | UInt32 Array |  | [10660]; [10701]; [10727]; [10747]; [10767]; [10803]; [7903, 1081524, 1081522, 10641]; []; … |
+| 13 | UInt32 Array |  | [5, 7926, 14, 29668, 15, 77058, 76910, 77227, 76…; [5, 8241, 14, 15278, 15, 80677, 80364, 80808, 80…; [5, 8377, 14, 18177, 15, 27983, 27368, 29499, 29…; [5, 8634, 14, 29652, 15, 42041, 41857, 42206, 41…; [5, 8693, 14, 23319, 15, 45353, 45207, 45529, 45…; [5, 8711, 14, 47020, 15, 47026, 46896, 47201, 46…; [5, 8887, 14, 18204, 15, 60353, 60153, 60501, 60…; [5]; … |
+| 14 | UInt32 | 0 … 6 | 0; 1; 2; 4; 5; 6 |
+| 15 | UInt32 | 0 … 80 | 0; 1; 16; 19; 20; 38; 51; 55; … |
+| 16 | UInt32 Array |  | [1261581]; [1416830]; [1435514]; [1435515]; [1491214]; [1516289]; [1523000]; []; … |
+| 17 | UInt32 Array |  | [317]; [478]; [553]; [6823]; [6832]; [6834]; [7381]; []; … |
+| 18 | UInt32 Array |  | [126]; [139]; [142]; [297, 128, 64, 1067, 1087, 1028, 1051, 1057]; [54]; [61]; [64, 56, 172, 248, 297, 128, 206]; [922, 489, 150, 56, 915, 938, 953, 500, 533, 497…; … |
+| 19 | UInt32 Array |  | [27983, 774995, 91559, 900803, 8693, 7927, 7926,…; [27983, 91559, 1201114, 7929, 11088, 11210, 8377…; [774749, 8598, 8877, 13956, 13980, 14056, 14085,…; [8241, 520891, 8695, 8694, 8693, 7926, 8242, 233…; [8246, 8247, 8380, 8387, 8711, 8778, 8813, 8831,…; [8380, 8384, 8386, 8387, 8634, 8887, 8966, 29791…; [8634, 8726, 27983, 8635, 138197, 103093, 329941…; []; … |
+| 20 | Boolean |  | false; true |
+| 21 | UInt32 | 1024073432 … 1177740352 | 1024073432; 1116079864; 1116095152; 1116104560; 1145449096; 1145495352; 1145499272; 1145499664; … |
+| 22 | Boolean |  | false |
+
+### DIPLOMACY_RELATIONSHIP_ATTITUDES_ARRAY[]
+
+- Instances: 67760
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Int32 | -2 … 2 | -1; -2; 0; 1; 2 |
+| 1 | Int32 | -560 … 423 | -15; -200; -35; -5; 0; 138; 15; 20; … |
+| 2 | Int32 | -200 … 80 | -15; -150; -200; 0; 25; 5; 60; 80; … |
+| 3 | Boolean |  | false; true |
+| 4 | Int32 | -15 … 15 | -15; 0; 15 |
+| 5 | Boolean |  | false; true |
+
+### CAMPAIGN_LOCALISATION
+
+- Instances: 63325
+- 2 distinct signatures; most common:
+  - (59029×) UTF-16
+  - (4296×) UTF-16, UTF-16
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UTF-16 |  | ; names_royalty_name_spainCarlos; names_royalty_name_spainFelipe; names_royalty_name_spainIsabella; names_royalty_name_spainLuis; names_royalty_name_spainLuisa_Isabel; names_royalty_name_spainMariana_Victoria; names_royalty_name_spainMaría_Luisa; … |
+| 1 | UTF-16 |  | ; Aguardiente; Amdjazade Mustafa; Black Mackerel; Black Turbot; Ferme; Illustre; Vermillion Lemming; … |
+
+### MANAGED_OBSTACLE_BOUNDARY
+
+- Instances: 54101
+
+### UNIT_CLASS_NAMES_LIST[]
+
+- Instances: 39478
+- Child nodes: CAMPAIGN_LOCALISATION
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Boolean |  | false; true |
+
+### AgentAttributes[]
+
+- Instances: 27384
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UTF-16 |  | command_land; command_sea; duelling_pistols; duelling_swords; management; research; subterfuge; zeal; … |
+| 1 | Int32 | -3 … 8 | -1; -3; 0; 1; 2; 3; 4; 7; … |
+
+### OBSTACLE_BASE_GRID_NODE[]
+
+- Instances: 26845
+- Child nodes: MANAGED_OBSTACLE_BOUNDARY
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 0 … 80406 | 1659; 1660; 1661; 1662; 1756; 1757; 1759; 1762; … |
+| 1 | UInt32 | 1 … 16 | 1; 13; 2; 3; 4; 5; 6; 7; … |
+
+### CAI_BORDER_PATROL_ANALYSIS_AREA_SPECIFIC_PATROL_POINTS[]
+
+- Instances: 24132
+- Child nodes: CAI_BORDER_PATROL_POINT
+
+### CAI_BORDER_PATROL_POINT
+
+- Instances: 24132
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Int32 | -796684800 … 964190656 | 461751456; 461907648; 461907872; 461908096; 710054784; 710416832; 711738816; 712651776; … |
+| 1 | Int32 | -214179760 … 545207872 | 20971542; 31457300; 34087592; 35253384; 38049448; 41943040; 50764060; 59206960; … |
+| 2 | UInt32 Array |  | [150]; [172]; [64]; [915]; [922]; [926]; [930]; []; … |
+
+### CAI_TAS_ANALYSIS
+
+- Instances: 24001
+- Child nodes: CAI_TAS_ANALYSIS_INFO
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 0 … 1544050 | 0; 5361; 5371; 5375; 5416; 5666; 6219; 6782; … |
+| 1 | UInt32 | 0 … 3594 | 2188; 2190; 2192; 2194; 2196; 2198; 2200; 2202; … |
+
+### AgentAbilities[]
+
+- Instances: 23472
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UTF-16 |  | can_assassinate; can_build_fort; can_build_religious; can_convert; can_duel; can_receive_duel; can_sabotage; can_spy; … |
+| 1 | Int32 | -1 … 1 | -1; 1 |
+| 2 | UTF-16 |  | ; command_land; command_sea; duelling_pistols; research; subterfuge |
+
+### CAI_RELATIVE_ABSOLUTE_STRENGTH_ANALYSIS_BASE
+
+- Instances: 18517
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Int32 | 1 … 2574 | 13; 14; 185; 26; 624; 695; 8; 819; … |
+
+### CAI_BDI_POOL_DESIRES[]
+
+- Instances: 16872
+- Child nodes: CAI_ACTIVE_RECRUITMENT_ANALYSER, CAI_AMBUSH_ANALYSER, CAI_ANALYSER, CAI_AREA_OF_INTEREST_ANALYSER, CAI_BDI_ASSIST, CAI_BDI_COMPONENT_BLOCK_OWNS, CAI_BDI_COMPONENT_PROPERTY_SET, CAI_BDI_CORRIDOR, CAI_BDI_DESIRE_CREATE_BUFFER_ZONE, CAI_BDI_DESIRE_CULL_EXCESS_FORCE, CAI_BDI_DESIRE_DEFEND_REGIONS, CAI_BDI_DESIRE_DEFEND_REGION_COASTS, CAI_BDI_DESIRE_DEFEND_REGION_GROUPS, CAI_BDI_DESIRE_DEFEND_TRADE_ROUTES, CAI_BDI_DESIRE_EXPAND_FACTION, CAI_BDI_DESIRE_EXPAND_REGION_GROUPS, CAI_BDI_DESIRE_FINANCE_SAVINGS, CAI_BDI_DESIRE_HELP_ALLY_AT_WAR, CAI_BDI_DESIRE_MILITARY_RANK_BEHAVIOUR, CAI_BDI_DESIRE_MISSIONARY_BEHAVIOUR, CAI_BDI_DESIRE_NAVY_ATTACK_BEHAVIOUR, CAI_BDI_DESIRE_NAVY_DISTRIBUTION, CAI_BDI_DESIRE_NAVY_RECRUITMENT, CAI_BDI_DESIRE_NAVY_REPAIR, CAI_BDI_DESIRE_NAVY_STRENGTH_MANAGER, CAI_BDI_DESIRE_PORT_BLOCKADE_BEHAVIOUR, CAI_BDI_DESIRE_RAID_BEHAVIOUR, CAI_BDI_DESIRE_RECALL_ASSETS, CAI_BDI_DESIRE_RECAPTURE_REGIONS, CAI_BDI_DESIRE_REGIONAL_DEVELOPMENT, CAI_BDI_DESIRE_RESEARCH_TECHNOLOGY, CAI_BDI_DESIRE_TAXATION, CAI_BDI_DESIRE_TRADE_AREA_BEHAVIOUR, CAI_BDI_DESIRE_TRADE_BEHAVIOUR, CAI_BDI_DESIRE_TRADE_ROUTE_RAIDING_BEHAVIOUR, CAI_BDI_EXCESS_RECRUITMENT_BEHAVIOUR, CAI_BDI_FAILED_REGION_TARGETS, CAI_BDI_FORT_MAINTAINENCE_BEHAVIOUR, CAI_BDI_GLOBAL_CONSTRUCTION_DESIRE, CAI_BDI_GOAL_ACQUIRE_REGION, CAI_BDI_GOAL_CAPTURE_TRADE_POSTS, CAI_BDI_GOAL_HELP_ALLY_AT_WAR, CAI_BDI_GOAL_HELP_ALLY_AT_WAR_WITH_GIFTS, CAI_BDI_GOAL_INVASION_ATTACK_DEFENDERS, CAI_BDI_GOAL_INVASION_CAPTURE_SETTLEMENT, CAI_BDI_GOAL_INVASION_DAMAGE_INFRASTRUCTURE, CAI_BDI_GOAL_INVASION_OBTAIN_FORCES, CAI_BDI_GOAL_MANAGE_FACTION_TO_FACTION_ATTITUDE, CAI_BDI_GOAL_MANAGE_REGION_INVASION, CAI_BDI_GOAL_MANAGE_REGION_SUPPORT, CAI_BDI_GOAL_MISSIONARY_CONVERT_REGION, CAI_BDI_GOAL_MOBILE_MOVE_TO_AND_RAID_REGION, CAI_BDI_GOAL_MOBILE_RAID_REGION, CAI_BDI_GOAL_NAVY_DISTRIBUTION, CAI_BDI_GOAL_NAVY_GLOBAL_DISTRIBUTION, CAI_BDI_GOAL_NAVY_RECRUITMENT, CAI_BDI_GOAL_NAVY_REPAIR, CAI_BDI_GOAL_PULL_TRADE_NAVY_TO_TRADE_AREAS, CAI_BDI_GOAL_REBEL_ARMY, CAI_BDI_GOAL_RECRUIT_STRENGTH_IN_REGION, CAI_BDI_GOAL_REGIONAL_DEVELOPMENT, CAI_BDI_GOAL_REGIONAL_MOTIVATED_DEVELOPMENT_BASE, CAI_BDI_GOAL_REGIONAL_MOTIVATED_DEVELOPMENT_SPECIFIED, CAI_BDI_GOAL_REGION_COAST_DEFENCE, CAI_BDI_GOAL_REGION_COAST_DEFENCE_GENERAL, CAI_BDI_GOAL_REGION_COAST_DEFENCE_PORT, CAI_BDI_GOAL_REGION_DEFENCE, CAI_BDI_GOAL_REGION_DEFENCE_ARMY_GROUPING, CAI_BDI_GOAL_REGION_DEFENCE_ASSET_BASE, CAI_BDI_GOAL_REGION_DEFENCE_BORDER, CAI_BDI_GOAL_REGION_DEFENCE_BORDERS, CAI_BDI_GOAL_REGION_DEFENCE_FREE_BLOCKADED_PORTS, CAI_BDI_GOAL_REGION_DEFENCE_RESERVES, CAI_BDI_GOAL_REGION_DEFENCE_SLOTS, CAI_BDI_GOAL_REGION_DEFENCE_UNHAPPINESS_MITIGATION, CAI_BDI_GOAL_REGION_GROUP_DEFENCE, CAI_BDI_GOAL_RESEARCH_TECHNOLOGY, CAI_BDI_GOAL_RESOLVE_UNDEFENDED_TRADE_NAVY, CAI_BDI_GOAL_STEAL_TECHNOLOGY, CAI_BDI_GOAL_SUPPORT_ATTACK_INVADERS, CAI_BDI_GOAL_SUPPORT_OBTAIN_FORCES, CAI_BDI_GOAL_SUPPORT_PROTECT_ALLY, CAI_BDI_INVASION_REQUEST, CAI_BDI_RESERVED_NAVIES, CAI_BDI_SUCCESS_AND_FAILURE, CAI_BDI_SUPPORT_REQUEST, CAI_BDI_TARGET_PATH, CAI_BDI_TARGET_REGION_BASE, CAI_BDI_TARGET_REGION_INVASION, CAI_BDI_TARGET_REGION_SUPPORT, CAI_BDI_WAR, CAI_BDI_WAR_AND_PEACE_MANAGER, CAI_BUILD_FORT_IN_REGION_ANALYSER, CAI_DEFEND_REGION_ANALYSER, CAI_DEFEND_REGION_COAST_ANALYSER, CAI_DIPLOMATIC_GOAL_BASE, CAI_DIPLOMATIC_GOAL_OFFER_PAYMENT, CAI_FACTION_BDI_POOL_ATTITUDE_MANAGER, CAI_FACTION_BDI_POOL_FINANCE_MANAGER_BASIC, CAI_FACTION_BDI_POOL_MISSION_MANAGER, CAI_FACTION_RESEARCH_TECHNOLOGY_ANALYSER, CAI_FACTION_SEA_GRID_ANALYSER, CAI_FACTION_STEAL_TECHNOLOGY_ANALYSER, CAI_FACTION_TAXATION_ANALYSER, CAI_FACTION_TRADE_ANALYSER, CAI_HIGH_LEVEL_PATHFINDER, CAI_INVADE_REGION_ANALYSER, CAI_INVASION_SPECIFICATION, CAI_MILITARY_RANK_ANALYSER, CAI_MILITARY_STRENGTH_ANALYSER, CAI_MISSION_AND_TARGET_LIST, CAI_NAVY_DAMAGE_ANALYSER, CAI_NAVY_RECRUITMENT_ANALYSER, CAI_NAVY_STRENGTH_ANALYSER, CAI_PLACE_RESERVES_IN_REGION_ANALYSER, CAI_PORT_ANALYSER, CAI_REGION_OCCUPANCY_ANALYSER, CAI_REGION_PROTECTION_AREA_ANALYSER, CAI_RELATION_ANALYSER, CAI_RELIGION_ANALYSER, CAI_SUPPORT_SPECIFICATION, CAI_TARGET_LIST, CAI_TARGET_LIST_TIMED, CAI_TARGET_MISSION_LINKER, CAI_TRADE_ROUTE_ANALYSER, CAI_TRADE_ROUTE_POI_DEFEND_ANALYSER, CAI_TRADE_ROUTE_POI_RAID_ANALYSER, CDIR_DESIRE_BOOST_PLAYER_RIVALS, CDIR_DESIRE_BOOST_PLAYER_RIVALS_AT_WAR, CDIR_DESIRE_FILL_TRADE_THEATRES, CDIR_DESIRE_TRANSFER_REGION_OWNERSHIP, CDIR_DESIRE_UNIT_BALANCER, CDIR_DESIRE_UNIT_UPGRADER, CDIR_PLAYER_RIVAL_SCORE_ANALYSER
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 0 … 374 | 14; 16; 17; 29; 30; 31; 46; 56; … |
+| 1 | UInt32 | 4 … 1544310 | 10; 11; 4; 5; 6; 7; 8; 9; … |
+| 2 | Float32 | 0 … 6000 | 0; 1000; 1250; 1500; 1750; 250; 500; 750; … |
+| 3 | Float32 | 0 … 99683.15625 | 0; 1000; 1250; 1500; 250; 4074.0667; 500; 750; … |
+| 4 | Float32 | -0.10999663919210434 … 0.10997650027275085 | -0.02934508; -0.056261387; -0.10961395; 0; 0.021620661; 0.043081865; 0.047972992; 0.07277776; … |
+| 5 | Float32 | 0 … 99296.8359375 | 0; 1497.0063; 1651.4897; 4110.426; 490.3713; 535.7729; 546.34406; 914.8853; … |
+| 6 | UInt32 | 0 … 2 | 0; 1; 2 |
+| 7 | Boolean |  | false; true |
+| 8 | UInt32 Array |  | [0, 1265, 3]; [0, 3]; [0]; [10394, 10397, 10396, 10395, 1081502, 1265]; [1265, 3]; [3]; [7923, 3, 7902]; []; … |
+| 9 | UInt32 Array |  | [1081524, 3]; [7903, 1]; [7912, 0]; [7916, 0]; [7918, 0, 7919, 0]; [8027, 0, 8025, 0]; [8029, 0, 8025, 1]; []; … |
+| 10 | UInt32 | 0 … 4 | 0; 1; 2; 3; 4 |
+| 11 | UInt32 | 0 … 7 | 0; 1; 2; 3; 4; 5; 6; 7; … |
+| 12 | UInt32 Array |  | [1081524, 1081522, 10641]; [12572, 8040]; [12575, 12572, 8040]; [7903, 1081524, 1081522, 10641]; [7910]; [8025]; [8056]; []; … |
+| 13 | UInt32 Array |  | [7912]; [7916]; [7918, 7919]; [8027]; [8029]; [8031]; [8033]; []; … |
+| 14 | UInt32 | 0 … 139 | 0; 1; 15; 3; 4; 5; 6; 7; … |
+| 15 | UInt32 | 0 … 5032 | 0; 102; 137; 205; 5032; 57; 61; 999; … |
+| 16 | UInt32 Array |  | [1081523]; [12563, 12800, 12802, 12804, 1081605, 1218048, 1…; [13937, 13945, 13935, 333423, 13939, 93610, 1445…; [14601, 229560, 1081732, 1526533, 1526534, 15265…; [161193, 161194, 358502, 427058, 427059, 640133,…; [7906, 7907, 12565, 12566, 83092, 1081523, 10815…; [93564, 93566, 93568, 93570, 1335877]; []; … |
+| 17 | UInt32 Array |  | [7348, 7349, 7350, 7351, 7352, 7353, 7354, 7355,…; [7638, 7639, 7640, 7641, 7642, 7643, 7644, 7645,…; [7904, 7930, 7931, 7964, 8015, 8070, 8071, 8072,…; [7925, 7948, 8009, 8062, 8136, 8187, 8240, 8306,…; [7932, 6823, 7938, 6832, 7939, 6834, 7966, 5357,…; [84016, 1307, 84017, 1265, 84018, 1268, 84019, 1…; [9117, 765, 9118, 2216, 9120, 2214, 9122, 2212, …; [9145, 10044, 10062, 10074, 10358, 10375, 10677,…; … |
+| 18 | UInt32 Array |  | [1081523]; [3, 765, 1265, 7904, 843, 1391, 809]; [3, 7902, 7923]; [3, 7904]; [3]; [7904, 843, 7907]; [7904]; []; … |
+| 19 | UInt32 Array |  | [10378, 12758, 10563, 12744]; [7908]; [7915, 7917, 8028, 8030, 8032, 8041, 8050, 14529…; [9969, 175434]; [9969, 9971, 9973, 10378, 10386, 10421, 10422, 1…; [9971]; [9973]; []; … |
+| 20 | Boolean |  | false; true |
+| 21 | UInt32 | 1024073432 … 1177740352 | 1024073432; 1116079864; 1116095152; 1116104560; 1145449096; 1145495352; 1145499272; 1145499664; … |
+| 22 | Boolean |  | false |
+
+### CAI_RELATIVE_ABSOLUTE_STRENGTH_ANALYSIS_MOBILE
+
+- Instances: 15760
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 5361 … 1544050 | 5361; 5371; 5375; 5416; 5430; 5449; 5468; 5630; … |
+
+### CAI_TAS_ANALYSIS_THREAT_AND_SUPPORT
+
+- Instances: 13943
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 5361 … 1544050 | 1286055; 1293102; 1428395; 1428398; 175936; 5430; 5449; 800927; … |
+| 1 | Float32 | 0 … 53.241310119628906 | 10.77194; 17.77328; 23.49981; 24.331633; 28.804184; 31.462187; 40.50449; 42.911972; … |
+| 2 | Float32 | 0 … 6.6195454597473145 | 0.7109312; 0.7405533; 0.9732653; 1.305545; 1.4402092; 1.5731094; 1.7379738; 2.3839984; … |
+
+### CAI_TAS_ANALYSIS_THREAT
+
+- Instances: 12950
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Int32 | -100 … 99 | -100; -27; -66; -7; -87; -96; -98; 7; … |
+
+### TRADE_ROUTES[]
+
+- Instances: 11584
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 0 … 258 | 28; 58; 66; 70; 72; 74; 81; 86; … |
+| 1 | UInt32 | 1 … 286 | 106; 109; 112; 119; 136; 282; 283; 97; … |
+| 2 | UInt32 Array |  | [1312, 1291, 1299, 1289, 1301, 1230, 1233, 1147,…; [1315, 1230, 1233, 1147, 1145, 1183, 369, 1329, …; [134, 138, 140, 142, 144, 165]; [148, 150, 152, 154, 125, 111, 109, 97, 1202, 84…; [171, 152, 154, 125, 111, 109, 97, 1202, 84, 86,…; [2521, 2881, 2383]; [354, 360, 1201, 1212, 646, 1034, 695, 693, 691,…; [42, 34, 50, 36, 38, 296, 298, 300, 302, 322, 32…; … |
+| 3 | Float32 | 2.7176318168640137 … 2724.870849609375 | 1069.718; 2006.0187; 38.8159; 472.5843; 560.5533; 57.024628; 735.421; 766.1985; … |
+
+### CAI_TAS_ANALYSIS_INFO_NEUTRALS[]
+
+- Instances: 10554
+- Child nodes: CAI_TAS_ANALYSIS_THREAT, CAI_TAS_ANALYSIS_THREAT_AND_SUPPORT
+
+### CAI_PLACE_RESERVES_IN_REGION_ANALYSIS_POI
+
+- Instances: 10282
+- Child nodes: CAI_PLACE_RESERVES_IN_REGION_ANALYSIS_POI_GARRISONABLES, CAI_PLACE_RESERVES_IN_REGION_ANALYSIS_POI_MOBILES
+- 2 distinct signatures; most common:
+  - (9006×) UInt32, Boolean
+  - (1276×) 
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 128 … 8624 | 6513; 6519; 6522; 6525; 6526; 6529; 6530; 6533; … |
+| 1 | Boolean |  | true |
+
+### CAI_BDI_SUCCESS_AND_FAILURE
+
+- Instances: 10015
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 0 … 2 | 0; 1; 2 |
+| 1 | Boolean |  | false; true |
+
+### DATE
+
+- Instances: 9804
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 0 … 1708 | 0; 1641; 1642; 1655; 1659; 1661; 1676; 1708; … |
+| 1 | ASCII |  | summer; winter |
+
+### CAI_PLACE_RESERVES_IN_REGION_ANALYSIS_POI[]
+
+- Instances: 9006
+- Child nodes: CAI_PLACE_RESERVES_IN_REGION_ANALYSIS_POI
+
+### CAI_PLACE_RESERVES_IN_REGION_ANALYSIS_POI_GARRISONABLES
+
+- Instances: 9006
+
+### CAI_PLACE_RESERVES_IN_REGION_ANALYSIS_POI_MOBILES
+
+- Instances: 9006
+
+### CAI_BUILDING_AVAILABILITY_ANALYSIS_INFO_UNIT_AVAILABILIITY[]
+
+- Instances: 8097
+- Child nodes: CAI_BUILDING_AVAILABILITY_ANALYSIS_INFO_UNIT_RECORDS
+
+### CAI_BUILDING_AVAILABILITY_ANALYSIS_INFO_UNIT_RECORDS
+
+- Instances: 8097
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UTF-16 |  | 1700_british_12lbs; 1700_british_3lbs; 1700_british_6lbs; 1700_british_8inch; 24_lber_land_cannon_(demi_cannon)_brit; 64_lber_siege_cannon_EURO; 9_lber_land_cannon_(saker)_brit; R_nan_Tt_pirates_dhow; … |
+| 1 | UInt32 | 0 … 2 | 0; 1; 2 |
+
+### techs[]
+
+- Instances: 7625
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UTF-16 |  | military_army_etwii_academic_training_doctrine; military_army_etwii_flintlock_musket; military_army_etwii_lineinf_doctrine; military_army_etwii_military_planning_doctrine; military_army_etwii_military_statistics; military_army_plug_bayonet; military_army_ring_bayonet; military_army_square_formation; … |
+| 1 | UInt32 | 0 … 4 | 0; 2; 4 |
+| 2 | Float32 | 0 … 738.4801635742188 | 0; 105; 115; 130; 230; 37; 60; 80; … |
+| 3 | UInt32 | 0 … 1022403640 | 0; 1021250080; 1021540816; 1021558680; 1021562992; 1021649848; 1022391320; 1022403640; … |
+| 4 | UInt32 Array |  | [] |
+| 5 | UInt32 | 0 … 2 | 0; 1; 2 |
+
+### TRAIT
+
+- Instances: 6563
+
+### TRAITS
+
+- Instances: 6563
+- Child nodes: TRAIT
+
+### CAI_MILITARY_STRENGTH_FOR_FACTION
+
+- Instances: 6537
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1433 | 1265; 1268; 1277; 1292; 1298; 1334; 1340; 1430; … |
+| 1 | Int32 | 18 … 29649 | 1240; 181; 205; 232; 322; 378; 493; 653; … |
+| 2 | Int32 | 0 … 26734 | 0; 1094; 1240; 1242; 1312; 1395; 458; 724; … |
+| 3 | Int32 | 0 … 14294 | 0; 181; 205; 232; 322; 378; 493; 653; … |
+
+### CAI_RECRUITABLE_UNIT_INFO
+
+- Instances: 6123
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UTF-16 |  | 3rd_rate_admiral_british; 3rd_rate_british; 3rd_rate_hms_elizabeth; 4th_rate_british; 6th_rate_british; brig_british; indiaman; sloop_british; … |
+| 1 | UInt32 | 0 … 5580 | 120; 148; 160; 224; 496; 664; 680; 736; … |
+| 2 | UInt32 | 3 … 600 | 115; 12; 156; 161; 189; 24; 26; 55; … |
+| 3 | UInt32 | 0 … 5 | 0; 1; 2; 3; 4; 5 |
+
+### OBSTACLE_BOUNDARY[]
+
+- Instances: 5554
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 Array |  | [1015059746, 4, 1015074826, 0]; [744145810, 0, 841061386, 0]; [744145810, 1, 2509212074, 0]; [744145810, 2, 837560290, 0, 841061386, 0]; [744145810, 2, 841061386, 0, 1015024946, 0]; [837415242, 1]; [837560290, 0, 2509212074, 0]; [841061386, 1, 1015024946, 3]; … |
+
+### CAMPAIGN_BONUS_VALUE
+
+- Instances: 5354
+- 3 distinct signatures; most common:
+  - (3161×) UInt32, Int32, Float32, UTF-16
+  - (2187×) UInt32, Int32, Float32
+  - (6×) UInt32, Int32, Float32, UTF-16, UTF-16
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 0 … 14 | 0; 1; 11; 12; 14; 2; 3; 6; … |
+| 1 | Int32 | 0 … 128 | 17; 19; 2; 20; 21; 3; 33; 7; … |
+| 2 | Float32 | -100 … 10000000000 | -25; -30; -40; -70; 0; 1; 10; 40; … |
+| 3 | UTF-16 |  | Eastern_Scholar; artillery; assassin; cavalry; elephants; gentleman; infantry; rake; … |
+| 4 | UTF-16 |  | french; germans |
+
+### CAMPAIGN_BONUS_VALUE_BLOCK[]
+
+- Instances: 5354
+- Child nodes: CAMPAIGN_BONUS_VALUE
+
+### CAI_REGION_MILITARY_STRENGTH_FACTION_STRENGTHS[]
+
+- Instances: 5350
+- Child nodes: CAI_MILITARY_STRENGTH_FOR_FACTION
+
+### LINE_OF_SIGHT
+
+- Instances: 5339
+- Child nodes: QUAD_TREE_BIT_ARRAY
+- 2 distinct signatures; most common:
+  - (3330×) Boolean
+  - (2009×) Boolean, Point2D, Point2D
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Boolean |  | false; true |
+| 1 | Point2D |  | (-16.25, 328.75); (-353.75, -193.75); (-36.25, 277.5); (-508.75, 122.5); (-508.75, 133.75); (-55, 256.25); (-588.75, 216.25); (-615, 227.5); … |
+| 2 | Point2D |  | (-15, 298.75); (-322.5, -162.5); (-33.75, 277.5); (-477.5, 165); (-487.5, 143.75); (-567.5, 237.5); (-593.75, 248.75); (5, 350); … |
+
+### CAI_REGION_MILITARY_STRENGTH
+
+- Instances: 5294
+- Child nodes: CAI_REGION_MILITARY_STRENGTH_FACTION_STRENGTHS
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 56 … 1263 | 1082; 203; 765; 769; 807; 809; 811; 843; … |
+
+### CAI_REGION_MILITARY_STRENGTH_FACTION_STRENGTHS
+
+- Instances: 5294
+
+### CAI_UNIT
+
+- Instances: 4470
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 0 … 1541248 | 0; 5355; 5360; 5364; 5370; 5376; 5390; 5431; … |
+| 1 | UInt32 | 129536712 … 1965300096 | 468819440; 468825992; 666447616; 666455304; 666489280; 666490272; 666496224; 666498704; … |
+| 2 | UInt32 | 5361 … 1544050 | 1081680; 110191; 124835; 1357239; 1411316; 1495116; 5361; 5391; … |
+
+### CAI_UNIT_MILITARY_STRENGTH
+
+- Instances: 4470
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 5357 … 1541252 | 5357; 5358; 5362; 5363; 5366; 5367; 5368; 5369; … |
+| 1 | Float32 | 51.038421630859375 … 162000 | 23925; 32860.848; 52732.39; 58149.125; 59786.58; 60952.1; 62150; 66300; … |
+
+### CAI_WORLD_UNITS[]
+
+- Instances: 4470
+- Child nodes: CAI_BDI_COMPONENT_BLOCK_OWNS, CAI_BDI_COMPONENT_PROPERTY_SET, CAI_UNIT
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 5357 … 1541252 | 5357; 5358; 5362; 5363; 5366; 5367; 5368; 5369; … |
+| 1 | Float32 | 100 | 100 |
+| 2 | Float32 | 100 | 100 |
+| 3 | Float32 | 0 | 0 |
+| 4 | Float32 | 100 | 100 |
+| 5 | UInt32 | 1 | 1 |
+| 6 | Boolean |  | false |
+| 7 | UInt32 Array |  | [] |
+| 8 | UInt32 Array |  | [7966, 0, 14452, 0]; [7967, 0, 14453, 0]; [7969, 0, 10601, 0]; [7970, 0, 10602, 0]; [7972, 0, 10617, 0]; [7973, 0, 10618, 0]; [7974, 0, 10619, 0]; [7975, 0, 10620, 0]; … |
+| 9 | UInt32 | 0 | 0 |
+| 10 | UInt32 | 1 … 5 | 1; 2; 3; 4; 5 |
+| 11 | UInt32 Array |  | [] |
+| 12 | UInt32 Array |  | [7966, 10, 14452, 18]; [7967, 10, 14453, 18]; [7969, 10, 10601, 7863]; [7970, 10, 10602, 7863]; [7972, 10, 10617, 7863]; [7973, 10, 10618, 7863]; [7974, 10, 10619, 7863]; [7975, 10, 10620, 7863]; … |
+| 13 | UInt32 | 0 | 0 |
+| 14 | UInt32 | 0 | 0 |
+| 15 | UInt32 Array |  | [] |
+| 16 | UInt32 Array |  | [] |
+| 17 | UInt32 Array |  | [] |
+| 18 | UInt32 Array |  | [7966, 14452]; [7967, 14453]; [7969]; [7970]; [7972]; [7973]; [7974]; [7975]; … |
+| 19 | Boolean |  | false |
+| 20 | UInt32 | 0 | 0 |
+| 21 | Boolean |  | false |
+
+### COMMANDER_DETAILS
+
+- Instances: 4470
+- Child nodes: CAMPAIGN_LOCALISATION
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UTF-16 |  | austria; britain; france; ottomans; prussia; russia; spain; thirteen_colonies; … |
+
+### UNIT
+
+- Instances: 4470
+- Child nodes: CAMPAIGN_LOCALISATION, COMMANDER_DETAILS, TRAITS, UNIT_HISTORY, UNIT_RECORD_KEY
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Int32 | 129536712 … 1965300096 | 468803840; 468804152; 468806960; 468808832; 468809144; 468809456; 468811640; 666403968; … |
+| 1 | UInt32 | 1 … 360 | 176; 200; 202; 280; 30; 58; 78; 82; … |
+| 2 | UInt32 | 10 … 360 | 176; 200; 202; 280; 30; 58; 78; 82; … |
+| 3 | Int32 | 0 … 240 | 100; 102; 111; 134; 14; 17; 189; 94; … |
+| 4 | UInt32 | 0 … 1068 | 0; 11; 15; 23; 36; 6; 67; 8; … |
+| 5 | UInt32 | 0 … 3145 | 0; 105; 115; 132; 27; 4; 50; 61; … |
+| 6 | UInt32 | 0 … 2509220192 | 0; 245711056; 245719176; 563672128; 563673288; 563679088; 563681408; 747666784; … |
+| 7 | UInt32 | 0 … 1068 | 0; 11; 15; 23; 36; 6; 67; 8; … |
+| 8 | UInt32 | 0 … 3145 | 0; 105; 115; 132; 27; 4; 50; 61; … |
+| 9 | UInt8 | 0 … 6 | 0; 1; 2; 3; 4; 5; 6 |
+
+### UNITS_ARRAY[]
+
+- Instances: 4470
+- Child nodes: LAND_UNIT, NAVAL_UNIT
+
+### UNIT_HISTORY
+
+- Instances: 4470
+- Child nodes: DATE
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 0 | 0 |
+| 1 | UInt32 | 0 | 0 |
+
+### UNIT_RECORD_KEY
+
+- Instances: 4470
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UTF-16 |  | 24_lber_land_cannon_(demi_cannon); brig_of_war; brig_spanish; episodic_1_arquebusiers; euro_militia_infantry_early; galleon; galleon_war; indiaman; … |
+
+### CDIR_DESIRE_UNIT_BALANCER_UNIT_COUNT[]
+
+- Instances: 4461
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 5357 … 1525994 | 171771; 171772; 171773; 171774; 179961; 179964; 179967; 376554; … |
+| 1 | Float32 | 0 | 0 |
+
+### CDIR_DESIRE_UNIT_UPGRADER_UNIT_COUNT[]
+
+- Instances: 4461
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 5357 … 1525994 | 171771; 171772; 171773; 171774; 179961; 179964; 179967; 376554; … |
+| 1 | Float32 | 0 | 0 |
+
+### RELIGION_BREAKDOWN[]
+
+- Instances: 4434
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UTF-16 |  | baltic; celtic; english; rel_hindu; rel_nonconformist; russian; scandinavian; tatars; … |
+| 1 | Float32 | 0 … 1 | 0; 0.1; 0.22197953; 0.3; 0.6; 0.77802044; 0.9; 1; … |
+
+### CAI_UNIT_AVAILABILITY_ANALYSIS_BASE_INFO_RLU[]
+
+- Instances: 4254
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UTF-16 |  | 1600_late_musketeer; 24_lber_land_cannon_(demi_cannon)_brit; 64_lber_siege_cannon_EURO; 9_lber_land_cannon_(saker)_brit; IRLANDIAS_militia001; euro_militia_infantry_brit; euro_militia_infantry_early; euro_pikemen; … |
+
+### CAI_UNIT_AVAILABILITY_ANALYSIS_BASE_INFO_CRLU[]
+
+- Instances: 4149
+- Child nodes: CAI_RECRUITABLE_UNIT_INFO
+
+### CAI_ARMED_CITIZENRY_ANALYSIS
+
+- Instances: 3900
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1441 … 3590 | 2186; 2347; 2531; 3183; 3245; 3449; 3509; 3556; … |
+| 1 | Int32 | 0 … 1216 | 115; 192; 285; 384; 755; 80; 83; 87; … |
+
+### LAND_RECORD_KEY
+
+- Instances: 3805
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UTF-16 |  | 24_lber_land_cannon_(demi_cannon); RE_9lberland_cannon_(saker); episodic_1_arquebusiers; euro_militia_infantry_early; euro_provincial_cavalry; lategeneralsbodyguard; lateroyalguard; spaintorsycavalry; … |
+
+### LAND_UNIT
+
+- Instances: 3805
+- Child nodes: LAND_RECORD_KEY, UNIT
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 0 | 0 |
+
+### PORTRAITS[]
+
+- Instances: 3520
+- Child nodes: PORTRAIT_ALLOCATION
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UTF-16 |  | General; admiral; assassin; catholic_missionary; colonel; middle_east_missionary; pirate; rake; … |
+
+### PORTRAIT_ALLOCATION
+
+- Instances: 3520
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 0 … 300 | 0; 10; 100; 101; 300; 50 |
+| 1 | UInt32 | 0 … 274 | 0; 1; 2; 23; 24; 49; 5; 7; … |
+| 2 | UInt32 Array |  | [0, 30, 59, 90, 53, 94, 24, 19, 45, 21, 9, 66, 1…; [138, 136, 41, 185, 291, 183, 46, 270, 264, 61, …; [226, 227, 10, 136, 33, 174, 222, 52, 202, 22, 2…; [296, 30, 141, 9, 90, 249, 174, 4, 113, 267, 76,…; [54, 52, 61, 39, 23, 16, 92, 11, 22, 15, 38, 72,…; [55, 27, 5, 41, 54, 82, 59, 2, 64, 75, 45, 29, 9…; [60, 20, 142, 169, 203, 279, 283, 13, 249, 172, …; []; … |
+
+### CAI_MISSION_AND_TARGET_LIST
+
+- Instances: 3487
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 0 … 1544253 | 7911; 7915; 7917; 8026; 8028; 8030; 8032; 8034; … |
+| 1 | UInt32 | 1 | 1 |
+| 2 | UInt32 Array |  | [1197766, 1264496, 1273558, 1494773]; [229261, 333223]; [250206, 277438, 640351, 1147669]; [250206, 640351, 277438, 1147669]; [250206]; [333223, 229261]; [333223]; []; … |
+| 3 | UInt32 Array |  | [1147461, 1147463]; [1526271, 1526503, 1526527, 1526563]; [1526525, 1526559]; [1526533, 1526539, 1526547, 1526553]; [277768, 1197947, 277772, 1197949]; [405726]; [863758]; []; … |
+| 4 | UInt32 | 0 … 72 | 0; 45; 47; 57; 7; 70; 71; 8; … |
+| 5 | UInt32 Array |  | [] |
+| 6 | UInt32 Array |  | [] |
+
+### CAI_TARGET_LIST_TIMED
+
+- Instances: 3487
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 Array |  | [1359038, 1500585, 1380287, 1380184, 1528457, 13…; [1380287]; [1381828, 1381828]; [1381828]; [1496276, 1432628, 1496270]; [161046]; [96212, 96212, 96212, 96212]; []; … |
+| 1 | UInt32 Array |  | [1445328]; [1863, 1853, 1855, 1851]; [1976, 1976, 1976]; [656, 656, 656, 656, 656, 656, 656, 656, 656, 65…; [705, 2000]; [705]; [710]; []; … |
+| 2 | UInt32 Array |  | [70, 71]; [71, 71, 71, 71, 71, 71, 71, 71, 71, 71]; [71, 71, 71, 71, 71]; [71, 71, 71, 71]; [71, 71, 71]; [71, 71]; [71]; []; … |
+| 3 | UInt32 Array |  | [1359038, 1500585, 1380287, 1380184, 1528457, 13…; [1380287]; [1381828, 1381828]; [1381828]; [1496276, 1432628, 1496270]; [161046]; [96212, 96212, 96212, 96212]; []; … |
+| 4 | UInt32 Array |  | [1445328]; [1863, 1853, 1855, 1851]; [1976, 1976, 1976]; [656, 656, 656, 656, 656, 656, 656, 656, 656, 65…; [705, 2000]; [705]; [710]; []; … |
+| 5 | UInt32 Array |  | [70, 71]; [71, 71, 71, 71, 71, 71, 71, 71, 71, 71]; [71, 71, 71, 71, 71]; [71, 71, 71, 71]; [71, 71, 71]; [71, 71]; [71]; []; … |
+
+### CAI_INVADE_REGION_ANALYSIS_POI
+
+- Instances: 3414
+- 2 distinct signatures; most common:
+  - (2682×) UInt32, Boolean
+  - (732×) 
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 468 … 8628 | 4506; 4526; 4530; 4539; 4545; 4549; 4553; 4559; … |
+| 1 | Boolean |  | true |
+
+### CAI_RESOURCE_MOBILE_MILITARY_AFFECT
+
+- Instances: 3357
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 5361 … 1544050 | 1286055; 1293102; 1428395; 1428398; 175936; 5430; 5449; 800927; … |
+| 1 | Boolean |  | false; true |
+| 2 | Int32 Array |  | [0, 0, 0, 12, 8, 2, 0, 0, 0, 619, 703, 200, 0, 0…; [0, 0, 0, 14, 10, 0, 0, 0, 0, 771, 1000, 0, 0, 0…; [0, 0, 0, 14, 9, 1, 0, 0, 0, 1200, 900, 100, 0, …; [0, 0, 0, 17, 8, 0, 0, 0, 0, 1288, 702, 0, 0, 0,…; [0, 0, 0, 18, 5, 0, 0, 0, 0, 1140, 500, 0, 0, 0,…; [0, 0, 0, 18, 7, 0, 0, 0, 0, 1290, 700, 0, 0, 0,…; [0, 0, 0, 3, 15, 2, 0, 0, 0, 281, 1227, 200, 0, …; [0, 0, 0, 9, 8, 5, 0, 0, 0, 818, 743, 500, 0, 0,…; … |
+
+### CAI_COMPOSITE_VALUE_ANALYSIS
+
+- Instances: 3311
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Int32 | 0 … 2053105 | 31292; 34119; 35075; 45885; 59395; 73572; 798785; 931752; … |
+
+### CAI_DEFEND_REGION_ANALYSIS_POI
+
+- Instances: 3241
+- Child nodes: CAI_DEFEND_REGION_ANALYSIS_POI_GARRISONABLES, CAI_DEFEND_REGION_ANALYSIS_POI_MOBILES
+- 2 distinct signatures; most common:
+  - (2160×) UInt32, Boolean
+  - (1081×) 
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 108 … 8636 | 3016; 3019; 3020; 3033; 6496; 6502; 6504; 6508; … |
+| 1 | Boolean |  | true |
+
+### CAI_MILITARY_REGION_GROUP_REGION_ANALYSIS
+
+- Instances: 3196
+- Child nodes: CAI_MILITARY_REGION_GROUP_REGION_ANALYSIS_INFO
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 317 … 1263 | 1037; 1082; 1101; 1222; 1251; 765; 809; 843; … |
+| 1 | UInt32 | 1265 … 1430 | 1265; 1268; 1271; 1274; 1277; 1280; 1283; 1286; … |
+
+### CAI_DIPLOMATIC_ANALYSIS_FACTIONINFO[]
+
+- Instances: 3192
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1433 | 1268; 1271; 1274; 1277; 1280; 1283; 1286; 1289; … |
+| 1 | Float32 | 0 … 1 | 0; 0.16666666; 0.43354166; 0.46791667; 0.48541662; 0.74999994; 0.87666667; 0.97375; … |
+| 2 | Float32 | 0.00564441317692399 … 0.8728863596916199 | 0.11013492; 0.23966; 0.43344223; 0.46652648; 0.46771634; 0.6621983; 0.77281725; 0.8486084; … |
+| 3 | UInt32 | 0 … 10 | 0; 10; 3; 7; 9 |
+
+### CAI_FACTION_TO_FACTION_ATTITUDE_ANALYSIS
+
+- Instances: 3180
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1433 | 1268; 1271; 1274; 1277; 1280; 1283; 1286; 1289; … |
+| 1 | UInt32 | 0 … 4 | 0; 1; 2; 3; 4 |
+| 2 | Float32 | 0 | 0 |
+| 3 | Float32 | 0 | 0 |
+| 4 | UInt32 Array |  | [] |
+| 5 | Float32 | 0 | 0 |
+| 6 | Float32 | 0 | 0 |
+| 7 | UInt32 Array |  | [] |
+| 8 | Float32 | 0 | 0 |
+| 9 | Float32 | 0 | 0 |
+| 10 | UInt32 Array |  | [] |
+
+### CAI_COMPOSITE_REGION_ANALYSIS
+
+- Instances: 3178
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 317 … 1263 | 1037; 1082; 1101; 1222; 1251; 765; 809; 843; … |
+
+### CAI_FACTION_RELATION_TIMELINE
+
+- Instances: 3136
+- Child nodes: CAI_FACTION_RELATION_TIMELINE_ENTRIES
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1433 | 1265; 1268; 1271; 1274; 1277; 1280; 1283; 1286; … |
+| 1 | UInt32 | 1265 … 1430 | 1268; 1271; 1274; 1277; 1280; 1283; 1286; 1289; … |
+
+### CAI_FACTION_RELATION_TIMELINE_ENTRIES
+
+- Instances: 3136
+
+### CAI_RELATION_ANALYSIS_TIMELINES[]
+
+- Instances: 3136
+- Child nodes: CAI_FACTION_RELATION_TIMELINE
+
+### ALLIED_IN_WAR_AGAINST
+
+- Instances: 3080
+
+### DIPLOMACY_RELATIONSHIP
+
+- Instances: 3080
+- Child nodes: ALLIED_IN_WAR_AGAINST, DIPLOMACY_RELATIONSHIP_ATTITUDES_ARRAY, REGULAR_PAYMENTS
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Int32 | 247045056 … 1012495192 | 475776240; 475787800; 475801672; 478561424; 478575296; 478579920; 559751872; 842320704; … |
+| 1 | Boolean |  | false; true |
+| 2 | Int32 | -1 … 4 | -1; 0; 1; 4 |
+| 3 | UTF-16 |  | allied; neutral; patron; protectorate; war |
+| 4 | Int32 | 0 … 842780312 | 0; 478547552; 478586856; 842780312 |
+| 5 | UInt32 | 0 … 19 | 0; 10; 14; 15; 16; 19; 3 |
+| 6 | Int32 | -23 … 16 | -23; -4; 0; 1; 16; 2; 4; 6; … |
+| 7 | Int32 | 0 … 4081 | 0; 1135; 1869; 2504; 4081; 432 |
+| 8 | Int32 | 0 … 4081 | 0; 1135; 1869; 2504; 4081; 432 |
+| 9 | Int32 | -10 … 10 | -2; -3; 0; 1; 2; 3; 4; 8; … |
+| 10 | Int32 | -10 … 10 | -2; -8; 0; 10; 6; 7; 8; 9; … |
+| 11 | UInt32 | 0 … 72 | 0; 11; 13; 30; 70; 71; 72 |
+| 12 | UInt32 | 0 … 72 | 0; 29; 30; 36; 53; 59; 7; 72; … |
+| 13 | UInt32 | 0 … 10 | 0; 10; 3; 7; 9 |
+| 14 | UInt32 | 0 | 0 |
+| 15 | UInt32 Array |  | [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; [0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0]; [0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0]; [0, 0, 0, 0, 3, 0, 0, 0, 0, 3, 0] |
+| 16 | UInt32 | 0 … 4 | 0; 1; 4 |
+| 17 | UTF-16 |  | allied; neutral; patron; protectorate; war |
+| 18 | Boolean |  | false; true |
+| 19 | Boolean |  | false; true |
+| 20 | Int32 | -85 … 85 | -45; -85; 0; 45; 85 |
+
+### DIPLOMACY_RELATIONSHIPS_ARRAY[]
+
+- Instances: 3080
+- Child nodes: DIPLOMACY_RELATIONSHIP
+
+### DIPLOMACY_RELATIONSHIP_ATTITUDES_ARRAY
+
+- Instances: 3080
+
+### REGULAR_PAYMENTS
+
+- Instances: 3080
+
+### OWNED_INDIRECT
+
+- Instances: 2886
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 0 … 3590 | 0; 1441; 1464; 1482; 1495; 1506; 1530; 1543; … |
+
+### CAI_MILITARY_REGION_GROUP_REGION_ANALYSIS_INFO_ENEMIES[]
+
+- Instances: 2841
+- Child nodes: CAI_RESOURCE_MOBILE_MILITARY_AFFECT
+
+### CAI_RELATIVE_ABSOLUTE_STRENGTH_ANALYSIS_UNIT
+
+- Instances: 2757
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 5362 … 1541252 | 5362; 5363; 5366; 5367; 5368; 5378; 5379; 5380; … |
+
+### CAI_INVADE_REGION_ANALYSIS_POI[]
+
+- Instances: 2682
+- Child nodes: CAI_INVADE_REGION_ANALYSIS_POI
+
+### CAI_ANALYSER
+
+- Instances: 2588
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 Array |  | [7348, 7349, 7350, 7351, 7352, 7353, 7354, 7355,…; [7638, 7639, 7640, 7641, 7642, 7643, 7644, 7645,…; [7904, 7930, 7931, 7964, 8015, 8070, 8071, 8072,…; [7925, 7948, 8009, 8062, 8136, 8187, 8240, 8306,…; [7932, 7938, 7939, 7966, 7967, 7968, 7969, 7970,…; [84016, 84017, 84018, 84019, 84020, 84021, 84022…; [9117, 9118, 9120, 9122, 9124, 9126, 9128, 9130,…; [9145, 10044, 10062, 10074, 10358, 10375, 10677,…; … |
+| 1 | UInt32 Array |  | [1249, 7838, 665, 7705, 54, 7638, 1251, 7839, 94…; [1334, 8190, 1412, 9103, 1358, 8263, 1415, 9105,…; [1334, 84039, 1412, 84065, 1358, 84047, 1415, 84…; [1334, 8791, 1412, 10529, 1358, 8927, 1415, 1053…; [1603, 11400, 2602, 13789, 634, 11697, 2596, 136…; [242051, 242057, 1231175, 1231201, 5677, 8302, 5…; [773, 13162, 675, 11851, 1118, 14166, 1222, 1067…; [829, 7415, 725, 7403, 1101, 7444, 1097, 7443, 7…; … |
+| 2 | UInt32 | 0 … 72 | 0; 38; 41; 49; 51; 71; 72; 9; … |
+
+### TRAIT[]
+
+- Instances: 2580
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UTF-16 |  | C_Admiral_Boring_Speaker; C_Feck_Vice; C_Gent_Academic_Honours; C_Leader_Inbred; C_Leader_Mad; C_Personal_Piety; C_Personal_Sickly; C_Sausage_Vice; … |
+| 1 | Int32 | 1 … 31 | 1; 2; 3; 4; 5; 6; 7; 8; … |
+
+### CAI_BDI_GOAL_MANAGE_FACTION_TO_FACTION_ATTITUDE
+
+- Instances: 2574
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1433 | 1268; 1271; 1274; 1277; 1280; 1283; 1316; 1385; … |
+| 1 | UInt32 | 0 … 1477914 | 0; 1254571; 12565; 12566; 1356873; 1358053; 83092; 93327; … |
+| 2 | UInt32 | 8061 … 87641 | 8061; 8135; 8186; 8239; 8305; 8337; 8669; 9003; … |
+| 3 | UInt32 | 0 … 2 | 0; 1; 2 |
+| 4 | UInt32 | 0 … 2 | 0; 1; 2 |
+| 5 | UInt32 | 0 … 2 | 0; 1; 2 |
+| 6 | Boolean |  | false |
+
+### PORTRAIT_DETAILS
+
+- Instances: 2516
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UTF-16 |  | ui/portraits/european/Cards/king/young/011.tga; ui/portraits/european/Cards/king/young/049.tga; ui/portraits/european/Cards/king/young/079.tga; ui/portraits/european/Cards/queen/old/035.tga; ui/portraits/european/Cards/queen/young/041.tga; ui/portraits/european/Cards/queen/young/049.tga; ui/portraits/european/Cards/queen/young/062.tga; ui/portraits/european/cards/king/young/071.tga; … |
+| 1 | UTF-16 |  | ; european/%S/king/%S/014.tga; european/%S/king/%S/027.tga; european/%S/king/%S/034.tga; european/%S/king/%S/071.tga; european/%S/king/%S/082.tga; european/%S/king/%S/084.tga; indian/%S/king/%S/042.tga; … |
+| 2 | UTF-16 |  | ui/portraits/european/Info/king/young/011.jpg; ui/portraits/european/Info/king/young/049.jpg; ui/portraits/european/Info/king/young/071.tga; ui/portraits/european/Info/king/young/079.jpg; ui/portraits/european/Info/queen/old/035.jpg; ui/portraits/european/Info/queen/young/041.jpg; ui/portraits/european/Info/queen/young/049.jpg; ui/portraits/european/Info/queen/young/062.jpg; … |
+| 3 | Int32 | -1 … 298 | -1; 10; 11; 35; 41; 49; 62; 79; … |
+
+### CAI_FRIENDS_AND_ENEMIES_ANALYSIS
+
+- Instances: 2508
+- Child nodes: CAI_FRIENDS_AND_ENEMIES_ANALYSIS_FRIEND_ENEMY_PAIR
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1433 | 1265; 1268; 1271; 1274; 1277; 1280; 1316; 1385; … |
+
+### CAI_FRIENDS_AND_ENEMIES_ANALYSIS_FRIEND_ENEMY_PAIR
+
+- Instances: 2508
+
+### CAI_FRIENDS_AND_ENEMIES_ANALYSIS_FRIEND_ENEMY_PAIR[]
+
+- Instances: 2508
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Boolean |  | false; true |
+| 1 | Boolean |  | false; true |
+
+### BOUNDARIES[]
+
+- Instances: 2466
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 Array |  | [2147483648, 2147483649, 2147483650, 2147483651,…; [2147483684, 2147483685, 2147483686, 2147483687,…; [2147484455, 2147484456, 2147484457, 2147484458,…; [2147484640, 2147484641, 2147484642, 2147484643,…; [2147484670, 2147484671, 2147484672, 2147484673,…; [2333, 2334, 2335, 2336, 2337, 2338, 2339, 2340,…; [837, 838, 839, 840, 841, 842, 843, 844, 845, 84…; []; … |
+
+### CAI_TAS_ANALYSIS_INFO_ENEMIES[]
+
+- Instances: 2396
+- Child nodes: CAI_TAS_ANALYSIS_THREAT, CAI_TAS_ANALYSIS_THREAT_AND_SUPPORT
+
+### CAI_VISIBILITY_ANALYSIS_RESOURCE_MOBILE
+
+- Instances: 2341
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 5361 … 1544050 | 5361; 5371; 5375; 5416; 5430; 5449; 6225; 6782; … |
+| 1 | Boolean |  | false; true |
+
+### CAI_HIGH_LEVEL_PATH_PATH_INFO[]
+
+- Instances: 2167
+- Child nodes: CAI_HLPP_INFO
+
+### CAI_HLPP_INFO
+
+- Instances: 2167
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 491 … 1227 | 1198; 1227; 688; 692; 765; 809; 817; 843; … |
+| 1 | Int32 | -681957184 … 658635776 | -12626268; -22438320; -2359296; -26384149; -35630483; -35682737; -41199664; 812431; … |
+| 2 | Int32 | -180633264 … 491371719 | 381943808; 384532640; 406724384; 410170575; 410193508; 411315213; 413937344; 416262141; … |
+| 3 | UInt32 | 11 … 33 | 11; 13; 20; 32; 33 |
+
+### CAI_DEFEND_REGION_ANALYSIS_POI[]
+
+- Instances: 2160
+- Child nodes: CAI_DEFEND_REGION_ANALYSIS_POI
+
+### CAI_DEFEND_REGION_ANALYSIS_POI_GARRISONABLES
+
+- Instances: 2160
+
+### CAI_DEFEND_REGION_ANALYSIS_POI_MOBILES
+
+- Instances: 2160
+
+### QUAD_TREE_BIT_ARRAY
+
+- Instances: 2015
+- Child nodes: QUAD_TREE_BIT_ARRAY_NODE
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 2048 | 2048 |
+| 1 | UInt32 | 1024 | 1024 |
+| 2 | UInt32 | 2048 | 2048 |
+
+### CAI_BUILD_FORT_IN_REGION_ANALYSIS_POI
+
+- Instances: 1966
+- 2 distinct signatures; most common:
+  - (1335×) UInt32, Boolean
+  - (631×) 
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 108 … 8491 | 3019; 3020; 6523; 6527; 6531; 6547; 6550; 6551; … |
+| 1 | Boolean |  | false; true |
+
+### AgentAbilities
+
+- Instances: 1956
+
+### AgentAncillaries
+
+- Instances: 1956
+
+### AgentAttributeBonuses
+
+- Instances: 1956
+
+### AgentAttributeBonuses[]
+
+- Instances: 1956
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UTF-16 |  | dummy |
+| 1 | UInt32 | 0 | 0 |
+
+### AgentAttributes
+
+- Instances: 1956
+
+### CAI_CHARACTER
+
+- Instances: 1956
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 0 … 1544050 | 0; 110191; 1357239; 5361; 5375; 5391; 5416; 5430; … |
+| 1 | UInt32 | 0 … 1541247 | 0; 5357; 5362; 5366; 5372; 5378; 5392; 5433; … |
+| 2 | UInt32 | 0 … 1544050 | 0; 1081680; 110191; 124835; 1495116; 5361; 5375; 5391; … |
+| 3 | UInt32 | 245711056 … 2509223672 | 747213400; 747216880; 747229640; 747230800; 747231960; 747235440; 747236600; 747240080; … |
+| 4 | UInt32 | 0 … 99910058 | 0; 7461; 7462; 7463; 7464; 7465; 7469; 7470; … |
+
+### CAI_WORLD_CHARACTERS[]
+
+- Instances: 1956
+- Child nodes: CAI_BDI_COMPONENT_BLOCK_OWNS, CAI_BDI_COMPONENT_PROPERTY_SET, CAI_CHARACTER, OWNED_INDIRECT
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 5355 … 99900058 | 5355; 5360; 5364; 5370; 5374; 5376; 5381; 5384; … |
+| 1 | Float32 | 100 | 100 |
+| 2 | Float32 | 100 | 100 |
+| 3 | Float32 | 0 | 0 |
+| 4 | Float32 | 100 | 100 |
+| 5 | UInt32 | 1 | 1 |
+| 6 | Boolean |  | false |
+| 7 | UInt32 Array |  | [] |
+| 8 | UInt32 Array |  | [14520, 0, 14522, 0]; [17348, 0, 17398, 0]; [17400, 0, 17405, 0, 385680, 0]; [27251, 0, 27270, 0]; [31604, 0, 31644, 0, 435013, 0]; [31646, 0, 31647, 0, 88154, 0]; [33910, 0, 33949, 0, 88507, 0]; []; … |
+| 9 | UInt32 | 0 | 0 |
+| 10 | UInt32 | 0 … 3 | 0; 1; 2; 3 |
+| 11 | UInt32 Array |  | [] |
+| 12 | UInt32 Array |  | [14520, 7898, 14522, 7906, 14523]; [17348, 14819, 17398, 14826, 17399]; [17400, 14819, 17405, 14826, 17406, 385680, 3856…; [27251, 25882, 27270, 25889, 27271]; [31604, 29230, 31644, 29237, 31645, 435013, 4350…; [31646, 29230, 31647, 29237, 31648, 88154, 88155…; [33910, 32121, 33949, 32128, 33950, 88507, 88508…; []; … |
+| 13 | UInt32 | 0 | 0 |
+| 14 | UInt32 | 0 | 0 |
+| 15 | UInt32 Array |  | [] |
+| 16 | UInt32 Array |  | [] |
+| 17 | UInt32 Array |  | [] |
+| 18 | UInt32 Array |  | [14522]; [17398]; [17405, 385680]; [27270]; [31644, 435013]; [31647, 88154]; [33949, 88507]; []; … |
+| 19 | Boolean |  | false |
+| 20 | UInt32 | 0 | 0 |
+| 21 | Boolean |  | false |
+
+### CHARACTER
+
+- Instances: 1956
+- Child nodes: CHARACTER_DETAILS, LINE_OF_SIGHT, LOCOMOTABLE
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Int32 | -1785945464 … 1582899368 | 747664528; 826673616; 826674744; 826675872; 826677000; 826678128; 826679256; 841607888; … |
+| 1 | UTF-16 |  | Eastern_Scholar; General; admiral; captain; colonel; gentleman; minister; rake; … |
+| 2 | UInt32 | 0 … 2544969544 | 0; 474735440; 474737232; 474738000; 474738256; 474741584; 828128368; 828130888; … |
+| 3 | UInt32 | 0 … 1965288440 | 0; 468803840; 468805712; 468806960; 468809768; 666401984; 666403968; 666407192; … |
+| 4 | UInt32 | 0 | 0 |
+| 5 | UInt32 | 0 … 1022408568 | 0; 1021488352; 1021562376; 1021649848; 1022023072; 1022047696; 1022403640; 842818552; … |
+| 6 | UInt32 | 0 … 1017367816 | 0; 741639096; 741639192; 741639320; 741639576; 741639704; 741639768; 741639800; … |
+| 7 | Boolean |  | false |
+| 8 | Boolean |  | false; true |
+| 9 | UInt32 Array |  | [3665157871, 253755392, 3664773120, 253755392, 3…; [3765020214, 156237824, 3765142116, 155943524, 3…; [3779936993, 139460608, 3779521033, 140509184, 3…; [3932919990, 4097835008, 3933076768, 4097835008,…; [4246732800, 276024801, 4246915081, 275825402, 4…; [4291333419, 286398692, 4290956019, 287309824, 4…; [71642135, 293729475, 71581609, 295479280, 71303…; []; … |
+| 10 | Boolean |  | false; true |
+| 11 | UInt32 | 0 … 73 | 0; 21; 3; 60; 67; 70; 72; 73; … |
+| 12 | Boolean |  | false |
+| 13 | Float32 | 10 … 15 | 10; 15 |
+| 14 | UInt32 | 0 … 2 | 0; 1; 2 |
+| 15 | UInt32 | 0 … 1 | 0; 1 |
+| 16 | UInt32 | 0 … 8 | 0; 1; 2; 3; 5; 8 |
+| 17 | UInt32 | 0 … 7 | 0; 1; 2; 3; 4; 5; 7 |
+| 18 | Boolean |  | false; true |
+| 19 | Boolean |  | false; true |
+| 20 | UInt32 | 0 … 72 | 0; 13; 14; 16; 19; 20; 21; 22; … |
+| 21 | Boolean |  | false; true |
+| 22 | UInt32 | 0 … 22 | 0; 1; 15; 2; 21; 22; 3; 4; … |
+| 23 | Boolean |  | false; true |
+| 24 | UInt32 | 0 … 72 | 0; 11; 21; 28; 5; 59; 6; 72; … |
+| 25 | UInt32 | 0 … 70 | 0; 1; 17; 2; 3; 38; 4; 9; … |
+| 26 | UInt32 | 0 … 73 | 0; 1; 24; 26; 31; 33; 38; 73; … |
+
+### CHARACTER_ARRAY[]
+
+- Instances: 1956
+- Child nodes: CHARACTER
+
+### CHARACTER_DETAILS
+
+- Instances: 1956
+- Child nodes: AgentAbilities, AgentAncillaries, AgentAttributeBonuses, AgentAttributes, CAMPAIGN_LOCALISATION, DATE, PORTRAIT_DETAILS, TRAITS
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UTF-16 |  | ; I; II; III; IV; XI; XII; XV; … |
+| 1 | Int32 | 0 | 0 |
+| 2 | UTF-16 |  | austria; britain; france; ottomans; prussia; russia; spain; thirteen_colonies; … |
+| 3 | UInt32 | 245711056 … 2509223672 | 747664528; 826673616; 826674744; 826675872; 826677000; 826678128; 826679256; 841607888; … |
+| 4 | Boolean |  | false; true |
+
+### LOCOMOTABLE
+
+- Instances: 1956
+- Child nodes: LOCOMOTION_ACTION_CONTROLLER
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Int32 | -789116416 … 919520512 | -27383376; -46030360; -517647680; -521908672; -5981806; -605574144; -634379840; 0; … |
+| 1 | Int32 | -230424576 … 494129184 | 0; 140134608; 156792048; 237727072; 250319008; 279633504; 301504512; 355518240; … |
+| 2 | Int32 | -789116416 … 919520512 | -27383376; -46030360; -517647680; -521908672; -5981806; -605574144; -634379840; 0; … |
+| 3 | Int32 | -230424576 … 494129184 | 0; 140134608; 156792048; 237727072; 250319008; 279633504; 301504512; 355518240; … |
+| 4 | Float32 | -3.1372783184051514 … 3.1415927410125732 | -0.08398545; -2.0888984; 0.2744867; 0.4992149; 0.8867368; 2.3752735; 3.0530055; 3.1415927; … |
+| 5 | Float32 | -3.1372783184051514 … 3.1415927410125732 | -0.08398545; -2.0888984; 0.2744867; 0.4992149; 0.8867368; 2.3752735; 3.0530055; 3.1415927; … |
+| 6 | Float32 | 0 | 0 |
+| 7 | Float32 | 0 | 0 |
+| 8 | Int32 | 0 … 90 | 0; 24; 25; 26; 90 |
+| 9 | Int32 | 0 … 240 | 0; 100; 14; 17; 24; 25; 90; 94; … |
+| 10 | Boolean |  | false |
+| 11 | Int32 | 0 | 0 |
+| 12 | Int32 | 0 | 0 |
+| 13 | Angle | 0 | 0° |
+| 14 | UInt32 | 12 | 12 |
+| 15 | UInt32 | 0 | 0 |
+| 16 | Float32 | 0 | 0 |
+
+### CAI_BUILDING_AVAILABILITY_ANALYSIS_INFO
+
+- Instances: 1745
+- Child nodes: CAI_BUILDING_AVAILABILITY_ANALYSIS_INFO_UNIT_AVAILABILIITY, CAMPAIGN_BONUS_VALUES
+- 2 distinct signatures; most common:
+  - (1561×) 
+  - (184×) UTF-16, UInt32, Boolean, UInt32, Int32
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UTF-16 |  | corn_tenanted_farms; fur_market; improved_roads; ironmasters_works; ordnance_factory; tarmac_roads; trading_port; water-powered_cloth_mill; … |
+| 1 | UInt32 | 0 … 6300 | 1000; 180; 2500; 350; 3600; 4200; 50; 5000; … |
+| 2 | Boolean |  | false; true |
+| 3 | UInt32 | 0 | 0 |
+| 4 | Int32 | -1802098368 … 1551423520 | -1777482224; -1777482512; -1777482896; -1777482944; 1079163032; 1141514632; 1141514680; 576559576; … |
+
+### CAI_TRADE_ROUTE_SEGMENT
+
+- Instances: 1737
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 748959160 … 1022854040 | 749144760; 749146560; 749147160; 749147760; 749148160; 749148360; 749148760; 749150160; … |
+| 1 | UInt32 | 0 … 1736 | 0; 1; 2; 3; 4; 5; 6; 7; … |
+
+### CAI_WORLD_TRADE_ROUTE_SEGMENTS[]
+
+- Instances: 1737
+- Child nodes: CAI_BDI_COMPONENT_BLOCK_OWNS, CAI_BDI_COMPONENT_PROPERTY_SET, CAI_TRADE_ROUTE_SEGMENT
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 3618 … 5354 | 3618; 3619; 3620; 3621; 3622; 3623; 3624; 3625; … |
+| 1 | Float32 | 100 | 100 |
+| 2 | Float32 | 100 | 100 |
+| 3 | Float32 | 0 | 0 |
+| 4 | Float32 | 100 | 100 |
+| 5 | UInt32 | 1 | 1 |
+| 6 | Boolean |  | false |
+| 7 | UInt32 Array |  | [] |
+| 8 | UInt32 Array |  | [] |
+| 9 | UInt32 | 0 | 0 |
+| 10 | UInt32 | 0 | 0 |
+| 11 | UInt32 Array |  | [] |
+| 12 | UInt32 Array |  | [] |
+| 13 | UInt32 | 0 | 0 |
+| 14 | UInt32 | 0 | 0 |
+| 15 | UInt32 Array |  | [] |
+| 16 | UInt32 Array |  | [] |
+| 17 | UInt32 Array |  | [] |
+| 18 | UInt32 Array |  | [] |
+| 19 | Boolean |  | false |
+| 20 | UInt32 | 0 | 0 |
+| 21 | Boolean |  | false |
+
+### COMMERCE_RAIDS
+
+- Instances: 1737
+
+### TRADE_SEGMENTS[]
+
+- Instances: 1737
+- Child nodes: COMMERCE_RAIDS, LINE_OF_SIGHT
+- 48 distinct signatures; most common:
+  - (513×) UInt32, Point2D, Point2D, Point2D, Point2D, Float32 Array, Float32 Array, Float32, UInt32, UInt32 Array, UInt32 Array, UInt32, Float32, Int32, Boolean
+  - (438×) UInt32, Point2D, Point2D, Point2D, Point2D, Point2D, Point2D, Point2D, Point2D, Float32 Array, Float32 Array, Float32, UInt32, UInt32 Array, UInt32 Array, UInt32, Float32, Int32, Boolean
+  - (82×) UInt32, Point2D, Point2D, Point2D, Point2D, Point2D, Point2D, Point2D, Point2D, Point2D, Point2D, Point2D, Point2D, Float32 Array, Float32 Array, Float32, UInt32, UInt32 Array, UInt32 Array, UInt32, Float32, Int32, Boolean
+  - (82×) UInt32, Point2D, Point2D, Point2D, Point2D, Point2D, Point2D, Point2D, Point2D, Point2D, Point2D, Point2D, Point2D, Point2D, Point2D, Point2D, Point2D, Float32 Array, Float32 Array, Float32, UInt32, UInt32 Array, UInt32 Array, UInt32, Float32, Int32, Boolean
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1 … 106 | 1; 2; 3; 4; 5; 6; 7; 8; … |
+| 1 | Point2D |  | (207.65019, 232.23317); (218.89395, 261.8214); (228.54478, 232.09749); (228.54478, 232.0975); (228.5448, 232.0975); (235.42572, 246.32909); (242.60611, 237.78696); (248.18085, 245.99292); … |
+| 2 | Point2D |  | (202.58774, 231.92163); (226.28899, 232.54556); (229.92639, 231.75705); (230.19377, 231.87968); (231.98592, 230.99776); (236.33249, 245.20157); (244.03246, 239.90208); (246.3226, 243.2576); … |
+| 3 | Point2D |  | (197.58876, 233.16284); (224.03317, 232.9936); (231.35721, 231.50266); (231.69638, 232.20932); (235.42699, 229.89801); (237.21416, 243.86893); (244.46436, 240.52228); (245.02571, 239.9792); … |
+| 4 | Point2D |  | (192.58978, 234.40404); (220.87892, 233.04726); (233.05258, 233.08647); (233.08653, 231.79753); (237.53001, 228.88042); (238.07071, 242.33115); (242.60611, 237.78696); (251.98042, 239.24948); … |
+| 5 | Float32 Array / Point2D |  | (233.05258, 233.08647); (233.08653, 231.79753); (237.53001, 228.88042); (238.07071, 242.33115); [10.08917]; [15.29432]; [7.7450976]; [9.9304285]; … |
+| 6 | Float32 Array / Point2D |  | (200.99397, 233.40933); (213.64563, 230.39725); (222.40898, 233.62984); (234.4088, 233.96362); (234.81586, 232.09238); (238.92729, 240.79337); (239.63306, 227.86284); [0]; … |
+| 7 | Float32 / Point2D | 0.09667744487524033 … 76.69476318359375 | (236.00363, 235.80005); (237.33415, 232.86838); (239.75766, 238.99722); (242.14282, 225.83353); 10.08917; 15.29432; 7.7450976; 9.9304285; … |
+| 8 | Point2D / UInt32 | 1000 | (192.58978, 234.40404); (216.08466, 232.15025); (228.54478, 232.0975); (236.682, 237.36035); (238.92075, 233.86662); (240.56516, 237.10242); (244.65259, 223.80426); 1000; … |
+| 9 | Float32 Array / Point2D / UInt32 Array |  | (216.08466, 232.15025); (236.682, 237.36035); (238.92075, 233.86662); (240.56516, 237.10242); [11.036415, 12.048921]; [15.822259, 9.556709]; [9.559242, 8.771729]; []; … |
+| 10 | Float32 Array / Point2D / UInt32 Array |  | (217.39471, 232.88939); (237.3604, 238.92068); (240.50734, 234.86487); (241.37265, 235.20763); [0, 11.036415]; [0, 15.822259]; [0, 9.559242]; []; … |
+| 11 | Float32 / Point2D / UInt32 | 0 … 1721 | (237.33235, 240.95357); (241.66081, 236.3049); (242.77069, 231.91263); 0; 1; 18.33097; 5; 6; … |
+| 12 | Float32 / Point2D / UInt32 | 0.09667744487524033 … 1000 | (237.12297, 242.44835); (242.60611, 237.78696); (242.91568, 230.96228); 10.08917; 1000; 15.29432; 7.7450976; 9.9304285; … |
+| 13 | Float32 Array / Int32 / Point2D / UInt32 Array | 748959160 … 1022848240 | (237.12297, 242.44835); 749144760; 749147160; 749147760; 749150160; [4.59214, 6.2283645, 5.431129]; [4.804155, 5.8015895, 6.586344]; []; … |
+| 14 | Boolean / Float32 Array / Point2D / UInt32 Array |  | (236.91359, 243.94313); [0, 4.59214, 10.820505]; [0, 4.804155, 10.605744]; [0, 6.9989333, 10.09884]; [0, 7.266706, 12.066711]; [747766544, 2080855184, 2080855316, 2080855580, …; []; false; … |
+| 15 | Float32 / Point2D / UInt32 | 0.08698675036430359 … 1736 | (236.34782, 245.23671); 10; 12.830311; 16.251635; 17.021471; 17.19209; 2; 9; … |
+| 16 | Float32 / Point2D / UInt32 | 0.029861997812986374 … 1000 | (235.42572, 246.32909); 1000; 17.899536; 18.33097; 18.44773; 20.221176; 23.085335; 25.378967; … |
+| 17 | Float32 Array / Int32 / Point2D / UInt32 Array | 748963160 … 1022854040 | 749148160; 749150360; 749150760; 749152760; 749153960; 749156960; [4.72209, 5.6769276, 5.1716185, 4.2980766]; []; … |
+| 18 | Boolean / Float32 Array / Point2D / UInt32 Array |  | [0, 2.3943975, 5.633895, 16.206383]; [0, 4.72209, 10.399017, 15.570636]; [2080855448, 556473404, 1022506012, 1022506408, …; [2080855448, 826795680]; [747766544, 2080854920, 2080855184, 2080856108, …; [747766544, 2080855184, 2080855316, 2080855580, …; []; false; … |
+| 19 | Float32 / Point2D / UInt32 | 0.2410423904657364 … 1702 | 11; 12; 18; 19.868713; 26; 28; 4; 7; … |
+| 20 | Float32 / Point2D / UInt32 | 0.08698675036430359 … 1000 | 1000; 12.830311; 15.358145; 16.251635; 17.021471; 17.19209; 18.081968; 33.13502; … |
+| 21 | Float32 Array / Int32 / Point2D / UInt32 Array | 748962560 … 1022843640 | 749145560; 749145960; 749146560; 749148760; 749153160; 749153360; 749154960; []; … |
+| 22 | Boolean / Float32 Array / Point2D / UInt32 Array |  | (-138.5151, 153.04042); (540.8783, 38.09324); [0, 2.0237901, 6.2952156, 16.422222, 23.256544]; [0, 3.906511, 8.709031, 12.777037, 27.731997]; [0, 4.508562, 8.745691, 18.155842, 31.56234]; [747766544, 2080855184, 2080855316, 2080855580, …; []; false; … |
+| 23 | Float32 / Point2D / UInt32 | 1.246848225593567 … 1701 | (-141.94193, 148.24385); (544.0725, 39.78914); 148; 27.734577; 3; 36; 38.82276; 76; … |
+| 24 | Float32 / Point2D / UInt32 | 0.2410423904657364 … 1000 | (-145.00746, 142.51529); (547.4748, 41.58712); 1000; 19.148605; 19.868713; 23.389862; 34.78672; 35.012215; … |
+| 25 | Float32 Array / Int32 / Point2D / UInt32 Array | 748961560 … 1022847240 | 749148360; 749154160; 749161560; 749179160; [14.690131, 19.292128, 15.49337, 16.585573, 15.3…; [2069527624, 2069527728, 2069527832]; [7.1799254, 5.690322, 6.9155827, 7.850979, 9.469…; []; … |
+| 26 | Boolean / Float32 Array / Point2D / UInt32 Array |  | (192.16441, 511.02145); [0, 14.690131, 33.982258, 49.475628, 66.0612, 81…; [0, 6.211907, 10.590141, 19.757181, 26.54353, 29…; [0, 7.1799254, 12.870247, 19.78583, 27.636808, 3…; [2080855976, 556473272, 585755096, 585755360]; [747766940, 747767072, 2080855316, 556472216, 55…; []; false; … |
+| 27 | Float32 / Point2D / UInt32 | 0.8405251502990723 … 1692 | 187; 189; 261; 278; 36.03562; 47.966198; 62; 99.130905; … |
+| 28 | Float32 / Point2D / UInt32 | 1.246848225593567 … 1000 | (220.58292, 507.28574); 1000; 26.347631; 27.734577; 28.855507; 35.7898; 38.82276; 45.18368; … |
+| 29 | Float32 Array / Int32 / Point2D / UInt32 Array | 748960560 … 1022846240 | 749162160; 749184560; 749187160; 749197360; 749207360; [1316005312, 1316005416, 1316010072, 1316010176,…; [1316005312, 1562722928, 2069527624, 1961339024,…; []; … |
+| 30 | Boolean / Float32 Array / Point2D / UInt32 Array |  | (-563.75244, 426.73062); (230.58942, 506.17386); (889.66296, -52.946045); (896.69653, -50.450356); [0, 2.4883661, 4.4624734, 6.1363473, 9.856381, 1…; [556473536, 2527485400, 2527485796, 826814172, 8…; []; false; … |
+| 31 | Float32 / Point2D / UInt32 | 1.8698396682739258 … 1641 | (-564.2556, 421.82483); (236.99362, 505.1955); 175; 184; 21.118729; 236; 399; 616; … |
+| 32 | Float32 / Point2D / UInt32 | 0.8405251502990723 … 1000 | (-563.87823, 416.85614); (239.79544, 504.35046); 1000; 111.192894; 36.03562; 47.966198; 8.543573; 99.130905; … |
+| 33 | Float32 Array / Int32 / Point2D / UInt32 Array | 748961960 … 1022830840 | 1022628840; 748961960; 749183760; 749184160; 749194760; [14.970514, 11.337957, 19.290234, 31.640884, 65.…; [35.894997, 23.621271, 25.329102, 37.3348, 24.68…; []; … |
+| 34 | Boolean / Float32 Array / Point2D / UInt32 Array |  | (885.5698, -50.221973); [0, 14.970514, 26.308472, 45.598705, 77.23959, 1…; [0, 35.894997, 59.516266, 84.84537, 122.18017, 1…; [0, 4.1453466, 9.759018, 13.5971, 17.090544, 20.…; [0, 4.5450087, 8.18623, 11.653102, 15.462793, 19…; [0, 4.567405, 9.014463, 13.947928, 18.415216, 24…; []; false; … |
+| 35 | Float32 / Point2D / UInt32 | 1.1088547706604004 … 1691 | (883.95447, -49.9344); 200.5846; 237.5124; 31.246412; 31.52245; 32.745956; 607; 658; … |
+| 36 | Float32 / Point2D / UInt32 | 1.8698396682739258 … 1000 | (0.5835122, 373.33972); (105.48618, 431.65454); (113.15823, 329.40045); (882.1093, -50.020237); 1000; 21.118729; 31.87274; 6.08933; … |
+| 37 | Float32 Array / Int32 / Point2D / UInt32 Array | 1022624640 … 1022845240 | (0.5835122, 373.33972); 1022624640; 1022636640; [1315998584]; [1316005312]; [2069527624]; [3.4173758, 3.515334, 2.7996302, 3.9428613, 3.49…; []; … |
+| 38 | Boolean / Float32 Array / Point2D / UInt32 Array |  | (0.5155153, 373.38144); (105.026085, 431.71884); (113.17918, 329.51376); (220.87741, 213.32146); [0, 3.4173758, 6.9327097, 9.73234, 13.675201, 17…; []; false; true; … |
+| 39 | Float32 / Point2D / UInt32 | 2.1628787517547607 … 1642 | (0.48056626, 373.39114); 32.91945; 321; 524; 652; 657; 659; 660; … |
+
+### CAI_BDI_POOL_INTENTIONS[]
+
+- Instances: 1618
+- Child nodes: CAI_BDIM_ATTACK_SH, CAI_BDIM_COMPLEX_EMBARK_TO, CAI_BDIM_MOVE_TO_POSITION, CAI_BDIM_OCCUPY_GARRISONABLE_SH, CAI_BDIM_RAID_TRADE_SEGMENT_SH, CAI_BDIM_REINFORCE_SPECIFIC, CAI_BDIM_SIEGE_SH, CAI_BDIM_SPLIT, CAI_BDIM_WAIT_HERE, CAI_BDI_BUILDING_TYPE_CONSTRUCTION, CAI_BDI_COMPONENT_BLOCK_OWNS, CAI_BDI_COMPONENT_PROPERTY_SET, CAI_BDI_DEMOTE_UNIT, CAI_BDI_FINANCIAL_INTENTION_BASE, CAI_BDI_FORT_TYPE_CONSTRUCTION, CAI_BDI_MISSION_BASE, CAI_BDI_MULTI_RECRUIT_BASE, CAI_BDI_NAVAL_RECRUITMENT_BUILD_NAVY_AT_PORT_OF_STRENGTH, CAI_BDI_NAVAL_RECRUITMENT_NEW_SPECIFIC, CAI_BDI_PROMOTE_UNIT, CAI_BDI_RECRUITMENT_BASE, CAI_BDI_RECRUITMENT_NEW_FORCE_OF_OR_REINFORCE_TO_STRENGTH, CAI_BDI_RESEARCH_TECHNOLOGY, CAI_BDI_SUCCESS_AND_FAILURE, CAI_BDI_TAX_EXEMPT_REGION, CAI_BDI_UNIT_RECRUITMENT_NEW, CAI_BDI_UNIT_RECRUITMENT_REINFORCE, CAI_DIPLOMATIC_INTENTION, CAI_FACTION_BDI_POOL_SAVINGS_BASIC, CAI_RECRUITABLE_UNIT_INFO
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 0 … 358 | 183; 185; 220; 222; 260; 261; 262; 358; … |
+| 1 | UInt32 | 7853 … 1544327 | 13945; 277768; 277772; 283350; 333423; 8059; 86699; 93610; … |
+| 2 | Float32 | 0 … 10 | 0; 10 |
+| 3 | Float32 | -587.73876953125 … 18405.9609375 | 0; 10; 1073.8137; 1372.8627; 2321.5361; 5.92783; 6.0711036; 735.7822; … |
+| 4 | Float32 | -0.009989012964069843 … 0.009977417066693306 | -0.0034154267; -0.004755779; -0.008709086; 0.0020070197; 0.008063629; 0.008845197; 0.009054551; 0.009952085; … |
+| 5 | Float32 | -588.3060302734375 … 18520.884765625 | 0; 10.099521; 1075.9689; 1383.933; 2307.7727; 5.8968167; 6.0744095; 729.37427; … |
+| 6 | UInt32 | 0 … 2 | 0; 1; 2 |
+| 7 | Boolean |  | false; true |
+| 8 | UInt32 Array |  | [124753]; [1463457]; [1511452]; [2817]; [3]; [445167]; [6014]; []; … |
+| 9 | UInt32 Array |  | [13935, 0]; [13937, 0]; [13939, 0]; [277769, 0, 7899, 0, 12618, 9, 12617, 0]; [277773, 0, 7899, 1, 12618, 11, 12617, 2]; [283351, 0, 7899, 2, 210845, 4, 210844, 0]; [86694, 0]; []; … |
+| 10 | UInt32 | 0 … 5 | 0; 1; 2; 3; 4; 5 |
+| 11 | UInt32 | 0 … 6 | 0; 1; 2; 3; 4; 5; 6 |
+| 12 | UInt32 Array |  | [12617, 12572, 8040]; [12627, 12572, 8040]; [13935, 7920]; [13937, 7920]; [13939, 7920]; [210844, 210821, 8040]; [86694]; []; … |
+| 13 | UInt32 Array |  | [1147462, 7899, 12653]; [1147464, 7899, 12653]; [277769, 7899, 12618]; [277773, 7899, 12618]; [283351, 7899, 210845]; [405727, 7899, 12628]; [863759, 7899, 12660]; []; … |
+| 14 | UInt32 | 0 … 38 | 0; 1; 10; 13; 2; 24; 3; 38; … |
+| 15 | UInt32 | 0 … 3 | 0; 1; 2; 3 |
+| 16 | UInt32 Array |  | [1445933, 1464310]; [1445942, 1464317]; [277769]; [277773]; [283351]; [405727]; [640576]; []; … |
+| 17 | UInt32 Array |  | [1147669]; [124835]; [229261]; [250206]; [277438]; [333223]; [640351]; []; … |
+| 18 | UInt32 Array |  | [124835, 3]; [229261, 3]; [2355]; [250206, 3]; [277438, 3]; [333223, 3]; [3]; []; … |
+| 19 | UInt32 Array |  | [] |
+| 20 | Boolean |  | false |
+| 21 | UInt32 | 1116079864 … 1177740352 | 1116079864; 1116095152; 1116104560; 1145445960; 1145449096; 1145495352; 1145499272; 1145499664; … |
+| 22 | Boolean |  | false |
+
+### CAI_BUILDING_AVAILABILITY_ANALYSIS
+
+- Instances: 1561
+- Child nodes: CAI_BUILDING_AVAILABILITY_ANALYSIS_INFO
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1435 … 90272242 | 2187; 2189; 2191; 2193; 2195; 2197; 2199; 2201; … |
+
+### CAI_BUILDING_OPTIONS_ANALYSIS
+
+- Instances: 1561
+- Child nodes: CAI_BUILDING_OPTIONS_ANALYSIS_INFO
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1435 … 90272242 | 2187; 2189; 2191; 2193; 2195; 2197; 2199; 2201; … |
+
+### CAI_BUILDING_OPTIONS_ANALYSIS_INFO
+
+- Instances: 1561
+- Child nodes: CAI_BUILDING_OPTIONS_ANALYSIS_INFO_OPTIONS
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Float32 Array |  | [-200, 5445, 0, 200, 299.99994]; [0, 0, 0, 0, 0]; [1000, 0, 0, 50, 0]; [1000, 400, 1000, 0, 0]; [1200, 0, -1000, 0, 0]; [2000, 0, 0, 100, 0]; [3000, 300, 0, 0, 149.99997]; [4050, -500, 0, 0, 299.99994]; … |
+
+### CAI_BUILDING_OPTIONS_ANALYSIS_INFO_OPTIONS
+
+- Instances: 1561
+
+### CAI_SITUATED
+
+- Instances: 1549
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Int32 | -790014016 … 956379968 | -41534792; 232442128; 261347840; 329457536; 383359360; 453865664; 73796480; 96467744; … |
+| 1 | Int32 | -603979776 … 519852640 | 219928320; 222650496; 236483008; 241838336; 242026224; 249683552; 263332688; 274102208; … |
+| 2 | UInt32 | 0 … 1263 | 317; 478; 491; 494; 500; 523; 530; 533; … |
+| 3 | UInt32 Array |  | [27]; [33]; [34]; [35]; [36]; [42]; [48]; []; … |
+| 4 | UInt32 | 10 … 4294967295 | 10; 11; 12; 13; 20; 57; 82; 93; … |
+
+### CAI_PORT_ANALYSIS
+
+- Instances: 1538
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1478 … 3594 | 1478; 1486; 1514; 1568; 1599; 1648; 1654; 2728; … |
+| 1 | Int32 | 0 … 480 | 0; 10; 16; 160; 2; 20; 3; 480; … |
+
+### FORTIFICATIONS_BLOCK
+
+- Instances: 1509
+
+### GARRISON_RESIDENCE
+
+- Instances: 1509
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 247045056 … 1012495192 | 1011335232; 478547552; 478556800; 478563736; 478570672; 478572984; 747673152; 842234200; … |
+
+### SIEGEABLE_GARRISON_RESIDENCE
+
+- Instances: 1509
+- Child nodes: FORTIFICATIONS_BLOCK, GARRISON_RESIDENCE, LINE_OF_SIGHT
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 246895952 … 1022424584 | 246895952; 481448712; 481455488; 481457336; 481460416; 481467192; 481469040; 481469656; … |
+| 1 | UInt32 | 0 | 0 |
+| 2 | UInt32 | 0 | 0 |
+| 3 | UInt32 | 0 | 0 |
+| 4 | UInt32 | 0 | 0 |
+| 5 | Int32 | 0 | 0 |
+| 6 | Boolean |  | false |
+| 7 | Boolean |  | false |
+| 8 | Boolean |  | false |
+| 9 | Int32 | -789116416 … 658635776 | -531554048; -569453312; -767854464; 0; 367958208; 565035648; 72566496; 78905000; … |
+| 10 | Int32 | 0 … 480657792 | 0; 171387056; 315658048; 320122944; 355016672; 392069088; 415238528; 447013760; … |
+| 11 | UInt32 | 0 … 2441601488 | 0; 1024093400; 474743632; 827803232; 827808608; 827809120; 827834464; 827856736; … |
+| 12 | UInt32 Array |  | [] |
+| 13 | UInt32 Array |  | [1011751568, 1011773608, 834970240]; [1014071432, 1014092312]; [479782672]; [834783480]; [834991120, 834771880]; [841104304, 1014064472]; [841120544, 841150704]; []; … |
+| 14 | Boolean |  | false |
+
+### CAI_PLACE_RESERVES_IN_REGION_ANALYSIS_POI_GARRISONABLES[]
+
+- Instances: 1502
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1445 … 3584 | 2192; 2196; 2200; 2206; 2210; 2349; 2355; 2357; … |
+
+### CAI_DEFEND_REGION_COAST_ANALYSIS_POI
+
+- Instances: 1469
+- Child nodes: CAI_DEFEND_REGION_COAST_ANALYSIS_POI_GARRISONABLES, CAI_DEFEND_REGION_COAST_ANALYSIS_POI_MOBILES
+- 2 distinct signatures; most common:
+  - (1264×) UInt32, Boolean
+  - (205×) 
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 2012 … 8800 | 7476; 7478; 7481; 7491; 7504; 7507; 7539; 7571; … |
+| 1 | Boolean |  | true |
+
+### CAI_AREA_OF_INTEREST_ANALYSIS_BASE
+
+- Instances: 1394
+- Child nodes: CAI_AREA_OF_INTEREST_ANALYSIS_BASE_DATA
+
+### CAI_AREA_OF_INTEREST_ANALYSIS_BASE_DATA
+
+- Instances: 1394
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 Array |  | [1891, 1930, 2186, 2220, 2229, 2245, 2375]; [1891, 2068, 2105, 2186, 2220, 2229, 2375]; [1891, 2105, 2186, 2220, 2229, 2245, 2361]; [1891, 2186, 2229, 2245, 2375, 2531]; [1891, 2186, 2245]; [1891, 2186]; [1930, 2186, 2229, 2245, 2375]; [2186, 2347]; … |
+| 1 | UInt32 Array |  | [1632, 1640, 1642, 1658, 1895, 1897, 1899, 1901,…; [1632, 1642, 1658, 1893, 1895, 1897, 1901, 1903,…; [1636, 1642, 1893, 1897, 1899, 1901, 1903, 1907,…; [1893, 1895, 1899, 1901, 1905, 1909, 1911, 1913,…; [1893, 1897, 1899, 1901, 1903, 1905, 1909, 1911,…; [1893, 1899, 1901, 1903, 1905, 1911, 1913, 1915,…; [1903, 1905, 1911, 1915, 1925, 1960, 2107, 2109,…; [1903, 2188, 2190, 2192, 2194, 2196, 2198, 2200,…; … |
+| 2 | UInt32 Array |  | [1926, 2225]; [1926]; [2003, 2225]; [2003]; [2128]; [2225]; [2639]; []; … |
+| 3 | UInt32 Array |  | [5416, 161046, 161057, 161059, 229261, 250206, 2…; [5416, 5430, 5449, 6670, 124835, 161059, 175936,…; [5430, 5449, 161046, 161059, 250206, 277438, 332…; [5430, 5449, 161059, 175936, 250206, 277438, 332…; [5430, 5449, 5468, 6670, 6672, 161059, 175936, 2…; [5430, 5449, 6384, 6390, 6435, 6648, 6670, 6672,…; [5430, 5449, 6670, 6672, 161059, 175936, 250206,…; [5430, 5449, 6670, 6672, 6677, 6715, 6717, 6719,…; … |
+
+### BUILDING_MANAGER
+
+- Instances: 1357
+- Child nodes: BUILDING, BUILDING_CONSTRUCTION_ITEM
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Boolean |  | false; true |
+| 1 | Boolean |  | false; true |
+
+### CAI_BUILDING_SLOT
+
+- Instances: 1357
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 481446248 … 1022424584 | 1021093560; 1021094792; 1021098488; 1021099104; 1021100336; 1021102800; 1021103416; 1021105880; … |
+| 1 | UInt32 | 0 … 7 | 0; 1; 2; 3; 4; 5; 6; 7; … |
+| 2 | UInt32 | 1441 … 3594 | 1441; 1443; 1445; 1447; 1449; 1451; 1453; 1455; … |
+
+### CAI_WORLD_BUILDING_SLOTS[]
+
+- Instances: 1357
+- Child nodes: CAI_BDI_COMPONENT_BLOCK_OWNS, CAI_BDI_COMPONENT_PROPERTY_SET, CAI_BUILDING_SLOT
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1435 … 90272242 | 1435; 1436; 1437; 1438; 1439; 1440; 1442; 1444; … |
+| 1 | Float32 | 100 | 100 |
+| 2 | Float32 | 100 | 100 |
+| 3 | Float32 | 0 | 0 |
+| 4 | Float32 | 100 | 100 |
+| 5 | UInt32 | 1 | 1 |
+| 6 | Boolean |  | false |
+| 7 | UInt32 Array |  | [] |
+| 8 | UInt32 Array |  | [31802, 0]; [31804, 0]; [31810, 0]; [31812, 0]; [31814, 0]; [31816, 0]; [31818, 0]; [31820, 0]; … |
+| 9 | UInt32 | 0 | 0 |
+| 10 | UInt32 | 0 … 4 | 0; 1; 2; 3; 4 |
+| 11 | UInt32 Array |  | [] |
+| 12 | UInt32 Array |  | [31802, 29216]; [31804, 29216]; [31810, 29216]; [31812, 29216]; [31814, 29216]; [31816, 29216]; [31818, 29216]; [31820, 29216]; … |
+| 13 | UInt32 | 0 | 0 |
+| 14 | UInt32 | 0 | 0 |
+| 15 | UInt32 Array |  | [] |
+| 16 | UInt32 Array |  | [] |
+| 17 | UInt32 Array |  | [] |
+| 18 | UInt32 Array |  | [31802]; [31804]; [31810]; [31812]; [31814]; [31816]; [31818]; [31820]; … |
+| 19 | Boolean |  | false |
+| 20 | UInt32 | 0 | 0 |
+| 21 | Boolean |  | false |
+
+### REGION_SLOT
+
+- Instances: 1357
+- Child nodes: BUILDING_MANAGER, PORT_GARRISON_MANAGER, REGION_RECRUITMENT_MANAGER, SIEGEABLE_GARRISON_RESIDENCE
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 481446248 … 1022424584 | 481448712; 481455488; 481457336; 481460416; 481461648; 481467192; 481469040; 481469656; … |
+| 1 | UTF-16 |  | corn:great_plains:central; corn:iroquois_territory:lake; fur:great_plains:lake_manitoba; fur:iroquois_territory:st_lawrence; settlement:great_plains:knife_river_village:sett…; settlement:iroquois_territory:cayuga:settlement_…; town:iroquois_territory:mohawk; town:iroquois_territory:oneida; … |
+| 2 | Int32 | 0 | 0 |
+| 3 | Int32 | 0 | 0 |
+| 4 | Int32 | -790014016 … 673846400 | -536483328; -552255360; -560414976; -564210688; -568854848; -569453312; -570056384; -767854464; … |
+| 5 | Int32 | 13339590 … 519852640 | 319524160; 320122944; 320725984; 326948224; 327411200; 329081280; 336269248; 355016672; … |
+| 6 | Int32 | 0 … 5 | 0; 1; 2; 3; 4; 5 |
+| 7 | Int32 | 0 … 5 | 0; 1; 2; 3; 4; 5 |
+| 8 | Boolean |  | false; true |
+| 9 | Int32 | 0 … 1 | 0; 1 |
+| 10 | Int32 | 1 … 2 | 1; 2 |
+| 11 | UInt32 | 0 … 4294967295 | 0; 1; 4294967295 |
+| 12 | UInt32 | 0 … 12 | 0; 1; 2; 3; 4; 6; 7; 8; … |
+| 13 | Boolean |  | false; true |
+| 14 | Boolean |  | false; true |
+
+### UNIT_CLASS_NAMES_LIST
+
+- Instances: 1344
+
+### UNIT_CLASS_NAME_ALLOCATOR
+
+- Instances: 1344
+- Child nodes: CAMPAIGN_LOCALISATION, UNIT_CLASS_NAMES_LIST
+
+### CAI_BUILD_FORT_IN_REGION_ANALYSIS_POI[]
+
+- Instances: 1335
+- Child nodes: CAI_BUILD_FORT_IN_REGION_ANALYSIS_POI
+
+### LAND_UNIT_NAMES_MAP[]
+
+- Instances: 1288
+- Child nodes: UNIT_CLASS_NAME_ALLOCATOR
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 0 … 22 | 10; 11; 12; 13; 14; 15; 8; 9; … |
+
+### CAI_PLACE_RESERVES_IN_REGION_ANALYSIS_POIS[]
+
+- Instances: 1276
+- Child nodes: CAI_PLACE_RESERVES_IN_REGION_ANALYSIS_POI
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 318 … 1264 | 766; 767; 768; 810; 844; 845; 846; 847; … |
+
+### CAI_DEFEND_REGION_COAST_ANALYSIS_POI[]
+
+- Instances: 1264
+- Child nodes: CAI_DEFEND_REGION_COAST_ANALYSIS_POI
+
+### CAI_DEFEND_REGION_COAST_ANALYSIS_POI_GARRISONABLES
+
+- Instances: 1264
+
+### CAI_DEFEND_REGION_COAST_ANALYSIS_POI_MOBILES
+
+- Instances: 1264
+
+### CAI_THEATRE_MILITARY_STRENGTH_FACTION_STRENGTH[]
+
+- Instances: 1187
+- Child nodes: CAI_MILITARY_STRENGTH_FOR_FACTION
+
+### CAI_BDI_GOAL_STEAL_TECHNOLOGY
+
+- Instances: 1099
+- 2 distinct signatures; most common:
+  - (1092×) UInt32, UInt32, UInt32, UInt32, Boolean, UInt32, UInt32
+  - (7×) UInt32, UInt32, UInt32, UInt32, Boolean, UTF-16, UInt32, UInt32
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 0 … 1325 | 0; 1268; 1286; 1289; 1292; 1304; 1325 |
+| 1 | UInt32 | 0 … 1342098 | 0; 1342098; 5469; 5791; 5803; 5861; 6064; 6295; … |
+| 2 | UInt32 | 0 … 1367 | 0; 1271; 1280; 1292; 1298; 1301; 1328; 1367; … |
+| 3 | UInt32 | 0 … 3386 | 0; 1875; 1968; 2402; 2590; 2787; 3283; 3386; … |
+| 4 | Boolean |  | false; true |
+| 5 | UInt32 / UTF-16 | 0 | 0; enlightenment_empiricism; enlightenment_physiocracy; military_army_etwii_lineinf_doctrine; military_army_etwii_military_statistics; military_army_plug_bayonet; military_ordnance_etwii_limbers |
+| 6 | UInt32 | 0 … 1346552 | 0; 1346552; 267177; 385681; 435014; 563234; 88155; 88508; … |
+| 7 | UInt32 | 0 | 0 |
+
+### CAI_RTPA_REGION_GROUP_INFO
+
+- Instances: 1084
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 0 … 1535957 | 1081500; 7396; 7408; 7434; 7437; 7439; 7444; 7457; … |
+| 1 | UInt32 | 0 … 1263 | 1037; 1065; 1078; 1084; 1094; 1097; 1132; 1222; … |
+| 2 | UInt32 Array |  | [1037, 988, 1025, 1082]; [1037, 988, 1101, 998, 1232, 1022, 1251]; [1037, 988, 1101]; [1037, 988, 203, 809]; [1222, 1183, 1176, 1158, 1170, 1025, 1082]; [1222, 1183, 1176, 1158, 1170, 1025, 1101]; [1222, 1251, 1022, 203, 769, 765]; [1222, 1251]; … |
+| 3 | UInt32 Array |  | [1037, 988, 1025, 1082]; [1037, 988, 1101, 998, 1232, 1022, 1251]; [1037, 988, 1101]; [1037, 988, 203, 809]; [1222, 1183, 1176, 1158, 1170, 1025, 1082]; [1222, 1183, 1176, 1158, 1170, 1025, 1101]; [1222, 1251, 1022, 203, 769, 765]; [1222, 1251]; … |
+| 4 | Float32 | 0 … 1597.9169921875 | 280.44055; 282.28375; 326.01477; 355.2161; 43.623512; 535.20483; 680.7592; 727.3997; … |
+| 5 | Float32 | 0 … 1495.8883056640625 | 280.44055; 282.28375; 326.01477; 355.2161; 43.623512; 535.20483; 680.7592; 727.3997; … |
+| 6 | Boolean |  | false; true |
+| 7 | Boolean |  | false; true |
+
+### REGION_SLOT_ARRAY[]
+
+- Instances: 1083
+- Child nodes: REGION_SLOT
+
+### CAI_DEFEND_REGION_ANALYSIS_POIS[]
+
+- Instances: 1081
+- Child nodes: CAI_DEFEND_REGION_ANALYSIS_POI
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 318 … 1264 | 1102; 1103; 1104; 1105; 1106; 1252; 1253; 1254; … |
+
+### BUILDING
+
+- Instances: 1009
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 0 … 100 | 0; 100; 40; 49; 53; 65; 88; 90; … |
+| 1 | UTF-16 |  | army_barracks; basic_roads; fur_market; governors_mansion; ordnance_factory; tribal_corn_communal_farms; tribal_horse_breeder_gofa; tribal_weavers_cottages; … |
+| 2 | UTF-16 |  | denmark; hannover; iroquoi; mughal; plains; russia; sweden; thirteen_colonies; … |
+| 3 | UTF-16 |  | gov_absolute_monarchy; gov_constitutional_monarchy; gov_republic |
+
+### CAI_REGION_HLCI
+
+- Instances: 1006
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 54 … 1263 | 126; 128; 139; 142; 54; 56; 61; 64; … |
+| 1 | UInt32 | 0 … 856 | 109; 110; 111; 112; 113; 114; 31; 35; … |
+| 2 | UInt32 Array |  | [0, 1]; [0]; [1]; [2]; [3]; [4]; [5]; [6]; … |
+| 3 | Int32 | -1271782400 … 1316596224 | -126566488; -1271782400; 1015447616; 41942800; 489562112; 589823616; 739522432; 748399616; … |
+| 4 | Int32 | -503316256 … 592658496 | -273130592; -304086880; -435158848; -503316256; 244094672; 35331424; 35790424; 50285840; … |
+
+### CAI_WORLD_REGION_HLCIS[]
+
+- Instances: 1006
+- Child nodes: CAI_BDI_COMPONENT_BLOCK_OWNS, CAI_BDI_COMPONENT_PROPERTY_SET, CAI_REGION_HLCI
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 55 … 1264 | 55; 57; 58; 59; 60; 62; 63; 65; … |
+| 1 | Float32 | 100 | 100 |
+| 2 | Float32 | 100 | 100 |
+| 3 | Float32 | 0 | 0 |
+| 4 | Float32 | 100 | 100 |
+| 5 | UInt32 | 1 | 1 |
+| 6 | Boolean |  | false |
+| 7 | UInt32 Array |  | [] |
+| 8 | UInt32 Array |  | [] |
+| 9 | UInt32 | 0 | 0 |
+| 10 | UInt32 | 0 | 0 |
+| 11 | UInt32 Array |  | [] |
+| 12 | UInt32 Array |  | [] |
+| 13 | UInt32 | 0 | 0 |
+| 14 | UInt32 | 0 | 0 |
+| 15 | UInt32 Array |  | [] |
+| 16 | UInt32 Array |  | [] |
+| 17 | UInt32 Array |  | [] |
+| 18 | UInt32 Array |  | [] |
+| 19 | Boolean |  | false |
+| 20 | UInt32 | 0 | 0 |
+| 21 | Boolean |  | false |
+
+### CAI_BASE_VALUE
+
+- Instances: 999
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Int32 | 10 … 156575 | 144325; 15; 17; 30; 45; 52; 60; 75; … |
+
+### CAI_TAS_ANALYSIS_INFO
+
+- Instances: 999
+- Child nodes: CAI_TAS_ANALYSIS_INFO_ENEMIES, CAI_TAS_ANALYSIS_INFO_FRIENDS, CAI_TAS_ANALYSIS_INFO_NEUTRALS
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Int32 | 0 … 2400 | 0; 1000; 1200; 1400; 1900; 300; 800; 900; … |
+| 1 | Int32 | -7500 … 6090 | -100; -1100; -1600; -386; -400; -500; -700; 0; … |
+| 2 | Int32 | -3100 … 3027 | -1000; -1100; -200; -300; -400; -500; -900; 0; … |
+| 3 | Int32 | 0 … 100 | 0; 100; 13; 23; 50; 64; 93; 97; … |
+| 4 | Int32 | -100 … 99 | -100; -13; -87; -93; 0; 96; 98; 99; … |
+| 5 | Int32 | -100 … 98 | -100; -27; 0; 34; 58; 7; 85; 98; … |
+| 6 | Int32 | 0 … 1000 | 0; 1000; 200; 400; 500; 515; 700; 800; … |
+| 7 | Int32 | 0 … 1500 | 0; 1300; 300; 400; 500; 600; 700; 800; … |
+| 8 | Int32 | 0 … 900 | 0; 100; 200; 300; 400; 700; 900; 95; … |
+| 9 | Int32 | -2700 … 1965 | -100; -200; -300; -400; -500; -800; 0; 390; … |
+| 10 | Int32 | -3900 … 3311 | -100; -300; -400; -500; -7; -800; -900; 0; … |
+| 11 | Int32 | -2300 … 1304 | -100; -200; -300; -379; -400; -700; -93; 0; … |
+| 12 | Int32 | -1300 … 1044 | -100; -27; -300; -400; -500; -700; 0; 152; … |
+| 13 | Int32 | -1700 … 1675 | -100; -1000; -1700; -400; -500; -600; -700; 0; … |
+| 14 | Int32 | -900 … 930 | -100; -200; -249; -300; -413; -500; -600; 0; … |
+| 15 | Int32 | 0 … 10 | 0; 10; 2; 4; 5; 7; 8; 9; … |
+| 16 | Int32 | 0 … 15 | 0; 13; 3; 4; 5; 6; 7; 8; … |
+| 17 | Int32 | 0 … 9 | 0; 1; 2; 3; 4; 6; 7; 9; … |
+| 18 | Int32 | 0 … 27 | 0; 1; 2; 3; 4; 5; 6; 8; … |
+| 19 | Int32 | 0 … 39 | 0; 1; 2; 3; 4; 5; 8; 9; … |
+| 20 | Int32 | 0 … 23 | 0; 1; 2; 3; 4; 5; 6; 7; … |
+| 21 | Int32 | 0 … 13 | 0; 1; 2; 3; 4; 5; 6; 7; … |
+| 22 | Int32 | 0 … 21 | 0; 1; 10; 17; 4; 5; 6; 7; … |
+| 23 | Int32 | 0 … 15 | 0; 1; 2; 3; 4; 5; 6; 7; … |
+| 24 | Int32 | -634379840 … 514580604 | -1726962; -590610432; -5981806; 0; 1406659; 63973197; 65425952; 71304800; … |
+| 25 | Int32 | -231056480 … 474024708 | -231056480; 0; 330039296; 331046581; 355518240; 363107372; 363761744; 388555856; … |
+| 26 | Int32 | -629411109 … 575293146 | -1621573; -23103062; -2584687; -2821125; -3406180; -4620275; -5981806; 0; … |
+| 27 | Int32 | -333223194 … 474024708 | -229714308; -333223194; -42639705; -93502634; 0; 312307257; 355518240; 370025440; … |
+| 28 | Int32 | -634379840 … 573201242 | -1679060; -23103062; -2821125; -4170551; -6092306; -7319237; 0; 16837872; … |
+| 29 | Int32 | -397313576 … 489106432 | -1024581; -44379059; -93502634; 0; 312307257; 364778208; 368731024; 376631832; … |
+| 30 | Int32 | -763984320 … 697494826 | -400966400; -496920192; -555686788; -559271558; -561983023; 0; 519213467; 58414457; … |
+| 31 | Int32 | -347962662 … 489106432 | 0; 325065044; 333603374; 336136329; 336772163; 342674624; 376980192; 42339792; … |
+| 32 | Int32 | -789116416 … 688093056 | -400966400; -585014528; 0; 51786252; 58414457; 60623858; 60859967; 61745310; … |
+| 33 | Int32 | -418414865 … 489106432 | 0; 26690023; 327219829; 376021440; 376980192; 379856448; 42339792; 55055275; … |
+| 34 | Int32 | -789116416 … 714609408 | -400966400; 0; 50472084; 51020713; 56825900; 60247119; 60248392; 62980547; … |
+| 35 | Int32 | -427310334 … 489106432 | -235694025; -7964134; 0; 118568499; 376125248; 385677681; 386873293; 42339792; … |
+| 36 | Int32 | -521908672 … 62282575 | 0; 14828739; 16109724; 17916242; 19052073; 20383448; 21422775; 23675892; … |
+| 37 | Int32 | -333088131 … 390622656 | -175569032; -180707973; -249880926; -257354678; -65105179; 0; 358679603; 359023936; … |
+| 38 | Int32 | -590610432 … 68110530 | 0; 13996468; 17575383; 17916242; 20870785; 22576510; 25077800; 27331083; … |
+| 39 | Int32 | -356591402 … 357389888 | -118498510; -175569032; -28453284; -356591402; 0; 357389888; 40062782; 80980053; … |
+
+### CAI_TAS_ANALYSIS_INFO_ENEMIES
+
+- Instances: 999
+
+### CAI_TAS_ANALYSIS_INFO_FRIENDS
+
+- Instances: 999
+
+### CAI_TAS_ANALYSIS_INFO_NEUTRALS
+
+- Instances: 999
+
+### CAI_TAS_ANALYSIS_INFO_FRIENDS[]
+
+- Instances: 993
+- Child nodes: CAI_TAS_ANALYSIS_SUPPORT, CAI_TAS_ANALYSIS_THREAT_AND_SUPPORT
+
+### CAI_TAS_ANALYSIS_SUPPORT
+
+- Instances: 993
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Int32 | 1 … 100 | 100; 27; 45; 50; 51; 95; 97; 98; … |
+
+### OWNED_DIRECT
+
+- Instances: 989
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1433 | 1265; 1268; 1271; 1274; 1277; 1280; 1283; 1286; … |
+
+### LAND_UNIT_DATA
+
+- Instances: 964
+- 2 distinct signatures; most common:
+  - (863×) Int32, UInt32, UInt8, Int32, UTF-16, UInt32
+  - (101×) 
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Int32 | 1 | 1 |
+| 1 | UInt32 | 0 | 0 |
+| 2 | UInt8 | 0 | 0 |
+| 3 | Int32 | 0 … 3 | 0; 1; 2; 3 |
+| 4 | UTF-16 |  |  |
+| 5 | UInt32 | 0 … 2509162192 | 0; 1015165304; 1015166464; 1015171104; 1015172264; 1015258104; 1015259264; 745668224; … |
+
+### CAI_UNIT_AVAILABILITY_ANALYSIS_BASE_INFO_RNU[]
+
+- Instances: 953
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UTF-16 |  | 3rd_rate_admiral_british; 3rd_rate_british; 3rd_rate_hms_elizabeth; 4th_rate_british; 6th_rate_british; brig_british; indiaman; sloop_british; … |
+
+### CAI_UNIT_AVAILABILITY_ANALYSIS_BASE_INFO_CRNU[]
+
+- Instances: 941
+- Child nodes: CAI_RECRUITABLE_UNIT_INFO
+
+### CAI_BDI_FINANCIAL_INTENTION_BASE
+
+- Instances: 921
+- Child nodes: CAI_FINANCIAL_INTENTION_SPECIFICATION
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Boolean |  | false; true |
+
+### RESOURCES_ARRAY[]
+
+- Instances: 920
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UTF-16 |  | americas; americas_inland; colonial_euro_factions; displaced_scots; europe; global; middle_east_and_europe; usa; … |
+
+### CAI_BDI_GOAL_REGION_DEFENCE_ASSET_BASE
+
+- Instances: 905
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1441 … 3594 | 2186; 2188; 2190; 2192; 2194; 2196; 2198; 2200; … |
+| 1 | UInt32 | 1265 … 1430 | 1265; 1268; 1271; 1274; 1277; 1280; 1283; 1286; … |
+| 2 | UInt32 | 12574 … 1536015 | 12574; 12577; 12579; 12581; 12583; 12585; 12587; 12589; … |
+| 3 | UInt32 | 0 … 72 | 0; 45; 47; 51; 57; 65; 70; 71; … |
+| 4 | Boolean |  | false; true |
+
+### CULTURE_PATHS[]
+
+- Instances: 880
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UTF-16 |  | General; admiral; assassin; catholic_missionary; colonel; middle_east_missionary; pirate; rake; … |
+| 1 | UTF-16 |  | ; cossacks; european; indian; middle_east; papacy; pirates; tribal; … |
+
+### PORTRAITS
+
+- Instances: 880
+
+### PORTRAIT_CATEGORIES[]
+
+- Instances: 880
+- Child nodes: PORTRAITS
+
+### CAI_GARRISONABLE
+
+- Instances: 877
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 0 … 1544050 | 0; 107671; 116783; 129681; 142693; 297214; 399834; 6219; … |
+| 1 | UInt32 | 0 … 1509671 | 0; 1382997; 1383000; 154375; 338957; 6249; 799329; 988205; … |
+| 2 | UInt32 Array |  | [175936]; [5624, 885943, 1060615, 1397067]; [6135, 199594]; [6137, 219937]; [6699]; [6737, 6739]; [827263]; []; … |
+| 3 | UInt32 Array |  | [] |
+| 4 | UInt32 | 0 | 0 |
+
+### CAI_PLACE_RESERVES_IN_REGION_ANALYSIS_POI_MOBILES[]
+
+- Instances: 869
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 5470 … 1541249 | 1132961; 1147669; 1197766; 1264496; 1273872; 1432628; 1496276; 332703; … |
+
+### LAND_UNIT_DATA[]
+
+- Instances: 863
+- Child nodes: LAND_UNIT_DATA
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 666424552 … 1046687168 | 1015851456; 1015852448; 1015854928; 1015855672; 1015857904; 1015858400; 1015862368; 1015863856; … |
+
+### CAI_THREATENED_GARRISONABLE
+
+- Instances: 862
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Boolean |  | false |
+
+### CAI_FINANCIAL_INTENTION_SPECIFICATION
+
+- Instances: 802
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Float32 | 0 … 20000 | 1000; 112; 350; 4200; 5000; 60; 600; 80; … |
+| 1 | Float32 | 0 … 1600 | 0; 14; 29; 67; 68; 81; 92; 98; … |
+| 2 | UInt32 | 0 … 9 | 0; 1; 2; 4; 6; 9 |
+
+### CAI_UNIT_AVAILABILITY_ANALYSIS_BASE
+
+- Instances: 795
+- Child nodes: CAI_UNIT_AVAILABILITY_ANALYSIS_BASE_INFO
+
+### CAI_UNIT_AVAILABILITY_ANALYSIS_BASE_INFO
+
+- Instances: 795
+- Child nodes: CAI_UNIT_AVAILABILITY_ANALYSIS_BASE_INFO_CRLU, CAI_UNIT_AVAILABILITY_ANALYSIS_BASE_INFO_CRNU, CAI_UNIT_AVAILABILITY_ANALYSIS_BASE_INFO_RLU, CAI_UNIT_AVAILABILITY_ANALYSIS_BASE_INFO_RNU
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 Array |  | [580422192]; [580422400]; [580425936]; [580540128]; [580548864]; [580554272, 580548864, 580425936]; [580554272]; []; … |
+| 1 | UInt32 Array |  | [580423856]; [580547928]; [580548760]; [580549072, 580548760, 580547928, 580549176]; [580549072]; [580549176]; [580553440]; []; … |
+| 2 | Boolean |  | false; true |
+| 3 | Boolean |  | false; true |
+| 4 | Boolean |  | false; true |
+| 5 | Boolean |  | false; true |
+
+### CAI_UNIT_AVAILABILITY_ANALYSIS_BASE_INFO_CRLU
+
+- Instances: 795
+
+### CAI_UNIT_AVAILABILITY_ANALYSIS_BASE_INFO_CRNU
+
+- Instances: 795
+
+### CAI_UNIT_AVAILABILITY_ANALYSIS_BASE_INFO_RLU
+
+- Instances: 795
+
+### CAI_UNIT_AVAILABILITY_ANALYSIS_BASE_INFO_RNU
+
+- Instances: 795
+
+### CAI_HIGH_LEVEL_PATH
+
+- Instances: 735
+- Child nodes: CAI_HIGH_LEVEL_PATH_PATH_INFO
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Boolean |  | false; true |
+| 1 | Boolean |  | false |
+| 2 | Boolean |  | false; true |
+
+### CAI_HIGH_LEVEL_PATH_PATH_INFO
+
+- Instances: 735
+
+### CAI_INVADE_REGION_ANALYSIS_POIS[]
+
+- Instances: 732
+- Child nodes: CAI_INVADE_REGION_ANALYSIS_POI
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 318 … 1228 | 780; 790; 797; 824; 828; 834; 864; 882; … |
+
+### CAI_AREA_OF_INTEREST_ANALYSIS_REGION_SLOT
+
+- Instances: 725
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1443 … 3594 | 1893; 1895; 1899; 1903; 1905; 1907; 1909; 1911; … |
+
+### CAI_REGIONSLOT_BASE_VALUE
+
+- Instances: 725
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1443 … 3594 | 2202; 2204; 2206; 2208; 2210; 2212; 2214; 2216; … |
+| 1 | Int32 | 0 … 95500 | 0; 60700; 69000; 69700; 70400; 71100; 76400; 95500; … |
+| 2 | Int32 | 9 | 9 |
+
+### CAI_REGION_SLOT
+
+- Instances: 725
+- Child nodes: CAI_SITUATED
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Int32 | 1 | 1 |
+| 1 | UInt32 | 1442 … 3593 | 1442; 1444; 1446; 1448; 1450; 1452; 1454; 1456; … |
+| 2 | UInt32 Array |  | [1544060, 1544061, 1544062]; [1544139, 1544140, 1544141]; [1544144]; [1544189, 1544193]; [1544190]; [1544222]; [1544226, 1544228, 1544229]; []; … |
+| 3 | UInt32 Array |  | [1544060, 1544061]; [] |
+| 4 | UInt32 Array |  | [1544060, 1544061, 1544062, 1544130, 1544147, 15…; [1544075, 1544127, 1544153]; [1544092, 1544152, 1544194, 1544226]; [1544128, 1544222, 1544224]; [1544156, 1544187, 1544217]; [1544159, 1544191]; [1544193]; []; … |
+| 5 | Boolean |  | false; true |
+
+### CAI_WORLD_REGION_SLOTS[]
+
+- Instances: 725
+- Child nodes: CAI_BDI_COMPONENT_BLOCK_OWNS, CAI_BDI_COMPONENT_PROPERTY_SET, CAI_GARRISONABLE, CAI_REGION_SLOT, CAI_SITUATED, CAI_THREATENED_GARRISONABLE, OWNED_INDIRECT
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1443 … 3594 | 1443; 1445; 1447; 1449; 1451; 1453; 1455; 1457; … |
+| 1 | Float32 | 100 | 100 |
+| 2 | Float32 | 100 | 100 |
+| 3 | Float32 | 0 | 0 |
+| 4 | Float32 | 100 | 100 |
+| 5 | UInt32 | 1 | 1 |
+| 6 | Boolean |  | false |
+| 7 | UInt32 Array |  | [] |
+| 8 | UInt32 Array |  | [9608, 0, 11101, 0, 11102, 0, 11125, 0, 16237, 0…; [9644, 0, 11111, 0, 11112, 0, 11120, 0, 16232, 0…; [9682, 0, 11114, 0, 11118, 0, 16230, 0, 18790, 0…; [9683, 0, 11113, 0, 11119, 0, 16231, 0, 18791, 0…; [9684, 0, 11109, 0, 11110, 0, 11121, 0, 16233, 0…; [9685, 0, 11107, 0, 11108, 0, 11122, 0, 16234, 0…; [9717, 0, 11103, 0, 11104, 0, 11124, 0, 16236, 0…; [9720, 0, 11105, 0, 11106, 0, 11123, 0, 16235, 0…; … |
+| 9 | UInt32 | 0 | 0 |
+| 10 | UInt32 | 7 … 52 | 34; 35; 36; 37; 38; 40; 41; 42; … |
+| 11 | UInt32 Array |  | [] |
+| 12 | UInt32 Array |  | [9608, 16, 11101, 4, 11102, 15, 11125, 7855, 162…; [9644, 16, 11111, 4, 11112, 15, 11120, 7855, 162…; [9682, 16, 11114, 4, 11118, 7855, 16230, 14776, …; [9683, 16, 11113, 4, 11119, 7855, 16231, 14776, …; [9684, 16, 11109, 4, 11110, 15, 11121, 7855, 162…; [9685, 16, 11107, 4, 11108, 15, 11122, 7855, 162…; [9717, 16, 11103, 4, 11104, 15, 11124, 7855, 162…; [9720, 16, 11105, 4, 11106, 15, 11123, 7855, 162…; … |
+| 13 | UInt32 | 0 | 0 |
+| 14 | UInt32 | 0 | 0 |
+| 15 | UInt32 Array |  | [] |
+| 16 | UInt32 Array |  | [] |
+| 17 | UInt32 Array |  | [] |
+| 18 | UInt32 Array |  | [11101, 11102, 74383, 140934, 71539, 28091, 4097…; [11109, 11110, 74379, 140930, 71535, 20761, 2808…; [11111, 11112, 74378, 140929, 71534, 20760, 2808…; [11114, 74376, 140927, 71532, 28084, 40972, 9702…; [9720, 11103, 11104, 74382, 140933, 71538, 20764…; [9720, 11105, 11106, 11123, 16235, 18795, 20763,…; [9720, 11107, 11108, 74380, 140931, 71536, 40976…; [9720, 11113, 74377, 140928, 71533, 40973, 20759…; … |
+| 19 | Boolean |  | false |
+| 20 | UInt32 | 0 | 0 |
+| 21 | Boolean |  | false |
+
+### CAI_TARGET_ANALYSIS_TARGET
+
+- Instances: 721
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1325 | 1265; 1271; 1280; 1286; 1292; 1316; 1325 |
+| 1 | UInt32 | 1670 … 1533744 | 1903; 2024; 2533; 2537; 2539; 5804; 711587; 99378; … |
+| 2 | Int32 | 3 … 1000 | 1000; 500; 65; 84; 87; 89; 95; 98; … |
+| 3 | Float32 | 1.050051212310791 … 52.137733459472656 | 12.404918; 13.887377; 14.809191; 18.5204; 20.9384; 36.828518; 48.589443; 5.2496505; … |
+| 4 | Float32 | 0.06176771968603134 … 6.4948649406433105 | 0.37497503; 0.81690454; 0.88606554; 1.0577993; 1.0894352; 1.2316706; 2.1663835; 3.4706745; … |
+| 5 | UInt32 | 0 … 2 | 0; 2 |
+
+### CAI_BDI_GOAL_REGIONAL_MOTIVATED_DEVELOPMENT_BASE
+
+- Instances: 720
+- Child nodes: DATE
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 317 … 1263 | 1082; 1094; 1101; 1251; 675; 765; 809; 843; … |
+| 1 | UInt32 Array |  | [1414419, 1544317]; [1446245, 1544317]; [1511683]; [1511696]; [1511697]; [1544309]; [1544318]; []; … |
+
+### CAI_BDI_GOAL_REGIONAL_MOTIVATED_DEVELOPMENT_SPECIFIED
+
+- Instances: 720
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 0 … 4 | 0; 1; 2; 3; 4 |
+
+### CAI_FACTION_TRADE_ANALYSIS_STATUS[]
+
+- Instances: 713
+- Child nodes: CAI_FACTION_TRADE_STATUS
+
+### CAI_FACTION_TRADE_STATUS
+
+- Instances: 713
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1379 | 1265; 1268; 1271; 1274; 1277; 1280; 1283; 1286; … |
+| 1 | UInt32 | 1265 … 1427 | 1271; 1280; 1292; 1298; 1304; 1325; 1334; 1343; … |
+| 2 | UInt32 | 105 … 13202 | 3581; 4165; 4535; 5463; 5810; 6133; 6631; 6964; … |
+| 3 | UInt32 | 7904 … 9083 | 7904; 7931; 8015; 8072; 8076; 8134; 8151; 8152; … |
+| 4 | Boolean |  | false; true |
+| 5 | Boolean |  | false; true |
+
+### CAI_HIGH_LEVEL_PATHFINDER_REGION_OWNERSHIP[]
+
+- Instances: 681
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1427 | 1265; 1268; 1271; 1274; 1277; 1280; 1286; 1391; … |
+| 1 | UInt32 | 1265 … 1427 | 1265; 1268; 1271; 1274; 1277; 1280; 1286; 1391; … |
+
+### CAI_BDI_RECRUITMENT_BASE
+
+- Instances: 679
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 0 … 7456 | 0; 7384; 7389; 7390; 7434; 7440; 7443; 7456; … |
+| 1 | UInt32 | 0 … 3594 | 0; 1919; 1925; 2200; 2216; 2249; 2355; 3059; … |
+| 2 | UInt32 | 0 … 1537543 | 0; 1133825; 524123; 524157; 567448; 688436; 707925; 834168; … |
+| 3 | Int32 | 0 | 0 |
+| 4 | Boolean |  | false; true |
+| 5 | UInt32 | 0 … 1539798 | 0; 1516290; 1516316; 1517891; 1527207; 1527208; 1527224; 1527227; … |
+| 6 | UInt32 | 0 | 0 |
+
+### NAVAL_RECORD_KEY
+
+- Instances: 665
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UTF-16 |  | 6th_rate_spanish; brig_of_war; brig_spanish; galleon; galleon_fluyt_pirate; galleon_race_built; galleon_war; indiaman; … |
+
+### NAVAL_UNIT
+
+- Instances: 665
+- Child nodes: NAVAL_RECORD_KEY, SHIP_DAMAGE_INFO, UNIT
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 0 | 0 |
+| 1 | Boolean |  | false |
+| 2 | Boolean |  | false; true |
+
+### SHIP_DAMAGE_INFO
+
+- Instances: 665
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Float32 | 0 … 0.9998365044593811 | 0; 0.0015852153; 0.004331311; 0.009479703; 0.010046667; 0.036897626; 0.041754633; 0.11596313; … |
+| 1 | Float32 | 0 | 0 |
+| 2 | Float32 | 0 … 0.9952200055122375 | 0; 0.000014283508; 0.000055296372; 0.00034918752; 0.0013809473; 0.0020888106; 0.009914774; 0.047206465; … |
+| 3 | Float32 | 0 | 0 |
+| 4 | Float32 | 0 | 0 |
+| 5 | Int32 | 0 … 50 | 14; 15; 20; 29; 30; 39; 4; 40; … |
+| 6 | Int32 | 1 … 50 | 14; 15; 20; 30; 39; 40; 49; 50; … |
+| 7 | Int32 | 0 … 122 | 116; 117; 119; 120; 122; 24; 50; 52; … |
+| 8 | Int32 | 0 … 50 | 14; 15; 20; 21; 30; 4; 40; 8; … |
+| 9 | Int32 | 2 … 50 | 14; 15; 17; 20; 30; 40; 50; 8; … |
+| 10 | Int32 | 3 … 122 | 116; 120; 122; 24; 50; 52; 64; 84; … |
+| 11 | UInt32 | 0 … 60 | 0; 10; 11; 12; 26; 42; 60; 8; … |
+| 12 | Boolean |  | false |
+
+### CAI_BDI_GOAL_REGION_DEFENCE_BORDER
+
+- Instances: 661
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 317 … 1263 | 1082; 1094; 1101; 1251; 675; 765; 809; 843; … |
+| 1 | UInt32 | 56 … 1255 | 1025; 203; 769; 807; 811; 843; 988; 998; … |
+| 2 | UInt32 | 12608 … 1536024 | 12608; 12610; 12612; 12614; 12616; 12647; 12649; 12651; … |
+
+### CAI_NAVAL_UNIT_DAMAGE_ANALYSIS
+
+- Instances: 641
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 5357 … 1539743 | 5357; 5358; 5392; 5393; 5394; 5397; 5398; 5446; … |
+| 1 | Float32 | 0 … 1 | 0; 1 |
+| 2 | Float32 | 0.0025398731231689453 … 1 | 0.38394856; 0.5162189; 0.5589578; 0.91590655; 0.9200046; 0.94592094; 0.9865463; 1; … |
+
+### CAI_BUILD_FORT_IN_REGION_ANALYSIS_POIS[]
+
+- Instances: 631
+- Child nodes: CAI_BUILD_FORT_IN_REGION_ANALYSIS_POI
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 318 … 1264 | 1083; 1102; 1103; 1104; 1105; 1106; 1253; 810; … |
+
+### CAI_BASIC_FACTION_RELATIVE_ANALYSIS_RELATIVEINFORMATION[]
+
+- Instances: 616
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1433 | 1268; 1271; 1274; 1277; 1280; 1283; 1286; 1289; … |
+| 1 | Float32 | 0 … 15 | 0; 0.5294118; 0.7647059; 1.1764706; 1.2941177; 1.4705882; 2.235294; 2.5882354; … |
+| 2 | Float32 | 0 … 13 | 0; 0.14285715; 0.2857143; 0.42857143; 0.5714286; 0.71428573; 1; 1.4285715; … |
+| 3 | Float32 | 0 … 32 | 0; 0.33146068; 0.6011236; 0.6123595; 0.66853935; 1.3876405; 1.511236; 1.5898876; … |
+| 4 | Float32 | 0 … 20.603845596313477 | 0; 0.27058062; 0.6965284; 0.7355413; 0.8036808; 1.4885356; 1.6445112; 1.9820145; … |
+| 5 | Float32 | 0.05000000074505806 … 20 | 0.05; 0.23440614; 0.61168724; 0.8827767; 0.91722083; 1.3712122; 1.6341002; 2.1472864; … |
+| 6 | Float32 | 0.05000000074505806 … 20 | 0.05; 0.10651314; 0.26397493; 0.33884826; 0.49453443; 0.77088773; 1.0362232; 2.5539796; … |
+| 7 | Float32 | 0 … 71.47435760498047 | 0.06973059; 0.5318542; 0.6416006; 0.7504754; 0.7655309; 0.9564184; 1.3217115; 1.3595879; … |
+| 8 | Float32 | 0 … 23.64820671081543 | 0.013946118; 0.43686315; 0.6784988; 0.6937329; 0.73998713; 1.3336953; 1.4747695; 1.6415247; … |
+| 9 | Float32 | -449 … 76.66666412353516 | -0; -1; -1.1666666; 12.833333; 2.3333333; 5.3333335; 8.833333; 9.833333; … |
+| 10 | Float32 | -78 … 39.5 | -2.3333333; -3.6666667; -5.6666665; -8; 0; 0.33333334; 0.6666667; 1.3333334; … |
+| 11 | Float32 | -1471.3333740234375 … 121.5 | -1.6842105; -10.157895; -26.894737; -30; -37.105263; 0; 2.0526316; 3.1578948; … |
+| 12 | Float32 | -116.80522155761719 … 411.1421813964844 | -0.7845484; -13.588864; -17.427458; -19.720167; -4.2754807; 0; 1.2357635; 3.4660864; … |
+| 13 | Float32 | -600.2051391601563 … 829.87060546875 | -0.11816467; -0.55311126; 16.711502; 23.361408; 26.666248; 3.8139534; 5.243243; 9.834066; … |
+| 14 | Float32 | -444.3318786621094 … 184.8779754638672 | -0.11062225; -3.7798767; -3.921087; -5.06517; 0.2134716; 0.8690389; 1.1011634; 1.7396611; … |
+| 15 | Float32 | 0 … 14 | 0; 0.2857143; 0.5714286; 0.71428573; 1; 1.1428572; 1.2857143; 1.4285715; … |
+| 16 | Float32 | 0 … 8 | 0; 0.2; 0.4; 0.8; 1; 1.4; 4; 5; … |
+| 17 | Float32 | 0 … 36.5 | 0; 0.55; 0.95; 0.975; 1.025; 1.225; 1.25; 1.625; … |
+| 18 | Float32 | 0 … 2924.5 | 0; 0.40845922; 0.48848337; 1.2326283; 1.5830816; 1.7567371; 2.1752267; 2.7222357; … |
+| 19 | Float32 | 0 … 3373.220458984375 | 0; 0.31471965; 0.35127848; 0.919569; 1.1560296; 1.1818887; 1.790672; 3.8177342; … |
+| 20 | Float32 | 0 … 16521.826171875 | 0; 0.37780926; 0.41487172; 1.2634125; 1.5727855; 1.8863038; 2.3413458; 2.7290702; … |
+| 21 | Float32 | 0 … 6250 | 0; 0.083333336; 0.19444445; 0.22777778; 0.44444445; 0.5555556; 0.6111111; 1.3888888; … |
+| 22 | Float32 | 0 … 7269 | 0; 0.021455225; 0.10237873; 0.18260261; 0.19309701; 0.46455225; 0.50116605; 1.6951959; … |
+| 23 | Float32 | 0 … 14 | 0; 0.22222222; 0.3888889; 0.5555556; 0.6666667; 0.8333333; 0.8888889; 1.1111112; … |
+| 24 | Float32 | 0 … 1 | 0; 1 |
+| 25 | Float32 | 0 | 0 |
+| 26 | UInt32 Array |  | [7378]; [7401]; [7405]; [7406]; [7407]; [7415]; [7454]; []; … |
+
+### CAI_BDI_RESOURCE_MOBILE_SUITABILITY
+
+- Instances: 601
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 0 … 1544286 | 1147461; 1147463; 1197947; 277768; 277772; 283350; 405726; 863758; … |
+| 1 | UInt32 | 0 … 1540521 | 0; 1464292; 1526271; 1526503; 1526505; 1526507; 1526511; 1526519; … |
+| 2 | UInt32 | 0 … 1541249 | 1147669; 124835; 1306900; 229261; 250206; 277438; 333223; 640351; … |
+| 3 | UInt32 | 0 | 0 |
+| 4 | UInt32 | 0 … 1 | 0; 1 |
+
+### CAI_DEFEND_REGION_ANALYSIS_POI_MOBILES[]
+
+- Instances: 600
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 5430 … 1531003 | 1147669; 161057; 161059; 229261; 250206; 277438; 333223; 640351; … |
+
+### CAI_BDI_MISSION_BASE
+
+- Instances: 599
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 Array |  | [1147462]; [1147464]; [1197948]; [277769]; [277773]; [283351]; [405727]; [863759]; … |
+| 1 | UInt32 | 0 … 1540522 | 0; 1464293; 1526272; 1526504; 1526506; 1526508; 1526512; 1526520; … |
+
+### FAMILY::MONARCHY_INFO_CHARACTER
+
+- Instances: 560
+- Child nodes: CAMPAIGN_LOCALISATION, PORTRAIT_DETAILS
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Boolean |  | false; true |
+| 1 | Boolean |  | false; true |
+| 2 | UInt8 | 0 … 4 | 0; 1; 2; 3; 4 |
+| 3 | Int32 | 0 … 2 | 0; 1; 2 |
+| 4 | Int32 | 0 … 89 | 10; 41; 56; 57; 64; 7; 8; 9; … |
+| 5 | Int32 | 1 … 15 | 1; 11; 12; 15; 2; 3; 4; 8; … |
+| 6 | Int32 | 0 … 52 | 0; 28; 30; 31; 39; 46; 48; 51; … |
+| 7 | Int32 | 0 … 53 | 0; 32; 33; 36; 46; 47; 49; 52; … |
+| 8 | Int32 | 0 … 54 | 0; 36; 42; 47; 48; 50; 53; 54; … |
+| 9 | Int32 | 0 … 55 | 0; 40; 46; 48; 49; 51; 54; 55; … |
+| 10 | UTF-16 |  | ; dutch; english; french; germans; iberian; levantine; polish; … |
+| 11 | UInt32 | 0 … 1012495192 | 0; 1010035568; 1010040224; 247045056; 248837696; 747673152; 834575336; 834578952; … |
+| 12 | UInt32 | 0 … 1012495192 | 0; 1010035568; 1010040224; 247045056; 248837696; 747673152; 834575336; 834578952; … |
+
+### NAME_ALLOCATION_DETAILS
+
+- Instances: 560
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 0 … 2186 | 0; 11; 172; 243; 3; 4; 81; 92; … |
+| 1 | UInt32 | 1853762 … 4294775739 | 1463716964; 1702983498; 2032991544; 269036797; 2694172512; 3205937196; 4253316818; 596203073; … |
+| 2 | UInt16 Array |  | [1, 2, 0]; [10, 67, 52, 63, 7, 47, 41, 48, 58, 31, 1, 79, 8…; [2, 0, 1]; [26, 60, 136, 203, 212, 139, 121, 163, 199, 190,…; [4, 7, 0, 9, 2, 3, 1, 6, 5, 10, 8]; [46, 26, 79, 22, 69, 57, 42, 11, 48, 12, 20, 0, …; [67, 72, 137, 127, 169, 171, 0, 35, 136, 102, 14…; []; … |
+
+### CAI_TARGET_ANALYSIS_SLOTS[]
+
+- Instances: 551
+- Child nodes: CAI_TARGET_ANALYSIS_TARGET
+
+### CDIR_DESIRE_UNIT_BALANCER_MOBILE_COUNT[]
+
+- Instances: 530
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 5361 … 1526052 | 103136; 1227498; 1372910; 1494773; 193256; 361191; 5862; 5864; … |
+| 1 | Float32 | 0 | 0 |
+
+### CDIR_DESIRE_UNIT_UPGRADER_MOBILE_COUNT[]
+
+- Instances: 530
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 5361 … 1526052 | 103136; 1227498; 1372910; 1494773; 193256; 361191; 5862; 5864; … |
+| 1 | Float32 | 0 | 0 |
+
+### CAI_FACTION_SEA_GRID_ANALYSIS_VALUES[]
+
+- Instances: 529
+- Child nodes: CAI_SEA_GRID_CELL_VALUE
+
+### CAI_SEA_GRID_CELL_VALUE
+
+- Instances: 529
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 7512 … 7614 | 7562; 7563; 7564; 7571; 7572; 7580; 7581; 7582; … |
+| 1 | Int32 | 0 … 1232298 | 0; 110489; 113316; 45885; 79197; 798785; 872357; 931752; … |
+| 2 | Int32 | 0 … 1273804 | 0; 109760; 155620; 182460; 228320; 555845; 837440; 916680; … |
+| 3 | Int32 | 0 … 1909240 | 0; 109600; 231360; 257480; 339400; 402640; 53040; 628640; … |
+| 4 | Int32 | 0 … 2112680 | 0; 138920; 157800; 200400; 212200; 219000; 258400; 351920; … |
+| 5 | Int32 | 0 … 636 | 0; 160; 176; 200; 280; 320; 40; 480; … |
+| 6 | Int32 | 0 … 42 | 0; 2; 20; 22; 26; 4; 42; 6; … |
+| 7 | Int32 | 0 … 20 | 0; 10; 20; 3; 6 |
+| 8 | Int32 | 0 … 15 | 0; 12; 15; 3; 6; 9 |
+| 9 | Int32 | 0 … 16571 | 10134; 10318; 11079; 1416; 3158; 3577; 4657; 6082; … |
+| 10 | Int32 | 0 … 30508 | 0; 12086; 13143; 2332; 3266; 4854; 9544; 9701; … |
+| 11 | Int32 | 0 … 73016 | 10925; 13065; 24304; 32124; 42950; 46451; 48360; 7820; … |
+| 12 | Int32 | 0 … 58731 | 0; 1308; 1788; 2877; 3351; 4212; 6685; 685; … |
+| 13 | Int32 | 0 … 5651 | 0; 1290; 243; 460; 493; 520; 756; 771; … |
+| 14 | Int32 | 0 … 6347 | 0; 1004; 1068; 1163; 1564; 189; 2312; 322; … |
+| 15 | Int32 | 0 … 12814 | 0; 1142; 1201; 181; 378; 387; 625; 826; … |
+| 16 | Int32 | 0 … 4346 | 0; 110; 1170; 1564; 267; 343; 410; 571; … |
+
+### CAI_AREA_OF_INTEREST_ANALYSIS_RESOURCE_MOBILE
+
+- Instances: 517
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 5361 … 1544050 | 5391; 5416; 5430; 5449; 5468; 5479; 6670; 6672; … |
+
+### CAI_RESOURCE_MOBILE
+
+- Instances: 517
+- Child nodes: CAI_RESOURCE_MOBILE_SIEGE_INFORMATION
+- 2 distinct signatures; most common:
+  - (433×) UInt32, UInt32, UInt32, UInt32 Array, UInt32 Array, Boolean, Boolean, Boolean, UInt32, UInt32, UInt32 Array, UInt32, UInt32, UInt32 Array, UInt32
+  - (84×) UInt32, UInt32, UInt32, UInt32 Array, UInt32 Array, Boolean, Boolean, Boolean, UInt32, UInt32, UInt32 Array, UInt32, UInt32, UInt32 Array, UInt32 Array, UInt32
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 5355 … 1541248 | 1318443; 5360; 5374; 5390; 5415; 5429; 5448; 5467; … |
+| 1 | UInt32 | 0 … 3590 | 0; 1804; 3080; 3145; 3191; 3273; 3329; 3564; … |
+| 2 | UInt32 | 0 … 3469 | 0; 1630; 1652; 1911; 1934; 1968; 2531; 3305; … |
+| 3 | UInt32 Array |  | [1318443, 1318177, 1356565, 1411311, 1427884, 14…; [5360, 1116350]; [5374]; [5390, 426819]; [5415]; [5429]; [5448]; [5467]; … |
+| 4 | UInt32 Array |  | [1318442, 1335689, 1318176, 188688, 1411309, 141…; [358092, 404806, 616012, 616019, 5639, 404810, 6…; [5362, 5363, 188707, 188708, 188709, 277444, 277…; [5392, 5393, 5394, 5397, 5398, 249159, 306299, 3…; [5481, 5482, 5483, 111246, 111249, 126100, 5446,…; [5667, 92966, 92967]; [5785, 5787, 175216, 332954, 283389, 358365, 669…; []; … |
+| 5 | Boolean |  | false; true |
+| 6 | Boolean |  | false |
+| 7 | Boolean |  | false |
+| 8 | UInt32 | 0 … 1063 | 0; 1040; 1063; 920 |
+| 9 | UInt32 | 0 … 2544969544 | 0; 474735440; 474736208; 474742608; 478274400; 828128368; 828128648; 828129768; … |
+| 10 | UInt32 Array |  | [1081680]; [1158287]; [1182792]; [680415]; [] |
+| 11 | UInt32 | 0 … 543881 | 0; 400310; 415319; 5391; 543881 |
+| 12 | UInt32 | 0 | 0 |
+| 13 | UInt32 Array |  | [3943]; [4135]; [] |
+| 14 | UInt32 / UInt32 Array | 0 | 0; [7520]; [7536]; [7564]; [7574]; [7626]; [7630]; [7634]; … |
+| 15 | UInt32 | 0 … 53 | 0; 29; 38; 41; 43; 46; 50; 51; … |
+
+### CAI_RESOURCE_MOBILE_MILITARY_STRENGTH
+
+- Instances: 517
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 5361 … 1544050 | 5361; 5371; 5375; 5391; 5416; 6823; 6832; 6834; … |
+| 1 | Float32 | 4 … 2508639.75 | 1086859.4; 1175016.1; 12; 13; 1384937.9; 14; 312513.44; 8; … |
+| 2 | UInt32 Array |  | [] |
+
+### CAI_RESOURCE_MOBILE_SIEGE_INFORMATION
+
+- Instances: 517
+
+### CAI_WORLD_RESOURCE_MOBILES[]
+
+- Instances: 517
+- Child nodes: CAI_BDI_COMPONENT_BLOCK_OWNS, CAI_BDI_COMPONENT_PROPERTY_SET, CAI_RESOURCE_MOBILE, CAI_SITUATED, OWNED_DIRECT
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 5361 … 1544050 | 5361; 5371; 5375; 5391; 5416; 5430; 5449; 5468; … |
+| 1 | Float32 | 100 | 100 |
+| 2 | Float32 | 100 | 100 |
+| 3 | Float32 | 0 | 0 |
+| 4 | Float32 | 100 | 100 |
+| 5 | UInt32 | 1 | 1 |
+| 6 | Boolean |  | false |
+| 7 | UInt32 Array |  | [] |
+| 8 | UInt32 Array |  | [7968, 0, 10076, 0, 10077, 0, 10079, 1, 10085, 1…; [7976, 0, 10282, 0, 10247, 1, 10270, 1, 10271, 1…; [7979, 0, 10236, 1, 10283, 0, 10237, 1, 10238, 1…; [7989, 0, 9187, 0, 10420, 0, 12569, 0, 8035, 1, …; [8008, 0, 9190, 0, 9152, 1, 9156, 2, 9163, 2, 91…; [8088, 0, 9191, 0, 9149, 3, 9150, 3, 9155, 2, 91…; [8103, 0, 9193, 0, 9149, 4, 9150, 4, 9151, 3, 91…; [8115, 0, 9224, 0, 9160, 4, 9161, 5, 9191, 3, 91…; … |
+| 9 | UInt32 | 0 | 0 |
+| 10 | UInt32 | 25 … 253 | 104; 134; 135; 137; 43; 79; 82; 87; … |
+| 11 | UInt32 Array |  | [] |
+| 12 | UInt32 Array |  | [7968, 10, 10076, 7855, 10077, 16, 10079, 10085,…; [7976, 10, 16, 10282, 10247, 10270, 10271, 10272…; [7979, 10, 10236, 16, 10283, 10237, 10238, 10239…; [7989, 10, 16, 9187, 10420, 7863, 7897, 12569, 8…; [8008, 10, 16, 9190, 9152, 9156, 9163, 9164, 916…; [8088, 10, 16, 9191, 9149, 9150, 9155, 9156, 915…; [8103, 10, 16, 9193, 9149, 9150, 9151, 9153, 915…; [8115, 10, 16, 9224, 9160, 9161, 9191, 9193, 920…; … |
+| 13 | UInt32 | 0 … 4 | 0; 1; 2; 3; 4 |
+| 14 | UInt32 | 0 | 0 |
+| 15 | UInt32 Array |  | [1307108]; [1445937, 1526520]; [1464293, 1494931]; [1526544]; [1527276]; [1527634]; [385683, 1527640]; []; … |
+| 16 | UInt32 Array |  | [] |
+| 17 | UInt32 Array |  | [] |
+| 18 | UInt32 Array |  | [7968, 12713, 14579, 81444, 12711, 1060658, 9946…; [7976, 12773, 14581, 14771, 73195, 12771, 114593…; [7979, 12774, 14582, 73196, 12771, 1145933, 1192…; [7989, 14458, 14586, 83419, 113610, 249730, 3068…; [8008, 12626, 14590, 15824, 74697, 74698, 74700,…; [8088, 12785, 15586, 17428, 21632, 28696, 40929,…; [8103, 12782, 15588, 17432, 21634, 74499, 74508,…; [8115, 15590, 17436, 21636, 28696, 40936, 41405,…; … |
+| 19 | Boolean |  | false |
+| 20 | UInt32 | 0 | 0 |
+| 21 | Boolean |  | false |
+
+### CAI_REGION_PATH_TRANSITION_ANALYSIS_EXTERNAL[]
+
+- Instances: 510
+- Child nodes: CAI_RPTA_EXTERNAL_TRANSITION
+
+### CAI_RPTA_EXTERNAL_TRANSITION
+
+- Instances: 510
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 11 … 20 | 11; 13; 20 |
+| 1 | UInt32 | 317 … 1201 | 533; 556; 603; 642; 656; 833; 865; 887; … |
+| 2 | Int32 | -547094528 … 659091456 | 177443120; 189115835; 196785650; 205307809; 207850823; 209030964; 212900684; 269397362; … |
+| 3 | Int32 | 122517683 … 493052024 | 269348189; 304502307; 306482311; 308289722; 308369088; 310660288; 315390342; 316184821; … |
+| 4 | UInt32 | 533 … 1172 | 533; 588; 656; 710; 715; 760; 865; 898; … |
+| 5 | Int32 | -621878528 … 658635776 | 156984080; 175859168; 179532992; 212794144; 255448416; 329457536; 367958208; 378435264; … |
+| 6 | Int32 | 96189024 … 480657792 | 249683552; 285550688; 308077120; 319841920; 333157632; 415238528; 458128096; 461689728; … |
+| 7 | Boolean |  | true |
+| 8 | Int32 | -581521472 … 647965440 | 210821152; 218837584; 269940192; 304428832; 304453632; 305418688; 310702144; 310986080; … |
+| 9 | Int32 | 112978424 … 490628416 | 275391328; 279592640; 280898624; 303809824; 305489664; 306470784; 306612000; 428249504; … |
+
+### CAI_MILITARY_RANK_RESOURCE_MOBILE_ANALYSIS
+
+- Instances: 504
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 5361 … 1541249 | 110191; 124835; 161046; 5361; 5371; 5375; 5391; 5416; … |
+| 1 | Boolean |  | false; true |
+| 2 | Boolean |  | false; true |
+| 3 | Boolean |  | false; true |
+| 4 | Boolean |  | false; true |
+
+### CAI_BDIM_WAIT_HERE
+
+- Instances: 494
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Int32 | -793509888 … 919520512 | -10223616; -13369344; -2883584; -29097984; -47802248; -49545216; -55836672; 812431; … |
+| 1 | Int32 | -202167488 … 494129184 | 384532640; 389283840; 392953856; 393478144; 397733120; 398196736; 401342464; 411828224; … |
+| 2 | UInt32 | 0 … 1537252 | 1147669; 124835; 1306900; 229261; 250206; 277438; 333223; 640351; … |
+| 3 | Int32 | 1 | 1 |
+| 4 | UInt32 | 0 … 72 | 11; 16; 34; 47; 50; 58; 69; 71; … |
+| 5 | UInt32 | 0 … 3 | 0; 3 |
+| 6 | Int32 | 0 … 656835520 | 0; 34632789; 39659222; 656835520 |
+| 7 | Int32 | 0 … 354391699 | 0; 165857040; 354214646; 354391699 |
+| 8 | Boolean |  | false; true |
+| 9 | UInt32 | 0 | 0 |
+
+### CAMPAIGN_BONUS_VALUES
+
+- Instances: 488
+- Child nodes: CAMPAIGN_BONUS_VALUE_BLOCK
+
+### CAMPAIGN_BONUS_VALUE_BLOCK
+
+- Instances: 488
+
+### CAI_DEFEND_REGION_ANALYSIS_POI_GARRISONABLES[]
+
+- Instances: 474
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1443 … 3572 | 1905; 1911; 1926; 2198; 2202; 2206; 2533; 2537; … |
+
+### CAI_BASIC_BORDER_ANALYSIS_BASE_RGBL[]
+
+- Instances: 470
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 7349 … 1535957 | 7362; 7378; 7380; 7381; 7384; 7396; 7408; 7418; … |
+| 1 | Float32 | 1 … 2814.529052734375 | 1; 1338.4917; 284.43866; 307.13303; 381.52945; 49.187157; 502.56152; 68.10131; … |
+
+### CAI_REGION_PATH_TRANSITION_ANALYSIS_INTERNAL[]
+
+- Instances: 464
+- Child nodes: CAI_RPTA_INTERNAL_TRANSITION
+
+### CAI_RPTA_INTERNAL_TRANSITION
+
+- Instances: 464
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 11 … 20 | 11; 13; 20 |
+| 1 | UInt32 | 494 … 1176 | 500; 556; 603; 656; 887; 898; 951; 961; … |
+| 2 | Int32 | -582140352 … 647965440 | 175329776; 262086608; 264529168; 268545536; 268591296; 270429888; 273531552; 274332960; … |
+| 3 | Int32 | 114256736 … 511047552 | 236771728; 237980640; 239219856; 241021200; 242789056; 244106304; 245506864; 314156096; … |
+| 4 | Int32 | -621878528 … 658635776 | 156984080; 212794144; 244760704; 298690048; 359556672; 378435264; 565035648; 589290368; … |
+| 5 | Int32 | 96189024 … 480657792 | 157181536; 171387056; 284163008; 296173472; 308077120; 333157632; 458128096; 480657792; … |
+| 6 | Boolean |  | false; true |
+| 7 | Int32 | -613305664 … 647061760 | 210821152; 218837584; 269940192; 278367296; 333023776; 381826848; 382194944; 579275840; … |
+| 8 | Int32 | 112978424 … 490628416 | 186342784; 271533760; 273138528; 275391328; 306470784; 306612000; 421916032; 474890464; … |
+
+### CAI_REGION_BOUNDARY
+
+- Instances: 446
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 56 … 1255 | 128; 150; 172; 203; 206; 234; 56; 64; … |
+| 1 | UInt32 | 64 … 1263 | 150; 172; 64; 915; 920; 922; 926; 930; … |
+| 2 | Float32 | 1 … 1458.838134765625 | 11.804638; 136.59372; 146.3792; 152.4994; 216.48965; 250.14609; 29.670063; 8.561715; … |
+| 3 | UInt32 | 0 … 1 | 0; 1 |
+
+### CAI_WORLD_REGION_BOUNDARIES[]
+
+- Instances: 446
+- Child nodes: CAI_BDI_COMPONENT_BLOCK_OWNS, CAI_BDI_COMPONENT_PROPERTY_SET, CAI_REGION_BOUNDARY
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 6902 … 7347 | 6902; 6903; 6904; 6905; 6906; 6907; 6908; 6909; … |
+| 1 | Float32 | 100 | 100 |
+| 2 | Float32 | 100 | 100 |
+| 3 | Float32 | 0 | 0 |
+| 4 | Float32 | 100 | 100 |
+| 5 | UInt32 | 1 | 1 |
+| 6 | Boolean |  | false |
+| 7 | UInt32 Array |  | [] |
+| 8 | UInt32 Array |  | [] |
+| 9 | UInt32 | 0 | 0 |
+| 10 | UInt32 | 0 | 0 |
+| 11 | UInt32 Array |  | [] |
+| 12 | UInt32 Array |  | [] |
+| 13 | UInt32 | 0 | 0 |
+| 14 | UInt32 | 0 | 0 |
+| 15 | UInt32 Array |  | [] |
+| 16 | UInt32 Array |  | [] |
+| 17 | UInt32 Array |  | [] |
+| 18 | UInt32 Array |  | [] |
+| 19 | Boolean |  | false |
+| 20 | UInt32 | 0 | 0 |
+| 21 | Boolean |  | false |
+
+### CAMPAIGN_CALENDAR
+
+- Instances: 445
+- Child nodes: DATE
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 4 | 4 |
+| 1 | UInt32 | 0 … 3 | 0; 1; 2; 3 |
+| 2 | UInt32 | 1 … 72 | 63; 64; 65; 68; 69; 70; 71; 72; … |
+
+### CAI_BDI_FAILURE_INFO
+
+- Instances: 444
+- Child nodes: CAI_BDI_COMPONENT_PROPERTY_SET, CAMPAIGN_CALENDAR
+
+### CAI_BDI_POOL_FAILED[]
+
+- Instances: 444
+- Child nodes: CAI_BDI_FAILURE_INFO
+
+### ECONOMICS_DATA
+
+- Instances: 444
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Int32 Array |  | [0, 0, 0, 0, 0]; [0, 0, 0, 0, 1500]; [0, 0, 0, 100, 1500]; [0, 0, 0, 1213, 0]; [0, 0, 0, 1411, 0]; [0, 0, 0, 2364, 0]; [0, 0, 0, 700, 0]; [0, 5000, 0, 961, 0]; … |
+| 1 | Int32 Array |  | [5224, 0, 7814]; [5338, 0, 7265]; [5346, 0, 6620]; [5492, 0, 7461]; [5564, 0, 8049]; [5644, 0, 8140]; [5652, 0, 7550]; [5654, 0, 7714]; … |
+| 2 | Int32 Array |  | [0, 0, 3975, 3000]; [0, 0, 3992, 3000]; [0, 0, 4009, 3000]; [0, 0, 4010, 3000]; [0, 0, 4024, 3000]; [0, 0, 4027, 3000]; [0, 751, 3968, 3000]; [0, 751, 3981, 3000]; … |
+| 3 | Int32 Array |  | [0] |
+| 4 | Int32 Array |  | [0, 0, 0, 0, 0]; [0, 0, 0, 5000, 0]; [0, 0, 4872, 390, 0]; [1000, 0, 3972, 0, 0]; [10000, 0, 0, 0, 0]; [6520, 0, 149, 0, 0]; [7130, 0, 4560, 0, 0]; [800, 0, 5908, 0, 0]; … |
+| 5 | Int32 Array |  | [0, 10177, 4574, 388, 0, 0, 0]; [0, 10650, 4574, 371, 0, 0, 0]; [0, 10650, 4574, 380, 0, 0, 0]; [0, 10682, 4574, 320, 0, 0, 0]; [0, 10685, 4574, 311, 0, 0, 0]; [0, 7326, 4412, 426, 0, 0, 0]; [0, 8238, 4412, 424, 0, 0, 0]; [0, 8911, 4574, 405, 0, 0, 0]; … |
+
+### history[]
+
+- Instances: 444
+- Child nodes: ECONOMICS_DATA
+
+### CAI_POSITION_AND_STRENGTH_ANALYSIS_REGION
+
+- Instances: 443
+- Child nodes: CAI_POSITION_AND_STRENGTH_ANALYSIS_REGION_BLOCK
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 56 … 1263 | 1082; 1101; 1251; 172; 765; 809; 843; 913; … |
+
+### CAI_VISIBILITY_ANALYSIS_REGION
+
+- Instances: 443
+- 2 distinct signatures; most common:
+  - (421×) UInt32
+  - (22×) UInt32, UInt32 Array
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 56 … 1263 | 1082; 1101; 1251; 172; 765; 809; 843; 913; … |
+| 1 | UInt32 Array |  | [1095972]; [1293077]; [1398757, 543412]; [234909, 6249, 329620, 338957, 362007, 500602, 5…; [5468, 1273874, 1399656]; [5470, 1511452, 103949, 1542784, 1398754]; [6592, 423239, 1357239, 1412079, 1526782]; []; … |
+
+### CHARACTER_POST
+
+- Instances: 434
+- Child nodes: GOVERNORSHIP
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Int32 | 741629848 … 1017367816 | 741639096; 741639192; 741639320; 741639576; 741639704; 741639768; 741639800; 741639864; … |
+| 1 | UTF-16 |  | accident; army; faction_leader; finance; governor_europe; head_of_government; justice; navy; … |
+| 2 | UInt32 | 0 … 2509223672 | 563652408; 563661688; 563664008; 563666328; 563668648; 747664528; 747665656; 826674744; … |
+| 3 | Boolean |  | false; true |
+| 4 | Int32 | 580820344 … 580837864 | 580820344; 580820824; 580821064; 580824904; 580825144; 580825864; 580827544; 580827784; … |
+
+### POSTS_ARRAY[]
+
+- Instances: 434
+- Child nodes: CHARACTER_POST
+
+### CAI_REGION_TARGET_PATHS_ANALYSIS
+
+- Instances: 429
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 317 … 1263 | 1037; 1065; 1078; 1084; 1094; 1097; 1132; 1222; … |
+| 1 | UInt32 Array |  | [10661, 10665, 10667, 10669]; [10702, 10703, 10704, 10705, 1116532]; [10728, 10729, 10730, 10731, 1116533]; [10748, 10749, 10750, 10751, 1081508]; [10768, 10769, 10770, 10771, 1081511]; [10804, 10805, 10806, 10807]; [10838, 10839, 10840, 10841, 1081512]; [10883, 10884, 10885, 10886, 1081513]; … |
+
+### CAI_INVASION_STRENGTH_ANALYSIS_REGION
+
+- Instances: 428
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 317 … 1263 | 1037; 1065; 1078; 1084; 1094; 1097; 1132; 1222; … |
+| 1 | Int32 | 40 … 5639 | 103; 137; 182; 537; 642; 67; 96; 984; … |
+| 2 | Int32 | 0 … 5639 | 0; 137; 182; 537; 642; 67; 96; 984; … |
+
+### CAI_UNIT_AVAILABILITY_ANALYSIS_REGION_SLOT
+
+- Instances: 418
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1447 … 3594 | 2202; 2204; 2206; 2208; 2210; 2212; 2214; 2216; … |
+
+### BOUNDARIES
+
+- Instances: 411
+
+### OBSTACLE
+
+- Instances: 411
+- Child nodes: BOUNDARIES, MANAGED_OBSTACLE_BOUNDARY
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 0 … 5 | 0; 1; 5 |
+| 1 | UInt32 | 0 … 1 | 0; 1 |
+| 2 | UInt32 | 0 … 1 | 0; 1 |
+| 3 | UInt32 | 0 … 5 | 0; 1; 5 |
+| 4 | UInt32 | 7 … 9 | 7; 9 |
+| 5 | Int32 | -796917760 … 901775360 | -583008256; -612368384; 838860800; 855638016; 859832320; 887095296; 891289600; 901775360; … |
+| 6 | Int32 | -220200960 … 486539264 | -39845888; -41943040; -60817408; -62914560; -69206016; -83886080; 314572800; 379584512; … |
+| 7 | Int32 | -778043392 … 935329792 | -566231040; 861929472; 864026624; 887095296; 895483904; 912261120; 922746880; 935329792; … |
+| 8 | Int32 | -184549376 … 511705088 | -14680064; -29360128; -31457280; -44040192; -56623104; -58720256; -6291456; -67108864; … |
+| 9 | UInt16 | 0 … 303 | 0; 103; 11; 24; 26; 31; 89; 9; … |
+| 10 | UInt16 | 0 … 197 | 0; 11; 12; 151; 182; 21; 22; 8; … |
+| 11 | UInt16 | 0 … 310 | 10; 108; 21; 25; 33; 38; 44; 9; … |
+| 12 | UInt16 | 0 … 205 | 10; 11; 17; 23; 24; 31; 35; 6; … |
+| 13 | UInt16 | 0 … 306 | 0; 1; 13; 16; 2; 27; 30; 36; … |
+| 14 | UInt16 | 0 … 200 | 0; 15; 152; 27; 3; 4; 5; 9; … |
+| 15 | UInt16 | 1 … 309 | 16; 19; 3; 30; 33; 39; 4; 5; … |
+| 16 | UInt16 | 1 … 203 | 1; 12; 155; 18; 30; 6; 7; 8; … |
+
+### POPULATION CLASSES[]
+
+- Instances: 411
+- Child nodes: POPULATION_CLASS
+
+### POPULATION_CLASS
+
+- Instances: 411
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UTF-16 |  | lower; middle; upper |
+| 1 | Int32 Array |  | [-2, -4, -1, 0, 6, 0, 5, 0, -5, 0, 0]; [-2, -4, -6, 0, 0, 0, 1, -1, 0, 0, 12]; [-2, -4, 0, 0, 0, 0, 3, 0, 0, 0, 0]; [0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0]; [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; [2, -4, -1, 0, 4, 0, 4, 0, -7, 0, 0]; [2, -4, -6, 0, 0, 0, 4, -1, 0, 0, 12]; [2, -4, 0, 0, 0, 0, 1, 0, 0, 0, 0]; … |
+| 2 | Int32 Array |  | [0, 0, 0, 0, 0, 0]; [3, 2, 2, 0, 0, 0]; [5, 0, 3, 0, 12, 0]; [5, 0, 4, 0, 20, 0]; [5, 1, 5, 0, 0, 0]; [5, 1, 6, 0, 14, 0]; [5, 2, 4, 5, 0, 0]; [5, 4, 4, 0, 20, 0]; … |
+| 3 | Int32 | 0 … 25 | 0; 10; 11; 13; 18; 3; 7; 8; … |
+| 4 | Int32 | -45 … 0 | -10; -12; -13; -27; -4; -6; -7; 0; … |
+| 5 | Int32 | 0 … 40 | 0; 11; 16; 20; 26; 29; 33; 7; … |
+| 6 | Int32 | 0 … 100 | 0; 100; 54; 66; 80; 84; 88; 94; … |
+| 7 | Int32 | 0 … 1 | 0; 1 |
+| 8 | UInt32 | 0 … 1 | 0; 1 |
+| 9 | UInt32 | 0 … 7 | 0; 6; 7 |
+| 10 | UInt32 | 1 … 10 | 1; 10; 2; 7 |
+| 11 | Int32 | 0 | 0 |
+| 12 | Int32 | -22 … 0 | -1; -10; -12; -22; -4; -7; -8; 0; … |
+
+### CHARACTER_OBSTACLE[]
+
+- Instances: 396
+- Child nodes: OBSTACLE
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 245714536 … 2509220192 | 1015024944; 1015074824; 1015131664; 2509212072; 744145808; 837415240; 837560288; 841061384; … |
+
+### CAI_MILITARY_RANK_THEATRE_ANALYSIS
+
+- Instances: 392
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 27 … 48 | 27; 33; 34; 35; 36; 42; 48 |
+| 1 | Boolean |  | false; true |
+| 2 | Boolean |  | false; true |
+
+### ARMY_ARRAY[]
+
+- Instances: 384
+- Child nodes: ARMY, NAVY
+
+### MILITARY_FORCE
+
+- Instances: 384
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 474685776 … 2544969544 | 474735440; 474737232; 474738000; 474738256; 474740048; 474741584; 828128368; 828130888; … |
+| 1 | UInt32 | 245714536 … 2509220192 | 245714536; 245719176; 245720336; 245728456; 563672128; 563681408; 747666784; 826678128; … |
+| 2 | UInt32 Array |  | [] |
+
+### UNITS_ARRAY
+
+- Instances: 384
+
+### AgentAncillaries[]
+
+- Instances: 337
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UTF-16 |  | Ancillary_Army_Drillmaster; Ancillary_Barber; Ancillary_Garden_Hermit; Ancillary_Great_Composer; Ancillary_Mistress_Gorgeous; Ancillary_Navy_Purser; Ancillary_Research_Lunatic_Jack; Ancilllary_Pet_Parrot_Ordinary; … |
+
+### CAI_MILITARY_REGION_GROUP_REGION_ANALYSIS_INFO_FRIENDS[]
+
+- Instances: 334
+- Child nodes: CAI_RESOURCE_MOBILE_MILITARY_AFFECT
+
+### CAI_RELIGION_REGION_ANALYSIS
+
+- Instances: 326
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 317 … 1251 | 1251; 317; 491; 494; 500; 523; 675; 771; … |
+| 1 | Float32 | -10 … 1 | -10; -9.65; -9.7; 0; 0.05; 0.1; 0.2; 0.8; … |
+
+### CAI_BDI_UNIT_RECRUITMENT_REINFORCE
+
+- Instances: 325
+
+### CAI_BASIC_BORDER_ANALYSIS_BASE_FBL[]
+
+- Instances: 322
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1433 | 1265; 1268; 1277; 1286; 1292; 1319; 1334; 1427; … |
+| 1 | Float32 | 1 … 1539.347900390625 | 1; 110.40683; 21.83112; 284.43866; 303.90247; 381.52945; 49.187157; 68.10131; … |
+
+### CAI_BASIC_REGION_GROUP_REGION_ANALYSIS_FACTIONAFFECTS[]
+
+- Instances: 305
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1433 | 1265; 1268; 1277; 1298; 1358; 1385; 1430; 1433; … |
+| 1 | UInt32 | 0 … 4 | 0; 1; 2; 3; 4 |
+
+### ARMY
+
+- Instances: 300
+- Child nodes: MILITARY_FORCE, REBEL_DATA, UNITS_ARRAY
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 Array |  | [] |
+| 1 | UInt32 Array |  | [] |
+| 2 | Int32 | -1853481264 … 1154143616 | 1154031232; 474735440; 474737232; 474738000; 474738256; 474740048; 474740304; 474741584; … |
+| 3 | UInt32 | 0 … 1022405488 | 0; 1020333160; 1021492000; 1022033560; 1022039944; 1022400560; 1022405488; 842818552; … |
+| 4 | Boolean |  | false |
+| 5 | UInt32 | 0 … 828149368 | 0; 828128648; 828133968; 828142648; 828149368 |
+| 6 | Boolean |  | false |
+
+### CAI_BDI_UNIT_RECRUITMENT_NEW
+
+- Instances: 300
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Int32 | -767854464 … 602569664 | -40536948; -521908672; -605574144; 0; 109053184; 602569664; 68513968; 68942704; … |
+| 1 | Int32 | 0 … 425984000 | 0; 140134608; 237727072; 271543872; 294488416; 305990720; 339004640; 62942104; … |
+
+### CAI_CONSTRUCTION_BALANCE_ANALYSIS
+
+- Instances: 285
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Float32 Array |  | [0.06349206, 0.46031746, 0.06349206, 0.06349206,…; [0.12903225, 0.41935486, 0.12903225, 0.12903225,…; [0.2, 0.2, 0.2, 0.2, 0.2]; [0.3, 0.4, 0.1, 0.1, 0.1]; [0.3333333, 0.3333333, 0.111111104, 0.111111104,…; [0.41666666, 0.33333334, 0.083333336, 0.08333333…; [0.43478262, 0.30434784, 0.08695652, 0.08695652,…; [0.45454544, 0.27272728, 0.090909086, 0.09090908…; … |
+
+### CAI_FACTION_LEARNT_PARAMETERS_INFO
+
+- Instances: 272
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 0 … 1433 | 0; 1268; 1277; 1286; 1319; 1358; 1385; 1430; … |
+| 1 | Int32 | 0 … 301 | 0; 1; 174; 22; 4; 44; 5; 6; … |
+| 2 | Float32 | 0.7315194606781006 … 1.3708245754241943 | 0.75476176; 0.76130354; 0.7838237; 0.7946105; 0.79475397; 0.7954745; 0.8; 0.84533846; … |
+| 3 | Int32 | 0 … 118 | 0; 10; 15; 3; 34; 38; 7; 89; … |
+| 4 | Float32 | 0.6634920835494995 … 38.74702072143555 | 0.6634921; 0.7995862; 0.8; 0.85073453; 0.88493395; 1.0824645; 1.5966697; 38.74702; … |
+| 5 | Int32 | 0 … 10 | 0; 10; 5 |
+| 6 | Float32 | 0.7999999523162842 … 1.25 | 0.79999995; 0.8; 1.25 |
+| 7 | Int32 | 0 … 10 | 0; 10; 5 |
+| 8 | Float32 | 0.7999999523162842 … 1.25 | 0.79999995; 0.8; 1.25 |
+
+### CAI_FACTION_LEARNT_PARAMETERS_INFO_ARRAY[]
+
+- Instances: 272
+- Child nodes: CAI_FACTION_LEARNT_PARAMETERS_INFO
+
+### CAI_BDI_WAR
+
+- Instances: 259
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1433 | 1277; 1298; 1316; 1355; 1358; 1427; 1430; 1433; … |
+| 1 | UInt32 Array |  | [1081525]; [1428131, 1469449, 1531929]; [1430707, 1513876, 1526620]; [1452823]; [1477913]; [1483625]; [1511827]; []; … |
+| 2 | UInt32 | 0 … 1544307 | 0; 124740; 1544288; 1544295; 1544305; 1544307; 174398; 707479; … |
+| 3 | UInt32 Array |  | [1081576]; [1428135, 1469453, 1531933]; [1430731, 1513906, 1526627]; [1452830]; [1483632]; [1511835]; [1526298]; []; … |
+
+### CAI_BORDER_PATROL_ANALYSIS_AREA_SPECIFIC
+
+- Instances: 258
+- Child nodes: CAI_BORDER_PATROL_ANALYSIS_AREA_SPECIFIC_PATROL_POINTS
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 56 … 1263 | 128; 150; 172; 203; 206; 234; 56; 64; … |
+| 1 | UInt32 | 0 … 25 | 0; 1; 2; 3; 4; 5; 6; 7; … |
+| 2 | Int32 | -791620864 … 972553856 | -101366792; -104462744; -116044080; -123697904; -126566488; 348954240; 367606176; 589823616; … |
+| 3 | Int32 | -199592208 … 547790208 | -128062320; 208937888; 210819600; 211663968; 216589008; 244094672; 50285840; 515218720; … |
+
+### CAI_BORDER_PATROL_ANALYSIS_AREA_SPECIFIC_PATROL_POINTS
+
+- Instances: 258
+
+### CAI_BORDER_PATROL_ANALYSIS_SPECIFIC_AREAS[]
+
+- Instances: 258
+- Child nodes: CAI_BORDER_PATROL_ANALYSIS_AREA_SPECIFIC
+
+### CAI_HISTORY_EVENT_HTML_CLASSES[]
+
+- Instances: 231
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | ASCII |  | faction_all; faction_austria; faction_britain; faction_france; round_1; type_invasion_requested; type_new_manager_for_faction; type_round; … |
+
+### CHARACTER_DATA
+
+- Instances: 222
+
+### REGION_RECRUITMENT_ITEM_ARRAY
+
+- Instances: 216
+
+### REGION_RECRUITMENT_MANAGER
+
+- Instances: 216
+- Child nodes: REGION_RECRUITMENT_ITEM_ARRAY
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Boolean |  | false |
+| 1 | Int32 | 580419800 … 1258114952 | 580536488; 580536592; 580537424; 580537632; 580538152; 580538256; 580538880; 580538984; … |
+
+### CAI_INVADE_REGION_ANALYSIS
+
+- Instances: 212
+- Child nodes: CAI_INVADE_REGION_ANALYSIS_POIS
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 56 … 1232 | 203; 562; 769; 809; 823; 829; 843; 913; … |
+| 1 | UInt32 | 0 … 1427 | 0; 1265; 1268; 1271; 1274; 1277; 1280; 1283; … |
+
+### CAI_INVADE_REGION_ANALYSIS_POIS
+
+- Instances: 212
+
+### CAI_MILITARY_PRODUCTION_CAPACITY_ANALYSIS_BASE
+
+- Instances: 209
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Int32 | 0 … 11510 | 1212; 2727; 5319; 648; 702; 808; 870; 909; … |
+| 1 | Int32 | 0 … 1273 | 0; 376; 380; 496; 60; 70; 736; 780; … |
+
+### CAI_BORDER_PATROL_ANALYSIS
+
+- Instances: 205
+- Child nodes: CAI_BORDER_PATROL_ANALYSIS_SPECIFIC_AREAS
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 54 … 1263 | 126; 128; 139; 142; 54; 56; 61; 64; … |
+
+### CAI_BORDER_PATROL_ANALYSIS_SPECIFIC_AREAS
+
+- Instances: 205
+
+### CAI_DEFEND_REGION_COAST_ANALYSIS_POIS[]
+
+- Instances: 205
+- Child nodes: CAI_DEFEND_REGION_COAST_ANALYSIS_POI
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 317 … 1263 | 1082; 1217; 1222; 1232; 1251; 765; 809; 843; … |
+
+### CAI_REGION
+
+- Instances: 205
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 Array |  | [27, 33, 34, 35, 36, 42, 48]; [27, 34, 35, 36, 48]; [27, 35, 36]; [33, 42]; [36]; [42]; [48]; []; … |
+| 1 | UInt32 Array |  | [127]; [129, 130, 131, 132, 133, 134, 135, 136, 137, 13…; [140, 141]; [143, 144]; [55]; [57, 58, 59, 60]; [62, 63]; [65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76,…; … |
+| 2 | UInt32 | 0 … 3590 | 0; 1441; 1464; 1482; 1495; 1506; 1530; 1543; … |
+| 3 | UInt32 Array |  | [1443, 1445, 1447, 1449, 1451, 1453, 1455, 1457]; [1466, 1468, 1470, 1472, 1474, 1476, 1478]; [1484, 1486, 1488]; [1497, 1499]; [1508, 1510, 1512, 1514, 1516, 1518, 1520, 1522,…; [1532, 1534, 1536]; [1545, 1547, 1549, 1551, 1553]; []; … |
+| 4 | Float32 | -754.948486328125 … 857.4995727539063 | -119.87378; -125.05281; -59.461052; -682.6781; 0; 332.7887; 468.0979; 562.49963; … |
+| 5 | Float32 | -190.34596252441406 … 501.14886474609375 | -122.129745; 0; 125.6915; 214.01428; 390.23282; 47.956314; 501.14886; 87.00185; … |
+| 6 | UInt32 Array |  | [1589]; [1926]; [2003]; [2016]; [2128]; [2225]; [2310]; []; … |
+| 7 | UInt32 Array |  | [6902, 6903, 6904, 6905, 6906, 6907, 6908]; [6902, 6909, 6910, 6911, 6912, 6951]; [6907, 6919, 6920, 6921, 6922, 6923, 6924, 6925,…; [6909, 6928, 6929, 6930, 6931, 6932, 6933]; [6912, 6913, 6914, 6915, 6916, 6917, 6918]; [6933, 6934, 6935, 6936, 6937, 6938, 6939, 6940,…; [6946, 6947, 6948, 6949, 6950, 6951]; []; … |
+| 8 | Boolean |  | false; true |
+| 9 | UInt32 Array |  | [110191, 6125, 6225, 172017, 1217907, 440271, 13…; [1302582, 1342056, 1445328]; [1475729]; [154375, 623995, 884250]; [321596, 799329, 1511792]; [543881, 1158287, 400310, 680415, 1440340]; [5479, 100340, 5807, 103136, 296956, 738638, 351…; []; … |
+| 10 | UTF-16 |  | atlantic_ocean_se; atlantic_ocean_sw; indian_ocean; kalahari; pacific_ocean; south_africa; southern_ocean; unexplorable; … |
+| 11 | UInt32 | 0 … 1022472952 | 0; 1019389784; 1019395400; 1021503128; 1021507808; 1022470144; 246964944; 246970560; … |
+| 12 | UInt32 | 0 … 99910058 | 0; 7470; 7473; 7481; 7482; 7485; 7486; 7508; … |
+| 13 | UInt32 Array |  | [1265, 1268]; [1265]; [1268]; [1271, 1283, 1286, 1289]; [1277, 1286]; [1277]; [1286, 1289]; []; … |
+
+### CAI_WORLD_REGIONS[]
+
+- Instances: 205
+- Child nodes: CAI_BDI_COMPONENT_BLOCK_OWNS, CAI_BDI_COMPONENT_PROPERTY_SET, CAI_REGION, OWNED_INDIRECT
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 54 … 1263 | 126; 128; 139; 142; 54; 56; 61; 64; … |
+| 1 | Float32 | 100 | 100 |
+| 2 | Float32 | 100 | 100 |
+| 3 | Float32 | 0 | 0 |
+| 4 | Float32 | 100 | 100 |
+| 5 | UInt32 | 1 | 1 |
+| 6 | Boolean |  | false |
+| 7 | UInt32 Array |  | [] |
+| 8 | UInt32 Array |  | [12818, 0, 15856, 0, 21821, 0, 31188, 0, 34924, …; [12895, 0, 15935, 0, 21845, 0, 31318, 0, 35065, …; [12897, 0, 15938, 0, 21846, 0, 31321, 0, 35068, …; [12899, 0, 15939, 0, 21847, 0, 31322, 0, 35069, …; [8192, 0, 12263, 0, 16150, 0, 20134, 0, 31415, 0…; [8519, 0, 11238, 0, 15936, 0, 20839, 0, 31319, 0…; [8599, 0, 12816, 0, 15855, 0, 20289, 0, 31187, 0…; []; … |
+| 9 | UInt32 | 0 | 0 |
+| 10 | UInt32 | 0 … 80 | 0; 26; 27; 28; 32; 35; 41; 48; … |
+| 11 | UInt32 Array |  | [] |
+| 12 | UInt32 Array |  | [12818, 7863, 15856, 14784, 21821, 19739, 31188,…; [12895, 7863, 15935, 14784, 21845, 19739, 31318,…; [12897, 7863, 15938, 14784, 21846, 19739, 31321,…; [12899, 7863, 15939, 14784, 21847, 19739, 31322,…; [8192, 14, 12263, 7863, 16150, 14784, 20134, 197…; [8519, 14, 11238, 7863, 15936, 14784, 20839, 197…; [8599, 14, 12816, 7863, 15855, 14784, 20289, 197…; []; … |
+| 13 | UInt32 | 0 | 0 |
+| 14 | UInt32 | 0 | 0 |
+| 15 | UInt32 Array |  | [] |
+| 16 | UInt32 Array |  | [] |
+| 17 | UInt32 Array |  | [] |
+| 18 | UInt32 Array |  | [7348]; [7349, 12264, 21930, 22801, 36922, 43611, 49169,…; [7350]; [7351, 12896, 109204, 113594, 360936, 516755, 12…; [7352]; [7353, 12817, 13007, 13946, 16211, 16958, 18766,…; [7354]; [7355, 12819, 13946, 16958, 22057, 38901, 40005,…; … |
+| 19 | Boolean |  | false |
+| 20 | UInt32 | 0 | 0 |
+| 21 | Boolean |  | false |
+
+### CAI_BASIC_BORDER_ANALYSIS_BASE
+
+- Instances: 204
+- Child nodes: CAI_BASIC_BORDER_ANALYSIS_BASE_FBL, CAI_BASIC_BORDER_ANALYSIS_BASE_RGBL
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Float32 | 0 | 0 |
+| 1 | Float32 | 0 | 0 |
+
+### CAI_BASIC_BORDER_ANALYSIS_BASE_FBL
+
+- Instances: 204
+
+### CAI_BASIC_BORDER_ANALYSIS_BASE_RGBL
+
+- Instances: 204
+
+### ACTIVE_OUTFIELD_REGIONS[]
+
+- Instances: 199
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 56 … 1251 | 1022; 1025; 1080; 1097; 1101; 1232; 1251; 998; … |
+| 1 | UInt32 Array |  | [1081528, 1081576]; [1081530, 1081576]; [1081532]; [1081535, 1081576]; [1081537]; [1081539]; [1081576]; [14522, 1081541]; … |
+
+### UNIT_REINFORCEMENT
+
+- Instances: 192
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Int32 | 0 … 1046675760 | 666424800; 666425048; 666428272; 666428768; 666429016; 666432240; 836770600; 836773328; … |
+| 1 | UInt32 | 1 … 225 | 13; 18; 3; 5; 59; 66; 67; 8; … |
+| 2 | Int32 | 0 … 2 | 0; 1; 2 |
+| 3 | UInt32 | 1 … 812 | 28; 36; 4; 61; 715; 800; 812; 97; … |
+
+### UNIT_REINFORCEMENTS_ARRAY[]
+
+- Instances: 192
+- Child nodes: UNIT_REINFORCEMENT
+
+### CAI_PLACE_RESERVES_IN_REGION_ANALYSIS
+
+- Instances: 190
+- Child nodes: CAI_PLACE_RESERVES_IN_REGION_ANALYSIS_POIS
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 317 … 1263 | 1082; 1094; 1101; 1251; 765; 809; 843; 913; … |
+| 1 | UInt32 | 1265 … 1430 | 1265; 1268; 1271; 1274; 1277; 1280; 1283; 1286; … |
+
+### CAI_PLACE_RESERVES_IN_REGION_ANALYSIS_POIS
+
+- Instances: 190
+
+### ENTRIES[]
+
+- Instances: 190
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UTF-16 |  | Ancillary_Barber; Ancillary_Government_Crimper; Ancillary_Great_Composer; Ancillary_Merchant_Corn_Factor; Ancillary_Military_Riding_Master; Ancillary_Mistress_Noble; Ancillary_Pet_Tiger; Ancillary_Research_Lunatic_Jack; … |
+
+### CAI_REGION_OCCUPANCY_ANALYSIS
+
+- Instances: 189
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 56 … 1263 | 1082; 203; 765; 769; 807; 809; 811; 843; … |
+| 1 | UInt32 Array |  | [1116340]; [1302582, 1342056, 1445328]; [161046]; [161059, 250206, 277438, 640351, 1147669, 119776…; [333223, 229261]; [426817, 1264728]; [5416, 124835, 161057]; [734823, 1480288]; … |
+| 2 | Boolean |  | false |
+
+### CAI_CONSTRUCTION_BALANCE_ANALYSIS_REGION
+
+- Instances: 186
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 317 … 1263 | 1082; 1094; 1101; 1251; 765; 809; 843; 913; … |
+
+### CAI_DEFENCE_AND_INVASION_FORCE_STRENGTH_ANALYSIS_REGION
+
+- Instances: 186
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 317 … 1263 | 1082; 1094; 1101; 1251; 765; 809; 843; 913; … |
+| 1 | Int32 | 80 … 11941 | 1163; 1367; 1616; 195; 285; 780; 80; 91; … |
+| 2 | Int32 | 40 … 5348 | 186; 195; 274; 285; 40; 780; 80; 91; … |
+| 3 | Int32 | 80 … 11941 | 1163; 1367; 1616; 285; 321; 780; 80; 91; … |
+
+### CAI_DEFEND_REGION_ANALYSIS
+
+- Instances: 186
+- Child nodes: CAI_DEFEND_REGION_ANALYSIS_POIS
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 317 … 1263 | 1082; 1094; 1101; 1251; 765; 809; 843; 913; … |
+| 1 | UInt32 | 1265 … 1430 | 1265; 1268; 1271; 1274; 1277; 1280; 1283; 1286; … |
+
+### CAI_DEFEND_REGION_ANALYSIS_POIS
+
+- Instances: 186
+
+### CAI_REGION_DEFENCE_STRENGTH_ANALYSIS
+
+- Instances: 186
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 317 … 1263 | 1082; 1094; 1101; 1251; 765; 809; 843; 913; … |
+| 1 | Int32 | 80 … 6093 | 1004; 195; 285; 484; 761; 780; 80; 91; … |
+| 2 | Int32 | 80 … 5348 | 1004; 195; 285; 371; 752; 780; 80; 91; … |
+
+### CAI_BUILDING_AVAILABILITY_ANALYSIS_INFO[]
+
+- Instances: 184
+- Child nodes: CAI_BUILDING_AVAILABILITY_ANALYSIS_INFO
+
+### CAI_BUILDING_AVAILABILITY_ANALYSIS_INFO_UNIT_AVAILABILIITY
+
+- Instances: 184
+
+### CAI_BUILDING_OPTIONS_ANALYSIS_INFO_OPTION
+
+- Instances: 184
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 576559576 … 2539328776 | 1079163032; 1141514632; 1141514680; 2517484352; 2517484400; 2517484784; 2517485072; 576559576; … |
+| 1 | Float32 Array |  | [-200, 5445, 0, 200, 299.99994]; [1000, 0, 0, 50, 0]; [1000, 400, 1000, 0, 0]; [106100, 48225.027, 0, 700, 0]; [1200, 0, -1000, 0, 0]; [2000, 0, 0, 100, 0]; [3000, 300, 0, 0, 149.99997]; [4050, -500, 0, 0, 299.99994]; … |
+
+### CAI_BUILDING_OPTIONS_ANALYSIS_INFO_OPTIONS[]
+
+- Instances: 184
+- Child nodes: CAI_BUILDING_OPTIONS_ANALYSIS_INFO_OPTION
+
+### CAI_RELIGION_MISSIONARY_ANALYSIS_REGIONS_ENEMY[]
+
+- Instances: 184
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 317 … 1146 | 588; 642; 710; 715; 756; 865; 926; 953; … |
+
+### CAI_TRADE_ROUTE
+
+- Instances: 180
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Boolean |  | false |
+| 1 | UInt32 Array |  | [1620, 1720, 1716, 1863]; [1620, 1863]; [3044, 3161]; [3059, 1907]; [3138, 1907]; [3550, 1925]; [3594, 3179]; []; … |
+| 2 | UInt32 Array |  | [246484]; [523333]; [] |
+| 3 | UInt32 Array |  | [] |
+| 4 | UInt32 Array |  | [3949, 3803, 3793, 3788, 3799, 3789, 3790, 3804,…; [4011, 4014, 4040]; [4037, 4032, 4031, 4030, 4029, 3666, 3672, 3678,…; [4037, 4032, 4036, 3674, 3676, 3678, 3677]; [4075, 3995, 3874, 3873, 3872, 3871, 3870, 3856,…; [4093, 4081, 4082, 4083, 4087, 4089, 4084, 4114,…; [4237, 3954, 4136, 4138, 3941, 4224, 4217, 3790,…; []; … |
+| 5 | UInt32 | 0 … 11 | 0; 1; 2; 3; 4; 5; 6; 7; … |
+
+### CAI_WORLD_TRADE_ROUTES[]
+
+- Instances: 180
+- Child nodes: CAI_BDI_COMPONENT_BLOCK_OWNS, CAI_BDI_COMPONENT_PROPERTY_SET, CAI_TRADE_ROUTE, CAI_TRADE_ROUTE_DOMESTIC, CAI_TRADE_ROUTE_INTERNATIONAL, OWNED_DIRECT
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 168 … 169 | 168; 169 |
+| 1 | UInt32 | 1544051 … 1544230 | 1544051; 1544052; 1544053; 1544054; 1544055; 1544056; 1544057; 1544058; … |
+| 2 | Float32 | 100 | 100 |
+| 3 | Float32 | 100 | 100 |
+| 4 | Float32 | 0 | 0 |
+| 5 | Float32 | 100 | 100 |
+| 6 | UInt32 | 1 | 1 |
+| 7 | Boolean |  | false |
+| 8 | UInt32 Array |  | [] |
+| 9 | UInt32 Array |  | [] |
+| 10 | UInt32 | 0 | 0 |
+| 11 | UInt32 | 0 | 0 |
+| 12 | UInt32 Array |  | [] |
+| 13 | UInt32 Array |  | [] |
+| 14 | UInt32 | 0 | 0 |
+| 15 | UInt32 | 0 | 0 |
+| 16 | UInt32 Array |  | [] |
+| 17 | UInt32 Array |  | [] |
+| 18 | UInt32 Array |  | [] |
+| 19 | UInt32 Array |  | [] |
+| 20 | Boolean |  | false |
+| 21 | UInt32 | 0 | 0 |
+| 22 | Boolean |  | false |
+
+### CAMPAIGN_VICTORY_CONDITIONS
+
+- Instances: 169
+- Child nodes: REGION_KEYS
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Boolean |  | false |
+| 1 | UInt32 | 0 … 1750 | 0; 1750 |
+| 2 | UInt32 | 0 … 25 | 0; 20; 25 |
+| 3 | Boolean |  | false |
+| 4 | UInt32 | 0 … 4 | 0; 4 |
+| 5 | Boolean |  | false |
+| 6 | Boolean |  | false |
+
+### REGION_KEYS
+
+- Instances: 169
+
+### CAI_OWNED_REGIONS_ANALYSIS_HISTORY
+
+- Instances: 168
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 Array |  | [675, 771, 1037, 1065, 1249, 688, 777, 817, 1198…; [675, 771, 1037, 1065, 1249, 688, 777, 817, 692]; [675, 771, 1037, 1065, 1249, 688, 777, 817]; [765, 809, 1082, 1101, 1251, 843, 1094]; [765, 809, 1082, 1101, 1251, 843]; [765, 809, 1082, 1101, 1251, 913]; [765, 809, 1082, 1101, 1251]; [765, 809, 843, 1082, 1101, 1251]; … |
+| 1 | UInt32 Array |  | [1094]; [1190]; [1198]; [692]; [817]; [843]; [913]; []; … |
+| 2 | UInt32 Array |  | [1164]; [1190]; [1198]; [746]; [750]; [843]; [913]; []; … |
+| 3 | UInt32 | 0 … 72 | 0; 1; 3; 43; 52; 57; 63; 8; … |
+
+### CAI_OWNED_REGIONS_ANALYSIS_HISTORY_BLOCK[]
+
+- Instances: 168
+- Child nodes: CAI_OWNED_REGIONS_ANALYSIS_HISTORY
+
+### NAVAL_UNIT_DATA
+
+- Instances: 166
+- 2 distinct signatures; most common:
+  - (109×) Int32, UInt8, Int32, UTF-16, UInt32
+  - (57×) 
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Int32 | 1 | 1 |
+| 1 | UInt8 | 0 | 0 |
+| 2 | Int32 | 6 … 11 | 10; 11; 6; 7; 8; 9 |
+| 3 | UTF-16 |  |  |
+| 4 | UInt32 | 0 … 2509194672 | 0; 1015062064; 1015082944; 2509065912; 2509194672; 748425048; 748427368; 748429688; … |
+
+### CAI_MILITARY_PRODUCTION_CAPACITY_ANALYSIS_REGION
+
+- Instances: 164
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 317 … 1261 | 1082; 1094; 1101; 1251; 765; 809; 843; 913; … |
+
+### CAI_TARGET_MISSION_LINKER
+
+- Instances: 164
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 7917 … 81860 | 14837; 14861; 14870; 17770; 17794; 7917; 8041; 8050; … |
+| 1 | UInt32 Array |  | [6858]; [] |
+| 2 | UInt32 Array |  | [0]; [] |
+| 3 | UInt32 | 1 … 73 | 1; 10; 39; 42; 50; 52; 72; 73; … |
+
+### CAI_BDI_DESIRE_NAVY_DISTRIBUTION_GOALS[]
+
+- Instances: 162
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 8028 … 78840 | 14848; 14850; 14852; 17781; 17783; 8028; 8030; 8032; … |
+
+### CAI_BDI_GOAL_NAVY_DISTRIBUTION
+
+- Instances: 162
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1430 | 1265; 1268; 1271; 1274; 1280; 1283; 1286; 1289; … |
+| 1 | UInt32 | 33 … 35 | 33; 34; 35 |
+| 2 | UInt32 | 8029 … 78841 | 14849; 14851; 14853; 17782; 17784; 8029; 8031; 8033; … |
+
+### ARMY_DATA
+
+- Instances: 158
+- Child nodes: CHARACTER_DATA, LAND_UNIT_DATA
+- 2 distinct signatures; most common:
+  - (101×) Int32, Int32
+  - (57×) 
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Int32 | -1 … 1 | -1; 1 |
+| 1 | Int32 | -1785924584 … 1016906688 | 1015080624; 1015166464; 1015258104; 1016906688; 479812832; 744119128; 745668224; 841186664; … |
+
+### CAI_UNIT_BALANCE_ANALYSIS_MOBILE
+
+- Instances: 151
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 5361 … 1536257 | 110191; 1495116; 161046; 161668; 175017; 5361; 5371; 5391; … |
+| 1 | Float32 Array |  | [0.3, 1.05, 0.42499992, 0.79999995]; [0.39999998, 0.74999994, 0.54999995, 0.84999996]; [0.39999998, 1.2380953, 0.5500001, 1]; [0.4, 1.2, 0.5500001, 1]; [0.4, 1.2413793, 0.53000003, 1]; [0.4235294, 1.0588236, 0.43235302, 1.0000001]; [0.70000005, 0.38333324, 0.925, 1]; [1, 1.75, 0.7750001, 1.3]; … |
+| 2 | Float32 Array |  | [0, 0, 0, 0, 0, 0, 0.25, 0.5833334, 0, 0, 0.1666…; [0, 0, 0, 0, 0, 0, 0.5, 0.25, 0, 0, 0.25, 0, 0]; [0, 0, 0, 0, 0, 0, 0.5, 0.5, 0, 0, 0, 0, 0]; [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0]; [0.37931034, 0, 0.62068963, 0, 0, 0, 0, 0, 0, 0,…; [0.3809524, 0, 0.61904764, 0, 0, 0, 0, 0, 0, 0, …; [0.4, 0, 0.6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; [0.4117647, 0.05882353, 0.5294118, 0, 0, 0, 0, 0…; … |
+| 3 | Float32 Array |  | [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0]; [0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0]; [0, 0, 0, 0, 0, 0, 2, 1, 0, 0, 1, 0, 0]; [0, 0, 0, 0, 0, 0, 3, 7, 0, 0, 2, 0, 0]; [11, 0, 18, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; [7, 1, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; [8, 0, 12, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; [8, 0, 13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; … |
+| 4 | UInt32 | 4 | 4 |
+
+### CAI_TARGET_ANALYSIS_MOBILES[]
+
+- Instances: 150
+- Child nodes: CAI_TARGET_ANALYSIS_TARGET
+
+### CAI_UNIT_BALANCE_ANALYSIS_FACTION_ARMY_UNIT_BIAS[]
+
+- Instances: 148
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Float32 Array |  | [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; [0.19299999, 0.099999994, 0.607, 0.099999994, 0,…; [0.19299999, 0.16499999, 0.542, 0.099999994, 0, …; [0.2, 0.1, 0.6, 0.1, 0, 0, 0, 0, 0, 0, 0, 0, 0]; [0.2, 0.17500001, 0.525, 0.1, 0, 0, 0, 0, 0, 0, …; [0.21399999, 0.099999994, 0.6, 0.082499996, 0.00…; [0.82500005, 0.17500001, 0, 0, 0, 0, 0, 0, 0, 0,…; [0.83500004, 0.16499999, 0, 0, 0, 0, 0, 0, 0, 0,…; … |
+
+### CAI_UNIT_BALANCE_ANALYSIS_FACTION_NAVY_UNIT_BIAS[]
+
+- Instances: 148
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Float32 Array |  | [0, 0, 0, 0, 0, 0, 0.125, 0.74999994, 0, 0.025, …; [0, 0, 0, 0, 0, 0, 0.204, 0.69000006, 0, 0, 0.10…; [0, 0, 0, 0, 0, 0, 0.35000002, 0.22500001, 0, 0.…; [0, 0, 0, 0, 0, 0, 0.41400003, 0.20000002, 0, 0,…; [0, 0, 0, 0, 0, 0, 0.5, 0.3, 0, 0.1, 0.1, 0, 0]; [0, 0, 0, 0, 0, 0, 0.554, 0.27, 0, 0.07000001, 0…; [0, 0, 0, 0, 0, 0, 0.61249995, 0.22500001, 0, 0.…; [0, 0, 0, 0, 0, 0, 0.65900004, 0.20000002, 0, 0.…; … |
+
+### CAI_BASIC_BORDER_ANALYSIS_REGION
+
+- Instances: 146
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 56 … 1255 | 1025; 203; 317; 478; 553; 769; 807; 811; … |
+
+### CAI_BDI_GOAL_REGIONAL_DEVELOPMENT
+
+- Instances: 144
+- Child nodes: DATE
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 317 … 1263 | 1082; 1094; 1101; 1251; 675; 765; 809; 843; … |
+
+### CAI_BDI_GOAL_REGION_DEFENCE
+
+- Instances: 144
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 317 … 1263 | 1082; 1094; 1101; 1251; 675; 765; 809; 843; … |
+| 1 | UInt32 | 1265 … 1430 | 1265; 1268; 1271; 1274; 1277; 1280; 1283; 1286; … |
+| 2 | UInt32 | 12573 … 1536005 | 1081546; 12573; 12632; 12697; 12719; 12745; 15526; 210822; … |
+| 3 | UInt32 | 12575 … 1536007 | 1081548; 12575; 12634; 12699; 12721; 12747; 15528; 210824; … |
+| 4 | UInt32 | 12606 … 1536016 | 1081563; 12606; 12645; 12704; 12726; 12758; 15563; 210833; … |
+| 5 | UInt32 | 12617 … 1536025 | 1081568; 12617; 12652; 12707; 12733; 12767; 15580; 210844; … |
+| 6 | UInt32 | 12619 … 1536027 | 1081570; 12619; 12654; 12709; 12735; 12769; 15582; 210846; … |
+| 7 | UInt32 | 12627 … 1536029 | 1081572; 12627; 12659; 12714; 12740; 12775; 15593; 210848; … |
+| 8 | UInt32 | 12629 … 1536031 | 1081574; 12629; 12661; 12716; 12742; 12777; 15595; 210850; … |
+| 9 | Float32 Array |  | [0.27450976, 0.01715686, 0.23529409, 0, 0.470588…; [0.34728682, 0.054263566, 0.29767442, 0, 0.29767…; [0.42846215, 0.026778884, 0.2387146, 0, 0.183626…; [0.4745763, 0.029661018, 0.2881356, 0, 0.2033898…; [0.49122807, 0.030701755, 0.4210526, 0, 0.052631…; [0.69760203, 0.039240114, 0.18685767, 0, 0.07474…; [0.72878116, 0.049819026, 0.064419046, 0, 0.1561…; [0.7690099, 0.040668793, 0.025104394, 0, 0.16478…; … |
+
+### CAI_BDI_GOAL_REGION_DEFENCE_ARMY_GROUPING
+
+- Instances: 144
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 317 … 1263 | 1082; 1094; 1101; 1251; 675; 765; 809; 843; … |
+| 1 | UInt32 | 12620 … 1536028 | 1081571; 12620; 12655; 12710; 12736; 12770; 15583; 210847; … |
+
+### CAI_BDI_GOAL_REGION_DEFENCE_BORDERS
+
+- Instances: 144
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 317 … 1263 | 1082; 1094; 1101; 1251; 675; 765; 809; 843; … |
+| 1 | Float32 Array |  | [0.2, 0.2, 0.4, 0.2]; [0.20512821, 0.20512821, 0.102564104, 0.20512821…; [0.24242425, 0.24242425, 0.24242425, 0.030303031…; [0.30769232, 0.03846154, 0.30769232, 0.03846154,…; [0.33333334, 0.33333334, 0.33333334]; [0.47058824, 0.47058824, 0.05882353]; [0.5, 0.5]; [1]; … |
+| 2 | UInt32 Array |  | [1081564, 1081566]; [12607, 12609, 12611, 12613, 12615]; [12646, 12648, 12650]; [12705]; [12727, 12729, 12731]; [12759, 12761, 12763, 12765]; [15564, 15566, 15568, 15570, 15572, 15574, 15576…; [210834, 210836, 210838, 210840, 210842]; … |
+
+### CAI_BDI_GOAL_REGION_DEFENCE_FREE_BLOCKADED_PORTS
+
+- Instances: 144
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 317 … 1263 | 1082; 1094; 1101; 1251; 675; 765; 809; 843; … |
+| 1 | UInt32 | 12630 … 1536032 | 1081575; 12630; 12662; 12717; 12743; 12778; 15596; 210851; … |
+
+### CAI_BDI_GOAL_REGION_DEFENCE_RESERVES
+
+- Instances: 144
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 317 … 1263 | 1082; 1094; 1101; 1251; 675; 765; 809; 843; … |
+| 1 | UInt32 | 12618 … 1536026 | 1081569; 12618; 12653; 12708; 12734; 12768; 15581; 210845; … |
+
+### CAI_BDI_GOAL_REGION_DEFENCE_SLOTS
+
+- Instances: 144
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 317 … 1263 | 1082; 1094; 1101; 1251; 675; 765; 809; 843; … |
+| 1 | UInt32 Array |  | [1081549, 1081551, 1081553, 1081555, 1081557, 10…; [12576, 12578, 12580, 12582, 12584, 12586, 12588…; [12635, 12637, 12639, 12641, 12643]; [12700, 12702]; [12722, 12724]; [12748, 12750, 12752, 12754, 12756]; [15529, 15531, 15533, 15535, 15537, 15539, 15541…; [210825, 210827, 210829, 210831]; … |
+| 2 | Float32 Array |  | [0.059741788, 0.059741788, 0.059741788, 0.059741…; [0.065126054, 0.065126054, 0.05619748, 0.0561974…; [0.13608375, 0.13608375, 0.13608375, 0.13608375,…; [0.17425743, 0.17425743, 0.17425743, 0.22871286,…; [0.2056338, 0.1, 0.1, 0.28309858, 0.3112676]; [0.2306338, 0.30809858, 0.3362676, 0.125]; [0.43292683, 0.56707317]; [0.45, 0.55]; … |
+
+### CAI_BDI_GOAL_REGION_DEFENCE_UNHAPPINESS_MITIGATION
+
+- Instances: 144
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 317 … 1263 | 1082; 1094; 1101; 1251; 675; 765; 809; 843; … |
+| 1 | UInt32 | 12628 … 1536030 | 1081573; 12628; 12660; 12715; 12741; 12776; 15594; 210849; … |
+
+### CAI_AREA_OF_INTEREST_ANALYSIS_SETTLEMENT
+
+- Instances: 137
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1441 … 3590 | 1891; 1930; 2068; 2186; 2229; 2245; 2375; 2531; … |
+
+### CAI_BASIC_REGION_GROUP_REGION_ANALYSIS
+
+- Instances: 137
+- Child nodes: CAI_BASIC_REGION_GROUP_REGION_ANALYSIS_FACTIONAFFECTS
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 317 … 1263 | 1037; 1082; 1101; 1222; 1251; 765; 809; 843; … |
+| 1 | Boolean |  | false; true |
+| 2 | Boolean |  | false; true |
+| 3 | UInt32 Array |  | [7362]; [7430, 1237515]; [7430, 7447, 7450, 7457, 7455]; [7430, 7447, 7454, 7455]; [7430, 7449, 7448]; [7430, 7449, 7450]; [7430, 7451, 7455, 7454]; [7430]; … |
+
+### CAI_BASIC_REGION_GROUP_REGION_ANALYSIS_FACTIONAFFECTS
+
+- Instances: 137
+
+### CAI_MILITARY_REGION_GROUP_ANALYSIS
+
+- Instances: 137
+- Child nodes: CAI_MILITARY_REGION_GROUP_ANALYSIS_INFO
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 7378 … 1535957 | 1081500; 7396; 7408; 7409; 7434; 7439; 7444; 7457; … |
+| 1 | UInt32 | 1265 … 1427 | 1265; 1268; 1271; 1274; 1280; 1283; 1286; 1289; … |
+
+### CAI_REGION_BASE_VALUE
+
+- Instances: 137
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 317 … 1263 | 1037; 1082; 1101; 1222; 1251; 765; 809; 843; … |
+| 1 | Int32 Array |  | [0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 838662]; [0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 245200]; [0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 282341]; [0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 282341]; [0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 169173]; [0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 533296]; [0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 245200]; [0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 454530]; … |
+
+### CAI_SETTLEMENT
+
+- Instances: 137
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 Array |  | [1435, 1436, 1437, 1438, 1439, 1440]; [1458, 1459, 1460, 1461, 1462, 1463]; [1479, 1480, 1481]; [1489, 1490, 1491, 1492, 1493, 1494]; [1500, 1501, 1502, 1503, 1504, 1505]; [1527, 1528, 1529]; [1537, 1538, 1539, 1540, 1541, 1542]; [1554, 1555, 1556, 1557, 1558, 1559]; … |
+| 1 | UInt32 | 0 … 1430 | 0; 1277; 1310; 1319; 1322; 1343; 1355; 1427; … |
+| 2 | UInt32 | 246895952 … 1022053624 | 1020331336; 1020331792; 1021478320; 1021487440; 1022040856; 1022046328; 246904616; 842826304; … |
+
+### CAI_SETTLEMENT_BASE_VALUE
+
+- Instances: 137
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1441 … 3590 | 2186; 2347; 2531; 3053; 3183; 3245; 3509; 3556; … |
+| 1 | Int32 | 0 … 638680 | 169173; 177900; 184500; 211941; 222897; 393830; 472596; 551362; … |
+
+### CAI_UNIT_AVAILABILITY_ANALYSIS_REGION
+
+- Instances: 137
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 317 … 1263 | 1082; 1101; 1222; 1251; 1261; 765; 809; 843; … |
+
+### CAI_UNIT_AVAILABILITY_ANALYSIS_SETTLEMENT
+
+- Instances: 137
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1441 … 3590 | 2186; 2347; 2531; 3183; 3245; 3509; 3556; 3582; … |
+
+### CAI_WORLD_SETTLEMENTS[]
+
+- Instances: 137
+- Child nodes: CAI_BDI_COMPONENT_BLOCK_OWNS, CAI_BDI_COMPONENT_PROPERTY_SET, CAI_GARRISONABLE, CAI_SETTLEMENT, CAI_SITUATED, CAI_THREATENED_GARRISONABLE, OWNED_DIRECT
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1441 … 3590 | 1441; 1464; 1482; 1495; 1506; 1530; 1543; 1560; … |
+| 1 | Float32 | 100 | 100 |
+| 2 | Float32 | 100 | 100 |
+| 3 | Float32 | 0 | 0 |
+| 4 | Float32 | 100 | 100 |
+| 5 | UInt32 | 1 | 1 |
+| 6 | Boolean |  | false |
+| 7 | UInt32 Array |  | [] |
+| 8 | UInt32 Array |  | [9408, 0, 11341, 0, 11343, 0, 16377, 0, 18962, 0…; [9447, 0, 11158, 0, 23321, 0, 45543, 1]; [9502, 0, 11195, 0, 11197, 0, 16370, 0, 18954, 0…; [9680, 0, 11115, 0, 11117, 0, 16229, 0, 18201, 0…; [9681, 0, 11222, 0, 11224, 0, 16240, 0, 18199, 0…; [9743, 0, 11377, 0, 11379, 0, 16245, 0, 18195, 0…; [9788, 0, 11282, 0, 29660, 0, 42264, 1, 376390, …; [9803, 0, 11317, 0, 11319, 0, 16275, 0, 18840, 0…; … |
+| 9 | UInt32 | 0 | 0 |
+| 10 | UInt32 | 3 … 37 | 3; 32; 33; 34; 35; 36; 37; 4; … |
+| 11 | UInt32 Array |  | [] |
+| 12 | UInt32 Array |  | [9408, 16, 11341, 4, 11343, 7855, 16377, 14776, …; [9447, 16, 11158, 4, 23321, 15, 45543]; [9502, 16, 11195, 4, 11197, 7855, 16370, 14776, …; [9680, 16, 11115, 4, 11117, 7855, 16229, 14776, …; [9681, 16, 11222, 4, 11224, 7855, 16240, 14776, …; [9743, 16, 11377, 4, 11379, 7855, 16245, 14776, …; [9788, 16, 11282, 4, 29660, 15, 42264, 376390, 4…; [9803, 16, 11317, 4, 11319, 7855, 16275, 14776, …; … |
+| 13 | UInt32 | 0 | 0 |
+| 14 | UInt32 | 0 | 0 |
+| 15 | UInt32 Array |  | [] |
+| 16 | UInt32 Array |  | [] |
+| 17 | UInt32 Array |  | [] |
+| 18 | UInt32 Array |  | [11087, 11115, 15947, 18201, 20748, 29505, 35077…; [11093, 11222, 15955, 18199, 20751, 29508, 35085…; [11098, 11195, 15953, 20754, 29521, 29674, 35083…; [11135, 11158, 15950, 20774, 23321, 31329, 35080…; [11186, 11341, 15963, 20806, 29672, 31333, 35093…; [11236, 11282, 15959, 20838, 29660, 29691, 35089…; [11250, 11377, 15966, 18195, 20846, 29687, 35096…; [11253, 11317, 15961, 20848, 29658, 31331, 35091…; … |
+| 19 | Boolean |  | false |
+| 20 | UInt32 | 0 | 0 |
+| 21 | Boolean |  | false |
+
+### CDIR_INTERFACE_AUTORESOLVER_MODIFIERS[]
+
+- Instances: 137
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1430 | 1265; 1274; 1280; 1358; 1361; 1370; 1376; 1391; … |
+| 1 | UInt32 | 1265 … 1433 | 1265; 1283; 1316; 1349; 1376; 1427; 1430; 1433; … |
+
+### FORTIFICATION_SLOT
+
+- Instances: 137
+- Child nodes: REGION_SLOT
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Boolean |  | true |
+
+### FORT_ARRAY
+
+- Instances: 137
+
+### POPULATION
+
+- Instances: 137
+- Child nodes: REGION_FACTORS
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 2000 … 22460000 | 1300000; 1350000; 1800000; 5000; 550000; 55941; 900000; 990000; … |
+| 1 | UInt32 | 2500 … 42326294 | 1237500; 1432266; 1625000; 1687500; 2250000; 6250; 687500; 69926; … |
+| 2 | UInt32 | 2000 … 22460000 | 1300000; 1350000; 1800000; 5000; 550000; 55941; 900000; 990000; … |
+| 3 | Int32 | 0 … 270 | 0; 169; 20; 249; 25; 270; 42; 50; … |
+
+### POPULATION CLASSES
+
+- Instances: 137
+
+### REGION
+
+- Instances: 137
+- Child nodes: CAMPAIGN_LOCALISATION, FORT_ARRAY, LINE_OF_SIGHT, POPULATION, REBEL_DATA_INNARDS, REGION_RECRUITMENT_MANAGER, REGION_SLOT_MANAGER, RELIGIOUS_MISSION_BUILDING_ARRAY, RESOURCES_ARRAY, SETTLEMENT, TRAITS
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UTF-16 |  | great_plains; hannover; iroquois_territory; malwa; new_england; norway; tatariya; the_papal_states; … |
+| 1 | Int32 | 246961200 … 1022472952 | 1018212024; 1018212936; 1018213848; 1018214760; 1018217320; 1018219056; 1018219968; 1021021240; … |
+| 2 | UInt32 | 0 … 3 | 0; 1; 2; 3 |
+| 3 | Boolean |  | false; true |
+| 4 | Boolean |  | false |
+| 5 | UInt32 | 0 … 1750 | 0; 125; 1500; 250; 50; 500; 75; 750; … |
+| 6 | UInt32 | 0 … 13520 | 1221; 1499; 1739; 2491; 2568; 2805; 3087; 6015; … |
+| 7 | UInt32 | 0 … 13520 | 1037; 1109; 2176; 2568; 2688; 2805; 6015; 911; … |
+| 8 | UInt32 | 0 … 3321 | 0; 1301; 138; 4; 60; 718; 735; 839; … |
+| 9 | UInt32 | 0 … 2500 | 0; 1500; 2000; 25; 250; 375; 500; 600; … |
+| 10 | UInt32 | 0 … 3321 | 0; 1301; 138; 4; 60; 718; 735; 839; … |
+| 11 | Int32 | -89 … 48 | -1; -15; -2; -35; -5; 4; 6; 9; … |
+| 12 | UInt32 | 0 … 1 | 0; 1 |
+| 13 | UInt32 | 0 … 4 | 0; 3; 4 |
+| 14 | Boolean |  | false; true |
+| 15 | UInt32 | 247045056 … 1012495192 | 1011335232; 478547552; 478556800; 478563736; 478570672; 478572984; 747673152; 842234200; … |
+| 16 | UInt32 | 0 … 827954520 | 827880776; 827890720; 827892040; 827899080; 827904096; 827912808; 827915008; 827917120; … |
+| 17 | UTF-16 |  | america; europe; india |
+| 18 | UTF-16 |  | cossack_rebels; hannover; iroquoi; maratha_rebels; norway; papal_states; plains; thirteen_colonies; … |
+| 19 | UTF-16 |  | American Rebels; Hannoverian Rebels; Iroquois Rebels; Italian Rebels; Lakota Rebels; Maratha Rebels; Norwegian Rebels; Tatar Rebels; … |
+| 20 | UTF-16 |  | sc_european_east; sc_european_north; sc_european_west; sc_papal; sc_tangier; sc_tribal_american; sc_ujjain; sc_virginia; … |
+| 21 | Boolean |  | false |
+| 22 | UInt32 Array |  | [0, 0, 0, 0, 0, 0, 0, 0]; [0, 0, 0, 0, 0, 0, 0, 19]; [0, 0, 0, 0, 0, 0, 10, 0]; [15, 0, 0, 0, 0, 0, 0, 0]; [19, 0, 0, 0, 0, 0, 0, 0]; [22, 0, 0, 0, 0, 0, 0, 0]; [30, 0, 0, 0, 0, 0, 0, 0]; [44, 0, 0, 0, 0, 0, 0, 0]; … |
+| 23 | UInt32 Array |  | [0, 0, 0, 0, 0, 0, 0, 0]; [0, 0, 0, 0, 0, 0, 0, 19]; [0, 0, 0, 0, 0, 0, 10, 0]; [15, 0, 0, 0, 0, 0, 0, 0]; [19, 0, 0, 0, 0, 0, 0, 0]; [22, 0, 0, 0, 0, 0, 0, 0]; [30, 0, 0, 0, 0, 0, 0, 0]; [44, 0, 0, 0, 0, 0, 0, 0]; … |
+| 24 | UInt32 Array |  | [0, 0, 0, 0, 0, 0, 0, 0]; [0, 0, 0, 0, 0, 0, 0, 19]; [0, 0, 0, 0, 0, 0, 10, 0]; [15, 0, 0, 0, 0, 0, 0, 0]; [19, 0, 0, 0, 0, 0, 0, 0]; [22, 0, 0, 0, 0, 0, 0, 0]; [30, 0, 0, 0, 0, 0, 0, 0]; [44, 0, 0, 0, 0, 0, 0, 0]; … |
+| 25 | UInt32 Array |  | [1154, 1803, 2129, 2777, 341, 1803, 1795, 503]; [1375, 2139, 2520, 3282, 420, 2139, 2119, 609]; [1411, 2218, 2621, 3427, 403, 2218, 2218, 605]; [1501, 2334, 2751, 3584, 457, 2334, 2314, 663]; [3158, 4962, 5865, 7669, 902, 4962, 4962, 1353]; [478, 752, 888, 1162, 137, 752, 752, 205]; [544, 856, 1011, 1322, 156, 856, 856, 233]; [582, 915, 1081, 1414, 166, 915, 915, 250]; … |
+| 26 | Boolean Array |  | [false, false, false, false, false, false, false…; [false, false, false, false, false, true, false,…; [false, true, false, false, false, false, false,…; [false, true, false, false, false, true, false, …; [true, false, false, false, false, false, false,… |
+| 27 | Int32 Array |  | [827818080]; [827823712]; [827824480]; [] |
+| 28 | UTF-16 |  | ; army_encampment; basic_roads; fur_merchant; shipyard; small_cotton_plantation; timber_logging_camp; vineyards; … |
+| 29 | UInt32 | 5 … 40 | 10; 15; 20; 25; 30; 40; 5 |
+| 30 | UInt32 | 296419660 … 4218418516 | 1198604520; 2106322724; 3378975392; 375893944; 4156312016; 4218418516; 480943348; 494463932; … |
+| 31 | Float32 | -0.0013270389754325151 | -0.001327039 |
+
+### REGIONS_ARRAY[]
+
+- Instances: 137
+- Child nodes: REGION
+
+### REGION_FACTORS
+
+- Instances: 137
+- Child nodes: POPULATION CLASSES, RELIGION_BREAKDOWN
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Float32 Array |  | [0.19999999, 0.099999994, -0.32, -1.3, 0, 0, 0]; [0.19999999, 0.099999994, -0.32, 0, 0, 0, 0]; [0.19999999, 0.19999999, -0.35999998, -1.15, 0, …; [0.19999999, 0.25, -0.53, 0, 0, 0, 0.38]; [0.19999999, 0.29999998, -0.39999998, 0, 0, 0, 0…; [0.19999999, 0.35, -0.42, 0, 0, 0, 0]; [0.19999999, 0.39999998, -0.44, -0.59999996, 0, …; [0.19999999, 0.59999996, -0.52, 0, 0, 0, 0]; … |
+| 1 | UInt32 | 1000 … 24406332 | 1000; 1419736; 1445673; 2038862; 628162; 63973; 975311; 990624; … |
+| 2 | UInt32 | 2750 … 82536280 | 1065625; 1787500; 2025000; 2148399; 2275000; 3825000; 8750; 97896; … |
+| 3 | UInt32 | 2500 … 42326294 | 1237500; 1432266; 1625000; 1687500; 2250000; 6250; 687500; 69926; … |
+| 4 | Float32 | -9.430000305175781 … 1.2699998617172241 | -0.02000001; -0.44; -1.11; -1.3199999; 0.099999994; 0.12999997; 0.27999997; 0.3; … |
+| 5 | UInt32 | 1 … 3 | 1; 2; 3 |
+| 6 | Boolean |  | false; true |
+| 7 | Int32 | -7978 … 1020 | -3; -4355; -5691; -6684; 0; 1020; 25; 66; … |
+| 8 | Int32 | 0 … 251 | 0; 169; 2; 20; 206; 251; 42; 50; … |
+| 9 | UInt32 | 2147548928 … 2164260608 | 2147548928; 2164195328; 2164260608 |
+
+### REGION_SLOT_ARRAY
+
+- Instances: 137
+
+### REGION_SLOT_MANAGER
+
+- Instances: 137
+- Child nodes: FORTIFICATION_SLOT, REGION_SLOT_ARRAY, ROAD_SLOT
+
+### RELIGION_BREAKDOWN
+
+- Instances: 137
+
+### RELIGIOUS_MISSION_BUILDING_ARRAY
+
+- Instances: 137
+
+### RESOURCES_ARRAY
+
+- Instances: 137
+
+### ROAD_SLOT
+
+- Instances: 137
+- Child nodes: REGION_SLOT
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Boolean |  | true |
+
+### SETTLEMENT
+
+- Instances: 137
+- Child nodes: CAMPAIGN_LOCALISATION, SIEGEABLE_GARRISON_RESIDENCE
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Int32 | 1 … 5 | 1; 2; 3; 4; 5 |
+| 1 | UTF-16 |  | settlement:great_plains:knife_river_village; settlement:hannover:hannover; settlement:iroquois_territory:cayuga; settlement:malwa:ujjain; settlement:new_england:boston; settlement:norway:christiania; settlement:tatariya:kazan; settlement:the_papal_states:rome; … |
+| 2 | Int32 | 246895952 … 1022053624 | 246895952; 246896408; 246896864; 246898232; 246899600; 246902336; 246902792; 246905528; … |
+| 3 | UTF-16 |  | settlement:great_plains:knife_river_village; settlement:hannover:hannover; settlement:iroquois_territory:cayuga; settlement:malwa:ujjain; settlement:new_england:boston; settlement:norway:christiania; settlement:tatariya:kazan; settlement:the_papal_states:rome; … |
+
+### SETTLEMENT_INDICES[]
+
+- Instances: 135
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UTF-16 |  | baluchistan; don_voisko; georgia_usa; komi; michigan_territory; netherlands; rajpootana; ruperts_land; … |
+| 1 | UInt32 | 132 … 266 | 137; 143; 151; 158; 160; 169; 173; 183; … |
+
+### PORT_INDICES[]
+
+- Instances: 132
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UTF-16 |  | port:anatolia:antalya; port:france:marseille; port:guatemala:puerto_barrios; port:malta:marsaxlokk; port:mysore:mangalore; port:new_spain:campeche; port:persia:bandar_abbas; port:scotland:glasgow; … |
+| 1 | UInt32 | 0 … 131 | 0; 1; 2; 3; 4; 5; 6; 7; … |
+
+### CAI_SEA_GRID_CELL
+
+- Instances: 128
+- Child nodes: CAI_SEA_GRID_CELL_MOBILES
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 0 … 127 | 0; 1; 2; 3; 4; 5; 6; 7; … |
+
+### CAI_SEA_GRID_CELL_MOBILES
+
+- Instances: 128
+
+### CAI_WORLD_SEA_GRID_CELLS[]
+
+- Instances: 128
+- Child nodes: CAI_BDI_COMPONENT_BLOCK_OWNS, CAI_BDI_COMPONENT_PROPERTY_SET, CAI_SEA_GRID_CELL
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 7510 … 7637 | 7510; 7511; 7512; 7513; 7514; 7515; 7516; 7517; … |
+| 1 | Float32 | 100 | 100 |
+| 2 | Float32 | 100 | 100 |
+| 3 | Float32 | 0 | 0 |
+| 4 | Float32 | 100 | 100 |
+| 5 | UInt32 | 1 | 1 |
+| 6 | Boolean |  | false |
+| 7 | UInt32 Array |  | [] |
+| 8 | UInt32 Array |  | [] |
+| 9 | UInt32 | 0 | 0 |
+| 10 | UInt32 | 0 | 0 |
+| 11 | UInt32 Array |  | [] |
+| 12 | UInt32 Array |  | [] |
+| 13 | UInt32 | 0 | 0 |
+| 14 | UInt32 | 0 | 0 |
+| 15 | UInt32 Array |  | [] |
+| 16 | UInt32 Array |  | [] |
+| 17 | UInt32 Array |  | [] |
+| 18 | UInt32 Array |  | [] |
+| 19 | Boolean |  | false |
+| 20 | UInt32 | 0 | 0 |
+| 21 | Boolean |  | false |
+
+### ORDINAL_PAIR[]
+
+- Instances: 127
+- Child nodes: CAMPAIGN_LOCALISATION
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Int32 | 1 … 15 | 1; 11; 12; 15; 2; 3; 5; 6; … |
+
+### CAI_MILITARY_REGION_GROUP_REGION_ANALYSIS_INFO
+
+- Instances: 122
+- Child nodes: CAI_MILITARY_REGION_GROUP_REGION_ANALYSIS_INFO_ENEMIES, CAI_MILITARY_REGION_GROUP_REGION_ANALYSIS_INFO_FRIENDS, CAI_MILITARY_REGION_GROUP_REGION_ANALYSIS_INFO_NEUTRALS
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Int32 | 0 | 0 |
+| 1 | UInt32 | 0 … 2 | 0; 1; 2 |
+| 2 | UInt32 | 0 … 2 | 0; 2 |
+| 3 | UInt32 | 0 … 3 | 0; 1; 2; 3 |
+| 4 | UInt32 Array |  | [1277, 1319, 1343]; [1298, 1316, 1265, 1268]; [1298, 1316, 1385, 1268]; [1298]; [1316, 1268, 1298, 1385, 1358]; [1316, 1268, 1298]; [1316, 1385, 1268, 1301, 1358]; []; … |
+| 5 | Int32 | 0 | 0 |
+| 6 | Int32 | 0 | 0 |
+| 7 | Int32 | 0 | 0 |
+| 8 | Int32 | 0 | 0 |
+
+### CAI_MILITARY_REGION_GROUP_REGION_ANALYSIS_INFO_ENEMIES
+
+- Instances: 122
+
+### CAI_MILITARY_REGION_GROUP_REGION_ANALYSIS_INFO_FRIENDS
+
+- Instances: 122
+
+### CAI_MILITARY_REGION_GROUP_REGION_ANALYSIS_INFO_NEUTRALS
+
+- Instances: 122
+
+### CAI_TRADE_ROUTE_INTERNATIONAL
+
+- Instances: 122
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1427 | 1271; 1280; 1301; 1310; 1316; 1364; 1367; 1373; … |
+
+### FACTION_INTERNATIONAL_TRADE_ROUTES_ARRAY[]
+
+- Instances: 122
+- Child nodes: INTERNATIONAL_TRADE_ROUTE
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 556472216 … 2527485796 | 585747344; 585747476; 828154128; 828154260; 828155248; 828155380; 828155528; 828155660; … |
+
+### INTERNATIONAL_TRADE_ROUTE
+
+- Instances: 122
+- 7 distinct signatures; most common:
+  - (66×) UInt32, Int32, Point2D, UInt32, UInt32, Boolean, Int32, Point2D, UInt32, UInt32, Boolean, Boolean, UInt32 Array, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32 Array, UInt32, Int32
+  - (25×) UInt32, Int32, Point2D, UInt32, UInt32, Boolean, Int32, Point2D, UInt32, UInt32, Boolean, Int32, Point2D, UInt32, UInt32, Boolean, Boolean, UInt32 Array, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32 Array, UInt32, Int32
+  - (11×) UInt32, Int32, Point2D, UInt32, UInt32, Boolean, Int32, Point2D, UInt32, UInt32, Boolean, Int32, Point2D, UInt32, UInt32, Boolean, Int32, Point2D, UInt32, UInt32, Boolean, Boolean, UInt32 Array, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32 Array, UInt32, Int32
+  - (9×) UInt32, Int32, Point2D, UInt32, UInt32, Boolean, Int32, Point2D, UInt32, UInt32, Boolean, Int32, Point2D, UInt32, UInt32, Boolean, Int32, Point2D, UInt32, UInt32, Boolean, Int32, Point2D, UInt32, UInt32, Boolean, Boolean, UInt32 Array, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32 Array, UInt32, Int32
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 2 … 8 | 2; 3; 4; 5; 6; 8 |
+| 1 | Int32 | 246964008 … 1022471080 | 1021299320; 1021303064; 1021935552; 1021941168; 246964944; 842942224; 842950648; 842953456; … |
+| 2 | Point2D |  | (0, 0) |
+| 3 | UInt32 | 2 … 264 | 159; 167; 170; 172; 229; 252; 256; 264; … |
+| 4 | UInt32 | 3 … 264 | 156; 159; 161; 170; 172; 192; 196; 238; … |
+| 5 | Boolean |  | false; true |
+| 6 | Int32 | 246962136 … 1022471080 | 1021303064; 1021938360; 1021940232; 1021941168; 1021953336; 246964008; 842942224; 842944096; … |
+| 7 | Point2D |  | (0, 0) |
+| 8 | UInt32 | 7 … 4294967295 | 161; 194; 196; 197; 210; 238; 258; 4294967295; … |
+| 9 | UInt32 | 2 … 4294967295 | 133; 163; 182; 184; 193; 207; 232; 4294967295; … |
+| 10 | Boolean |  | false; true |
+| 11 | Boolean / Int32 | 246962136 … 1022472016 | 1019391656; 1021310552; 1021503128; 1021507808; 1021924320; 1021925256; 842949712; false; … |
+| 12 | Point2D / UInt32 Array |  | (0, 0); [0, 0, 0, 0, 0, 0, 0, 0]; [0, 0, 0, 0, 0, 0, 10, 0]; [0, 0, 11, 4, 51, 0, 4, 0]; [0, 0, 23, 10, 107, 0, 10, 0]; [0, 0, 4, 1, 18, 0, 1, 0]; [0, 1, 0, 2, 9, 0, 1, 0]; [1, 0, 0, 0, 0, 0, 0, 0]; … |
+| 13 | UInt32 | 0 … 4294967295 | 163; 270; 349; 374; 4294967295; 489; 530; 883; … |
+| 14 | UInt32 | 0 … 4294967295 | 0; 155; 203; 209; 241; 30; 4294967295; 430; … |
+| 15 | Boolean / UInt32 | 0 … 185 | 0; 10; 109; 15; 27; 66; 87; false; … |
+| 16 | Boolean / Int32 / UInt32 | 0 … 1022472016 | 1021021240; 1021939296; 198; 238; 287; 371; 386; false; … |
+| 17 | Point2D / UInt32 / UInt32 Array | 0 … 1352 | (0, 0); 118; 144; 146; 156; 72; 96; [0, 0, 0, 0, 0, 0, 0, 0]; … |
+| 18 | UInt32 | 0 … 4294967295 | 118; 144; 156; 335; 4294967295; 611; 72; 96; … |
+| 19 | UInt32 | 0 … 4294967295 | 0; 116; 133; 237; 38; 4294967295; 56; 98; … |
+| 20 | Boolean / UInt32 / UInt32 Array | 0 … 142 | 0; [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…; [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 37, 0…; [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 0, 0, 0, 0, 0…; [0, 0, 0, 0, 0, 0, 0, 0, 0, 12, 0, 0, 0, 0, 0, 0…; [0, 0, 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 0, 0, 0…; [0, 0, 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 0, 37, …; false; … |
+| 21 | Boolean / Int32 / UInt32 | 0 … 1021945848 | 0; 1; 1019391656; 263; 449; 481; 842951584; false; … |
+| 22 | Int32 / Point2D / UInt32 / UInt32 Array | -1767482952 … 2080856108 | 102; 162; 72; 828154260; 828155248; 828155380; 828155528; [0, 0, 0, 0, 0, 0, 12, 0]; … |
+| 23 | UInt32 | 12 … 4294967295 | 1046; 1280; 133; 155; 162; 248837696; 72; 77; … |
+| 24 | Int32 / UInt32 | 0 … 4294967295 | 0; 175; 184; 241; 4294967295; 516; 585747344; 630; … |
+| 25 | Boolean / UInt32 / UInt32 Array | 0 … 166 | 0; 15; 30; 85; [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…; [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0,…; [0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0…; false; … |
+| 26 | Boolean / Int32 / UInt32 | 0 … 1021939296 | 0; 1021939296; 246964944; 278; 372; 842945968; 842949712; false; … |
+| 27 | Int32 / Point2D / UInt32 / UInt32 Array | -1767482556 … 2080855976 | (0, 0); 222; 278; 585748292; 585748424; 828154128; 828155660; 828156500; … |
+| 28 | UInt32 | 29 … 4294967295 | 1290; 1586; 1643; 175; 196; 222; 278; 4294967295; … |
+| 29 | UInt32 | 0 … 4294967295 | 0; 177; 233; 237; 4294967295; 464; 754; 755; … |
+| 30 | Boolean / UInt32 / UInt32 Array | 0 … 80 | 55; 67; 80; [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…; [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 0, 0, 0, 0, 0…; [0, 0, 0, 0, 0, 0, 0, 0, 0, 25, 30, 0, 0, 0, 0, …; [0, 0, 0, 0, 0, 0, 0, 16, 0, 0, 15, 0, 0, 0, 18,…; false; … |
+| 31 | Boolean / Int32 / UInt32 | 0 … 1021943976 | 0; 1021307744; 1021943976; 565; 574; 575; 842951584; false; … |
+| 32 | Int32 / Point2D / UInt32 / UInt32 Array | -1767482688 … 2080855844 | (0, 0); 196; 200; 234; 585747476; 828152020; [0, 0, 0, 0, 0, 0, 0, 0]; [0, 0, 0, 0, 1, 0, 1, 1]; … |
+| 33 | UInt32 | 96 … 2173 | 177; 196; 200; 234; 237; 536; 569; 769; … |
+| 34 | UInt32 | 0 … 1150 | 0; 1150; 174; 184; 234; 25; 92 |
+| 35 | Boolean / UInt32 / UInt32 Array | 0 … 30 | 0; 27; 30; [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 25, 0…; [0, 0, 0, 0, 0, 0, 0, 12, 0, 0, 0, 0, 0, 0, 18, …; [0, 0, 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 0, 18, …; [0, 8, 0, 0, 0, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…; false; … |
+| 36 | Int32 / UInt32 | 0 … 1019394464 | 0; 1018220920; 1019394464; 389; 458; 640; 842949712 |
+| 37 | Int32 / Point2D / UInt32 | -1767482028 … 839922144 | (0, 0); -1767482028; 111; 147; 258; 747766676; 747766940; 747767072; … |
+| 38 | UInt32 | 111 … 4294967295 | 111; 147; 258; 371; 4294967295 |
+| 39 | UInt32 | 0 … 4294967295 | 0; 4294967295 |
+
+### FACTION_FLAG_AND_COLOURS
+
+- Instances: 120
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UTF-16 |  | data\ui\flags\britain; data\ui\flags\british_republic; data\ui\flags\france; data\ui\flags\france_republic; data\ui\flags\george_washington; data\ui\flags\spain; data\ui\flags\spain_republic; data\ui\flags\united_states; … |
+| 1 | UInt8 | 0 … 255 | 0; 134; 160; 165; 222; 229; 253; 255; … |
+| 2 | UInt8 | 0 … 255 | 0; 131; 144; 217; 255; 48; 49; 78; … |
+| 3 | UInt8 | 0 … 248 | 0; 1; 240; 29; 56; 78; 83; 86; … |
+| 4 | UInt8 | 0 … 255 | 164; 18; 208; 228; 238; 255; 50; 7; … |
+| 5 | UInt8 | 0 … 255 | 0; 134; 180; 185; 207; 218; 45; 46; … |
+| 6 | UInt8 | 0 … 255 | 1; 161; 199; 35; 7; 74; 86; 9; … |
+| 7 | UInt8 | 0 … 255 | 0; 113; 192; 212; 230; 238; 255; 28; … |
+| 8 | UInt8 | 0 … 255 | 115; 19; 207; 22; 230; 255; 43; 49; … |
+| 9 | UInt8 | 0 … 255 | 16; 19; 227; 230; 240; 255; 83; 84; … |
+
+### CAI_HIGH_LEVEL_PATHS
+
+- Instances: 119
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 317 … 1227 | 1198; 1227; 675; 688; 765; 771; 809; 843; … |
+| 1 | UInt32 Array |  | [1446500, 1464430, 1480443, 1480570, 1480635, 14…; [1514668, 1514679, 1514687, 1514694, 1514702, 15…; [1526746, 1526747, 1526748, 1526749, 1526750, 15…; [278157, 278161, 306521, 306650, 306653, 707731,…; [306519, 306520, 306648, 306649, 306651, 306652,…; [597201, 597218, 597219, 597232, 597233, 597240]; [834216, 834470, 835156, 835161, 835169, 862453,…; []; … |
+
+### CAI_BDI_MULTI_RECRUIT_BASE
+
+- Instances: 118
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 Array |  | [1505699]; [1520565, 1533827]; [1528700, 1528702]; [1537104]; [] |
+| 1 | UInt32 Array |  | [1505519]; [1520486, 1533744]; [1528444, 1528448]; [1537017]; [] |
+| 2 | UInt32 Array |  | [1175311]; [1293077]; [1318075]; [1528467]; [161668]; [5371]; [96212, 1528444, 1528448]; []; … |
+| 3 | UInt32 Array |  | [3, 3, 3]; [3, 3]; [3]; [] |
+
+### NAVY_DATA
+
+- Instances: 114
+- Child nodes: CHARACTER_DATA, NAVAL_UNIT_DATA
+- 2 distinct signatures; most common:
+  - (57×) Int32, Int32
+  - (57×) 
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Int32 | -1 … 1 | -1; 1 |
+| 1 | Int32 | -1785901384 … 1015180384 | -1785772624; -1785896744; -1785901384; 0; 1015062064; 1015180384; 748427368; 841184344; … |
+
+### CAI_TRADE_ROUTE_PORT_ANALYSIS_FACTION_VALUES[]
+
+- Instances: 113
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1430 | 1277; 1280; 1292; 1301; 1304; 1310; 1331; 1343; … |
+| 1 | UInt32 | 0 … 16856 | 1355; 1530; 2115; 2357; 2932; 532; 599; 718; … |
+
+### CAMPAIGN_PLAYER_SETUP
+
+- Instances: 113
+- Child nodes: CAMPAIGN_PLAYER_SETUP_INGAME_MODIFIABLES, CAMPAIGN_VICTORY_CONDITIONS
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UTF-16 |  | austria; britain; france; louisiana; netherlands; new_spain; spain; thirteen_colonies; … |
+| 1 | Boolean |  | false; true |
+| 2 | Boolean |  | false; true |
+| 3 | Boolean |  | false |
+
+### CAMPAIGN_PLAYER_SETUP_INGAME_MODIFIABLES
+
+- Instances: 113
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Int32 | -2 … 2 | -2; 0; 2 |
+| 1 | Int32 | -2 … 2 | -2; 0; 2 |
+| 2 | Int32 | 0 | 0 |
+| 3 | Boolean |  | false |
+
+### FORT_UPGRADE_MANAGER
+
+- Instances: 112
+- Child nodes: FORT_REPAIRS_ARRAY, FORT_UPGRADES_ARRAY
+
+### CAI_DEFEND_REGION_COAST_ANALYSIS_POI_GARRISONABLES[]
+
+- Instances: 109
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1478 … 3594 | 1925; 1934; 2216; 2249; 2383; 3138; 3187; 3564; … |
+
+### NAVAL_UNIT_DATA[]
+
+- Instances: 109
+- Child nodes: NAVAL_UNIT_DATA
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 468783872 … 1196768936 | 1014286344; 1014289152; 1014295080; 1115514968; 1115517776; 1176074032; 1196756768; 1196768936; … |
+
+### REGION_SLOT_DATA
+
+- Instances: 106
+- Child nodes: ARMY_DATA, CHARACTER_DATA, NAVY_DATA, RECRUITMENT_DATA
+- 2 distinct signatures; most common:
+  - (57×) 
+  - (49×) Int32
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Int32 | 1 | 1 |
+
+### CAI_BDI_GOAL_CAPTURE_TRADE_POSTS
+
+- Instances: 104
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1430 | 1265; 1268; 1271; 1274; 1280; 1286; 1292; 1295; … |
+| 1 | UInt32 | 27 … 48 | 27; 36; 42; 48 |
+| 2 | UInt32 | 21797 … 269387 | 93347; 93349; 93351; 93353; 93565; 93567; 93569; 93571; … |
+
+### CAI_BUILD_FORT_IN_REGION_ANALYSIS
+
+- Instances: 103
+- Child nodes: CAI_BUILD_FORT_IN_REGION_ANALYSIS_POIS
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 478 … 1263 | 1082; 1094; 1101; 1251; 675; 765; 809; 843; … |
+| 1 | UInt32 | 1265 … 1430 | 1265; 1268; 1271; 1274; 1277; 1280; 1283; 1286; … |
+
+### CAI_BUILD_FORT_IN_REGION_ANALYSIS_POIS
+
+- Instances: 103
+
+### CAI_BASIC_REGION_GROUP_ANALYSIS
+
+- Instances: 102
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 Array |  | [126]; [139]; [142]; [297, 128]; [54]; [61]; [64]; [922, 489, 150, 56]; … |
+| 1 | UInt32 Array |  | [494, 317, 497]; [553, 583, 705, 654, 663, 715, 710, 620, 665, 48…; [56, 172, 248, 297, 128, 206]; [588, 638, 651, 733, 705, 702, 694, 603, 642, 65…; [64, 1067, 1087, 1028, 1051, 1057]; [64]; [915, 938, 953, 500, 533, 497, 930, 932, 943, 94…; []; … |
+| 2 | UInt32 Array |  | [1286, 1277, 1331, 1352, 1271, 1289, 1346, 1367,…; [1286, 1319]; [1286]; [1304]; [1325, 1310, 1286, 1343, 1328, 1433]; [1352, 1271, 1310, 1367, 1427]; [1427, 1277]; []; … |
+| 3 | UInt32 | 0 … 1433 | 0; 1277; 1286; 1310; 1319; 1322; 1352; 1427; … |
+| 4 | UInt32 | 0 … 2 | 0; 1; 2 |
+| 5 | Float32 | 0 … 10995.724609375 | 0; 10995.725; 1282.3162; 1959.6705; 2156.8015; 258.6457; 271.64896; 2719.3477; … |
+| 6 | Float32 Array |  | [1851.3369, 954.5382, 113.274956, 215.80923, 244…; [247.96117]; [3.2240088, 101.47698, 120.16112, 50.060555, 68.…; [49.187157, 1]; [606.9411]; [649.8771, 304.18927, 37.21373, 46.705704, 11.80…; [68.10131, 49.187157]; []; … |
+| 7 | Point2D |  | (-0.0005722046, -255.15689); (-295.6969, -255.24901); (0, -431.96674); (0, -74.359055); (151.03654, -191.09573); (186.7608, -139.32011); (543.7385, -212.28761); (573.212, 119.56802); … |
+| 8 | Float32 | 5.3726959228515625 … 2560 | 125.39642; 1393.0057; 152.92755; 206.50902; 2560; 360.00043; 391.3938; 727.4777; … |
+| 9 | Float32 | 5.670166015625 … 1131.2818603515625 | 112.65425; 1131.2819; 167.98413; 416.06653; 769.50195; 769.6862; 855.4248; 903.6512; … |
+
+### CAI_FACTION_STEAL_TECHNOLOGY_FACTION_ANALYSIS
+
+- Instances: 97
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1427 | 1298; 1307; 1316; 1334; 1355; 1361; 1370; 1385; … |
+
+### CAI_BDI_EXCESS_RECRUITMENT_BEHAVIOUR
+
+- Instances: 96
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 Array |  | [1528698, 1528699]; [1536197, 1536199, 1536200]; [1536955, 1536956, 1536957]; [1537242, 1537243]; [1537589, 1537590]; [175012, 188675, 207650, 250156, 277421, 306282,…; [188513, 207617, 229096, 249639, 249640, 249641,…; []; … |
+
+### CAI_BDI_CORRIDOR
+
+- Instances: 88
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 56 … 1251 | 1022; 1025; 1097; 1101; 1195; 1232; 1251; 998; … |
+| 1 | UInt32 Array |  | [1081526, 1081527]; [1081526]; [1081527]; [1430708, 1430709, 1526621, 1544241]; [1430708, 1430709]; [1430708, 1526621]; [1430708, 1544240]; [1430709]; … |
+| 2 | UInt32 Array |  | [0]; [1081530, 1081535]; [1081532]; [1081537]; [1081539]; [1081541]; [1430712, 1430712]; [1430714, 1430719, 1430714, 1544246]; … |
+| 3 | UInt32 Array |  | [1081526, 1081527]; [1081526]; [1081527]; [1430708, 1430709, 1526621, 1544241]; [1430708, 1430709]; [1430708, 1526621]; [1430708, 1544240]; [1430709]; … |
+| 4 | UInt32 Array |  | [0]; [1081530, 1081535]; [1081532]; [1081537]; [1081539]; [1081541]; [1430712, 1430712]; [1430714, 1430719, 1430714, 1544246]; … |
+| 5 | UInt32 Array |  | [1081526, 1081527]; [1081526]; [1081527]; [1430708, 1430709, 1526621, 1544241]; [1430708, 1430709]; [1430708, 1526621]; [1430708, 1544240]; [1430709]; … |
+| 6 | UInt32 Array |  | [0, 0]; [1081528]; [1081530]; [1081535]; [1081537]; [1081539]; [1430710, 1430710, 1526622, 1544244]; [1430712, 1430712]; … |
+| 7 | UInt32 Array |  | [1081526, 1081527]; [1081526]; [1081527]; [1430708, 1430709, 1526621, 1544241]; [1430708, 1430709]; [1430708, 1526621]; [1430708, 1544240]; [1430709]; … |
+| 8 | UInt32 Array |  | [0, 0]; [1081528]; [1081530]; [1081535]; [1081537]; [1081539]; [1430710, 1430710, 1526622, 1544244]; [1430712, 1430712]; … |
+| 9 | UInt32 | 0 … 1544250 | 0; 1081534; 1081543; 1430718; 1430721; 1511833; 1526626; 1544250; … |
+| 10 | Boolean |  | false; true |
+| 11 | UInt32 | 88249 … 1544254 | 1081529; 1081531; 1081533; 1081536; 1081538; 1081540; 1081542; 1430711; … |
+| 12 | UInt32 Array |  | [1286055, 1]; [1320403, 1, 835187, 1]; [1412079, 1]; [1495116, 2, 1411316, 2]; [5371, 2, 110191, 2]; [5391, 2]; [926106, 1, 1198030, 1]; []; … |
+| 13 | UInt32 | 38 … 72 | 38; 49; 51; 71; 72 |
+| 14 | UInt32 Array |  | [1081680, 1081537]; [1161727, 1081530, 1411316, 1081530, 1495116, 10…; [1293077, 1430714]; [1357239, 1511829]; [1481134, 1430712]; [5371, 1081539]; [926106, 1430714]; []; … |
+| 15 | UInt32 Array |  | [1081953, 0]; [110191, 1081539]; [1198030, 1430714]; [1480288, 1430714]; [175017, 1081530]; [5391, 0]; [5479, 1430712]; []; … |
+| 16 | UInt32 Array |  | [1469462, 1469463, 1469464, 1469465, 1469467, 14…; [1512084, 1512085, 1512086, 1512087, 1512088, 15…; [1526099, 1526100, 1526101, 1526102, 1526103, 15…; [1526126, 1526127, 1526128, 1526129, 1526130, 15…; [1534744, 1534745, 1534746, 1534747, 1534748, 15…; [] |
+| 17 | UInt32 Array |  | [1219717, 1118586, 279030, 96218, 5514, 1118585,…; [1395771, 1395639, 1376071, 1214946, 1395635]; [1435926, 1402514]; [283403, 283401, 711552, 1308914, 669169, 133923…; [5999]; [803419, 149540, 282095, 338332, 780039, 282098,…; [] |
+| 18 | UInt32 Array |  | [1081680, 60]; [1293077, 79]; [1357239, 76]; [1481134, 75]; [1495116, 79, 1161727, 76, 1411316, 76]; [5371, 65]; [926106, 74]; []; … |
+
+### CAI_BDI_DESIRE_TRADE_AREA_BEHAVIOUR_CAPTURE_GOALS[]
+
+- Instances: 88
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 30516 … 269386 | 93346; 93348; 93350; 93352; 93564; 93566; 93568; 93570; … |
+
+### CAI_NAVY_STRENGTH_THEATRE_ANALYSIS
+
+- Instances: 87
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 27 … 48 | 27; 33; 34; 35; 36; 42; 48 |
+
+### CAI_NAVY_STRENGTH_MOBILE_ANALYSIS
+
+- Instances: 84
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 5391 … 1539502 | 110191; 1335697; 1445328; 161046; 175017; 426817; 5391; 5479; … |
+
+### CAMPAIGN_MAP_TRANSITION_LINK
+
+- Instances: 84
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Float32 | 0 | 0 |
+| 1 | UInt32 | 0 … 2 | 0; 2 |
+| 2 | UInt32 | 3 … 4294967295 | 3; 4294967295 |
+| 3 | UInt32 | 1 … 4294967295 | 1; 4294967295 |
+
+### NAVY
+
+- Instances: 84
+- Child nodes: MILITARY_FORCE, THEATRE_TRANSITION_INFO, UNITS_ARRAY
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 Array |  | [] |
+| 1 | UInt32 Array |  | [] |
+| 2 | UInt32 | 0 … 827862880 | 0; 474743120; 827849056; 827860576; 827862880 |
+| 3 | UInt32 | 0 | 0 |
+
+### THEATRE_TRANSITION_INFO
+
+- Instances: 84
+- Child nodes: CAMPAIGN_MAP_TRANSITION_LINK
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Boolean |  | false; true |
+| 1 | Boolean |  | false |
+| 2 | UInt32 | 0 | 0 |
+
+### CAI_SEA_GRID_CELL_MOBILES[]
+
+- Instances: 83
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 5391 … 1539502 | 1116073; 1212600; 1259406; 1509671; 1536257; 175017; 523333; 6858; … |
+
+### CAI_BDI_BUILDING_TYPE_CONSTRUCTION
+
+- Instances: 81
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1625 … 90182065 | 1912; 1940; 1945; 2209; 2223; 2526; 90092344; 90181939; … |
+| 1 | UTF-16 |  | college; ironmasters_works; ordnance_factory; pleasure_gardens; royal_observatory; tarmac_roads; water-powered_cloth_mill; weavers_cottages; … |
+
+### CAI_BDI_DESIRE_DEFEND_REGION_COASTS_GOALS[]
+
+- Instances: 81
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 14528 … 1536049 | 1081615; 14528; 14537; 14547; 14552; 14557; 17447; 210858; … |
+
+### CAI_BDI_DESIRE_DEFEND_REGION_COASTS_INFO_VALUES[]
+
+- Instances: 81
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 317 … 1263 | 1082; 1094; 1101; 1251; 675; 765; 809; 843; … |
+| 1 | Float32 | 20951 … 982025 | 31292; 34119; 45885; 59395; 73572; 79197; 798785; 982025; … |
+
+### CAI_BDI_GOAL_REGION_COAST_DEFENCE
+
+- Instances: 81
+- Child nodes: CAI_BDI_GOAL_REGION_COAST_DEFENCE_AGAINST_GOALS, CAI_BDI_GOAL_REGION_COAST_DEFENCE_PORT_GOALS
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1430 | 1265; 1268; 1271; 1274; 1280; 1286; 1292; 1295; … |
+| 1 | UInt32 | 317 … 1263 | 1082; 1094; 1101; 1251; 675; 765; 809; 843; … |
+| 2 | UInt32 | 14529 … 1536050 | 1081616; 14529; 14538; 14548; 14553; 14558; 17448; 210859; … |
+
+### CAI_BDI_GOAL_REGION_COAST_DEFENCE_AGAINST_GOALS
+
+- Instances: 81
+
+### CAI_BDI_GOAL_REGION_COAST_DEFENCE_GENERAL
+
+- Instances: 81
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1430 | 1265; 1268; 1271; 1274; 1280; 1286; 1292; 1295; … |
+| 1 | UInt32 | 317 … 1263 | 1082; 1094; 1101; 1251; 675; 765; 809; 843; … |
+| 2 | UInt32 | 14530 … 1536051 | 1081617; 14530; 14539; 14549; 14554; 14559; 17449; 210860; … |
+
+### CAI_BDI_GOAL_REGION_COAST_DEFENCE_PORT_GOALS
+
+- Instances: 81
+
+### CAI_NAVY_DAMAGE_ANALYSIS
+
+- Instances: 81
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 5391 … 1539502 | 5391; 5479; 5637; 5807; 6125; 6225; 6249; 6479; … |
+| 1 | Float32 | 0 … 1 | 0; 0.14285715; 0.16666667; 0.21428573; 0.5; 0.6428572; 0.75; 1; … |
+| 2 | Float32 | 0 … 1 | 0; 0.14285715; 0.16666667; 0.21428573; 0.5; 0.6428572; 0.75; 1; … |
+| 3 | Float32 | 0.30748337507247925 … 1 | 0.57699805; 0.59136033; 0.6570052; 0.701475; 0.76895154; 0.8616333; 0.9632578; 1; … |
+| 4 | Float32 | 0 … 1 | 0; 0.14285715; 0.16666667; 0.21428573; 0.2857143; 0.6428572; 0.75; 1; … |
+
+### PORT_GARRISON_MANAGER
+
+- Instances: 79
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 0 … 2495832976 | 0; 2377554440; 2495832976; 828123608; 828126128; 828128648; 828134528; 828144888; … |
+| 1 | UInt32 | 0 | 0 |
+| 2 | Boolean |  | false |
+
+### CAI_COMPOSITE_THEATRE_ANALYSIS
+
+- Instances: 78
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 33 … 35 | 33; 34; 35 |
+
+### CAI_THEATRE_MILITARY_STRENGTH_FACTION_STRENGTH
+
+- Instances: 78
+
+### CAI_THEATRE_RELATIVE_MILITARY_STRENGTHS
+
+- Instances: 78
+- Child nodes: CAI_THEATRE_MILITARY_STRENGTH_FACTION_STRENGTH
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 33 … 35 | 33; 34; 35 |
+
+### CAI_BDI_GOAL_HELP_ALLY_AT_WAR
+
+- Instances: 77
+- Child nodes: CAI_BDI_GOAL_HELP_ALLY_AT_WAR_INVASION_GOALS, CAI_BDI_GOAL_HELP_ALLY_AT_WAR_SUPPORT_GOALS
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 0 … 1415 | 0; 1268; 1271; 1277; 1280; 1289; 1292; 1295; … |
+| 1 | UInt32 | 0 … 1415 | 0; 1268; 1277; 1280; 1352; 1361; 1364; 1370; … |
+| 2 | UInt32 | 0 … 1433 | 0; 1289; 1358; 1427; 1430; 1433 |
+| 3 | UInt32 | 0 … 1242080 | 0; 1133753; 17443; 19579; 19595; 81459; 96328; 96329; … |
+
+### CAI_BDI_GOAL_HELP_ALLY_AT_WAR_INVASION_GOALS
+
+- Instances: 77
+
+### CAI_BDI_GOAL_HELP_ALLY_AT_WAR_SUPPORT_GOALS
+
+- Instances: 77
+
+### CAI_BDI_GOAL_NAVY_RECRUITMENT
+
+- Instances: 77
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 0 … 1430 | 0; 1265; 1268; 1271; 1274; 1277; 1280; 1286; … |
+| 1 | UInt32 | 0 … 3594 | 1907; 1919; 1925; 2198; 2200; 2216; 2355; 3059; … |
+| 2 | UInt32 | 0 … 1511517 | 13936; 13938; 13940; 161759; 17234; 17236; 17238; 86695; … |
+| 3 | UInt32 | 0 … 1511518 | 1231807; 13945; 161784; 252981; 333423; 503294; 86699; 93610; … |
+
+### CAI_DEFEND_REGION_COAST_ANALYSIS
+
+- Instances: 77
+- Child nodes: CAI_DEFEND_REGION_COAST_ANALYSIS_POIS
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 317 … 1263 | 1082; 1101; 1249; 1251; 675; 765; 809; 843; … |
+| 1 | UInt32 | 1265 … 1430 | 1265; 1268; 1271; 1274; 1280; 1286; 1292; 1295; … |
+
+### CAI_DEFEND_REGION_COAST_ANALYSIS_POIS
+
+- Instances: 77
+
+### CAI_HISTORY_EVENT
+
+- Instances: 77
+- Child nodes: CAI_HISTORY_EVENT_HTML_CLASSES
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Int32 | 1 … 15 | 1; 14; 15 |
+
+### CAI_HISTORY_EVENTS[]
+
+- Instances: 77
+- Child nodes: CAI_HISTORY_EVENT, CAI_HISTORY_EVENT_INVASION_REQUESTED, CAI_HISTORY_EVENT_NEW_MANAGER_FOR_FACTION, CAI_HISTORY_EVENT_ROUND
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Int32 | 1 … 15 | 1; 14; 15 |
+
+### CAI_HISTORY_EVENT_HTML_CLASSES
+
+- Instances: 77
+
+### CAI_MILITARY_REGION_GROUP_REGION_ANALYSIS_INFO_NEUTRALS[]
+
+- Instances: 76
+- Child nodes: CAI_RESOURCE_MOBILE_MILITARY_AFFECT
+
+### RECRUITMENT_ITEM
+
+- Instances: 74
+- Child nodes: LAND_UNIT_RECRUITMENT_ITEM, NAVAL_UNIT_RECRUITMENT_ITEM
+- 2 distinct signatures; most common:
+  - (37×) Int32, Int32, Int32, UInt32, UInt32, Boolean, UTF-16, UInt32, UInt32, Boolean, Int32, UInt32
+  - (37×) 
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Int32 | -1760599024 … 2090755976 | -1760599024; 1428829136; 1966178872; 1966180232; 1966181320; 1966184584; 1966186488; 1966296784; … |
+| 1 | Int32 | 246961200 … 1022470144 | 1018212024; 1018212936; 1018219968; 1019385104; 1019390720; 1019392592; 246961200; 246964008; … |
+| 2 | Int32 | 0 | 0 |
+| 3 | UInt32 | 1 … 2 | 1; 2 |
+| 4 | UInt32 | 0 … 1560 | 162; 215; 225; 296; 39; 525; 60; 72; … |
+| 5 | Boolean |  | true |
+| 6 | UTF-16 |  | 1700_euro_18lbs; 6th_rate_french; euro_militia_infantry_colonial_militia; euro_militia_infantry_early; euro_provincial_cavalry; euro_provincial_cavalry_gendarmerie; jackdaw; nan_plains_tribesmen; … |
+| 7 | UInt32 | 0 … 1560 | 162; 215; 225; 296; 39; 525; 60; 72; … |
+| 8 | UInt32 | 0 | 0 |
+| 9 | Boolean |  | false |
+| 10 | Int32 | 0 | 0 |
+| 11 | UInt32 | 0 … 1526767 | 0; 1483407; 1526767 |
+
+### CAI_TRADE_ROUTE_PORT_ANALYSIS
+
+- Instances: 73
+- Child nodes: CAI_TRADE_ROUTE_PORT_ANALYSIS_FACTION_VALUES
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1478 … 3594 | 1478; 1486; 1514; 1568; 1599; 1648; 1654; 2728; … |
+| 1 | UInt32 | 0 … 25343 | 0; 1315; 1355; 3985; 4372; 5180; 5603; 960; … |
+
+### CAI_TRADE_ROUTE_PORT_ANALYSIS_FACTION_VALUES
+
+- Instances: 73
+
+### RECRUITMENT_DATA
+
+- Instances: 73
+- 2 distinct signatures; most common:
+  - (64×) 
+  - (9×) Int32, Int32, UTF-16, UInt32
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Int32 | 1 | 1 |
+| 1 | Int32 | 1 … 10 | 1; 10; 2; 6; 7 |
+| 2 | UTF-16 |  |  |
+| 3 | UInt32 | 0 | 0 |
+
+### SETTLEMENT_DATA
+
+- Instances: 72
+- Child nodes: ARMY_DATA, CHARACTER_DATA, RECRUITMENT_DATA
+- 2 distinct signatures; most common:
+  - (57×) 
+  - (15×) Int32
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Int32 | 1 | 1 |
+
+### UNIT LIST[]
+
+- Instances: 72
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UTF-16 |  | episodic_1_native_american_archers; episodic_1_native_american_warriors; episodic_native_american_archers; nan_cherokee_generals_bodyguard; nan_huron_generals_bodyguard; nan_huron_warriors; nan_iroquois_generals_bodyguard; nan_mounted_archers; … |
+
+### CAI_BDI_GOAL_REGION_COAST_DEFENCE_PORT
+
+- Instances: 70
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1430 | 1265; 1268; 1271; 1274; 1280; 1286; 1292; 1295; … |
+| 1 | UInt32 | 1478 … 3594 | 2198; 2200; 2216; 2355; 2535; 3187; 3249; 3564; … |
+| 2 | UInt32 | 14532 … 1414388 | 14532; 14534; 14536; 14541; 14551; 14556; 14561; 210862; … |
+
+### CAI_NAVY_RECRUITMENT_PORT_ANALYSIS
+
+- Instances: 69
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1478 … 3594 | 1907; 1919; 1925; 2198; 2200; 2216; 2355; 3059; … |
+| 1 | Float32 | 103000000 … 1215699968 | 1215700000; 147200000; 229900000; 232000000; 292900000; 482400000; 486100000; 496700000; … |
+
+### CAI_BDI_RECRUITMENT_NEW_FORCE_OF_OR_REINFORCE_TO_STRENGTH
+
+- Instances: 66
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Boolean |  | true |
+| 1 | Boolean |  | false; true |
+| 2 | Int32 | 0 … 1421 | 0; 151; 240; 25; 306; 42; 814; 892; … |
+| 3 | Int32 | 41 … 3503 | 1221; 1347; 1672; 1966; 386; 564; 700; 777; … |
+| 4 | Int32 | -630980608 … 214171648 | -42750109; -517734400; -533987328; -582221824; 0; 107216896; 214171648; 65536528; … |
+| 5 | Int32 | 0 … 425984000 | 0; 271503448; 276561920; 310640640; 320602112; 332136448; 336371552; 348913664; … |
+| 6 | UInt32 | 0 | 0 |
+| 7 | UInt32 Array |  | [1527205, 1527206, 1544319]; [1527217, 1527219, 1544320, 1544321, 1544322, 15…; [1539364, 1539365, 1539366]; [] |
+| 8 | UInt32 Array |  | [1536085, 1536086, 1536087, 1536088, 1536089, 15…; [1537639, 1537640, 1537641, 1537642, 1537643, 15…; [982117, 982119, 982121, 982125, 982126, 1285069…; [] |
+| 9 | UInt32 | 0 … 1533744 | 0; 1175311; 1293077; 1318075; 1528467; 161668; 5371; 96212; … |
+| 10 | UInt32 Array |  | [1505519]; [1520486, 1533744]; [1528444, 1528448]; [1537017]; [] |
+| 11 | Int32 | 0 | 0 |
+| 12 | UInt32 Array |  | [1537544]; [] |
+| 13 | UInt32 | 7 … 72 | 38; 41; 49; 51; 7; 71; 72; 9; … |
+| 14 | Boolean |  | false; true |
+| 15 | UInt32 | 0 … 1251 | 0; 1037; 1249; 1251; 638; 656; 729; 756; … |
+
+### CAI_BDI_GOAL_REGION_GROUP_DEFENCE
+
+- Instances: 65
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 0 … 1535957 | 1081500; 7396; 7408; 7434; 7437; 7439; 7444; 7457; … |
+| 1 | UInt32 Array |  | [1099358]; [1218048]; [124714]; [1483406]; [1526766]; [386068]; [982091]; []; … |
+| 2 | UInt32 | 12564 … 1535988 | 1081606; 12564; 12801; 12803; 12805; 15840; 15842; 15844; … |
+
+### CAI_POSITION_AND_STRENGTH_ANALYSIS_REGION_BLOCK[]
+
+- Instances: 62
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 5468 … 1544050 | 103949; 1095972; 1293077; 1398754; 1398757; 1511452; 1542784; 5470; … |
+| 1 | Int32 | 12 … 1706 | 116; 13; 216; 22; 46; 50; 531; 74; … |
+
+### CAI_BDI_RESERVED_NAVY_RESERVATION
+
+- Instances: 61
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 13937 … 1544248 | 1081532; 1081539; 1081541; 13937; 13939; 17235; 17237; 86694; … |
+| 1 | UInt32 | 1 … 4 | 1; 2; 4 |
+
+### CAI_REGION_PATH_TRANSITION_ANALYSIS
+
+- Instances: 61
+- Child nodes: CAI_REGION_PATH_TRANSITION_ANALYSIS_EXTERNAL, CAI_REGION_PATH_TRANSITION_ANALYSIS_INTERNAL, CAI_REGION_PATH_TRANSITION_ANALYSIS_SIMPLE
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 494 … 1176 | 500; 603; 620; 656; 865; 887; 945; 951; … |
+
+### CAI_REGION_PATH_TRANSITION_ANALYSIS_EXTERNAL
+
+- Instances: 61
+
+### CAI_REGION_PATH_TRANSITION_ANALYSIS_INTERNAL
+
+- Instances: 61
+
+### CAI_REGION_PATH_TRANSITION_ANALYSIS_SIMPLE
+
+- Instances: 61
+
+### CAI_BDI_POOL
+
+- Instances: 59
+- Child nodes: CAI_BDI_POOL_BELIEFS, CAI_BDI_POOL_DESIRES, CAI_BDI_POOL_FAILED, CAI_BDI_POOL_INTENTIONS
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Boolean |  | false; true |
+| 1 | UInt32 | 0 … 248 | 0; 104; 121; 15; 3; 50; 60; 78; … |
+| 2 | Boolean |  | false |
+| 3 | UInt32 | 0 … 100 | 0; 100; 92; 98; 99 |
+
+### CAI_BDI_POOL_BELIEFS
+
+- Instances: 59
+
+### CAI_BDI_POOL_DESIRES
+
+- Instances: 59
+
+### CAI_BDI_POOL_FAILED
+
+- Instances: 59
+
+### CAI_BDI_POOL_INTENTIONS
+
+- Instances: 59
+
+### ANCILLARY_UNIQUENESS_MONITOR
+
+- Instances: 58
+- Child nodes: ENTRIES
+
+### BUILDING_CONSTRUCTION_ITEM
+
+- Instances: 58
+- 2 distinct signatures; most common:
+  - (56×) UInt32, Boolean, UInt32, UInt32, UInt32, UTF-16
+  - (2×) UInt32, Boolean, UInt32, UInt32, UInt32, UInt32
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 0 … 2 | 0; 1; 2 |
+| 1 | Boolean |  | true |
+| 2 | UInt32 | 0 … 10 | 0; 10; 2; 3; 4; 5; 6; 8; … |
+| 3 | UInt32 | 1 … 11 | 1; 10; 11; 4; 5; 7; 8; 9; … |
+| 4 | UInt32 | 350 … 6300 | 1000; 2700; 3150; 350; 3900; 490; 5000; 6300; … |
+| 5 | UInt32 / UTF-16 | 35 … 100 | 35; army_barracks; cotton_warehouse; iron_workshops; ironmasters_works; sugar_warehouse; tarmac_roads; wheat_clearances; … |
+
+### CAI_BASIC_BORDER_ANALYSIS_REGION_GROUP
+
+- Instances: 58
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 7378 … 1535957 | 7381; 7396; 7408; 7439; 7444; 7454; 7457; 7459; … |
+
+### CAI_BDI_RESERVED_NAVY
+
+- Instances: 58
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 0 … 1539502 | 110191; 1445328; 161046; 175017; 426817; 523333; 5391; 738638; … |
+| 1 | UInt32 Array |  | [1081608]; [1218053]; [1307031]; [1445554]; [161194, 358502]; [427059]; [640134]; [738718]; … |
+| 2 | UInt32 | 1 … 4 | 1; 2; 4 |
+
+### CAI_HIGH_LEVEL_PATHFINDER
+
+- Instances: 58
+- Child nodes: CAI_HIGH_LEVEL_PATHFINDER_FACTION_STATES, CAI_HIGH_LEVEL_PATHFINDER_REGION_OWNERSHIP
+
+### CAI_HIGH_LEVEL_PATHFINDER_FACTION_STATES
+
+- Instances: 58
+
+### CAI_HIGH_LEVEL_PATHFINDER_REGION_OWNERSHIP
+
+- Instances: 58
+
+### CAI_INVADE_REGION_ANALYSER
+
+- Instances: 58
+
+### CAI_TRADE_ROUTE_DOMESTIC
+
+- Instances: 58
+
+### CAI_UNIT_AVAILABILITY_ANALYSIS_REGION_GROUP
+
+- Instances: 58
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 7378 … 1535957 | 7396; 7408; 7434; 7439; 7444; 7454; 7457; 7459; … |
+
+### DOMESTIC_TRADE_ROUTE
+
+- Instances: 58
+- 6 distinct signatures; most common:
+  - (22×) Boolean, UTF-16, UTF-16, Point2D, UInt32, Int32, Point2D, UInt32, UInt32, Boolean, Int32, Point2D, UInt32, UInt32, Boolean, Boolean, UInt32 Array, UInt32, Int32
+  - (20×) Boolean, UTF-16, Point2D, UInt32, Int32, Point2D, UInt32, UInt32, Boolean, Int32, Point2D, UInt32, UInt32, Boolean, Boolean, UInt32 Array, UInt32, Int32
+  - (10×) Boolean, UTF-16, UTF-16, Point2D, UInt32, Int32, Point2D, UInt32, UInt32, Boolean, Int32, Point2D, UInt32, UInt32, Boolean, Int32, Point2D, UInt32, UInt32, Boolean, Boolean, UInt32 Array, UInt32, Int32
+  - (4×) Boolean, UTF-16, UTF-16, Point2D, UInt32, Int32, Point2D, UInt32, UInt32, Boolean, Int32, Point2D, UInt32, UInt32, Boolean, Int32, Point2D, UInt32, UInt32, Boolean, Int32, Point2D, UInt32, UInt32, Boolean, Boolean, UInt32 Array, UInt32, Int32
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Boolean |  | false; true |
+| 1 | UTF-16 |  | 836795134; guatemala; kaintuck_territory; new_andalusia; panama; syria; trinidad_tobago; upper_louisiana; … |
+| 2 | Point2D / UTF-16 |  | (-343.1197, -192.80194); (287.91092, -113.58304); (290.02582, -81.67319); (291.28735, -97.1175); (322.56964, -111.79444); (836.6284, -66.253586); 1; 2; … |
+| 3 | Point2D / UInt32 | 2 | (0, 0); 2 |
+| 4 | Int32 / UInt32 | 0 … 6 | 0; 2; 3; 4; 5; 6 |
+| 5 | Int32 / Point2D | 246961200 … 1022472952 | (287.91092, -113.58304); (290.02582, -81.67319); 1019390720; 1021311488; 1021504064; 1021940232; 842946904; 842955328; … |
+| 6 | Point2D / UInt32 | 267 … 286 | (0, 0); 269; 275; 277; 278; 280; 281; 286; … |
+| 7 | UInt32 | 0 … 245 | 0; 101; 142; 161; 164; 219; 245; 8; … |
+| 8 | Boolean / UInt32 | 4 … 245 | 132; 167; 188; 192; 245; 4; 83; true; … |
+| 9 | Boolean / Int32 | 246964008 … 1022471080 | 1021501256; 1021925256; 1021939296; 1022471080; 246964008; 842949712; false; true; … |
+| 10 | Int32 / Point2D | 246964008 … 1022472016 | (0, 0); 1019391656; 1021308680; 1021311488; 1021501256; 1021935552; 1022467336; 246964008; … |
+| 11 | Point2D / UInt32 | 4294967295 | (0, 0); 4294967295 |
+| 12 | UInt32 | 9 … 4294967295 | 153; 193; 245; 27; 30; 4294967295; 44; 9; … |
+| 13 | Boolean / UInt32 | 0 … 4294967295 | 0; 132; 155; 191; 37; 4; 4294967295; false; … |
+| 14 | Boolean |  | false; true |
+| 15 | Boolean / Int32 / UInt32 Array | 842941288 … 1022472016 | 1019391656; 1021501256; 1021939296; [0, 0, 0, 0, 105, 0, 0, 0]; [0, 0, 0, 0, 138, 0, 0, 0]; [0, 0, 0, 0, 71, 0, 0, 0]; false; true; … |
+| 16 | Point2D / UInt32 / UInt32 Array | 247045056 … 1012495192 | (0, 0); 1011126176; 842305432; 842320704; [0, 0, 0, 0, 0, 0, 10, 0]; [0, 0, 0, 0, 0, 0, 15, 0]; [0, 0, 0, 10, 0, 0, 0, 0]; [0, 0, 0, 8, 0, 0, 0, 0]; … |
+| 17 | Int32 / UInt32 | 27 … 4294967295 | 1961337856; 2069529368; 2069529472; 4294967295; 475801672; 478591480; 842305432; 842320704; … |
+| 18 | Int32 / UInt32 | -1774914304 … 4294967295 | 1562722032; 1562722704; 1562723712; 1961337648; 2069525656; 2069529264; 37; 4294967295; … |
+| 19 | Boolean |  | false; true |
+| 20 | Boolean / Int32 | 1018213848 … 1021939296 | 1018213848; 1018220920; 1018224664; 1021939296; false; true |
+| 21 | Point2D / UInt32 Array |  | (0, 0); [0, 0, 0, 0, 0, 0, 26, 0]; [0, 0, 0, 0, 0, 0, 8, 0]; [0, 0, 0, 0, 0, 10, 0, 0]; [0, 0, 0, 18, 0, 0, 0, 0]; [0, 10, 0, 0, 0, 0, 0, 0]; [15, 0, 0, 0, 0, 0, 0, 0]; [19, 0, 0, 0, 0, 0, 0, 0]; … |
+| 22 | UInt32 | 76 … 4294967295 | 1011126176; 1011335232; 141; 4294967295; 478563736; 747673152; 76; 842320704; … |
+| 23 | Int32 / UInt32 | -1774914408 … 4294967295 | -1774914096; -1774914408; 102; 1316005000; 1961337544; 1961337752; 2069525864; 4294967295; … |
+| 24 | Boolean |  | false; true |
+| 25 | Boolean / Int32 | 1018224664 … 1021506872 | 1018224664; 1021506872; false; true |
+| 26 | Point2D / UInt32 Array |  | (0, 0); [0, 0, 0, 0, 0, 0, 12, 0]; [0, 0, 0, 0, 0, 0, 22, 0]; [0, 0, 0, 0, 0, 0, 8, 0]; [0, 0, 0, 0, 0, 12, 0, 12] |
+| 27 | UInt32 | 76 … 4294967295 | 1011126176; 4294967295; 478563736; 76 |
+| 28 | Int32 / UInt32 | -1730590680 … 4294967295 | -1730590160; -1730590680; 102; 1316005104; 1316005208; 4294967295 |
+| 29 | Boolean |  | false; true |
+| 30 | Boolean / Int32 | 1021506872 | 1021506872; false |
+| 31 | Point2D / UInt32 Array |  | (0, 0); [30, 0, 0, 0, 0, 0, 0, 0] |
+| 32 | UInt32 | 747673152 … 4294967295 | 4294967295; 747673152 |
+| 33 | Int32 / UInt32 | -1774913992 … 4294967295 | -1774913992; 4294967295 |
+| 34 | Boolean |  | false |
+| 35 | Boolean |  | false |
+| 36 | UInt32 Array |  | [22, 0, 0, 0, 0, 0, 0, 0] |
+| 37 | UInt32 | 747673152 | 747673152 |
+| 38 | Int32 | -1774913888 | -1774913888 |
+
+### ENTRIES
+
+- Instances: 58
+
+### FACTION_DOMESTIC_TRADE_ROUTES_ARRAY[]
+
+- Instances: 58
+- Child nodes: DOMESTIC_TRADE_ROUTE
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 585235880 … 2564377240 | 1562722032; 1562723712; 1961337544; 1961337648; 1961337752; 2069529264; 2069529368; 2069529472; … |
+
+### ACTIVE_OUTFIELD_REGIONS
+
+- Instances: 57
+
+### ARMY_ARRAY
+
+- Instances: 57
+
+### ARMY_REINFORCEMENT_MANAGER
+
+- Instances: 57
+- Child nodes: CHARACTER_REINFORCEMENTS_ARRAY, UNIT_REINFORCEMENTS_ARRAY
+
+### CAI_ACTIVE_RECRUITMENT_ANALYSIS
+
+- Instances: 57
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1433 | 1265; 1268; 1271; 1274; 1277; 1280; 1283; 1286; … |
+| 1 | UInt32 Array |  | [1516290, 1516316]; [1517891, 1517909]; [1521894, 1536644, 1536840, 1536841, 1536842]; [1527207, 1527208, 1527224, 1527227]; [1536985, 1536986, 1536987]; [1537248, 1537249]; [1537869, 1537870]; []; … |
+| 2 | Int32 | 0 … 3128 | 0; 1221; 1824; 1980; 3128; 46; 773; 823; … |
+| 3 | Int32 | 0 … 1844 | 0; 168; 1844; 202; 227; 282; 426; 59; … |
+
+### CAI_AMBUSH_ANALYSER
+
+- Instances: 57
+
+### CAI_BASIC_FACTION_ABSOLUTE_ANALYSIS
+
+- Instances: 57
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1433 | 1265; 1268; 1271; 1274; 1277; 1280; 1385; 1427; … |
+| 1 | Int32 | 0 … 31 | 0; 14; 26; 28; 30; 31; 4; 7; … |
+| 2 | Int32 | 0 … 14 | 0; 1; 10; 14; 2; 3; 4; 7; … |
+| 3 | Int32 | 0 … 401 | 0; 180; 277; 331; 401; 48; 63; 89; … |
+| 4 | Int32 | 0 … 63436 | 0; 12223; 29404; 45065; 61521; 63436; 8074; 9312; … |
+| 5 | Int32 | 0 … 18321773 | 0; 10524071; 12061863; 17795964; 18321773; 2293612; 2702974; 2969578; … |
+| 6 | Int32 | 0 … 8083075 | 0; 270600; 3401415; 6216986; 77500; 8083075; 866600; 985765; … |
+| 7 | Int32 | 0 … 23164 | 10067; 12699; 17652; 21311; 23164; 4032; 4410; 6703; … |
+| 8 | Int32 | 0 … 86 | 0; 13; 40; 44; 45; 46; 54; 6; … |
+| 9 | UInt32 | 0 … 59709000 | 0; 11600000; 13037000; 14000000; 26818500; 4300000; 8275000; 9500; … |
+| 10 | UInt32 | 0 … 116218600 | 0; 13063; 21218841; 21432125; 21950000; 28266954; 6412500; 94675374; … |
+| 11 | UInt32 | 0 … 61276833 | 0; 12891809; 14472121; 15704880; 28759525; 4275783; 5321; 8796444; … |
+| 12 | UInt32 | 0 … 6500 | 0; 2250; 250; 3375; 4500; 6500; 875; 900; … |
+| 13 | Int32 | 0 … 9465 | 0; 1512; 208; 44; 5460; 6976; 899; 9465; … |
+| 14 | UInt32 | 0 … 28 | 0; 15; 19; 2; 21; 23; 6; 9; … |
+| 15 | UInt32 | 0 … 1 | 0; 1 |
+| 16 | UInt32 | 0 | 0 |
+| 17 | Int32 | 0 … 14 | 0; 10; 2; 3; 6; 7; 8; 9; … |
+| 18 | Int32 | 0 … 6 | 0; 1; 2; 3; 4; 5; 6 |
+| 19 | UInt32 Array |  | [1271, 1334, 1361, 1364, 1292, 1289, 1415, 1346]; [1280, 1361, 1370, 1352, 1286, 1346]; [1286, 1319]; [1298, 1265]; [1343, 1268, 1319, 1331, 1352, 1358, 1301, 1298]; [1370, 1364, 1277, 1334, 1331, 1433, 1313]; [1385]; []; … |
+| 20 | Float32 Array |  | [1.8820376, 95.1455, 61.931183, 7.9987164, 17.23…; [115.41152, 61.931183, 1, 29.437405, 18.555101, …; [286.68994, 57.875847, 16.402155, 4.8894825, 41.…; [286.68994, 76.12251, 11.968895, 17.222855, 101.…; [36.045784, 50.36683]; [50.36683]; [68.10131, 49.187157]; []; … |
+| 21 | Float32 | 0 … 773.1712036132813 | 0; 117.28847; 193.52126; 389.40836; 50.36683; 528.8306; 581.4016; 86.41261; … |
+| 22 | Float32 | 0 … 773.1712036132813 | 0; 117.28847; 193.52126; 389.40836; 50.36683; 528.8306; 581.4016; 86.41261; … |
+| 23 | UInt32 Array |  | [7362, 7378, 7380]; [7362, 7388, 7396, 7380, 7393, 7405, 7430, 7449,…; [7362, 7430, 7447, 7454, 7455]; [7399, 7413, 7362, 7406, 7409, 7418, 7402, 83153…; [7407, 7409, 7362, 7384, 7404, 7413, 7393, 7430,…; [7415, 7406, 7362, 7407, 7405, 7378, 7401]; [7430, 7447, 7450, 7457, 7455]; []; … |
+| 24 | Boolean |  | false; true |
+| 25 | Boolean |  | false; true |
+
+### CAI_BASIC_FREE_STRENGTH_FACTION_ANALYSIS
+
+- Instances: 57
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1433 | 1265; 1268; 1271; 1274; 1277; 1280; 1283; 1307; … |
+| 1 | Int32 | -449 … 23 | -1; -3; -30; -40; -55; -62; -63; 0; … |
+| 2 | Int32 | -79 … 8 | -10; -2; -20; -23; -8; 0; 3; 8; … |
+| 3 | Int32 | -4414 … 137 | -13; -221; -56; -672; -682; -698; 116; 67; … |
+| 4 | Int32 | -734628 … 32191 | -104287; -112538; -11669; -1680; -31048; -96246; 15889; 27657; … |
+| 5 | Int32 | -302618 … 8062 | -1368; -2127; -24336; -2811; -36075; -41464; 3197; 4455; … |
+
+### CAI_BDI_ACTIVE_OUTFIELD_AREAS
+
+- Instances: 57
+- Child nodes: ACTIVE_OUTFIELD_REGIONS
+
+### CAI_BDI_FAILED_REGION_TARGETS
+
+- Instances: 57
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 Array |  | [1187649]; [1505807, 1520492]; [1517950]; [1524087]; [1537027]; [] |
+| 1 | UInt32 Array |  | [1081523]; [1428121, 1469442, 1526281, 1531923]; [1430617, 1511825, 1513872, 1526618]; [1452821]; [1454610, 1505580, 1520494, 1539319]; [1477911]; [1483623]; []; … |
+
+### CAI_BDI_GOAL_HELP_ALLY_AT_WAR_WITH_GIFTS
+
+- Instances: 57
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 0 … 1415 | 0; 1268; 1271; 1277; 1280; 1289; 1292; 1295; … |
+| 1 | UInt32 | 0 … 1415 | 0; 1268; 1277; 1280; 1352; 1361; 1364; 1370; … |
+| 2 | UInt32 | 2 … 72 | 10; 11; 2; 3; 41; 49; 71; 72; … |
+| 3 | UInt32 | 0 … 1282399 | 0; 111620; 1261066; 1271203; 1282399 |
+| 4 | UInt32 | 0 … 3 | 0; 3 |
+
+### CAI_BDI_NEW_TURN
+
+- Instances: 57
+
+### CAI_BDI_RESERVED_NAVIES
+
+- Instances: 57
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 Array |  | [129879, 235119, 339275, 362230, 576645, 624309,…; [1328846, 1388151]; [1449452]; [1511519]; [161193, 427058, 640133, 1081607, 1218052, 13070…; [738717, 1264847, 1411875, 1430783, 1483605, 149…; [885955, 1079210]; []; … |
+
+### CAI_BDI_WAR_AND_PEACE_MANAGER
+
+- Instances: 57
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 Array |  | [1081524]; [1428130, 1469448, 1526284, 1531928]; [1430706, 1511826, 1513875, 1526619]; [1452822]; [1454701, 1505608, 1520532, 1539320]; [1477912]; [1483624]; []; … |
+| 1 | UInt32 Array |  | [1097]; [1136]; [1195, 651, 1164, 1227]; [656]; [705, 715, 1097, 710]; [829, 884, 881, 887]; [833]; []; … |
+| 2 | UInt32 Array |  | [12565, 12566, 83092, 1254571]; [17246, 17247, 93327, 1237589, 1318525, 1318906,…; [18468, 18469, 83664, 1238043]; [21585, 21594, 21595, 85912, 127476, 1084696]; [26280, 26281, 87369, 1238333]; [27979, 27980, 86845, 87648, 87719, 99259, 99260…; [29972, 85365, 1017878, 1238628]; [80909, 80910, 80911, 80912, 81012, 93024, 10792…; … |
+| 3 | UInt32 Array |  | [1328899]; [] |
+| 4 | UInt32 Array |  | [796]; [] |
+| 5 | UInt32 Array |  | [1298834]; [] |
+| 6 | UInt32 Array |  | [1081525]; [1428131, 1469449, 1526285, 1531929]; [1430707, 1511827, 1513876, 1526620]; [1452823]; [1477913]; [1483625]; [311552, 646614, 647090, 953567, 953585, 953666,…; [801183, 887134, 1179134]; … |
+| 7 | UInt32 Array |  | [1081534, 1081543]; [1430718, 1430721, 1511833, 1526626, 1544250]; [1452829]; [1469439, 1526297]; [1477920]; [1483631]; [311465]; [887140]; … |
+| 8 | UInt32 | 7905 … 81843 | 14825; 17758; 19780; 25888; 27415; 29236; 7905; 80413; … |
+| 9 | UInt32 | 7906 … 81844 | 14826; 17759; 19781; 25889; 27416; 29237; 7906; 80414; … |
+| 10 | UInt32 | 7907 … 81845 | 14827; 17760; 19782; 25890; 27417; 29238; 7907; 80415; … |
+
+### CAI_BUILD_FORT_IN_REGION_ANALYSER
+
+- Instances: 57
+
+### CAI_DEFEND_REGION_ANALYSER
+
+- Instances: 57
+
+### CAI_DEFEND_REGION_COAST_ANALYSER
+
+- Instances: 57
+
+### CAI_DIPLOMATIC_ANALYSIS
+
+- Instances: 57
+- Child nodes: CAI_DIPLOMATIC_ANALYSIS_FACTIONINFO
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1433 | 1265; 1268; 1277; 1286; 1319; 1364; 1370; 1385; … |
+| 1 | UInt32 Array |  | [] |
+| 2 | UInt32 Array |  | [1268, 1280, 1334, 1361, 1370]; [1268, 1301, 1361]; [1268]; [1271, 1280, 1292, 1334]; [1271, 1361, 1364]; [1277, 1280, 1292, 1334, 1364, 1385]; [1310, 1325]; []; … |
+| 3 | UInt32 Array |  | [1265, 1286, 1337, 1358, 1427, 1430, 1433]; [1268, 1316, 1427, 1430, 1433]; [1271, 1277, 1430, 1433]; [1277, 1427, 1430, 1433]; [1298, 1316, 1331, 1355, 1358, 1427, 1430, 1433]; [1427, 1430, 1433]; [1430, 1433]; [1433]; … |
+| 4 | UInt32 Array |  | [1265, 1268, 1292, 1298, 1304, 1310, 1346, 1352,…; [1265, 1271, 1286, 1292, 1304]; [1265, 1277, 1280, 1286, 1292, 1301, 1304, 1334,…; [1268, 1271, 1280, 1286, 1292, 1298, 1304, 1325,…; [1268, 1280, 1370]; [1268, 1292, 1301, 1304, 1322, 1331]; [1271, 1364]; []; … |
+| 5 | UInt32 Array |  | [1265, 1286, 1304, 1331, 1337, 1355, 1358, 1427,…; [1271, 1277, 1292, 1298, 1316, 1427, 1430, 1433]; [1271, 1277, 1346, 1427, 1430, 1433]; [1298, 1301, 1316, 1331, 1355, 1358, 1364, 1385,…; [1334, 1361, 1370, 1427, 1430, 1433]; [1364, 1430, 1433]; [1430, 1433]; [1433]; … |
+| 6 | UInt32 | 0 … 1286 | 0; 1265; 1268; 1277; 1286 |
+| 7 | UInt32 Array |  | [1298]; [1301]; [1304]; [1346, 1427]; [] |
+| 8 | Boolean |  | false; true |
+
+### CAI_DIPLOMATIC_ANALYSIS_FACTIONINFO
+
+- Instances: 57
+
+### CAI_FACTION
+
+- Instances: 57
+- Child nodes: CAI_BDI_COMPONENT_BLOCK_OWNS, CAI_BDI_COMPONENT_PROPERTY_SET, CAI_BDI_NEW_TURN
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 Array |  | [317, 494, 533, 556, 588, 603, 642, 656]; [562, 634, 638, 729, 1084, 1097, 913, 1132]; [675, 771, 1037, 1065, 1249, 688, 777, 817, 692]; [694, 779, 789, 702, 705, 756, 746, 715, 710]; [722, 760, 763, 839, 865, 833, 898]; [765, 809, 1082, 1101, 1251, 843, 1094]; [819, 785, 821, 863, 823, 827, 829, 796, 793, 75…; []; … |
+| 1 | UInt32 Array |  | [33, 35]; [33]; [34, 33]; [34, 35]; [34]; [35]; [] |
+| 2 | UInt32 Array |  | [11, 85, 86, 94, 19, 97, 98, 99, 100, 20, 18]; [13, 14, 16, 20]; [13, 53, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70,…; [13, 54, 55, 56, 10, 95, 96, 20]; [13, 87, 88, 89, 92, 90, 91]; [13]; [20, 105]; []; … |
+| 3 | UInt32 Array |  | [5361, 5371, 5375, 5391, 5416, 110191, 124835, 1…; [5430, 5449, 5468, 5470, 5479, 161668, 175936, 7…; [5510, 96212, 113364, 359670, 620024, 801104, 83…; [5624, 5630, 5637, 5654, 5666, 207577, 332703, 5…; [5691, 5693, 113918, 192705, 337495, 337515, 361…; [5779, 5784, 5792, 5794, 5804, 5807, 5819, 99365…; [5846, 5862, 5864, 5874, 5876, 5879, 165779, 195…; []; … |
+| 4 | UInt32 Array |  | [5355, 5360, 5364, 5370, 5374, 5376, 5381, 5384,…; [5426, 5427, 5428, 5429, 5431, 5444, 5448, 5458,…; [5508, 5509, 5511, 5519, 5520, 5524, 5533, 5541,…; [5623, 5629, 5631, 5632, 5636, 5640, 5653, 5655,…; [5690, 5692, 5694, 5695, 5696, 5702, 5713, 5725,…; [5777, 5778, 5783, 5790, 5791, 5793, 5797, 5802,…; [5845, 5860, 5861, 5863, 5872, 5873, 5875, 5877,…; []; … |
+| 5 | UInt32 | 0 … 1255 | 0; 562; 656; 675; 694; 765; 819; 833; … |
+| 6 | UInt32 | 247045056 … 1012495192 | 1010035568; 1010040224; 1011126176; 247045056; 248837696; 834575336; 834578952; 842780312; … |
+| 7 | UInt32 Array |  | [1544060, 1544061, 1544062, 1544063, 1544064]; [1544065]; [1544066, 1544067, 1544068]; [1544069, 1544070, 1544071, 1544072, 1544073]; [1544074]; [1544075, 1544076]; [1544077, 1544078, 1544079, 1544080, 1544081]; []; … |
+| 8 | UInt32 Array |  | [4037, 4032, 4036, 3674, 3676, 3678, 3677, 4031,…; [4057, 4058, 4061, 4062, 4060]; [4075, 3995, 3874, 3873, 3872, 3871, 3870, 3856,…; [4093, 4081, 4082, 4083, 4087, 4089, 4084, 4114,…; [4187, 4156, 4157, 4158, 4159, 4179, 4311]; [4211, 3963, 3964, 3965, 4135, 3941, 4224, 4217,…; [4239, 3941, 4224, 4218, 3798, 3786, 3785]; []; … |
+| 9 | UInt32 | 0 … 1432 | 1267; 1270; 1273; 1276; 1279; 1282; 1285; 1288; … |
+| 10 | UInt32 Array |  | [7461, 7462]; [7463, 7464]; [7465]; [7469, 7470]; [7471]; [7473]; [7474]; []; … |
+| 11 | UInt32 | 1266 … 1434 | 1266; 1269; 1272; 1275; 1278; 1281; 1284; 1287; … |
+| 12 | Float32 | 100 | 100 |
+| 13 | Float32 | 100 | 100 |
+| 14 | Float32 | 0 | 0 |
+| 15 | Float32 | 100 | 100 |
+| 16 | UInt32 | 1 | 1 |
+| 17 | Boolean |  | false |
+| 18 | UInt32 Array |  | [] |
+| 19 | UInt32 Array |  | [] |
+| 20 | UInt32 | 0 | 0 |
+| 21 | UInt32 | 0 | 0 |
+| 22 | UInt32 Array |  | [] |
+| 23 | UInt32 Array |  | [] |
+| 24 | UInt32 | 0 | 0 |
+| 25 | UInt32 | 0 | 0 |
+| 26 | UInt32 Array |  | [] |
+| 27 | UInt32 Array |  | [] |
+| 28 | UInt32 Array |  | [] |
+| 29 | UInt32 Array |  | [12573, 12575, 12576, 12578, 12580, 12582, 12584…; [15526, 15528, 15529, 15531, 15533, 15535, 15537…; [18502, 18504, 18505, 18507, 18509, 18511, 18513…; [21670, 21672, 21673, 21675, 21677, 21679, 21681…; [26283, 26285, 26286, 26288, 26290, 26292, 26294…; [28097, 28099, 28100, 28102, 28104, 28106, 28108…; [30014, 30016, 30017, 30019, 30021, 30023, 30025…; [81033, 81035, 81036, 81038, 81040, 81042, 81044…; … |
+| 30 | Boolean |  | false |
+| 31 | UInt32 | 0 | 0 |
+| 32 | Boolean |  | false |
+| 33 | UInt32 | 0 … 1255 | 562; 656; 675; 694; 765; 817; 819; 823; … |
+| 34 | UInt32 Array |  | [1040, 777, 932, 920, 1063, 1037, 926, 961, 1190…; [1190, 1195, 961, 692, 675, 317, 1123, 1227, 117…; [638, 631, 694, 777, 817, 562, 1063, 478, 729, 9…; [656, 500, 694, 793, 823, 733, 478, 669, 562, 74…; [656, 733, 827, 694, 821, 819, 746, 823]; [785, 743, 694, 827, 771, 773, 850, 789, 821, 77…; [796, 793, 819, 823, 829, 656, 854, 694]; [913, 843, 961, 317, 1132, 1078, 809, 1097, 581,…; … |
+
+### CAI_FACTION_BDI_POOL
+
+- Instances: 57
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Boolean |  | false |
+| 1 | Boolean |  | false |
+| 2 | UInt32 | 7899 … 81839 | 14820; 17753; 19775; 25883; 27410; 29231; 7899; 80409; … |
+| 3 | UInt32 | 7900 … 81840 | 14821; 17754; 19776; 25884; 27411; 29232; 7900; 80410; … |
+| 4 | UInt32 | 7901 … 81841 | 14822; 17755; 19777; 25885; 27412; 29233; 7901; 80411; … |
+| 5 | UInt32 | 7903 … 81842 | 14824; 17757; 19779; 25887; 27414; 29235; 7903; 80412; … |
+| 6 | UInt32 | 7854 … 81794 | 14775; 17708; 19730; 25838; 27365; 29186; 7854; 80364; … |
+| 7 | UInt32 | 7855 … 81795 | 14776; 17709; 19731; 25839; 27366; 29187; 7855; 80365; … |
+| 8 | UInt32 | 7856 … 81796 | 14777; 17710; 19732; 25840; 27367; 29188; 7856; 80366; … |
+| 9 | UInt32 | 7857 … 81797 | 14778; 17711; 19733; 25841; 27368; 29189; 7857; 80367; … |
+| 10 | UInt32 | 7858 … 81798 | 14779; 17712; 19734; 25842; 27369; 29190; 7858; 80368; … |
+| 11 | UInt32 | 7859 … 81799 | 14780; 17713; 19735; 25843; 27370; 29191; 7859; 80369; … |
+| 12 | UInt32 | 7860 … 81800 | 14781; 17714; 19736; 25844; 27371; 29192; 7860; 80370; … |
+| 13 | UInt32 | 7861 … 81801 | 14782; 17715; 19737; 25845; 27372; 29193; 7861; 80371; … |
+| 14 | UInt32 | 7862 … 81802 | 14783; 17716; 19738; 25846; 27373; 29194; 7862; 80372; … |
+| 15 | UInt32 | 7863 … 81803 | 14784; 17717; 19739; 25847; 27374; 29195; 7863; 80373; … |
+| 16 | UInt32 | 7864 … 81804 | 14785; 17718; 19740; 25848; 27375; 29196; 7864; 80374; … |
+| 17 | UInt32 | 7865 … 81805 | 14786; 17719; 19741; 25849; 27376; 29197; 7865; 80375; … |
+| 18 | UInt32 | 7866 … 81806 | 14787; 17720; 19742; 25850; 27377; 29198; 7866; 80376; … |
+| 19 | UInt32 | 7867 … 81807 | 14788; 17721; 19743; 25851; 27378; 29199; 7867; 80377; … |
+| 20 | UInt32 | 7868 … 81808 | 14789; 17722; 19744; 25852; 27379; 29200; 7868; 80378; … |
+| 21 | UInt32 | 7869 … 81809 | 14790; 17723; 19745; 25853; 27380; 29201; 7869; 80379; … |
+| 22 | UInt32 | 7870 … 81810 | 14791; 17724; 19746; 25854; 27381; 29202; 7870; 80380; … |
+| 23 | UInt32 | 7871 … 81811 | 14792; 17725; 19747; 25855; 27382; 29203; 7871; 80381; … |
+| 24 | UInt32 | 7872 … 81812 | 14793; 17726; 19748; 25856; 27383; 29204; 7872; 80382; … |
+| 25 | UInt32 | 7873 … 81813 | 14794; 17727; 19749; 25857; 27384; 29205; 7873; 80383; … |
+| 26 | UInt32 | 7874 … 81814 | 14795; 17728; 19750; 25858; 27385; 29206; 7874; 80384; … |
+| 27 | UInt32 | 7875 … 81815 | 14796; 17729; 19751; 25859; 27386; 29207; 7875; 80385; … |
+| 28 | UInt32 | 7876 … 81816 | 14797; 17730; 19752; 25860; 27387; 29208; 7876; 80386; … |
+| 29 | UInt32 | 7877 … 81817 | 14798; 17731; 19753; 25861; 27388; 29209; 7877; 80387; … |
+| 30 | UInt32 | 7878 … 81818 | 14799; 17732; 19754; 25862; 27389; 29210; 7878; 80388; … |
+| 31 | UInt32 | 7879 … 81819 | 14800; 17733; 19755; 25863; 27390; 29211; 7879; 80389; … |
+| 32 | UInt32 | 7880 … 81820 | 14801; 17734; 19756; 25864; 27391; 29212; 7880; 80390; … |
+| 33 | UInt32 | 7881 … 81821 | 14802; 17735; 19757; 25865; 27392; 29213; 7881; 80391; … |
+| 34 | UInt32 | 7882 … 81822 | 14803; 17736; 19758; 25866; 27393; 29214; 7882; 80392; … |
+| 35 | UInt32 | 7883 … 81823 | 14804; 17737; 19759; 25867; 27394; 29215; 7883; 80393; … |
+| 36 | UInt32 | 7884 … 81824 | 14805; 17738; 19760; 25868; 27395; 29216; 7884; 80394; … |
+| 37 | UInt32 | 7885 … 81825 | 14806; 17739; 19761; 25869; 27396; 29217; 7885; 80395; … |
+| 38 | UInt32 | 7886 … 81826 | 14807; 17740; 19762; 25870; 27397; 29218; 7886; 80396; … |
+| 39 | UInt32 | 7887 … 81827 | 14808; 17741; 19763; 25871; 27398; 29219; 7887; 80397; … |
+
+### CAI_FACTION_BDI_POOL_ATTITUDE_MANAGER
+
+- Instances: 57
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 Array |  | [14898, 14901, 14904, 14907, 14910, 14973, 14976…; [17831, 17834, 17837, 17840, 17843, 17846, 17849…; [19853, 19856, 19859, 19862, 19865, 19868, 19871…; [25961, 25964, 25967, 25970, 25973, 25976, 26001…; [27488, 27491, 27494, 27497, 27538, 27541, 27550…; [29325, 29335, 29362, 29369, 29392, 29406, 29433…; [80457, 80460, 80473, 80479, 80504, 80507, 80510…; [9970, 9972, 9974, 10379, 10387, 10423, 10425, 1…; … |
+
+### CAI_FACTION_BDI_POOL_FINANCE_MANAGER_BASIC
+
+- Instances: 57
+- Child nodes: DATE
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 Array |  | [1238103, 1337824, 1238105, 1414982, 1337855, 13…; [1345794, 1346112, 1346346, 1372400]; [1445933, 1464310, 1445942, 1464317, 1511683, 15…; [1470575]; [408540, 1008627, 952607]; [631113, 1533513, 1533514, 1533563, 1533564, 153…; [953634, 953633, 903901]; []; … |
+| 1 | UInt32 | 3 | 3 |
+| 2 | Float32 | 0 … 34342.33203125 | 0; 10069.101; 1116.155; 118.208984; 248.74815; 346.5; 352.06494; 6366.6187; … |
+| 3 | Boolean |  | false; true |
+| 4 | Float32 | 0 … 34144.97265625 | 0.9709513; 14727.817; 2467.05; 29912.379; 316.8; 3790.72; 4576.1133; 93.60431; … |
+| 5 | Boolean |  | false; true |
+| 6 | Float32 | 0 … 119649.515625 | 1080.15; 119649.516; 200.48758; 277.2; 357.17688; 7271.647; 9230.933; 9239.88; … |
+| 7 | Boolean |  | false; true |
+| 8 | Float32 | 0 … 2713.25 | 1000; 178.50479; 288.04; 49.5; 592.3; 63.78158; 982.6505; 987.7076; … |
+| 9 | Boolean |  | false |
+| 10 | Float32 | 875 … 27294 | 13903.117; 19993; 20044; 21129; 22238; 27294; 4118.8; 9632.64; … |
+| 11 | Float32 | 0 … 1844 | 0; 168; 1844; 202; 227; 282; 426; 59; … |
+| 12 | UInt32 | 0 … 71 | 0; 34; 38; 48; 50; 68; 70; 71; … |
+| 13 | Float32 | 1000 | 1000 |
+| 14 | UInt32 | 0 … 71 | 0; 38; 41; 48; 51; 64; 70; 71; … |
+| 15 | Float32 | 1000 | 1000 |
+| 16 | UInt32 | 0 … 71 | 0; 11; 48; 49; 61; 68; 70; 71; … |
+| 17 | Float32 | 1000 | 1000 |
+| 18 | UInt32 | 0 | 0 |
+| 19 | Float32 | 1000 | 1000 |
+
+### CAI_FACTION_BDI_POOL_MISSION_MANAGER
+
+- Instances: 57
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 Array |  | [1220524, 1256526, 1453059, 1470587, 1502549, 15…; [1379113, 1528600, 1528700, 1528702, 1528708, 15…; [277768, 277772, 283350, 405726, 863758, 1147461…; [385682, 1411960, 1412050, 1475389, 1475391, 148…; [81503, 93028, 207611, 306295, 332757, 616060, 1…; [88156, 346014, 435015, 624370, 1105649, 1127981…; [88510, 968389, 1386212, 1490200, 1505699, 15057…; []; … |
+| 1 | UInt32 | 3 | 3 |
+
+### CAI_FACTION_LEARNT_PARAMETERS
+
+- Instances: 57
+- Child nodes: CAI_FACTION_LEARNT_PARAMETERS_INFO_ARRAY
+
+### CAI_FACTION_LEARNT_PARAMETERS_INFO_ARRAY
+
+- Instances: 57
+
+### CAI_FACTION_MANAGER
+
+- Instances: 57
+- Child nodes: CAI_FACTION_LEARNT_PARAMETERS
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1433 | 1265; 1268; 1271; 1274; 1277; 1280; 1283; 1286; … |
+| 1 | UInt32 | 2 … 11 | 10; 11; 2 |
+| 2 | Boolean |  | false; true |
+| 3 | UInt32 | 0 … 1 | 0; 1 |
+| 4 | UInt32 | 0 … 1 | 0; 1 |
+
+### CAI_FACTION_RESEARCH_TECHNOLOGY_ANALYSER
+
+- Instances: 57
+
+### CAI_FACTION_SEA_GRID_ANALYSER
+
+- Instances: 57
+
+### CAI_FACTION_STEAL_TECHNOLOGY_ANALYSER
+
+- Instances: 57
+
+### CAI_FACTION_TAXATION_ANALYSER
+
+- Instances: 57
+
+### CAI_FACTION_TRADE_ANALYSER
+
+- Instances: 57
+
+### CAI_FINANCIAL_ANALYSIS
+
+- Instances: 57
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1433 | 1265; 1268; 1271; 1274; 1277; 1280; 1283; 1286; … |
+| 1 | Float32 | 0.5 … 1.1835631132125854 | 0.66503674; 0.7800069; 0.84971917; 0.92603374; 0.99173385; 1.0094596; 1.122947; 1.1835631; … |
+| 2 | Float32 | 875 … 27294 | 13903.117; 19993; 20044; 21129; 22238; 27294; 4118.8; 9632.64; … |
+
+### CAI_HISTORY_EVENT_NEW_MANAGER_FOR_FACTION
+
+- Instances: 57
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | ASCII |  | austria; britain; france; netherlands; ottomans; poland_lithuania; prussia; spain; … |
+| 1 | Int32 | 2 … 11 | 11; 2 |
+
+### CAI_INTERFACE_MANAGERS[]
+
+- Instances: 57
+- Child nodes: CAI_BDI_POOL, CAI_FACTION_BDI_POOL, CAI_FACTION_MANAGER
+
+### CAI_MILITARY_RANK_ANALYSER
+
+- Instances: 57
+
+### CAI_MILITARY_REGION_GROUP_ANALYSIS_INFO_ENEMIES[]
+
+- Instances: 57
+- Child nodes: CAI_RESOURCE_MOBILE_MILITARY_AFFECT
+
+### CAI_NAVY_RECRUITMENT_ANALYSER
+
+- Instances: 57
+
+### CAI_NAVY_STRENGTH_ANALYSER
+
+- Instances: 57
+
+### CAI_OWNED_REGIONS_ANALYSIS
+
+- Instances: 57
+- Child nodes: CAI_OWNED_REGIONS_ANALYSIS_HISTORY_BLOCK
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1433 | 1265; 1268; 1271; 1274; 1277; 1280; 1283; 1286; … |
+
+### CAI_OWNED_REGIONS_ANALYSIS_HISTORY_BLOCK
+
+- Instances: 57
+
+### CAI_PLACE_RESERVES_IN_REGION_ANALYSER
+
+- Instances: 57
+
+### CAI_PORT_ANALYSER
+
+- Instances: 57
+
+### CAI_RELATION_ANALYSIS
+
+- Instances: 57
+- Child nodes: CAI_RELATION_ANALYSIS_TIMELINES
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1433 | 1265; 1268; 1271; 1274; 1277; 1280; 1283; 1286; … |
+| 1 | UInt32 | 73 | 73 |
+
+### CAI_RELATION_ANALYSIS_TIMELINES
+
+- Instances: 57
+
+### CAI_RELIGION_ANALYSER
+
+- Instances: 57
+
+### CAI_TRADE_ROUTE_POI_DEFEND_ANALYSER
+
+- Instances: 57
+
+### CAI_TRADE_ROUTE_POI_RAID_ANALYSER
+
+- Instances: 57
+
+### CAI_WORLD_FACTIONS[]
+
+- Instances: 57
+- Child nodes: CAI_BDI_COMPONENT_BLOCK_OWNS, CAI_BDI_COMPONENT_PROPERTY_SET, CAI_FACTION, OWNED_DIRECT
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1433 | 1265; 1268; 1271; 1274; 1277; 1280; 1283; 1286; … |
+| 1 | Float32 | 100 | 100 |
+| 2 | Float32 | 100 | 100 |
+| 3 | Float32 | 0 | 0 |
+| 4 | Float32 | 100 | 100 |
+| 5 | UInt32 | 1 | 1 |
+| 6 | Boolean |  | false |
+| 7 | UInt32 Array |  | [] |
+| 8 | UInt32 Array |  | [8061, 0, 9969, 0, 14913, 0, 14914, 0, 15140, 0,…; [8135, 0, 10422, 0, 15141, 0, 15143, 0, 17852, 0…; [8186, 0, 9971, 0, 14900, 0, 14902, 0, 15309, 0,…; [8239, 0, 9973, 0, 14903, 0, 14905, 0, 15276, 0,…; [8305, 0, 10424, 0, 15010, 0, 15012, 0, 17830, 0…; [8337, 0, 10426, 0, 15144, 0, 15146, 0, 17833, 0…; [8375, 0, 10428, 0, 15147, 0, 15149, 0, 17836, 0…; [9976, 0, 9977, 0, 10421, 0, 10553, 0, 10672, 0,…; … |
+| 9 | UInt32 | 0 | 0 |
+| 10 | UInt32 | 91 … 112 | 104; 105; 106; 107; 108; 109; 110; 112; … |
+| 11 | UInt32 Array |  | [] |
+| 12 | UInt32 Array |  | [8061, 7859, 9969, 7867, 9970, 7900, 14913, 10, …; [8135, 7859, 10422, 7867, 10423, 7900, 15141, 14…; [8186, 7859, 9971, 7867, 9972, 7900, 14900, 1478…; [8239, 7859, 9973, 7867, 9974, 7900, 14903, 1478…; [8305, 7859, 10424, 7867, 10425, 7900, 15010, 14…; [8337, 7859, 10426, 7867, 10427, 7900, 15144, 14…; [8375, 7859, 10428, 7867, 10429, 7900, 15147, 14…; [9976, 10, 9977, 15, 10421, 7867, 10553, 7863, 1…; … |
+| 13 | UInt32 | 0 | 0 |
+| 14 | UInt32 | 0 | 0 |
+| 15 | UInt32 Array |  | [] |
+| 16 | UInt32 Array |  | [] |
+| 17 | UInt32 Array |  | [] |
+| 18 | UInt32 Array |  | [14837, 14844, 14876, 14913, 14783, 16211, 16958…; [15276, 22903, 80416, 80372, 15277, 80418, 80942…; [15309, 19792, 19799, 19831, 21930, 22057, 22172…; [17770, 17777, 17809, 17852, 17716, 18766, 29194…; [18149, 25900, 25907, 25939, 26389, 25846, 27373…; [18157, 27427, 27431, 27434, 27466, 28325, 27373…; [18175, 29248, 29255, 29287, 30537, 29194, 17716…; [7917, 7924, 8056, 9976, 13007, 13946, 7862, 997…; … |
+| 19 | Boolean |  | false |
+| 20 | UInt32 | 0 | 0 |
+| 21 | Boolean |  | false |
+
+### CAMPAIGN_SPYING
+
+- Instances: 57
+- Child nodes: ARMY_DATA, FORT_DATA, NAVY_DATA, REGION_SLOT_DATA, SETTLEMENT_DATA
+
+### CDIR_DESIRE_UNIT_BALANCER_FACTION_COUNT[]
+
+- Instances: 57
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1433 | 1316; 1319; 1322; 1325; 1382; 1385; 1388; 1391; … |
+| 1 | Float32 | 0 | 0 |
+
+### CDIR_DESIRE_UNIT_UPGRADER_FACTION_COUNT[]
+
+- Instances: 57
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1433 | 1316; 1319; 1322; 1325; 1382; 1385; 1388; 1391; … |
+| 1 | Float32 | 0 | 0 |
+
+### CHARACTER_ARRAY
+
+- Instances: 57
+
+### CHARACTER_REINFORCEMENTS_ARRAY
+
+- Instances: 57
+
+### EXPOSED_CHARACTERS
+
+- Instances: 57
+
+### FACTION
+
+- Instances: 57
+- Child nodes: ANCILLARY_UNIQUENESS_MONITOR, ARMY_ARRAY, ARMY_REINFORCEMENT_MANAGER, CAMPAIGN_BONUS_VALUES, CAMPAIGN_MISSION_MANAGER, CAMPAIGN_PLAYER_SETUP, CAMPAIGN_SHROUD, CAMPAIGN_VICTORY_CONDITIONS, CHARACTER_ARRAY, DIPLOMACY_MANAGER, EXPOSED_CHARACTERS, FACTION_ECONOMICS, FACTION_FLAG_AND_COLOURS, FACTION_TECHNOLOGY_MANAGER, FAMILY, FORT_UPGRADE_MANAGER, GOVERNMENT, LAND_UNIT_NAME_ALLOCATOR, MORGUE, NAME_ALLOCATION_DETAILS, NAVAL_UNIT_NAME_ALLOCATOR, PRESTIGE
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Int32 | 247045056 … 1012495192 | 1010035568; 1010040224; 247045056; 248837696; 747673152; 834575336; 834578952; 842780312; … |
+| 1 | UTF-16 |  | austria; britain; france; netherlands; poland_lithuania; prussia; spain; thirteen_colonies; … |
+| 2 | UTF-16 |  | Austria; France; Great Britain; Polish-Lithuanian Commonwealth; Prussia; Spain; Thirteen Colonies; United Provinces; … |
+| 3 | Boolean |  | false; true |
+| 4 | Boolean |  | false; true |
+| 5 | Boolean |  | false; true |
+| 6 | UInt32 Array |  | [827877960, 827878048]; [827880776]; [827880952, 827878752]; [827882360]; [827884032, 827882448]; [827884912]; [827889048]; []; … |
+| 7 | Boolean |  | false; true |
+| 8 | UTF-16 |  | dutch; english; french; germans; iberian; levantine; polish; russian; … |
+| 9 | Boolean |  | false; true |
+| 10 | Int32 | 0 … 1022471080 | 0; 1021309616; 1021506872; 1021925256; 1021939296; 1022471080; 842944096; 842949712; … |
+| 11 | Int32 | 0 … 1022471080 | 1021309616; 1021494704; 1021506872; 1021925256; 1021930872; 1022471080; 842944096; 842949712; … |
+| 12 | Boolean |  | false |
+| 13 | Boolean |  | false; true |
+| 14 | UInt32 | 0 … 4 | 0; 3; 4 |
+| 15 | Boolean Array |  | []; [false, false, false, false, false, false, false…; [false, false, false, false, false, true, false,…; [false, true, false, false, false, false, false,…; [false, true, false, false, false, true, false, …; [true, false, false, false, false, false, false,…; [true, false, false, false, false, true, false, …; [true, true, false, false, false, false, false, … |
+| 16 | Int32 | 0 … 23164 | 10067; 12699; 17652; 21311; 23164; 6703; 6843; 880; … |
+| 17 | Int32 | 0 … 5802 | 0; 1459; 197; 2341; 4130; 4318; 844; 927; … |
+| 18 | UTF-16 |  | ; FULL |
+| 19 | UTF-16 |  | continental_progressive; default; industrialist; maritime_progressive; maritime_repressive; mixed_progressive; non_euro; trader; … |
+| 20 | Int32 | 0 … 559747248 | 0; 559747248 |
+| 21 | Boolean |  | false |
+| 22 | Int32 | -517647680 … 0 | -517647680; 0 |
+| 23 | Int32 | 0 … 156792048 | 0; 156792048 |
+| 24 | Int32 | -634379840 … 0 | -634379840; 0 |
+| 25 | Int32 | 0 … 250319008 | 0; 250319008 |
+| 26 | Boolean |  | false |
+| 27 | Boolean |  | false; true |
+| 28 | Boolean |  | false |
+| 29 | Int32 | 0 … 15 | 0; 10; 13; 15; 5; 6 |
+| 30 | Int32 | 0 … 10 | 0; 1; 10; 5; 8 |
+| 31 | Int32 | 0 … 13 | 0; 10; 13; 3; 7 |
+| 32 | Int32 | 0 … 5 | 0; 4; 5 |
+| 33 | Boolean |  | false; true |
+| 34 | Boolean |  | false; true |
+| 35 | UInt32 | 0 | 0 |
+| 36 | Boolean |  | false |
+| 37 | Boolean |  | false |
+
+### FACTION_ECONOMICS
+
+- Instances: 57
+- Child nodes: history
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Int32 | 0 … 201489 | 1257; 1647; 201489; 23692; 24308; 4876; 8216; 990; … |
+| 1 | UInt8 Array |  | [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,… |
+| 2 | UInt32 | 0 … 2 | 0; 2 |
+
+### FORT_DATA
+
+- Instances: 57
+
+### MORGUE
+
+- Instances: 57
+
+### PRESTIGE
+
+- Instances: 57
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 Array |  | [0, 0, 0, 18, 88, 88, 146, 146, 250, 262, 472, 4…; [0, 0, 7, 27, 63, 79, 79, 79, 103, 121, 127, 155…; [10, 10, 52, 52, 143, 149, 285, 291, 343, 343, 4…; [16, 16, 135, 271, 391, 453, 495, 509, 539, 551,…; [17, 17, 121, 121, 219, 261, 325, 325, 373, 389,…; [19, 19, 103, 109, 258, 259, 345, 353, 431, 437,…; [6, 6, 38, 44, 198, 220, 300, 300, 414, 434, 492…; [7, 7, 125, 131, 141, 141, 159, 159, 149, 155, 1…; … |
+| 1 | UInt32 Array |  | [0, 0, 0, 0, 0, 0, 5, 5, 17, 17, 17, 17, 17, 17,…; [0, 0, 0, 0, 0, 0, 5, 5, 5, 5, 10, 10, 10, 10, 1…; [0, 0, 0, 0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 11, 11, …; [0, 0, 0, 12, 20, 20, 20, 20, 20, 20, 20, 20, 20…; [10, 10, 10, 30, 46, 62, 70, 80, 100, 112, 128, …; [5, 5, 9, 31, 39, 49, 55, 79, 85, 101, 111, 123,…; [5, 9, 9, 21, 35, 39, 45, 75, 81, 87, 101, 117, …; [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 28, 28, …; … |
+| 2 | UInt32 Array |  | [0, 0, 0, 0, 0, 0, 0, 0, 20, 20, 30, 50, 50, 50,…; [0, 0, 0, 0, 0, 0, 0, 5, 5, 5, 5, 5, 5, 25, 25, …; [0, 0, 0, 0, 0, 0, 0, 5, 5, 5, 5, 5, 5, 5, 10, 1…; [0, 0, 0, 20, 20, 20, 20, 20, 20, 20, 40, 40, 60…; [0, 0, 0, 20, 20, 20, 20, 20, 30, 30, 30, 30, 30…; [4, 4, 4, 4, 14, 14, 14, 34, 49, 49, 69, 69, 84,…; [5, 5, 5, 5, 20, 20, 20, 20, 30, 30, 65, 65, 65,…; [5, 5, 5, 5, 5, 5, 20, 20, 30, 30, 40, 40, 80, 8…; … |
+| 3 | UInt32 Array |  | [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…; [0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 20, 20, 20, 40, …; [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10,…; [13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13,…; [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,…; [7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7,…; [] |
+| 4 | UInt32 Array |  | [0, 0, 7, 27, 68, 84, 84, 89, 113, 131, 137, 165…; [13, 13, 55, 75, 166, 172, 313, 319, 381, 381, 4…; [16, 16, 135, 283, 411, 473, 515, 529, 579, 611,…; [23, 27, 27, 57, 156, 160, 224, 254, 374, 392, 6…; [24, 24, 128, 148, 246, 288, 357, 357, 417, 433,…; [25, 25, 143, 149, 159, 159, 177, 182, 172, 178,…; [31, 31, 63, 89, 259, 297, 400, 410, 554, 586, 6…; [35, 35, 123, 151, 318, 329, 421, 473, 572, 594,…; … |
+| 5 | UInt32 | 0 … 3607 | 1618; 2503; 2645; 3607; 734; 767; 826; 832; … |
+| 6 | UInt32 | 0 … 773 | 10; 118; 125; 187; 227; 270; 432; 773; … |
+| 7 | UInt32 | 0 … 385 | 190; 289; 30; 385; 40; 60; 75; 90; … |
+| 8 | UInt32 | 0 … 147 | 0; 110; 13; 130; 147; 35; 55; 75; … |
+| 9 | UInt32 | 0 … 175 | 100; 110; 175; 60; 70; 75; 85; 90; … |
+
+### UNIT_REINFORCEMENTS_ARRAY
+
+- Instances: 57
+
+### history
+
+- Instances: 57
+
+### CAI_BDI_DESIRE_DEFEND_REGIONS
+
+- Instances: 56
+- Child nodes: CAI_BDI_DESIRE_DEFEND_REGIONS_INFO
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Boolean |  | true |
+| 1 | UInt32 Array |  | [12572, 12631, 12696, 12718, 12744, 210821, 1081…; [15525, 15597, 15625, 15650, 15788, 1063684, 117…; [18501, 18662, 18697, 430705, 865675, 982060, 12…; [21669, 21700, 21729, 21759]; [26282, 97870, 98759, 257122, 309801, 311217, 55…; [28096]; [30013, 30052, 30081, 30125, 30162, 30202, 30256…; [81032, 81093, 81116, 81155, 81242, 81310, 12471…; … |
+
+### CAI_BDI_DESIRE_DEFEND_REGIONS_INFO
+
+- Instances: 56
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 Array |  | [317, 494, 533, 556, 588, 603, 642, 656]; [562, 634, 638, 729, 1084, 1097, 913, 1132]; [675, 771, 1037, 1065, 1249, 688, 777, 817, 692]; [694, 779, 789, 702, 705, 756, 746, 715, 710]; [765, 809, 1082, 1101, 1251, 843, 1094]; [793]; [817, 920, 1040, 1063]; [819, 785, 821, 863, 823, 827, 829, 796, 793, 75…; … |
+| 1 | Float32 Array |  | [2020055, 34255, 287235, 127236, 76467, 47410, 3…; [310695]; [330750, 75395, 70487, 39677]; [556055, 61682, 43807, 46356, 49289, 27912, 5372…; [565595, 60335, 59030, 61827, 85638, 82276, 7113…; [798785, 59395, 34119, 31292, 45885, 73572, 7919…; [79915, 43378, 76381, 74014, 71990, 131709, 3837…; [982025, 44039, 53067, 33469, 45040, 67806, 8549…; … |
+| 2 | Int32 | 1 … 2642538 | 1122245; 1155120; 1444526; 2642538; 310695; 516309; 944497; 982045; … |
+
+### CAI_BDI_DESIRE_DEFEND_REGION_GROUPS
+
+- Instances: 56
+- Child nodes: CAI_BDI_DESIRE_DEFEND_REGION_GROUPS_INFO
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Boolean |  | false; true |
+| 1 | UInt32 Array |  | [12563, 12800, 12802, 12804, 1081605]; [15839, 15841, 15843, 15847]; [18466]; [26278]; [29989]; [32653]; [81019, 81405, 81407, 81409, 81413, 81417]; []; … |
+
+### CAI_BDI_DESIRE_FINANCE_SAVINGS
+
+- Instances: 56
+- Child nodes: DATE
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 3 | 3 |
+
+### CAI_BDI_DESIRE_MILITARY_RANK_BEHAVIOUR
+
+- Instances: 56
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1430 | 1265; 1268; 1271; 1274; 1277; 1280; 1283; 1286; … |
+
+### CAI_BDI_DESIRE_NAVY_ATTACK_BEHAVIOUR
+
+- Instances: 56
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1430 | 1265; 1268; 1271; 1274; 1277; 1280; 1283; 1286; … |
+| 1 | UInt32 | 8042 … 81858 | 14862; 17795; 19817; 25925; 27452; 29273; 8042; 80428; … |
+| 2 | UInt32 | 8043 … 81859 | 14863; 17796; 19818; 25926; 27453; 29274; 80429; 8043; … |
+
+### CAI_BDI_DESIRE_NAVY_RECRUITMENT
+
+- Instances: 56
+- Child nodes: CAI_BDI_DESIRE_NAVY_RECRUITMENT_GOALS
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1430 | 1265; 1268; 1271; 1274; 1277; 1280; 1283; 1286; … |
+
+### CAI_BDI_DESIRE_NAVY_RECRUITMENT_GOALS
+
+- Instances: 56
+
+### CAI_BDI_DESIRE_PORT_BLOCKADE_BEHAVIOUR
+
+- Instances: 56
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1430 | 1265; 1268; 1271; 1274; 1277; 1280; 1283; 1286; … |
+| 1 | UInt32 | 8051 … 81861 | 14871; 17804; 19826; 25934; 27461; 29282; 80431; 8051; … |
+| 2 | UInt32 | 8052 … 81862 | 14872; 17805; 19827; 25935; 27462; 29283; 80432; 8052; … |
+
+### CAI_BDI_DESIRE_RECAPTURE_REGIONS
+
+- Instances: 56
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 Array |  | [] |
+
+### CAI_BDI_DESIRE_REGIONAL_DEVELOPMENT
+
+- Instances: 56
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 Array |  | [10398, 10572, 10587, 10604, 10622, 210798, 1081…; [15110, 15355, 15363, 15373, 15425, 1063675, 117…; [18013, 18250, 18258, 430683, 865644, 982035, 12…; [20118, 20128, 20139, 20150]; [26210, 97863, 98734, 257108, 309761, 311143, 55…; [27795]; [29500, 29675, 29682, 29698, 29702, 29719, 29724…; [80685, 80810, 80817, 80828, 80868, 80892, 12470…; … |
+| 1 | Float32 Array |  | [0.7591961, 0.5538244, 0.7393317, 0.7262013, 0.7…; [1]; [2.0788388, 0.7104453, 0.68796176, 0.52275395]; [3.6846867, 0.6716255, 0.6646012, 0.6827799, 0.8…; [3.727088, 0.5689904, 0.45776874, 0.44786018, 0.…; [3.9660215, 0.7155547, 0.5980279, 0.61478734, 0.…; [4.5317135, 0.49932313, 0.5381344, 0.4538828, 0.…; [4.53527, 0.3776102, 0.91116434, 0.57629675, 0.4…; … |
+
+### CAI_BDI_DESIRE_TAXATION
+
+- Instances: 56
+- Child nodes: CAI_BDI_DESIRE_TAXATION_SET_TAXES, CAI_BDI_DESIRE_TAXATION_TAX_EXEMPT_REGIONS
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1430 | 1265; 1268; 1271; 1274; 1277; 1280; 1283; 1286; … |
+
+### CAI_BDI_DESIRE_TAXATION_SET_TAXES
+
+- Instances: 56
+
+### CAI_BDI_DESIRE_TAXATION_TAX_EXEMPT_REGIONS
+
+- Instances: 56
+
+### CAI_BDI_FORT_MAINTAINENCE_BEHAVIOUR
+
+- Instances: 56
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 8038 … 81866 | 14858; 17791; 19813; 25921; 27448; 29269; 8038; 80436; … |
+| 1 | UInt32 Array |  | [1238397, 1238398]; [] |
+
+### CAI_TECHNOLOGY_TREE
+
+- Instances: 56
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 836980000 … 836988064 | 836980000; 836980064; 836980128; 836980704; 836980896; 836981088; 836981216; 836981792; … |
+
+### CAI_TRADE_ROUTE_POI_RAID_ANALYSIS
+
+- Instances: 56
+- 2 distinct signatures; most common:
+  - (46×) UInt32, Boolean, Int32, Int32
+  - (10×) UInt32, Boolean, UInt32, Int32, Int32
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 5391 … 1536257 | 110191; 1335697; 1445328; 161046; 175017; 5391; 5479; 738638; … |
+| 1 | Boolean |  | false; true |
+| 2 | Int32 / UInt32 | 0 … 8857 | 0; 2494; 7086; 7102; 7124; 7207; 7602; 8857; … |
+| 3 | Int32 | -467402752 … 314834944 | -10747904; -155451392; -172228608; -403963904; -54263808; 0; 150732800; 314834944; … |
+| 4 | Int32 | -128188416 … 428081152 | -128188416; 255590400; 261881856; 267124736; 269221888; 281280512; 342097920; 428081152; … |
+
+### CAI_WORLD_TECHNOLOGY_TREES[]
+
+- Instances: 56
+- Child nodes: CAI_BDI_COMPONENT_BLOCK_OWNS, CAI_BDI_COMPONENT_PROPERTY_SET, CAI_TECHNOLOGY_TREE, OWNED_DIRECT
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1267 … 1432 | 1267; 1270; 1273; 1276; 1279; 1282; 1285; 1288; … |
+| 1 | Float32 | 100 | 100 |
+| 2 | Float32 | 100 | 100 |
+| 3 | Float32 | 0 | 0 |
+| 4 | Float32 | 100 | 100 |
+| 5 | UInt32 | 1 | 1 |
+| 6 | Boolean |  | false |
+| 7 | UInt32 Array |  | [] |
+| 8 | UInt32 Array |  | [] |
+| 9 | UInt32 | 0 | 0 |
+| 10 | UInt32 | 0 | 0 |
+| 11 | UInt32 Array |  | [] |
+| 12 | UInt32 Array |  | [] |
+| 13 | UInt32 | 0 | 0 |
+| 14 | UInt32 | 0 | 0 |
+| 15 | UInt32 Array |  | [] |
+| 16 | UInt32 Array |  | [] |
+| 17 | UInt32 Array |  | [] |
+| 18 | UInt32 Array |  | [14601, 14604, 96049, 229560, 229563, 1081732, 1…; [17343, 17346, 85303, 41827, 82565, 359165, 1082…; [19571, 19574, 85868, 88145, 129015]; [22615, 22618, 53490]; [27273, 27276, 86819, 72381, 214597, 333170, 333…; [28972, 86819, 214598, 359040, 359041, 359042, 6…; [31576, 31579, 85868, 179621, 214597, 214598, 21…; [41829, 46856, 61871, 81502, 81511, 82567, 10360…; … |
+| 19 | Boolean |  | false |
+| 20 | UInt32 | 0 | 0 |
+| 21 | Boolean |  | false |
+
+### DIPLOMACY_MANAGER
+
+- Instances: 56
+- Child nodes: DIPLOMACY_RELATIONSHIPS_ARRAY
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 0 … 2 | 0; 1; 2 |
+| 1 | UInt32 | 0 | 0 |
+| 2 | UInt32 | 1 | 1 |
+
+### DIPLOMACY_RELATIONSHIPS_ARRAY
+
+- Instances: 56
+
+### DOMESTIC_TRADE_ROUTES[]
+
+- Instances: 56
+- Child nodes: FACTION_DOMESTIC_TRADE_ROUTES_ARRAY
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UTF-16 |  | afghanistan; hungary; huron; mamelukes; norway; punjab; saxony; scotland; … |
+
+### FACTION_ARRAY[]
+
+- Instances: 56
+- Child nodes: FACTION
+
+### FACTION_DOMESTIC_TRADE_ROUTES_ARRAY
+
+- Instances: 56
+
+### FACTION_INTERNATIONAL_TRADE_ROUTES_ARRAY
+
+- Instances: 56
+
+### FACTION_TECHNOLOGY_MANAGER
+
+- Instances: 56
+- Child nodes: techs
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Int32 | 836980000 … 836988064 | 836980000; 836980064; 836980128; 836980704; 836980896; 836981088; 836981216; 836981536; … |
+
+### FAMILY
+
+- Instances: 56
+- Child nodes: FAMILY::MONARCHY_INFO_CHARACTER, ORDINAL_PAIR
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt8 | 0 … 4 | 0; 1; 2; 3; 4 |
+
+### FORT_REPAIRS_ARRAY
+
+- Instances: 56
+
+### FORT_UPGRADES_ARRAY
+
+- Instances: 56
+
+### GOVERNMENT
+
+- Instances: 56
+- Child nodes: GOV_IMP, POSTS_ARRAY
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Int32 | 580820344 … 580837864 | 580820344; 580820824; 580821064; 580824904; 580825144; 580825864; 580827544; 580827784; … |
+| 1 | UTF-16 |  | gov_absolute_monarchy; gov_constitutional_monarchy; gov_republic |
+| 2 | Int32 | 0 … 100 | 70; 78; 79; 80; 83; 86; 96; 97; … |
+
+### GOV_IMP
+
+- Instances: 56
+
+### GOV_IMP[]
+
+- Instances: 56
+- Child nodes: GOVERNMENT::ABSOLUTE_MONARCHY, GOVERNMENT::CONSTITUTIONAL_MONARCHY, GOVERNMENT::REPUBLIC
+
+### INTERNATIONAL_TRADE_ROUTES[]
+
+- Instances: 56
+- Child nodes: FACTION_INTERNATIONAL_TRADE_ROUTES_ARRAY
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UTF-16 |  | afghanistan; hungary; huron; mamelukes; norway; punjab; saxony; scotland; … |
+
+### LAND_UNIT_NAMES_MAP
+
+- Instances: 56
+
+### LAND_UNIT_NAME_ALLOCATOR
+
+- Instances: 56
+- Child nodes: LAND_UNIT_NAMES_MAP
+
+### NAVAL_UNIT_NAME_ALLOCATOR
+
+- Instances: 56
+- Child nodes: UNIT_CLASS_NAME_ALLOCATOR
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Boolean |  | true |
+
+### ORDINAL_PAIR
+
+- Instances: 56
+
+### PLAYERS_ARRAY[]
+
+- Instances: 56
+- Child nodes: CAMPAIGN_PLAYER_SETUP
+
+### POSTS_ARRAY
+
+- Instances: 56
+
+### SPYING_ARRAY[]
+
+- Instances: 56
+- Child nodes: CAMPAIGN_SPYING
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UTF-16 |  | austria; britain; france; netherlands; poland_lithuania; prussia; spain; thirteen_colonies; … |
+
+### techs
+
+- Instances: 56
+
+### CAI_COMPOSITE_REGION_GROUP_ANALYSIS
+
+- Instances: 55
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 7378 … 1535957 | 1081500; 7396; 7408; 7434; 7437; 7439; 7444; 7457; … |
+
+### CAI_CONSTRUCTION_BALANCE_ANALYSIS_REGION_GROUP
+
+- Instances: 55
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 7378 … 1535957 | 1081500; 7396; 7408; 7434; 7437; 7439; 7444; 7457; … |
+
+### CAI_RELIGION_MISSIONARY_ANALYSIS_REGIONS_SELF[]
+
+- Instances: 55
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 317 … 1251 | 1198; 1210; 1249; 1251; 588; 675; 771; 827; … |
+
+### CAI_BDI_DESIRE_DEFEND_REGION_COASTS
+
+- Instances: 54
+- Child nodes: CAI_BDI_DESIRE_DEFEND_REGION_COASTS_GOALS, CAI_BDI_DESIRE_DEFEND_REGION_COASTS_INFO_BLOCK
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1430 | 1265; 1268; 1271; 1274; 1280; 1283; 1286; 1289; … |
+
+### CAI_BDI_DESIRE_DEFEND_REGION_COASTS_GOALS
+
+- Instances: 54
+
+### CAI_BDI_DESIRE_DEFEND_REGION_COASTS_INFO_BLOCK
+
+- Instances: 54
+
+### CAI_BDI_DESIRE_HELP_ALLY_AT_WAR
+
+- Instances: 54
+- Child nodes: CAI_BDI_DESIRE_HELP_ALLY_AT_WAR_GOALS
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1424 | 1265; 1268; 1271; 1274; 1277; 1280; 1283; 1286; … |
+
+### CAI_BDI_DESIRE_HELP_ALLY_AT_WAR_GOALS
+
+- Instances: 54
+
+### CAI_BDI_DESIRE_NAVY_DISTRIBUTION
+
+- Instances: 54
+- Child nodes: CAI_BDI_DESIRE_NAVY_DISTRIBUTION_GOALS
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1430 | 1265; 1268; 1271; 1274; 1280; 1283; 1286; 1289; … |
+| 1 | UInt32 | 8026 … 78834 | 14846; 17779; 19801; 25909; 27436; 29257; 32148; 8026; … |
+
+### CAI_BDI_DESIRE_NAVY_DISTRIBUTION_GOALS
+
+- Instances: 54
+
+### CAI_BDI_DESIRE_NAVY_REPAIR
+
+- Instances: 54
+- Child nodes: CAI_BDI_DESIRE_NAVY_REPAIR_GOALS
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1430 | 1265; 1268; 1271; 1274; 1280; 1283; 1286; 1289; … |
+
+### CAI_BDI_DESIRE_NAVY_REPAIR_GOALS
+
+- Instances: 54
+
+### CAI_BDI_DESIRE_NAVY_STRENGTH_MANAGER
+
+- Instances: 54
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1430 | 1265; 1268; 1271; 1274; 1280; 1283; 1286; 1289; … |
+| 1 | UInt32 | 8035 … 78816 | 14855; 17788; 19810; 25918; 27445; 29266; 32157; 8035; … |
+
+### CAI_BDI_DESIRE_RECALL_ASSETS
+
+- Instances: 54
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1430 | 1265; 1268; 1271; 1274; 1280; 1283; 1286; 1289; … |
+| 1 | UInt32 | 8046 … 78821 | 14866; 17799; 19821; 25929; 27456; 29277; 32168; 8046; … |
+| 2 | UInt32 Array |  | [6085]; [] |
+| 3 | UInt32 Array |  | [0]; [] |
+| 4 | UInt32 Array |  | [] |
+
+### CAI_BDI_DESIRE_RESEARCH_TECHNOLOGY
+
+- Instances: 54
+- Child nodes: CAI_BDI_DESIRE_RESEARCH_TECHNOLOGY_RESEARCH_GOALS, CAI_BDI_DESIRE_RESEARCH_TECHNOLOGY_STEAL_GOALS
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1424 | 1265; 1268; 1271; 1274; 1277; 1280; 1283; 1286; … |
+| 1 | UInt32 | 7912 … 81853 | 14832; 17765; 19787; 25895; 27422; 29243; 7912; 80423; … |
+
+### CAI_BDI_DESIRE_RESEARCH_TECHNOLOGY_RESEARCH_GOALS
+
+- Instances: 54
+
+### CAI_BDI_DESIRE_RESEARCH_TECHNOLOGY_STEAL_GOALS
+
+- Instances: 54
+
+### CAI_BDI_DESIRE_TRADE_AREA_BEHAVIOUR
+
+- Instances: 54
+- Child nodes: CAI_BDI_DESIRE_TRADE_AREA_BEHAVIOUR_CAPTURE_GOALS, CAI_BDI_DESIRE_TRADE_AREA_BEHAVIOUR_PULL_GOALS, CAI_BDI_DESIRE_TRADE_AREA_BEHAVIOUR_RESOLVE_GOALS, CAI_BDI_DESIRE_TRADE_AREA_BEHAVIOUR_UNDEFENDED_GOALS
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1430 | 1265; 1268; 1271; 1274; 1280; 1283; 1286; 1289; … |
+
+### CAI_BDI_DESIRE_TRADE_AREA_BEHAVIOUR_CAPTURE_GOALS
+
+- Instances: 54
+
+### CAI_BDI_DESIRE_TRADE_AREA_BEHAVIOUR_PULL_GOALS
+
+- Instances: 54
+
+### CAI_BDI_DESIRE_TRADE_AREA_BEHAVIOUR_RESOLVE_GOALS
+
+- Instances: 54
+
+### CAI_BDI_DESIRE_TRADE_AREA_BEHAVIOUR_UNDEFENDED_GOALS
+
+- Instances: 54
+
+### CAI_BDI_DESIRE_TRADE_ROUTE_RAIDING_BEHAVIOUR
+
+- Instances: 54
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1430 | 1265; 1268; 1271; 1274; 1280; 1283; 1286; 1289; … |
+| 1 | UInt32 | 7916 … 78827 | 14836; 17769; 19791; 25899; 27426; 29247; 32138; 7916; … |
+
+### CAI_BDI_GOAL_NAVY_GLOBAL_DISTRIBUTION
+
+- Instances: 54
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1430 | 1265; 1268; 1271; 1274; 1280; 1283; 1286; 1289; … |
+| 1 | UInt32 | 8027 … 78835 | 14847; 17780; 19802; 25910; 27437; 29258; 32149; 8027; … |
+
+### CAI_BDI_NAVAL_RECRUITMENT_NEW_SPECIFIC
+
+- Instances: 54
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1478 … 3594 | 1919; 1925; 2000; 2200; 2216; 2249; 2355; 3059; … |
+
+### CAI_MILITARY_RANK_REGION_GROUP_ANALYSIS
+
+- Instances: 54
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 7378 … 1081500 | 1081500; 7396; 7408; 7434; 7437; 7439; 7444; 7457; … |
+| 1 | Boolean |  | false; true |
+| 2 | Boolean |  | false; true |
+
+### CAI_OWNED_AND_ACTIVE_REGIONS_ANALYSIS
+
+- Instances: 54
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1430 | 1265; 1268; 1271; 1274; 1280; 1283; 1286; 1289; … |
+| 1 | UInt32 Array |  | [317, 494, 533, 556, 588, 603, 642, 656, 705, 71…; [675, 771, 1037, 1065, 1198, 1210, 1227, 1249, 6…; [694, 702, 746, 750, 779, 789, 819, 789, 785, 77…; [722, 760, 763, 805, 833, 839, 865, 887, 898, 66…; [765, 809, 843, 1082, 1101, 1251, 581, 553, 172,…; [793, 796, 821, 823, 829, 720, 793]; [817, 920, 1040, 1063, 777, 817, 1037, 988, 1025…; [819, 827, 785, 819, 827]; … |
+
+### REGION_KEYS[]
+
+- Instances: 54
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UTF-16 |  | florida; iroquois_territory; maine; maryland; new_france; new_york; pennsylvania; virginia; … |
+
+### CAI_BDI_DESIRE_CULL_EXCESS_FORCE
+
+- Instances: 52
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 Array |  | [] |
+
+### CAI_BDI_DESIRE_DEFEND_TRADE_ROUTES
+
+- Instances: 52
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1424 | 1265; 1268; 1271; 1274; 1280; 1283; 1286; 1289; … |
+| 1 | UInt32 | 7918 … 76819 | 14838; 17771; 19793; 25901; 27428; 29249; 32140; 7918; … |
+| 2 | UInt32 | 7919 … 76820 | 14839; 17772; 19794; 25902; 27429; 29250; 32141; 7919; … |
+
+### CAI_BDI_DESIRE_MISSIONARY_BEHAVIOUR
+
+- Instances: 52
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1424 | 1265; 1268; 1271; 1274; 1280; 1283; 1286; 1289; … |
+| 1 | UInt32 Array |  | [14522]; [17398, 17405]; [27270]; [31644, 31647]; [33949]; [36136]; [39269]; []; … |
+
+### CAI_BDI_DESIRE_RAID_BEHAVIOUR
+
+- Instances: 52
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 Array |  | [1530938, 1530940]; [] |
+
+### CAI_BDI_NAVAL_RECRUITMENT_BUILD_NAVY_AT_PORT_OF_STRENGTH
+
+- Instances: 52
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Int32 | 277 … 2272 | 1029; 1491; 2080; 287; 430; 578; 685; 708; … |
+| 1 | UInt32 | 1478 … 3594 | 1907; 1925; 2198; 2200; 2216; 2249; 2355; 3059; … |
+| 2 | UInt32 | 0 … 3 | 0; 3 |
+| 3 | UInt32 | 0 | 0 |
+| 4 | UInt32 Array |  | [1445933, 1464310]; [1445942, 1464317]; [1514203, 1527625]; [1514572]; [1514573]; [640576]; [952373]; []; … |
+| 5 | Int32 | 0 | 0 |
+
+### CAI_FACTION_SEA_GRID_ANALYSIS
+
+- Instances: 49
+- Child nodes: CAI_FACTION_SEA_GRID_ANALYSIS_VALUES, CAI_SEA_GRID_CELL_VALUE_TOTALS
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 33 … 35 | 33; 34; 35 |
+
+### CAI_FACTION_SEA_GRID_ANALYSIS_VALUES
+
+- Instances: 49
+
+### CAI_SEA_GRID_CELL_VALUE_TOTALS
+
+- Instances: 49
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Float32 | 6.2430853843688965 … 88.11518096923828 | 15.591179; 21.888645; 22.262636; 22.294622; 24.190369; 25.345234; 26.142818; 26.291409; … |
+| 1 | Int32 | 1732691 … 14841629 | 10585879; 10667879; 10720625; 2081635; 3214831; 3556734; 4864436; 7974495; … |
+| 2 | Int32 | 2 … 1293 | 118; 200; 420; 436; 643; 650; 665; 928; … |
+| 3 | Int32 | 0 … 520291 | 270869; 287490; 312131; 357564; 405516; 433848; 438761; 62753; … |
+| 4 | Int32 | 337 … 37180 | 10592; 20195; 20766; 2553; 28386; 2926; 5699; 7748; … |
+
+### REGION_SLOT_DATA[]
+
+- Instances: 49
+- Child nodes: REGION_SLOT_DATA
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 481448096 … 1022177080 | 1019348272; 1019350736; 1019361208; 1021085040; 1022113632; 1022116712; 1022137040; 842788128; … |
+
+### CAI_BDI_DESIRE_NAVY_RECRUITMENT_GOALS[]
+
+- Instances: 48
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 13935 … 1511516 | 1198198; 13935; 13937; 13939; 17233; 17235; 17237; 18761; … |
+
+### GOVERNMENT::ABSOLUTE_MONARCHY
+
+- Instances: 46
+
+### CAI_FACTION_CAPABLE_MILITARY_STRENGTHS
+
+- Instances: 45
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1433 | 1265; 1268; 1274; 1277; 1307; 1364; 1370; 1385; … |
+| 1 | Int32 Array |  | [62201, 29759, 44127, 2488040, 1190360, 1765080,…; [64300, 19501, 50938, 1286000, 390020, 1018760, …; [69600, 25293, 53902, 2784000, 1011720, 2156080,…; [79211, 19025, 54537, 3168440, 761000, 2181480, …; [81179, 25300, 58565, 3247160, 1012000, 2342600,…; [84606, 19517, 55494, 3384240, 780680, 2219760, …; [84962, 25525, 48694, 3398480, 1021000, 1947760,…; [87162, 19501, 55207, 3486480, 780040, 2208280, …; … |
+
+### CAI_UNIT_AVAILABILITY_ANALYSIS_FACTION
+
+- Instances: 45
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1433 | 1265; 1268; 1274; 1277; 1307; 1364; 1370; 1385; … |
+
+### CAI_CONSTRUCTION_BALANCE_ANALYSIS_FACTION
+
+- Instances: 44
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1430 | 1265; 1268; 1271; 1274; 1277; 1280; 1283; 1286; … |
+
+### CAI_FACTION_RELATIVE_MILITARY_STRENGTHS
+
+- Instances: 44
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1430 | 1265; 1268; 1271; 1274; 1277; 1280; 1283; 1286; … |
+| 1 | Int32 Array |  | [100, 21, 60, 3999, 863, 2411, 1999, 431, 1205, …; [100, 22, 63, 3999, 894, 2533, 1999, 447, 1266, …; [100, 22, 73, 3999, 918, 2937, 1999, 459, 1468, …; [100, 23, 65, 4000, 922, 2623, 2000, 461, 1311, …; [100, 24, 68, 4000, 960, 2754, 2000, 480, 1377, …; [100, 25, 59, 2000, 517, 1192, 1000, 258, 596, 0…; [100, 30, 66, 3999, 1201, 2664, 1999, 600, 1332,…; [100, 31, 72, 3999, 1246, 2885, 1999, 623, 1442,…; … |
+
+### CAI_FACTION_RESEARCH_TECHNOLOGY_FACTION_ANALYSIS
+
+- Instances: 44
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1430 | 1265; 1268; 1271; 1274; 1277; 1280; 1283; 1286; … |
+| 1 | Boolean |  | true |
+| 2 | UInt32 | 0 … 6 | 0; 1; 2; 4; 5; 6 |
+| 3 | Float32 | -0.9849624037742615 … -0.0504450798034668 | -0.05044508; -0.055737734; -0.46308726; -0.5557476; -0.69375736; -0.7338792; -0.8095238; -0.82122904; … |
+| 4 | Float32 | -0.9849624037742615 … -0.355704665184021 | -0.35570467; -0.55307263; -0.5557476; -0.6571429; -0.67962307; -0.7215967; -0.79821956; -0.8885246; … |
+| 5 | Float32 | -0.9849397540092468 … -0.0504450798034668 | -0.05044508; -0.055737734; -0.35570467; -0.55307263; -0.5557476; -0.6571429; -0.67962307; -0.7215967; … |
+| 6 | Float32 | -0.9720670580863953 … -0.024574637413024902 | -0.35238093; -0.37809187; -0.4595701; -0.5505618; -0.557047; -0.8575668; -0.8688525; -0.97206706; … |
+| 7 | Float32 | -0.9720670580863953 … -0.024574637413024902 | -0.35238093; -0.37809187; -0.4595701; -0.5505618; -0.557047; -0.8575668; -0.8688525; -0.97206706; … |
+| 8 | Float32 | -0.1409395933151245 … 1 | -0.114952445; -0.1409396; 0.048106432; 0.2061249; 0.21904767; 0.43575418; 0.56676555; 0.704918; … |
+| 9 | Float32 | -0.978723406791687 … 0.4357541799545288 | -0.114952445; -0.3880952; -0.39458185; -0.568792; -0.94658756; -0.9672131; 0.048106432; 0.43575418; … |
+
+### CAI_FACTION_RESEARCH_TECHNOLOGY_UNIVERSITY_ANALYSIS
+
+- Instances: 44
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1474 … 3536 | 1911; 1938; 1946; 2196; 2385; 2537; 3223; 3536; … |
+| 1 | UTF-16 |  | enlightenment_division_of_labour; enlightenment_joint_stock_companies; enlightenment_separation_of_powers; military_army_etwii_improved_volley_fire; military_army_etwii_lineinf_doctrine; military_army_wedge_formation; military_navy_flintlock_cannon; military_ordnance_canister_shot; … |
+
+### CAI_TRADE_ROUTE_FACTION_ANALYSIS
+
+- Instances: 44
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1430 | 1265; 1268; 1271; 1274; 1277; 1280; 1283; 1286; … |
+| 1 | UInt32 | 0 … 11393 | 0; 1040; 1771; 2460; 2868; 5536; 6464; 682; … |
+
+### CHARACTER_PORTRAIT_PATHS
+
+- Instances: 44
+- Child nodes: CULTURE_PATHS, PORTRAIT_CATEGORIES
+
+### CULTURE_PATHS
+
+- Instances: 44
+
+### CULTURE_UNIT_CLASS_MAPPING[]
+
+- Instances: 44
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UTF-16 |  | barbary; georgia; hessen; holland; malta; middle_east; poland; savoy; … |
+| 1 | Boolean Array |  | [false, false, false, false, false, false, false…; [false, false, false, false, true, false, true, …; [false, true, false, false, false, false, false,…; [false, true, false, false, true, false, false, …; [false, true, false, false, true, false, true, f…; [true, false, false, false, true, false, false, …; [true, true, false, false, false, false, false, …; [true, true, false, false, false, true, false, f…; … |
+
+### PORTRAIT_ALLOCATOR[]
+
+- Instances: 44
+- Child nodes: CHARACTER_PORTRAIT_PATHS
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UTF-16 |  | barbary; georgia; hessen; holland; malta; middle_east; poland; savoy; … |
+
+### PORTRAIT_CATEGORIES
+
+- Instances: 44
+
+### CAI_BDI_TARGET_REGION_BASE
+
+- Instances: 43
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 631 … 1227 | 1097; 1164; 1195; 1227; 651; 656; 773; 813; … |
+| 1 | UInt32 Array |  | [1081526, 1081527]; [1430708, 1430709]; [1477915]; [1483626]; [1511828]; [1526621]; [1544240, 1544241]; []; … |
+| 2 | Float32 Array |  | [0.44993362, 0.55006635]; [0.45230013, 0.54769987]; [0.5496967, 0.4503033]; [1]; [] |
+| 3 | Int32 | 0 … 4276 | 0; 105; 1090; 1342; 2095; 284; 67; 83; … |
+| 4 | Boolean |  | true |
+| 5 | UInt32 | 0 … 3 | 0; 1; 3 |
+
+### CAI_BDI_GOAL_ACQUIRE_REGION
+
+- Instances: 42
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 0 … 1227 | 0; 1097; 1136; 1164; 1195; 1227; 651; 656; … |
+| 1 | UInt32 | 0 | 0 |
+| 2 | UInt32 | 0 … 1539320 | 0; 1081524; 1430706; 1477912; 1483624; 1511826; 1513875; 1526619; … |
+| 3 | UInt32 | 41 … 111 | 100; 101; 102; 111; 62; 70; 73; 87; … |
+
+### CAI_BDI_INVASION_REQUEST
+
+- Instances: 42
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 0 … 1340 | 0; 1271; 1277; 1280; 1286; 1289; 1298; 1331; … |
+| 1 | Boolean |  | false; true |
+| 2 | Boolean |  | false |
+| 3 | Boolean |  | false |
+| 4 | Boolean |  | false |
+| 5 | UInt32 | 0 … 1539321 | 0; 1081525; 1430707; 1477913; 1483625; 1511827; 1513876; 1526620; … |
+
+### CAI_BDI_REGISTERED_REGION_TARGET
+
+- Instances: 42
+- Child nodes: CAI_FACTION_ATTITUDE_PAIR
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 0 … 1539318 | 0; 1081522; 1430616; 1477910; 1483622; 1511824; 1513871; 1526617; … |
+| 1 | UInt32 | 0 … 1227 | 0; 1097; 1136; 1164; 1195; 1227; 651; 656; … |
+| 2 | Boolean |  | false; true |
+
+### CAI_BDI_TARGET_PATH
+
+- Instances: 42
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 0 … 1539321 | 0; 1081525; 1430707; 1477913; 1483625; 1511827; 1513876; 1526620; … |
+| 1 | UInt32 | 0 … 1535965 | 10840; 10841; 111314; 111316; 111338; 111340; 1411749; 978556; … |
+| 2 | UInt32 Array |  | [1081528, 1081530, 1081532]; [1081528, 1081535, 1081537, 1081539, 1081541]; [1430710, 1430712, 1430714, 1430716]; [1430710, 1430712, 1430719]; [1511829, 1511831]; [1526622, 1430712, 1430714, 1526624]; [1544244, 1430712, 1544246, 1544248]; [1544244, 1544251, 1544253, 1430716]; … |
+| 3 | UInt32 Array |  | [1081528, 1081530, 1081532]; [1081528, 1081535, 1081537, 1081539, 1081541]; [1430710, 1430712, 1430714, 1430716]; [1430710, 1430712, 1430719]; [1511829, 1511831]; [1526622, 1430712, 1430714, 1526624]; [1544244, 1430712, 1544246, 1544248]; [1544244, 1544251, 1544253, 1430716]; … |
+| 4 | Int32 | 395 … 4276 | 1083; 1245; 1264; 1290; 1712; 2095; 425; 430; … |
+
+### CAI_BDI_TARGET_REGION_INVASION
+
+- Instances: 42
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 0 | 0 |
+
+### CAI_FACTION_TAXATION_GOVERNORSHIP_ANALYSIS
+
+- Instances: 42
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 7461 … 99910058 | 7461; 7462; 7463; 7464; 7465; 7469; 7470; 7471; … |
+| 1 | UInt32 | 2 | 2 |
+| 2 | UInt32 | 2 | 2 |
+| 3 | UInt32 Array |  | [634, 545]; [817]; [959]; [] |
+
+### CAI_GOVERNORSHIP
+
+- Instances: 42
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 827877960 … 827954520 | 827877960; 827878048; 827878752; 827880952; 827882360; 827882448; 827884032; 827884912; … |
+| 1 | UInt32 | 33 … 35 | 33; 34; 35 |
+| 2 | UInt32 | 5419 … 99900058 | 5419; 5420; 5485; 5486; 5543; 5683; 5684; 5726; … |
+| 3 | UInt32 Array |  | [1037, 1065, 1249]; [1084, 1097, 1132]; [1251, 1101, 1082, 1094]; [705, 694, 702, 779, 715, 756, 746, 789, 710]; [729, 913, 638, 634, 562]; [765, 809, 843]; [777, 771, 675, 688, 817, 692]; [827, 793, 819, 821, 796, 823, 829, 863, 785, 75…; … |
+
+### CAI_INVASION_SPECIFICATION
+
+- Instances: 42
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 631 … 1227 | 1097; 1164; 1195; 1227; 651; 656; 773; 813; … |
+| 1 | UInt32 | 0 … 7451 | 0; 7378; 7384; 7396; 7399; 7402; 7408; 7415; … |
+
+### CAI_WORLD_GOVERNORSHIPS[]
+
+- Instances: 42
+- Child nodes: CAI_BDI_COMPONENT_BLOCK_OWNS, CAI_BDI_COMPONENT_PROPERTY_SET, CAI_GOVERNORSHIP, OWNED_DIRECT
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 7461 … 99910058 | 7461; 7462; 7463; 7464; 7465; 7469; 7470; 7471; … |
+| 1 | Float32 | 100 | 100 |
+| 2 | Float32 | 100 | 100 |
+| 3 | Float32 | 0 | 0 |
+| 4 | Float32 | 100 | 100 |
+| 5 | UInt32 | 1 | 1 |
+| 6 | Boolean |  | false |
+| 7 | UInt32 Array |  | [] |
+| 8 | UInt32 Array |  | [14526, 0]; [14527, 0]; [17412, 0]; [17413, 0]; [19495, 0]; [27281, 0]; [81460, 0]; [81461, 0]; … |
+| 9 | UInt32 | 0 | 0 |
+| 10 | UInt32 | 1 | 1 |
+| 11 | UInt32 Array |  | [] |
+| 12 | UInt32 Array |  | [14526, 7879]; [14527, 7879]; [17412, 14800]; [17413, 14800]; [19495, 17733]; [27281, 25863]; [81460, 80389]; [81461, 80389]; … |
+| 13 | UInt32 | 0 | 0 |
+| 14 | UInt32 | 0 | 0 |
+| 15 | UInt32 Array |  | [] |
+| 16 | UInt32 Array |  | [] |
+| 17 | UInt32 Array |  | [] |
+| 18 | UInt32 Array |  | [] |
+| 19 | Boolean |  | false |
+| 20 | UInt32 | 0 | 0 |
+| 21 | Boolean |  | false |
+
+### GOVERNORSHIP
+
+- Instances: 42
+- Child nodes: GOVERNORSHIP_TAXES
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Int32 | 827877960 … 827954520 | 827877960; 827878048; 827878752; 827880776; 827880952; 827882360; 827882448; 827884032; … |
+| 1 | UInt32 Array |  | [1018213848, 842954392, 842947840, 842941288, 10…; [1019380424, 1021296512, 1021500320, 1021926192,…; [1019381360, 1021306808, 1021928064]; [1019386040, 1021505936, 1021936488, 1021943040]; [1019392592, 842944096, 1021301192, 1021497512, …; [1021309616, 1021929000, 1022464528]; [246961200, 842948776, 1021934616]; [246962136, 1019386976, 1021494704, 1021925256, …; … |
+| 2 | UInt32 | 247045056 … 1012495192 | 1010035568; 1010040224; 1011126176; 1011335232; 247045056; 248837696; 747673152; 834578952; … |
+| 3 | Boolean |  | false; true |
+| 4 | Boolean |  | false |
+
+### GOVERNORSHIP_TAXES
+
+- Instances: 42
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 2 | 2 |
+| 1 | UInt32 | 2 | 2 |
+| 2 | UInt8 | 15 | 15 |
+| 3 | UInt8 | 15 | 15 |
+
+### CDIR_PLAYER_RIVAL_SCORE_ANALYSIS
+
+- Instances: 41
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1430 | 1265; 1268; 1271; 1283; 1316; 1391; 1427; 1430; … |
+| 1 | Float32 | 0.037675000727176666 … 0.5182499885559082 | 0.063112505; 0.06600001; 0.11241668; 0.11270833; 0.11387501; 0.13200001; 0.17262502; 0.2; … |
+
+### CAI_BDI_GOAL_RECRUIT_STRENGTH_IN_REGION
+
+- Instances: 39
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 588 … 1251 | 1037; 1040; 1249; 1251; 729; 756; 817; 913; … |
+| 1 | Int32 | 94 … 10556 | 115; 1308; 182; 220; 439; 4718; 651; 777; … |
+| 2 | UInt32 Array |  | [1145914]; [1218049]; [1452783]; [1477937]; [1483407]; [1526767]; [174387]; []; … |
+
+### CAI_BDI_DESIRE_RESEARCH_TECHNOLOGY_RESEARCH_GOALS[]
+
+- Instances: 38
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 14601 … 1526037 | 1081732; 1082039; 1254969; 1428661; 14601; 17343; 19571; 229560; … |
+
+### CAI_BDI_GOAL_RESEARCH_TECHNOLOGY
+
+- Instances: 38
+- Child nodes: CAI_BDI_GOAL_RESEARCH_TECHNOLOGY_RESEARCH_TECHS
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1415 | 1265; 1268; 1271; 1274; 1277; 1280; 1286; 1289; … |
+| 1 | UInt32 | 1474 … 3536 | 1911; 1938; 1946; 1968; 2196; 2385; 2537; 3223; … |
+
+### CAI_BDI_GOAL_RESEARCH_TECHNOLOGY_RESEARCH_TECHS
+
+- Instances: 38
+
+### ARMY_DATA[]
+
+- Instances: 37
+- Child nodes: ARMY_DATA
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 474691408 … 2441588176 | 1154107776; 2441508304; 474740304; 474743632; 827804512; 827805792; 827812960; 827866208; … |
+
+### CAI_DIPLOMATIC_GOAL_BASE
+
+- Instances: 37
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1430 | 1277; 1298; 1316; 1322; 1331; 1355; 1427; 1430; … |
+| 1 | UInt32 | 80914 … 1544308 | 111625; 123760; 1544294; 1544296; 1544306; 1544308; 80914; 83014; … |
+| 2 | UInt32 | 0 | 0 |
+| 3 | Int32 | 0 … 1 | 0; 1 |
+| 4 | Int32 | 1 | 1 |
+
+### CAI_RECRUITMENT_LINK
+
+- Instances: 37
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1261581 … 1539797 | 1261581; 1416830; 1435514; 1435515; 1491214; 1516289; 1523000; 1524316; … |
+| 1 | UInt32 | 1047836400 … 2542356336 | 1048086096; 1135495544; 1428829136; 2090755976; 2542117112; 2542139144; 2542142544; 2542340968; … |
+| 2 | Boolean |  | false |
+| 3 | UInt32 | 0 | 0 |
+| 4 | UInt32 | 0 | 0 |
+| 5 | UInt32 | 1268 … 1430 | 1268; 1271; 1280; 1301; 1310; 1334; 1352; 1430; … |
+
+### CAI_UNIT_BALANCE_ANALYSIS_FACTION
+
+- Instances: 37
+- Child nodes: CAI_UNIT_BALANCE_ANALYSIS_FACTION_ARMY_UNIT_BIAS, CAI_UNIT_BALANCE_ANALYSIS_FACTION_NAVY_UNIT_BIAS
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1430 | 1265; 1268; 1271; 1274; 1277; 1280; 1283; 1286; … |
+
+### CAI_UNIT_BALANCE_ANALYSIS_FACTION_ARMY_UNIT_BIAS
+
+- Instances: 37
+
+### CAI_UNIT_BALANCE_ANALYSIS_FACTION_NAVY_UNIT_BIAS
+
+- Instances: 37
+
+### REGION_RECRUITMENT_ITEM_ARRAY[]
+
+- Instances: 37
+- Child nodes: RECRUITMENT_ITEM
+
+### CAI_BDIM_MOVE_TO_POSITION
+
+- Instances: 36
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Boolean |  | false |
+| 1 | Int32 | -792461312 … 630953014 | -589132054; -610913559; 166147695; 180070596; 180226260; 198103790; 198141981; 198759296; … |
+| 2 | Int32 | 82826829 … 467960399 | 231448764; 313512377; 313806921; 328323734; 342302438; 342421309; 342769568; 394930657; … |
+| 3 | UInt32 | 0 … 1201 | 1022; 1132; 656; 715; 750; 756; 833; 898; … |
+| 4 | UInt32 | 0 … 35 | 0; 33; 34; 35 |
+| 5 | UInt32 | 0 … 1539502 | 1359032; 1359038; 1528444; 1528448; 1528461; 1528464; 5391; 835187; … |
+| 6 | Int32 | -568563456 … 656846720 | 0; 123437432; 137760480; 143409825; 155929376; 278659392; 293601441; 365156585; … |
+| 7 | Int32 | -179322832 … 424895670 | 0; 327846368; 329864227; 350802565; 393192460; 412334880; 420554678; 424895670; … |
+| 8 | Boolean |  | false; true |
+| 9 | UInt32 | 0 … 1520609 | 0; 1520609 |
+
+### CAI_PROTECTION_AREA
+
+- Instances: 35
+- Child nodes: CAI_PROTECTION_AREA_FORTS, CAI_PROTECTION_AREA_MOBILES, CAI_PROTECTION_AREA_SLOTS
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Float32 | 111.2249755859375 … 315.91900634765625 | 111.224976; 112.86737; 114.50977; 120.337685; 132.562; 139.86383; 140.38272; 140.52164; … |
+| 1 | Float32 | 354.32281494140625 … 416.47796630859375 | 357.5757; 363.0301; 363.91644; 364.98822; 366.06; 372.8181; 373.09567; 374.27722; … |
+| 2 | Float32 | 1.0416259765625 … 5 | 1.041626; 1.71521; 3.529068; 3.6844025; 3.962204; 4.7221985; 5 |
+| 3 | Float32 | 0.0093994140625 … 5 | 0.009399414; 2.0818481; 2.6369324; 2.854065; 2.8564453; 4.444916; 5 |
+| 4 | UInt32 | 0 … 2486 | 0; 2287; 2430; 2486 |
+| 5 | Float32 | 1 … 1378184.25 | 1; 1207718.9; 1207719.9; 2; 542065; 603762.3; 665654.9; 665655.9; … |
+
+### CAI_PROTECTION_AREA_FORTS
+
+- Instances: 35
+
+### CAI_PROTECTION_AREA_MOBILES
+
+- Instances: 35
+
+### CAI_PROTECTION_AREA_SLOTS
+
+- Instances: 35
+
+### CAI_REGION_PROTECTION_AREA_ANALYSIS_AREAS[]
+
+- Instances: 35
+- Child nodes: CAI_PROTECTION_AREA
+
+### CAI_BDI_GOAL_INVASION_ATTACK_DEFENDERS
+
+- Instances: 34
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 631 … 1227 | 1097; 1164; 1195; 1227; 651; 656; 773; 813; … |
+| 1 | UInt32 | 311562 … 1539334 | 1081584; 1430737; 1483638; 1511841; 1513912; 1526633; 801204; 887173; … |
+
+### CAI_BDI_GOAL_INVASION_CAPTURE_SETTLEMENT
+
+- Instances: 34
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1754 … 3524 | 1827; 1849; 2229; 2361; 3229; 3370; 3431; 3524; … |
+| 1 | UInt32 | 311560 … 1539332 | 1081582; 1430735; 1483636; 1511839; 1513910; 1526631; 801202; 887171; … |
+
+### CAI_BDI_GOAL_INVASION_DAMAGE_INFRASTRUCTURE
+
+- Instances: 34
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 631 … 1227 | 1097; 1164; 1195; 1227; 651; 656; 773; 813; … |
+| 1 | UInt32 | 311564 … 1539336 | 1081586; 1430739; 1483640; 1511843; 1513914; 1526635; 801206; 887175; … |
+
+### CAI_BDI_GOAL_INVASION_OBTAIN_FORCES
+
+- Instances: 34
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 631 … 1227 | 1097; 1164; 1195; 1227; 651; 656; 773; 813; … |
+| 1 | UInt32 | 311558 … 1539330 | 1081578; 1430733; 1483634; 1511837; 1513908; 1526629; 801200; 887169; … |
+
+### CAI_BDI_GOAL_MANAGE_REGION_INVASION
+
+- Instances: 34
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 631 … 1227 | 1097; 1164; 1195; 1227; 651; 656; 773; 813; … |
+| 1 | UInt32 | 311557 … 1539329 | 1081577; 1430732; 1483633; 1511836; 1513907; 1526628; 801199; 887168; … |
+| 2 | UInt32 | 311559 … 1539331 | 1081581; 1430734; 1483635; 1511838; 1513909; 1526630; 801201; 887170; … |
+| 3 | UInt32 | 311561 … 1539333 | 1081583; 1430736; 1483637; 1511840; 1513911; 1526632; 801203; 887172; … |
+| 4 | UInt32 | 311563 … 1539335 | 1081585; 1430738; 1483639; 1511842; 1513913; 1526634; 801205; 887174; … |
+
+### CAI_DIPLOMATIC_INTENTION
+
+- Instances: 34
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1430 | 1277; 1298; 1316; 1322; 1331; 1355; 1427; 1430; … |
+| 1 | UInt32 | 0 | 0 |
+
+### CAI_FACTION_ATTITUDE_PAIR
+
+- Instances: 33
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1415 | 1271; 1277; 1280; 1286; 1289; 1292; 1298; 1331; … |
+| 1 | UInt32 | 0 … 4 | 0; 2; 3; 4 |
+
+### CAI_TARGET_ANALYSIS
+
+- Instances: 33
+- Child nodes: CAI_TARGET_ANALYSIS_MOBILES, CAI_TARGET_ANALYSIS_SETTLEMENTS, CAI_TARGET_ANALYSIS_SLOTS
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 96212 … 1528444 | 124835; 1320403; 1359038; 1380184; 1500585; 161057; 835187; 96212; … |
+| 1 | Boolean |  | true |
+| 2 | Boolean |  | true |
+| 3 | Boolean |  | false |
+| 4 | Boolean |  | false |
+| 5 | Boolean |  | false; true |
+| 6 | Boolean |  | false |
+| 7 | Boolean |  | true |
+
+### CAI_TARGET_ANALYSIS_MOBILES
+
+- Instances: 33
+
+### CAI_TARGET_ANALYSIS_SETTLEMENTS
+
+- Instances: 33
+
+### CAI_TARGET_ANALYSIS_SLOTS
+
+- Instances: 33
+
+### CAI_HIGH_LEVEL_PATHFINDER_FACTION_STATES[]
+
+- Instances: 31
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1433 | 1265; 1268; 1271; 1274; 1277; 1280; 1286; 1433; … |
+| 1 | Boolean |  | false; true |
+| 2 | Boolean |  | false; true |
+
+### CAI_PROTECTION_AREA_SLOTS[]
+
+- Instances: 30
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 2289 … 2512 | 2289; 2291; 2293; 2432; 2434; 2436; 2438; 2440; … |
+
+### CAI_MILITARY_PRODUCTION_CAPACITY_ANALYSIS_REGION_GROUP
+
+- Instances: 28
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 7378 … 1535957 | 1081500; 7396; 7408; 7434; 7437; 7439; 7444; 7457; … |
+
+### CAI_NAVY_RECRUITMENT_FACTION_ANALYSIS
+
+- Instances: 28
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1430 | 1265; 1268; 1271; 1274; 1277; 1280; 1286; 1292; … |
+| 1 | Boolean |  | false |
+| 2 | UInt32 | 15 … 480 | 15; 200; 240; 480 |
+
+### CAI_BDI_GOAL_NAVY_REPAIR
+
+- Instances: 27
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 0 … 1430 | 0; 1265; 1268; 1286; 1292; 1304; 1322; 1325; … |
+| 1 | UInt32 | 0 … 1411710 | 110191; 1198030; 1264728; 161046; 426817; 5391; 5479; 902870; … |
+| 2 | UInt32 | 0 … 1446206 | 1082032; 1116569; 1218420; 1377828; 190163; 249731; 249733; 306617; … |
+| 3 | UInt32 | 0 | 0 |
+
+### CAI_MILITARY_REGION_GROUP_ANALYSIS_INFO_FRIENDS[]
+
+- Instances: 27
+- Child nodes: CAI_RESOURCE_MOBILE_MILITARY_AFFECT
+
+### CREATED_CHARACTER_ARRAY[]
+
+- Instances: 27
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UTF-16 |  | abraham_de_moivre; charles_mohun; comte_de_marsin; daniel_defoe; dhanaji_jadhav; duc_de_broglie; duc_de_noailles; eberhard_ides; … |
+
+### CAI_BDI_DESIRE_DEFEND_REGION_COASTS_INFO
+
+- Instances: 26
+- Child nodes: CAI_BDI_DESIRE_DEFEND_REGION_COASTS_INFO_VALUES
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Int32 | 104650 … 1400487 | 1122245; 1215742; 1400487; 438075; 516309; 732591; 768728; 982045; … |
+
+### CAI_BDI_DESIRE_DEFEND_REGION_COASTS_INFO_BLOCK[]
+
+- Instances: 26
+- Child nodes: CAI_BDI_DESIRE_DEFEND_REGION_COASTS_INFO
+
+### CAI_BDI_DESIRE_DEFEND_REGION_COASTS_INFO_VALUES
+
+- Instances: 26
+
+### CAI_BDI_FRONTIER_REGION_INFORMATION
+
+- Instances: 26
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 588 … 1251 | 1037; 1065; 1101; 1249; 1251; 675; 692; 715; … |
+| 1 | UInt32 Array |  | [1081526]; [1081527]; [1430708, 1544240]; [1430709]; [1483626]; [1511828]; [1526621]; [1544241]; … |
+| 2 | Float32 Array |  | [0.33333334, 0.33333334, 0.33333334]; [0.5, 0.5]; [0.54860127, 0.4513988]; [1]; [] |
+| 3 | Int32 | 410 … 8556 | 1083; 1245; 1290; 415; 420; 425; 430; 5071; … |
+
+### CAI_TRANSITION_AREA
+
+- Instances: 23
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 0 … 22 | 0; 1; 2; 3; 4; 5; 6; 7; … |
+| 1 | UInt32 Array |  | [3595, 3596, 3611, 3612, 3613, 3614, 3610, 3604,…; [3595, 3602, 3611, 3615, 3608, 3606]; [3595, 3603, 3611, 3615, 3608, 3606]; [3595, 3610, 3605, 3608, 3607, 3616, 3598]; [3596, 3599, 3612, 3608, 3606, 3615]; [3597, 3610, 3605, 3608, 3607, 3616]; [3597, 3614, 3601, 3604, 3605, 3617, 3609, 3607,…; [3607, 3614, 3601, 3605, 3617, 3609, 3602, 3603,…; … |
+
+### CAI_WORLD_TRANSITION_AREAS[]
+
+- Instances: 23
+- Child nodes: CAI_BDI_COMPONENT_BLOCK_OWNS, CAI_BDI_COMPONENT_PROPERTY_SET, CAI_SITUATED, CAI_TRANSITION_AREA
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 3595 … 3617 | 3595; 3596; 3597; 3598; 3599; 3600; 3601; 3602; … |
+| 1 | Float32 | 100 | 100 |
+| 2 | Float32 | 100 | 100 |
+| 3 | Float32 | 0 | 0 |
+| 4 | Float32 | 100 | 100 |
+| 5 | UInt32 | 1 | 1 |
+| 6 | Boolean |  | false |
+| 7 | UInt32 Array |  | [] |
+| 8 | UInt32 Array |  | [] |
+| 9 | UInt32 | 0 | 0 |
+| 10 | UInt32 | 0 | 0 |
+| 11 | UInt32 Array |  | [] |
+| 12 | UInt32 Array |  | [] |
+| 13 | UInt32 | 0 | 0 |
+| 14 | UInt32 | 0 | 0 |
+| 15 | UInt32 Array |  | [] |
+| 16 | UInt32 Array |  | [] |
+| 17 | UInt32 Array |  | [] |
+| 18 | UInt32 Array |  | [] |
+| 19 | Boolean |  | false |
+| 20 | UInt32 | 0 | 0 |
+| 21 | Boolean |  | false |
+
+### CAI_BDIM_OCCUPY_GARRISONABLE_SH
+
+- Instances: 22
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 0 … 3536 | 0; 1644; 1650; 1652; 1934; 3134; 3201; 3386; … |
+| 1 | UInt32 | 0 … 1399656 | 0; 1060615; 1175311; 1399656; 5470; 5624; 5666; 926106; … |
+| 2 | Boolean |  | false; true |
+| 3 | Int32 | 0 … 244751633 | 0; 244751633 |
+| 4 | Int32 | 0 … 403391448 | 0; 403391448 |
+| 5 | UInt32 | 0 … 1537271 | 0; 1537271 |
+
+### CAI_MILITARY_REGION_GROUP_ANALYSIS_INFO_NEUTRALS[]
+
+- Instances: 22
+- Child nodes: CAI_RESOURCE_MOBILE_MILITARY_AFFECT
+
+### CAI_POSITION_AND_STRENGTH_ANALYSIS_REGION_BLOCK
+
+- Instances: 22
+
+### LAND_UNIT_RECRUITMENT_ITEM
+
+- Instances: 22
+- Child nodes: RECRUITMENT_ITEM
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 0 | 0 |
+
+### CAI_BDI_PROMOTE_UNIT
+
+- Instances: 21
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 6006 … 1541247 | 1117193; 1217903; 1218312; 229062; 472921; 548105; 863460; 92966; … |
+
+### CAI_BDIM_SIEGE_SH
+
+- Instances: 20
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 0 … 3538 | 0; 1685; 1849; 1992; 2020; 2022; 2486; 2506; … |
+| 1 | UInt32 | 0 … 1520486 | 0; 1321420; 1364600; 1382870; 1414851; 1496279; 1503517; 96212; … |
+| 2 | UInt32 | 0 | 0 |
+| 3 | UInt32 | 0 | 0 |
+| 4 | Boolean |  | false |
+| 5 | Int32 | -641440192 … 274690455 | -550222530; 0; 131171008; 181063726; 192500664; 242930924; 245173808; 274690455; … |
+| 6 | Int32 | 0 … 472562686 | 0; 313175921; 330695629; 332062189; 335960078; 405102389; 411676517; 472562686; … |
+
+### CAI_BDI_GOAL_RESOLVE_UNDEFENDED_TRADE_NAVY
+
+- Instances: 20
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 0 … 1343 | 0; 1265; 1280; 1286; 1292; 1301; 1304; 1310; … |
+| 1 | UInt32 | 0 … 1335697 | 0; 100340; 103136; 1285502; 1335697; 151795; 351353; 361191; … |
+| 2 | UInt32 | 0 … 1517410 | 0; 1054639; 115404; 1217674; 1287890; 1335878; 1517410; 198891; … |
+
+### CAI_TARGET_ANALYSIS_SETTLEMENTS[]
+
+- Instances: 20
+- Child nodes: CAI_TARGET_ANALYSIS_TARGET
+
+### CAI_TRADING_POST
+
+- Instances: 20
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 27 … 48 | 27; 36; 42; 48 |
+| 1 | Int32 | -359787072 … 919520512 | 301896480; 305436928; 362317792; 869422464; 877268480; 900269632; 905670912; 919520512; … |
+| 2 | Int32 | -202167488 … 46641984 | -101835080; -119100448; -22367864; -23289134; -61735496; -69471920; -73488280; -98154632; … |
+| 3 | UInt32 | 5637 … 1285502 | 105976; 113918; 1285502; 138939; 328351; 351353; 5807; 663678; … |
+
+### CAI_WORLD_TRADING_POSTS[]
+
+- Instances: 20
+- Child nodes: CAI_BDI_COMPONENT_BLOCK_OWNS, CAI_BDI_COMPONENT_PROPERTY_SET, CAI_TRADING_POST
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 28 … 53 | 28; 29; 30; 31; 32; 37; 38; 39; … |
+| 1 | Float32 | 100 | 100 |
+| 2 | Float32 | 100 | 100 |
+| 3 | Float32 | 0 | 0 |
+| 4 | Float32 | 100 | 100 |
+| 5 | UInt32 | 1 | 1 |
+| 6 | Boolean |  | false |
+| 7 | UInt32 Array |  | [] |
+| 8 | UInt32 Array |  | [21797, 1, 79133, 2, 56583, 3]; [21797, 2, 106478, 1, 79133, 3, 119347, 1]; [79133, 1, 93347, 1, 21797, 3, 106478, 2, 128062…; [79135, 1, 93349, 3, 103148, 3]; [93118, 1, 93349, 4, 171151, 1]; [93347, 2, 21797, 4, 56583, 1]; [93347, 3, 190476, 1, 56583, 5, 30517, 1]; [93349, 1, 110644, 1, 30519, 1]; … |
+| 9 | UInt32 | 0 | 0 |
+| 10 | UInt32 | 1 … 5 | 1; 2; 3; 4; 5 |
+| 11 | UInt32 Array |  | [] |
+| 12 | UInt32 Array |  | [21797, 106478, 79133, 119347]; [21797, 79133, 56583]; [79133, 93347, 21797, 106478, 128062]; [79135, 93349, 103148]; [93118, 93349, 171151]; [93347, 190476, 56583, 30517]; [93347, 21797, 56583]; [93349, 110644, 30519]; … |
+| 13 | UInt32 | 0 | 0 |
+| 14 | UInt32 | 0 | 0 |
+| 15 | UInt32 Array |  | [] |
+| 16 | UInt32 Array |  | [] |
+| 17 | UInt32 Array |  | [] |
+| 18 | UInt32 Array |  | [21796, 30516, 56582, 79132, 93115, 93346, 93564…; [21798, 30518, 56584, 79134, 93117, 93348, 93566…; [21800, 30520, 56586, 79136, 93119, 93350, 93568…; [21802, 30522, 56588, 79138, 93121, 93352, 93570… |
+| 19 | Boolean |  | false |
+| 20 | UInt32 | 0 | 0 |
+| 21 | Boolean |  | false |
+
+### RESOURCES_ORDER[]
+
+- Instances: 20
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UTF-16 |  | res_cattle; res_coffee; res_fish; res_rice; res_sheep; res_silver; res_tea; res_timber; … |
+
+### TRADE_NODES[]
+
+- Instances: 20
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Point2D |  | (-311.44406, -164.78065); (322.56964, -111.79444); (345.53317, -93.60755); (40.062035, 29.754108); (67.31523, 13.553589); (836.6284, -66.253586); (858.564, -21.331657); (876.9231, -70.083885); … |
+| 1 | UInt32 | 267 … 286 | 271; 273; 275; 279; 280; 282; 285; 286; … |
+
+### CAI_BDI_DESIRE_EXPAND_FACTION
+
+- Instances: 19
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 Array |  | [1081522]; [1430616, 1511824, 1513871, 1526617]; [1452820]; [1454609, 1505579, 1539318]; [1469441, 1428120, 1526280]; [1477910]; [1483622]; []; … |
+
+### CAI_FACTION_BDI_POOL_SAVINGS_BASIC
+
+- Instances: 19
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 0 | 0 |
+| 1 | UInt32 | 14874 … 81850 | 14874; 80420; 81850 |
+
+### CAI_HISTORY_EVENT_INVASION_REQUESTED
+
+- Instances: 19
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | ASCII |  | austria; britain; netherlands; ottomans; poland_lithuania; prussia; russia; spain; … |
+| 1 | ASCII |  | gibraltar, spain; ireland, scotland, england; lithuania, belarus, west_prussia, poland, galici…; moldavia, bulgaria, serbia, bosnia, greece, rume…; netherlands; silesia, bohemia, transylvania, hungary, croatia…; ukraine, karelia, muscovy, arkhangelsk, komi, ba…; west_pommerania; … |
+| 2 | ASCII |  | flanders; french_guyana; malta; morocco; portugal; saxony; venice; west_pommerania; … |
+
+### CAI_BASIC_FACTION_RELATIVE_ANALYSIS
+
+- Instances: 18
+- Child nodes: CAI_BASIC_FACTION_RELATIVE_ANALYSIS_RELATIVEINFORMATION
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1415 | 1265; 1271; 1274; 1283; 1292; 1307; 1316; 1328; … |
+
+### CAI_BASIC_FACTION_RELATIVE_ANALYSIS_RELATIVEINFORMATION
+
+- Instances: 18
+
+### CAI_BDIM_REINFORCE_SPECIFIC
+
+- Instances: 17
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 0 … 1520486 | 1175311; 1223670; 1274244; 1293102; 1296020; 1438405; 1520486; 96212; … |
+| 1 | UInt32 | 0 … 1537017 | 1145865; 1255156; 1286055; 1496283; 1505519; 1520486; 1528444; 1528448; … |
+| 2 | Boolean |  | false; true |
+| 3 | UInt32 | 0 … 1537111 | 0; 1505718; 1520584; 1528708; 1528787; 1533855; 1537111 |
+| 4 | Int32 | 0 | 0 |
+| 5 | Int32 | 0 | 0 |
+| 6 | Int32 | 0 | 0 |
+| 7 | Int32 | 0 | 0 |
+
+### CAI_BDI_DESIRE_NAVY_REPAIR_GOALS[]
+
+- Instances: 17
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 104400 … 1446205 | 1082031; 1116568; 1363667; 1377827; 1446205; 190162; 249732; 306616; … |
+
+### CAI_BDI_DESIRE_TRADE_AREA_BEHAVIOUR_UNDEFENDED_GOALS[]
+
+- Instances: 17
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 105709 … 1517409 | 1054638; 115403; 1217673; 1287889; 1335877; 1506076; 1517409; 198890; … |
+
+### CAI_MILITARY_PRODUCTION_CAPACITY_ANALYSIS_FACTION
+
+- Instances: 17
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1427 | 1265; 1268; 1271; 1274; 1277; 1280; 1283; 1286; … |
+
+### CAI_AREA_OF_INTEREST_ANALYSIS_FORT
+
+- Instances: 15
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1589 … 3338 | 1926; 2003; 2016; 2128; 2225; 2310; 2478; 2639; … |
+
+### CAI_FORT
+
+- Instances: 15
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1020207392 … 1020252112 | 1020207392; 1020209472; 1020224552; 1020226112; 1020232352; 1020239112; 1020248992; 1020252112; … |
+
+### CAI_WORLD_FORTS[]
+
+- Instances: 15
+- Child nodes: CAI_BDI_COMPONENT_BLOCK_OWNS, CAI_BDI_COMPONENT_PROPERTY_SET, CAI_FORT, CAI_GARRISONABLE, CAI_SITUATED
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1589 … 3338 | 1589; 1926; 2003; 2016; 2128; 2225; 2310; 2478; … |
+| 1 | Float32 | 100 | 100 |
+| 2 | Float32 | 100 | 100 |
+| 3 | Float32 | 0 | 0 |
+| 4 | Float32 | 100 | 100 |
+| 5 | UInt32 | 1 | 1 |
+| 6 | Boolean |  | false |
+| 7 | UInt32 Array |  | [] |
+| 8 | UInt32 Array |  | [9149, 2, 9223, 0, 9150, 2, 9151, 2, 9157, 2, 91…; [9185, 0, 9149, 1, 9150, 1, 9151, 1, 9153, 1, 91…; [9295, 1, 9420, 0, 9296, 1, 9297, 1, 9301, 1, 93…; [9341, 1, 9476, 0, 9344, 2, 9345, 2, 9346, 2, 93…; [9459, 1, 9553, 0, 9464, 1, 9469, 3, 9470, 3, 94…; [9465, 2, 9568, 0, 9466, 2, 9467, 2, 9468, 2, 94…; [9494, 4, 9594, 0, 9506, 1, 9509, 4, 9510, 3, 95…; [9807, 1, 9820, 0, 9808, 1, 9809, 1, 9810, 1, 98…; … |
+| 9 | UInt32 | 0 | 0 |
+| 10 | UInt32 | 17 … 139 | 103; 109; 139; 29; 65; 71; 79; 94; … |
+| 11 | UInt32 Array |  | [] |
+| 12 | UInt32 Array |  | [16, 9185, 9149, 9150, 9151, 9153, 9155, 9156, 9…; [9149, 16, 9223, 9150, 9151, 9157, 9161, 9178, 9…; [9295, 16, 9420, 9296, 9297, 9301, 9302, 9303, 9…; [9341, 16, 9476, 9344, 9345, 9346, 9348, 9349, 9…; [9459, 16, 9553, 9464, 9469, 9470, 9471, 9472, 9…; [9465, 16, 9568, 9466, 9467, 9468, 9469, 9470, 9…; [9494, 16, 9594, 9506, 9509, 9510, 9518, 9524, 9…; [9807, 16, 9820, 9808, 9809, 9810, 9811, 9816, 9…; … |
+| 13 | UInt32 | 0 | 0 |
+| 14 | UInt32 | 0 | 0 |
+| 15 | UInt32 Array |  | [] |
+| 16 | UInt32 Array |  | [] |
+| 17 | UInt32 Array |  | [] |
+| 18 | UInt32 Array |  | [9150, 9151, 9156, 9157, 9164, 9177, 9178, 9179,…; [9150, 9151, 9157, 9178, 9179, 9180, 9181, 9182,…; [9311, 9476, 1359056, 9467, 9468, 9533, 9494, 95…; [9510, 9578, 9615, 99385, 1528474, 9476, 9572, 8…; [9535, 1085408, 9556, 9510, 9357, 9432, 9472, 12…; [9553, 9508, 9540, 9507, 9593, 9620, 9552, 40941…; [9645, 9647, 120119, 863468, 1128334, 9535, 1085…; [9823, 9808, 9810, 9807, 9809, 9852, 9811, 9848,…; … |
+| 19 | Boolean |  | false |
+| 20 | UInt32 | 0 | 0 |
+| 21 | Boolean |  | false |
+
+### FORT
+
+- Instances: 15
+- Child nodes: CAMPAIGN_LOCALISATION
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Int32 | -670721664 … 588065536 | -670721664; 124138816; 191386096; 220337280; 550449984; 55312384; 588065536; 84819312; … |
+| 1 | Int32 | 79461088 … 452271808 | 135150960; 268886336; 333093792; 359315552; 365774752; 441775552; 452271808; 96945048; … |
+| 2 | Int32 | 1 … 2 | 1; 2 |
+| 3 | UTF-16 |  | -1138921185; -1163276661; -299354588; 1314500845; 1385859054; 1442954196; 789720503; 818526423; … |
+| 4 | Int32 | 1020207392 … 1020252112 | 1020207392; 1020208432; 1020209472; 1020221432; 1020227672; 1020228192; 1020234432; 1020239112; … |
+| 5 | Int32 | 478563736 … 1012495192 | 1010035568; 1011126176; 1012495192; 478563736; 842234200; 842301816; 842305432; 842780312; … |
+
+### FORTIFICATIONS_BLOCK[]
+
+- Instances: 15
+- Child nodes: FORTIFICATION_DAMAGE_INFO
+
+### FORTIFICATION_DAMAGE_INFO
+
+- Instances: 15
+- Child nodes: HIT_POINTS_BLOCK
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Float32 | 1 | 1 |
+| 1 | UInt32 | 4 | 4 |
+
+### FORT_ARRAY[]
+
+- Instances: 15
+- Child nodes: FORT, SIEGEABLE_GARRISON_RESIDENCE
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Int32 | 478563736 … 1012495192 | 1010035568; 1010040224; 1012495192; 478563736; 834578952; 842234200; 842305432; 842320704 |
+
+### FORT_OBSTACLE[]
+
+- Instances: 15
+- Child nodes: OBSTACLE
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1020207392 … 1020252112 | 1020208432; 1020224552; 1020226112; 1020234432; 1020239112; 1020241192; 1020248992; 1020252112; … |
+
+### HIT_POINTS_BLOCK
+
+- Instances: 15
+
+### NAVAL_UNIT_RECRUITMENT_ITEM
+
+- Instances: 15
+- Child nodes: RECRUITMENT_ITEM
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 0 | 0 |
+
+### SETTLEMENT_DATA[]
+
+- Instances: 15
+- Child nodes: SETTLEMENT_DATA
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 246895952 … 1022039488 | 1020335896; 1022024896; 1022039488; 246904616; 246905528; 842818552; 842829952; 842969992; … |
+
+### CAI_BDI_DESIRE_TRADE_BEHAVIOUR
+
+- Instances: 14
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1379 | 1265; 1268; 1271; 1274; 1277; 1280; 1283; 1286; … |
+
+### CAI_BDI_GOAL_MISSIONARY_CONVERT_REGION
+
+- Instances: 14
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 0 … 1251 | 0; 1198; 1251; 675; 705; 756; 827; 865; … |
+| 1 | UInt32 | 0 … 6295 | 0; 5374; 5429; 5469; 5692; 5791; 5803; 5861; … |
+| 2 | UInt32 | 0 … 49854 | 0; 14523; 17399; 17406; 27271; 31645; 31648; 33950; … |
+
+### CAI_FACTION_TRADE_ANALYSIS
+
+- Instances: 14
+- Child nodes: CAI_FACTION_TRADE_ANALYSIS_STATUS
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1265 … 1379 | 1265; 1268; 1271; 1274; 1277; 1280; 1283; 1286; … |
+
+### CAI_FACTION_TRADE_ANALYSIS_STATUS
+
+- Instances: 14
+
+### CAI_BDI_DESIRE_DEFEND_REGION_GROUPS_INFO
+
+- Instances: 13
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 Array |  | [7396, 7434, 7437, 7456]; [] |
+| 1 | Float32 Array |  | [1312950, 53067, 33469, 45040]; [] |
+| 2 | Int32 | 1 … 1444526 | 1; 1444526 |
+
+### CHARACTER_DATA[]
+
+- Instances: 13
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 245729616 … 1015207064 | 1014064472; 1015038864; 1015160664; 1015182704; 1015186184; 1015194304; 1015207064; 841104304; … |
+
+### CAI_BDI_DESIRE_CREATE_BUFFER_ZONE
+
+- Instances: 12
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 0 … 961 | 656; 675; 694; 765; 793; 817; 819; 833; … |
+| 1 | UInt32 Array |  | [1271, 1280, 1289, 1292, 1415, 1346, 1433, 1286]; [1271, 1394, 1283]; [1271]; [1277, 1364, 1334, 1268]; [1286]; [1292, 1415, 1283, 1280, 1367, 1373, 1433]; [1307, 1274]; [1391]; … |
+| 2 | UInt32 Array |  | [715, 710, 705]; [720, 746, 750, 756, 823, 805, 796]; [773, 777, 813]; [829, 884, 881, 887]; [898]; [930, 934, 943]; [] |
+| 3 | Float32 Array |  | [0, 0, 0, 0, 0, 0, 0]; [0, 0, 0]; [0.1711422, 2.1928394, 0.63601834]; [0.5157327, 1.5841862, 0.40376347, 1.4963176]; [1]; [] |
+| 4 | UInt32 Array |  | [1428120, 1469441, 1531922]; [1454609, 1505579, 1520493, 1539318]; [1534717]; [] |
+
+### CAI_RELIGION_MISSIONARY_ANALYSIS
+
+- Instances: 11
+- Child nodes: CAI_RELIGION_MISSIONARY_ANALYSIS_REGIONS_ENEMY, CAI_RELIGION_MISSIONARY_ANALYSIS_REGIONS_SELF
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 5374 … 6295 | 5374; 5429; 5469; 5692; 5791; 5803; 5861; 5915; … |
+
+### CAI_RELIGION_MISSIONARY_ANALYSIS_REGIONS_ENEMY
+
+- Instances: 11
+
+### CAI_RELIGION_MISSIONARY_ANALYSIS_REGIONS_SELF
+
+- Instances: 11
+
+### CAI_PROTECTION_AREA_MOBILES[]
+
+- Instances: 10
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1256455 … 1533744 | 1256455; 1363278; 1533744 |
+
+### FAMOUS_BATTLE_BLOCK[]
+
+- Instances: 10
+- Child nodes: FAMOUS_BATTLE_INFO
+
+### FAMOUS_BATTLE_INFO
+
+- Instances: 10
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Int32 | -620320682 … 22028900 | -21150826; -26738688; -37224448; -562672977; -59244544; -606148810; -620320682; 22028900; … |
+| 1 | Int32 | 230776421 … 404960064 | 230776421; 237259589; 271388533; 301729017; 314887360; 323275968; 387973120; 404960064; … |
+| 2 | UTF-16 |  | ; Battle of: Albany; Battle of: Algiers; Battle of: Dublin; Battle of: Madrid; Battle of: Philadelphia; Battle of: Savannah; Battle of: St. Augustine |
+| 3 | Int32 | 1250 … 6244 | 1250; 1502; 1870; 1900; 3020; 3430; 5945; 6244 |
+| 4 | Int32 | 1250 … 5207 | 1250; 1502; 1560; 2572; 3310; 4470; 4690; 5207 |
+| 5 | Int32 | 1250 … 6502 | 1250; 1400; 1511; 2857; 4015; 4207; 5235; 6502 |
+| 6 | Boolean |  | false |
+
+### RECRUITMENT_DATA[]
+
+- Instances: 9
+- Child nodes: RECRUITMENT_DATA
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1048000416 … 2542356336 | 1048000416; 1135495544; 1966178872; 1966201856; 1966202672; 1966296784; 2090755976; 2542221016; … |
+
+### ALLIED_IN_WAR_AGAINST[]
+
+- Instances: 8
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 478547552 … 1010035568 | 1010035568; 478547552; 842234200 |
+| 1 | Int32 | -1 … 0 | -1; 0 |
+
+### CAI_BDIM_SPLIT_TARGETS[]
+
+- Instances: 8
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 0 | 0 |
+| 1 | Float32 | 0.09710551053285599 … 0.9028944969177246 | 0.09710551; 0.13318536; 0.2863485; 0.42367256; 0.57632744; 0.71365154; 0.8668146; 0.9028945 |
+
+### COMMODITIES_ORDER[]
+
+- Instances: 8
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UTF-16 |  | res_coffee; res_cotton; res_furs; res_ivory; res_spices; res_sugar; res_tea; res_tobacco |
+
+### NAVY_DATA[]
+
+- Instances: 8
+- Child nodes: NAVY_DATA
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 828128088 … 2544748344 | 2382380152; 2495832976; 2544748344; 828128088; 828130328; 828145728; 828156648; 828158608 |
+
+### BARRIER_NAMES
+
+- Instances: 7
+
+### BARRIER_OBSTACLE
+
+- Instances: 7
+
+### CAI_WORLD_THEATRES[]
+
+- Instances: 7
+- Child nodes: CAI_BDI_COMPONENT_BLOCK_OWNS, CAI_BDI_COMPONENT_PROPERTY_SET, THEATRE
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 27 … 48 | 27; 33; 34; 35; 36; 42; 48 |
+| 1 | Float32 | 100 | 100 |
+| 2 | Float32 | 100 | 100 |
+| 3 | Float32 | 0 | 0 |
+| 4 | Float32 | 100 | 100 |
+| 5 | UInt32 | 1 | 1 |
+| 6 | Boolean |  | false |
+| 7 | UInt32 Array |  | [] |
+| 8 | UInt32 Array |  | [12815, 0, 14572, 0, 15854, 0, 17422, 0, 19502, …; [12894, 0, 8027, 1, 14573, 0, 15934, 0, 17423, 0…; [12991, 0, 14574, 0, 16149, 0, 17424, 0, 19504, …; [14571, 0, 17421, 0, 19501, 0, 22629, 0, 27223, …; [14575, 0, 17425, 0, 19505, 0, 22641, 0, 27227, …; [14576, 0, 17426, 0, 19506, 0, 22642, 0, 27228, …; [14577, 0, 17427, 0, 19507, 0, 22643, 0, 27229, … |
+| 9 | UInt32 | 0 | 0 |
+| 10 | UInt32 | 56 … 87 | 56; 57; 82; 87 |
+| 11 | UInt32 Array |  | [] |
+| 12 | UInt32 Array |  | [12815, 7863, 14572, 7893, 15854, 14784, 17422, …; [12894, 7863, 8027, 14573, 7893, 15934, 14784, 1…; [12991, 7863, 14574, 7893, 16149, 14784, 17424, …; [14571, 7893, 17421, 14814, 19501, 17747, 22629,…; [14575, 7893, 17425, 14814, 19505, 17747, 22641,…; [14576, 7893, 17426, 14814, 19506, 17747, 22642,…; [14577, 7893, 17427, 14814, 19507, 17747, 22643,… |
+| 13 | UInt32 | 0 | 0 |
+| 14 | UInt32 | 0 | 0 |
+| 15 | UInt32 Array |  | [] |
+| 16 | UInt32 Array |  | [] |
+| 17 | UInt32 Array |  | [] |
+| 18 | UInt32 Array |  | [140393, 79275, 21843, 135323, 110651, 21820, 12…; [140548, 140833, 47641, 42805, 135635, 135462, 1…; [140834, 42856, 135636, 111044, 111052, 21921, 2…; [] |
+| 19 | Boolean |  | false |
+| 20 | UInt32 | 0 | 0 |
+| 21 | Boolean |  | false |
+
+### CHARACTER_OBSTACLE
+
+- Instances: 7
+
+### FORT_OBSTACLE
+
+- Instances: 7
+
+### OBSTACLE_BASE_GRID_NODE
+
+- Instances: 7
+
+### OBSTACLE_BOUNDARIES
+
+- Instances: 7
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 Array |  | [1, 2, 4290772992, 1179658, 0, 1, 2, 4290772992,…; [1, 4279304464, 0, 1703962, 0, 2, 3054502160, 67…; [1, 4279304464, 75497472, 6946845, 0, 1, 4279304…; [1, 4279304465, 0, 2097174, 0, 1, 4279304465, 0,…; [1, 4279304465, 0, 2097176, 0, 1, 4279304465, 0,…; [2, 3205636368, 104931255, 1627459623, 104931263…; [2, 4145094928, 138586625, 220336128, 696429064,… |
+
+### OBSTACLE_BOUNDARY
+
+- Instances: 7
+
+### OBSTACLE_BOUNDARY_MANAGER
+
+- Instances: 7
+- Child nodes: OBSTACLE_BOUNDARY
+
+### OBSTACLE_LISTS
+
+- Instances: 7
+- Child nodes: BARRIER_OBSTACLE, CHARACTER_OBSTACLE, FORT_OBSTACLE
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 Array |  | [] |
+| 1 | UInt32 Array |  | [1015026104, 1015118904, 563672128, 1011677328, …; [2509162192, 747237760, 744097088, 2509154072, 7…; [745687944, 747216880, 841066024, 1015036544, 83…; [749443144, 749437344, 1016842888, 749438504, 74…; [835029400, 744092448, 837523168, 840222728, 835…; [841061384, 744145808, 837415240, 1015024944, 83…; [841068344, 834872800, 834884400, 841059064, 101… |
+| 2 | UInt32 Array |  | [1020208432, 1020241192]; [1020232352, 1020228192, 1020238592, 1020227672]; [1020252112, 1020226112, 1020248992, 1020234432,…; [] |
+
+### PATHFINDING_GRID[]
+
+- Instances: 7
+- Child nodes: BARRIER_NAMES, OBSTACLE_BASE_GRID_NODE, OBSTACLE_BOUNDARIES, OBSTACLE_BOUNDARY_MANAGER, OBSTACLE_LISTS
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 803 … 65202 | 10718; 1317; 1527; 1850; 26228; 65202; 803 |
+| 1 | UInt32 Array |  | [0, 0, 0, 0, 0, 0, 10, 553648128, 241172480, 551…; [11, 148897792, 274180468, 148854338, 274174747,…; [12, 3724541952, 322961408, 3723842246, 32296140…; [12, 40471106, 31457280, 40993457, 31457280, 419…; [6, 317718528, 4206886912, 315894473, 4206886912…; [6, 856276902, 4247781376, 855681386, 4248829952…; [9, 3997171712, 4123000832, 3995074560, 41230008… |
+| 2 | UInt32 Array |  | [0, 629, 65536, 639, 131072, 649, 196608, 599, 2…; [196608, 767, 262144, 777, 327680, 787, 393216, …; [327685, 828, 393221, 832, 458757, 836, 524293, …; [6029312, 1881, 6094848, 1884, 6160384, 1887, 62…; [655360, 532, 720896, 544, 786432, 556, 851968, …; [7929856, 2385, 7995392, 2394, 8060928, 2403, 81…; [8585219, 4917, 8650755, 4934, 8716291, 4951, 87… |
+| 3 | UInt32 Array |  | [1181, 1182, 1314, 1315, 1183, 1316, 1317, 1318,…; [1270, 1271, 1278, 1279, 1280, 1281, 1305, 1306,…; [1796, 1797, 920, 1050, 1798, 1800, 1799, 1801, …; [2921, 6050, 9818, 9821, 5605, 2318, 9633, 7487,…; [55785, 50792, 15558, 8780, 28629, 4499, 4899, 5…; [7211, 19123, 19129, 19127, 1537, 7541, 2339, 83…; [] |
+| 4 | Boolean Array |  | [false, false, false, true, false, true, false, …; [false, true, true, false, false, true, true, fa…; [true, true, false, false, false, false, false, …; [true, true]; [true] |
+| 5 | Boolean |  | true |
+| 6 | UInt32 Array |  | [] |
+| 7 | Float32 Array |  | [0.5, 0.4, 0.5, 0.5, 0.5, 0.5, 0.67, 0.5, 0.5, 0…; [0.5, 0.5, 0.5, 0.67, 0.5, 0.5, 0.5, 0.67, 0.5, …; [0.5]; [0.67, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0…; [0.67, 0.5] |
+
+### THEATRE
+
+- Instances: 7
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UTF-16 |  | -1133129049; 1; 1197997136; 2; 2113354257; 3; 836795134 |
+| 1 | UInt32 Array |  | [110191, 6125, 6225, 172017, 1217907, 440271, 13…; [113918, 105976, 663678, 138939, 1285502, 119803…; [5361, 5371, 5375, 5470, 5630, 5666, 5995, 6011,…; [5416, 5430, 5449, 5468, 5510, 5624, 5654, 5691,…; [5479, 100340, 5807, 103136, 296956, 738638, 351…; [6137, 6169, 6268, 6284, 6289, 6296, 6325, 6331,…; [6479, 151795, 168979, 303245, 902870, 5637] |
+| 2 | UInt32 Array |  | [28, 29, 30, 31, 32]; [37, 38, 39, 40, 41]; [43, 44, 45, 46, 47]; [49, 50, 51, 52, 53]; [] |
+| 3 | UInt32 Array |  | [128, 142, 213, 217, 259, 320, 970, 988, 993, 99…; [54, 64, 128, 145, 217, 242, 259, 320]; [56, 64, 128, 139, 153, 248, 257, 259]; [56, 64, 128, 150, 180, 183, 188, 193, 259, 308,…; [56, 64, 128, 297, 305]; [61, 128, 142, 970, 983]; [64, 128, 150, 158, 165, 172, 180, 193, 203, 206… |
+| 4 | UInt32 Array |  | [7510, 7511, 7512, 7513, 7514, 7515, 7516, 7517,…; [7552, 7553, 7554, 7555, 7556, 7557, 7558, 7559,…; [7606, 7607, 7608, 7609, 7610, 7611, 7612, 7613,…; [7622, 7623, 7624, 7625]; [7626, 7627, 7628, 7629]; [7630, 7631, 7632, 7633]; [7634, 7635, 7636, 7637] |
+| 5 | UInt32 Array |  | [3595, 3596]; [3597, 3598, 3599, 3600, 3601]; [3602, 3603, 3604, 3605]; [3606, 3607]; [3608, 3609]; [3610, 3611, 3612, 3613, 3614]; [3615, 3616, 3617] |
+
+### CAI_BDI_FAILED_REGION_TARGET
+
+- Instances: 6
+- Child nodes: CAI_FACTION_ATTITUDE_PAIR
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 789 … 1251 | 1206; 1251; 789; 796; 805; 926 |
+| 1 | Boolean |  | true |
+| 2 | UInt32 | 49 … 71 | 49; 69; 70; 71 |
+
+### CAI_BDI_GOAL_SUPPORT_ATTACK_INVADERS
+
+- Instances: 6
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 779 … 833 | 779; 789; 796; 823; 829; 833 |
+| 1 | UInt32 | 114969 … 1335048 | 114969; 1298846; 1328921; 1335048; 186055; 403382 |
+
+### CAI_BDI_GOAL_SUPPORT_OBTAIN_FORCES
+
+- Instances: 6
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 779 … 833 | 779; 789; 796; 823; 829; 833 |
+| 1 | UInt32 | 114967 … 1335046 | 114967; 1298844; 1328919; 1335046; 186053; 403377 |
+
+### CAI_BDI_GOAL_SUPPORT_PROTECT_ALLY
+
+- Instances: 6
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 779 … 833 | 779; 789; 796; 823; 829; 833 |
+| 1 | UInt32 | 114971 … 1335050 | 114971; 1298848; 1328923; 1335050; 186057; 403384 |
+
+### CAI_SUPPORT_STRENGTH_ANALYSIS_REGION
+
+- Instances: 6
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 779 … 833 | 779; 789; 796; 823; 829; 833 |
+| 1 | Int32 | 0 … 1238 | 0; 1238 |
+| 2 | Int32 | 0 | 0 |
+
+### GOVERNMENT::CONSTITUTIONAL_MONARCHY
+
+- Instances: 6
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 0 … 1 | 0; 1 |
+| 1 | Boolean |  | false |
+| 2 | Int32 | 3 … 10 | 10; 3; 4 |
+
+### REBEL_DATA_INNARDS
+
+- Instances: 6
+- Child nodes: CAMPAIGN_BONUS_VALUES, FACTION_FLAG_AND_COLOURS, REBEL_SETUP
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Boolean |  | false |
+
+### REBEL_SETUP
+
+- Instances: 6
+- Child nodes: UNIT LIST
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UTF-16 |  | amerind_rebels; kandy |
+| 1 | UTF-16 |  | hindu_indians; rel_animist |
+| 2 | UTF-16 |  | gov_absolute_monarchy |
+| 3 | UInt32 | 7 | 7 |
+| 4 | UTF-16 |  | middle |
+
+### UNIT LIST
+
+- Instances: 6
+
+### CAI_BDI_RESEARCH_TECHNOLOGY
+
+- Instances: 5
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1268 … 1298 | 1268; 1277; 1298 |
+| 1 | UInt32 | 1644 … 3386 | 1644; 1652; 1938; 3378; 3386 |
+| 2 | UTF-16 |  | enlightenment_division_of_labour; enlightenment_empiricism; military_navy_etwii_ship_of_the_line_tactics; military_navy_flintlock_cannon |
+
+### CAI_BDIM_SPLIT
+
+- Instances: 4
+- Child nodes: CAI_BDIM_SPLIT_TARGETS
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1318069 … 1412079 | 1318069; 1398756; 1412079 |
+| 1 | UInt32 | 1 | 1 |
+| 2 | Boolean |  | true |
+| 3 | Int32 | -607914304 … 69218944 | -561916096; -607291136; -607914304; 69218944 |
+| 4 | Int32 | 214254416 … 331733248 | 214254416; 222350624; 299856352; 331733248 |
+
+### CAI_BDIM_SPLIT_TARGETS
+
+- Instances: 4
+
+### CAI_BDI_GOAL_MOBILE_MOVE_TO_AND_RAID_REGION
+
+- Instances: 4
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 0 … 588 | 0; 588 |
+| 1 | UInt32 | 0 … 1496279 | 0; 1414851; 1496279 |
+| 2 | Boolean |  | false |
+| 3 | UInt32 | 0 … 1530941 | 0; 1530939; 1530941 |
+| 4 | UInt32 | 0 | 0 |
+| 5 | UInt32 | 0 … 1286 | 0; 1286 |
+
+### CAI_DIPLOMATIC_GOAL_OFFER_PAYMENT
+
+- Instances: 4
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 401 … 3129 | 3129; 401; 438; 509 |
+| 1 | UInt32 | 1 | 1 |
+
+### CAI_REGION_PROTECTION_AREA_ANALYSIS
+
+- Instances: 4
+- Child nodes: CAI_REGION_PROTECTION_AREA_ANALYSIS_AREAS
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 779 … 833 | 779; 789; 823; 833 |
+| 1 | Float32 | 0 … 1659737.375 | 0; 127650.125; 1659737.4; 724553.6 |
+
+### CAI_REGION_PROTECTION_AREA_ANALYSIS_AREAS
+
+- Instances: 4
+
+### COMMODITIES
+
+- Instances: 4
+
+### COMMODITIES[]
+
+- Instances: 4
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UTF-16 |  | res_ivory; res_spices; res_sugar |
+
+### GOVERNMENT::REPUBLIC
+
+- Instances: 4
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 0 | 0 |
+| 1 | Boolean |  | false |
+| 2 | Int32 | 1 … 8 | 1; 8 |
+| 3 | UInt32 | 0 … 1 | 0; 1 |
+
+### LOCOMOTION_ACTION_CONTROLLER
+
+- Instances: 4
+- Child nodes: CHARACTER_JOIN_GARRISON_CONTROLLER, CHARACTER_SEEK_MERGE_CONTROLLER
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Boolean |  | false |
+| 1 | Boolean |  | false; true |
+| 2 | Boolean |  | false |
+
+### THEATRES[]
+
+- Instances: 4
+- Child nodes: COMMODITIES
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UTF-16 |  | -1133129049; 1197997136; 2113354257; 836795134 |
+
+### CAI_BDIM_COMPLEX_EMBARK_TO
+
+- Instances: 3
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 5371 … 1441746 | 1441746; 5371; 926106 |
+| 1 | UInt32 | 110191 … 1198030 | 110191; 1198030; 155021 |
+| 2 | Boolean |  | false |
+| 3 | Int32 | 0 | 0 |
+| 4 | Int32 | 0 | 0 |
+| 5 | UInt32 | 0 | 0 |
+| 6 | Boolean |  | false; true |
+| 7 | Int32 | -337108416 … 0 | -337108416; 0 |
+| 8 | Int32 | -179322832 … 0 | -179322832; 0 |
+| 9 | UInt32 | 0 … 1537269 | 0; 1537269 |
+| 10 | Boolean |  | false |
+
+### CAI_BDI_DESIRE_HELP_ALLY_AT_WAR_GOALS[]
+
+- Instances: 3
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 95120 … 642064 | 642064; 95120; 98916 |
+
+### CAI_BDI_GOAL_REBEL_ARMY
+
+- Instances: 3
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1234767 … 1235872 | 1234767; 1235320; 1235872 |
+| 1 | UInt32 | 0 | 0 |
+| 2 | UInt32 | 58 … 64 | 58; 60; 64 |
+
+### CAI_MILITARY_REGION_GROUP_ANALYSIS_INFO
+
+- Instances: 3
+- Child nodes: CAI_MILITARY_REGION_GROUP_ANALYSIS_INFO_ENEMIES, CAI_MILITARY_REGION_GROUP_ANALYSIS_INFO_FRIENDS, CAI_MILITARY_REGION_GROUP_ANALYSIS_INFO_NEUTRALS
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1 … 2 | 1; 2 |
+| 1 | UInt32 | 2 | 2 |
+| 2 | UInt32 | 0 … 2 | 0; 2 |
+| 3 | UInt32 | 0 … 2 | 0; 2 |
+| 4 | UInt32 | 1 … 2 | 1; 2 |
+| 5 | UInt32 Array |  | [1433, 1268, 1430, 1304]; [] |
+| 6 | UInt32 Array |  | [7407, 7409, 7362, 7384, 7404, 7413, 7393]; [7430, 1237515]; [7430, 7434] |
+| 7 | Float32 Array |  | [1.8820376, 95.1455, 529.0566, 22.968225, 38.962…; [50.40503, 8.328882]; [84.9872, 8.328882] |
+| 8 | Int32 | 0 | 0 |
+| 9 | Int32 | 0 | 0 |
+| 10 | Int32 | 0 | 0 |
+| 11 | Int32 | 0 | 0 |
+
+### CAI_MILITARY_REGION_GROUP_ANALYSIS_INFO_ENEMIES
+
+- Instances: 3
+
+### CAI_MILITARY_REGION_GROUP_ANALYSIS_INFO_FRIENDS
+
+- Instances: 3
+
+### CAI_MILITARY_REGION_GROUP_ANALYSIS_INFO_NEUTRALS
+
+- Instances: 3
+
+### CAI_TARGET_LIST
+
+- Instances: 3
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 Array |  | [] |
+| 1 | UInt32 Array |  | [] |
+| 2 | UInt32 Array |  | [1234767]; [1235320]; [1235872] |
+| 3 | UInt32 Array |  | [2758]; [3063]; [3124] |
+
+### COMMERCE_RAIDS[]
+
+- Instances: 3
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Int32 | 563681408 … 1014055192 | 1014055192; 563681408; 826678128 |
+| 1 | Int32 | 247045056 … 1010035568 | 1010035568; 247045056; 478591480 |
+
+### MAPS[]
+
+- Instances: 3
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UTF-16 |  | america; europe; india |
+| 1 | UInt32 | 128 … 400 | 128; 400 |
+| 2 | UInt32 | 146 … 236 | 146; 236 |
+| 3 | Int32 | 512 … 1600 | 1600; 512 |
+| 4 | UInt32 Array |  | [4290556305, 4290358922, 4290621321, 4290555787,…; [4290621326, 4290358665, 4290621321, 4290555787,…; [4291938735, 4291411877, 4291346340, 4291411872,… |
+
+### REBEL_DATA
+
+- Instances: 3
+- Child nodes: REBEL_DATA_INNARDS
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 4 … 5 | 4; 5 |
+
+### CAI_BDIM_ATTACK_SH
+
+- Instances: 2
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1509671 … 1539502 | 1509671; 1539502 |
+| 1 | UInt32 | 0 | 0 |
+| 2 | UInt32 | 523333 … 1264728 | 1264728; 523333 |
+| 3 | Boolean |  | false |
+| 4 | Int32 | 0 | 0 |
+| 5 | Int32 | 0 | 0 |
+
+### CAI_BDI_FORT_TYPE_CONSTRUCTION
+
+- Instances: 2
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 0 | 0 |
+| 1 | UInt32 | 2310 … 2478 | 2310; 2478 |
+| 2 | Boolean |  | false |
+
+### CAI_BDI_GLOBAL_CONSTRUCTION_DESIRE
+
+- Instances: 2
+
+### CAMPAIGN_MISSION_MANAGER
+
+- Instances: 2
+- Child nodes: MISSIONS
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Boolean |  | false |
+
+### CAMPAIGN_SHROUD
+
+- Instances: 2
+- Child nodes: QUAD_TREE_BIT_ARRAY
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Boolean |  | true |
+
+### CHARACTER_JOIN_GARRISON_CONTROLLER
+
+- Instances: 2
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Int32 | 1022027176 | 1022027176 |
+| 1 | Int32 | 0 | 0 |
+| 2 | Boolean |  | false |
+| 3 | Boolean |  | false |
+| 4 | Boolean |  | true |
+| 5 | Boolean |  | true |
+| 6 | Boolean |  | false |
+| 7 | Boolean |  | false |
+| 8 | Boolean |  | false |
+| 9 | Int32 | 0 | 0 |
+| 10 | Int32 | 0 | 0 |
+| 11 | Boolean |  | false |
+
+### CHARACTER_SEEK_MERGE_CONTROLLER
+
+- Instances: 2
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Boolean |  | false |
+| 1 | Boolean |  | false |
+| 2 | Boolean |  | true |
+| 3 | Int32 | 474740048 … 1154031232 | 1154031232; 474740048 |
+| 4 | Boolean |  | false |
+| 5 | Boolean |  | false |
+| 6 | Boolean |  | false |
+| 7 | Boolean |  | false |
+| 8 | Boolean |  | false |
+| 9 | Int32 | -628599736 … -625253753 | -625253753; -628599736 |
+| 10 | Int32 | 226810074 … 227250429 | 226810074; 227250429 |
+
+### FORT_UPGRADES_ARRAY[]
+
+- Instances: 2
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Int32 | 1020238592 … 1020241192 | 1020238592; 1020241192 |
+| 1 | UTF-16 |  | star_fort |
+| 2 | Int32 | 2 … 8 | 2; 8 |
+| 3 | Int32 | 2 … 8 | 2; 8 |
+
+### MISSIONS
+
+- Instances: 2
+
+### PENDING_BATTLE_ALLIANCE
+
+- Instances: 2
+- Child nodes: PENDING_BATTLE_FACTION, allies
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Float32 | 0 | 0 |
+
+### PENDING_BATTLE_FACTION
+
+- Instances: 2
+- Child nodes: PENDING_BATTLE_PARTICIPANT, reinforcements
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Int32 | 747673152 … 1010035568 | 1010035568; 747673152 |
+| 1 | Boolean |  | false |
+| 2 | Boolean |  | false |
+| 3 | UInt32 | 3276920 … 6619246 | 3276920; 6619246 |
+
+### PENDING_BATTLE_PARTICIPANT
+
+- Instances: 2
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Int32 | 828128088 … 1024093400 | 1024093400; 828128088 |
+| 1 | Boolean |  | false; true |
+| 2 | UInt32 Array |  | [] |
+| 3 | Boolean |  | false |
+| 4 | Point2D |  | (0.81915647, 0.57357025) |
+| 5 | Boolean |  | false |
+
+### READY_FOR_ORDERS[]
+
+- Instances: 2
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Boolean |  | false |
+| 1 | UTF-16 |  | france; thirteen_colonies |
+
+### READY_TO_FIGHT[]
+
+- Instances: 2
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UTF-16 |  | france; thirteen_colonies |
+| 1 | Boolean |  | false |
+| 2 | Boolean |  | false |
+| 3 | Boolean |  | false; true |
+
+### allies
+
+- Instances: 2
+
+### reinforcements
+
+- Instances: 2
+
+### ATTACK_OF_OPPORTUNITY
+
+- Instances: 1
+
+### BUILDING_RESTRICTIONS
+
+- Instances: 1
+
+### CAI_ACTIVE_RECRUITMENT_ANALYSER
+
+- Instances: 1
+
+### CAI_AREA_OF_INTEREST_ANALYSER
+
+- Instances: 1
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Boolean |  | false |
+
+### CAI_BDIM_RAID_TRADE_SEGMENT_SH
+
+- Instances: 1
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 246484 | 246484 |
+| 1 | Int32 | 150732800 | 150732800 |
+| 2 | Int32 | 281280512 | 281280512 |
+| 3 | Boolean |  | true |
+| 4 | Int32 | 150732800 | 150732800 |
+| 5 | Int32 | 281280512 | 281280512 |
+
+### CAI_BDI_ASSIST
+
+- Instances: 1
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1280 | 1280 |
+| 1 | UInt32 Array |  | [1328900] |
+| 2 | UInt32 | 0 | 0 |
+| 3 | UInt32 Array |  | [1328917] |
+
+### CAI_BDI_DEMOTE_UNIT
+
+- Instances: 1
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 5638 | 5638 |
+
+### CAI_BDI_DESIRE_EXPAND_REGION_GROUPS
+
+- Instances: 1
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 0 | 0 |
+| 1 | UInt32 Array |  | [] |
+
+### CAI_BDI_DESIRE_TAXATION_TAX_EXEMPT_REGIONS[]
+
+- Instances: 1
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1035418 | 1035418 |
+
+### CAI_BDI_DESIRE_TRADE_AREA_BEHAVIOUR_PULL_GOALS[]
+
+- Instances: 1
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 183437 | 183437 |
+
+### CAI_BDI_GOAL_HELP_ALLY_AT_WAR_SUPPORT_GOALS[]
+
+- Instances: 1
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1328899 | 1328899 |
+
+### CAI_BDI_GOAL_MANAGE_REGION_SUPPORT
+
+- Instances: 1
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 796 | 796 |
+| 1 | UInt32 | 1280 | 1280 |
+| 2 | UInt32 | 1328918 | 1328918 |
+| 3 | UInt32 | 1328920 | 1328920 |
+| 4 | UInt32 | 1328922 | 1328922 |
+| 5 | Boolean |  | false |
+
+### CAI_BDI_GOAL_MOBILE_RAID_REGION
+
+- Instances: 1
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 0 | 0 |
+| 1 | UInt32 | 0 | 0 |
+| 2 | Boolean |  | false |
+| 3 | UInt32 | 0 | 0 |
+| 4 | UInt32 | 0 | 0 |
+| 5 | Int32 | 49 | 49 |
+
+### CAI_BDI_GOAL_PULL_TRADE_NAVY_TO_TRADE_AREAS
+
+- Instances: 1
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1322 | 1322 |
+| 1 | UInt32 | 6249 | 6249 |
+| 2 | UInt32 | 42 | 42 |
+| 3 | UInt32 | 183438 | 183438 |
+
+### CAI_BDI_SUPPORT_REQUEST
+
+- Instances: 1
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1328900 | 1328900 |
+
+### CAI_BDI_TARGET_REGION_SUPPORT
+
+- Instances: 1
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 0 | 0 |
+
+### CAI_BDI_TAX_EXEMPT_REGION
+
+- Instances: 1
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1132 | 1132 |
+| 1 | Boolean |  | false |
+
+### CAI_CENTRAL_BDI_POOL
+
+- Instances: 1
+- Child nodes: CAI_FACTION_INDEPENDENT_PARAMETERS, CAI_FACTION_INDEPENDENT_PARAMETERS_VARIABLE
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1544328 | 1544328 |
+| 1 | UInt32 | 4 | 4 |
+| 2 | UInt32 | 5 | 5 |
+| 3 | UInt32 | 6 | 6 |
+| 4 | UInt32 | 7 | 7 |
+| 5 | UInt32 | 8 | 8 |
+| 6 | UInt32 | 9 | 9 |
+| 7 | UInt32 | 10 | 10 |
+| 8 | UInt32 | 11 | 11 |
+| 9 | UInt32 | 12 | 12 |
+| 10 | UInt32 | 13 | 13 |
+| 11 | UInt32 | 14 | 14 |
+| 12 | UInt32 | 15 | 15 |
+| 13 | UInt32 | 16 | 16 |
+| 14 | UInt32 | 17 | 17 |
+| 15 | UInt32 | 18 | 18 |
+| 16 | UInt32 | 19 | 19 |
+| 17 | UInt32 | 20 | 20 |
+| 18 | UInt32 | 21 | 21 |
+| 19 | UInt32 | 22 | 22 |
+| 20 | UInt32 | 23 | 23 |
+| 21 | UInt32 | 24 | 24 |
+| 22 | UInt32 | 25 | 25 |
+
+### CAI_FACTION_INDEPENDENT_PARAMETERS
+
+- Instances: 1
+
+### CAI_FACTION_INDEPENDENT_PARAMETERS_VARIABLE
+
+- Instances: 1
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Float32 | 38.0629997253418 | 38.063 |
+
+### CAI_HISTORY
+
+- Instances: 1
+- Child nodes: CAI_HISTORY_EVENTS
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1 | 1 |
+| 1 | UInt32 | 0 | 0 |
+
+### CAI_HISTORY_EVENTS
+
+- Instances: 1
+
+### CAI_HISTORY_EVENT_ROUND
+
+- Instances: 1
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1 | 1 |
+
+### CAI_INTERFACE
+
+- Instances: 1
+- Child nodes: CAI_BDI_COMPONENT_BLOCK_OWNS, CAI_BDI_COMPONENT_PROPERTY_SET, CAI_BDI_POOL, CAI_CENTRAL_BDI_POOL, CAI_INTERFACE_DIRECTOR_BDI_POOL, CAI_INTERFACE_MANAGERS, CAI_WORLD, EXCLUSION ZONES, PRE_BATTLE_INFORMATION
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 3429077774 | 3429077774 |
+| 1 | UInt32 | 2 | 2 |
+| 2 | Float32 | 100 | 100 |
+| 3 | Float32 | 100 | 100 |
+| 4 | Float32 | 0 | 0 |
+| 5 | Float32 | 100 | 100 |
+| 6 | UInt32 | 1 | 1 |
+| 7 | Boolean |  | false |
+| 8 | UInt32 Array |  | [] |
+| 9 | UInt32 Array |  | [] |
+| 10 | UInt32 | 0 | 0 |
+| 11 | UInt32 | 0 | 0 |
+| 12 | UInt32 Array |  | [] |
+| 13 | UInt32 Array |  | [] |
+| 14 | UInt32 | 0 | 0 |
+| 15 | UInt32 | 0 | 0 |
+| 16 | UInt32 Array |  | [] |
+| 17 | UInt32 Array |  | [] |
+| 18 | UInt32 Array |  | [] |
+| 19 | UInt32 Array |  | [] |
+| 20 | Boolean |  | false |
+| 21 | UInt32 | 0 | 0 |
+| 22 | Boolean |  | false |
+| 23 | UInt32 Array |  | [1265, 11, 1268, 11, 1271, 11, 1274, 11, 1277, 1… |
+| 24 | UInt32 | 11 | 11 |
+| 25 | UInt32 | 11 | 11 |
+| 26 | UInt32 | 10 | 10 |
+| 27 | UInt32 | 1277 | 1277 |
+| 28 | Boolean |  | false |
+| 29 | UInt32 Array |  | [1516290, 1516316, 1517891, 1517909, 1521894, 15… |
+| 30 | UInt32 Array |  | [841127504, 745698384, 745698384] |
+| 31 | Boolean |  | false |
+| 32 | Boolean |  | false |
+| 33 | UInt32 | 0 | 0 |
+| 34 | Boolean |  | false |
+| 35 | Boolean |  | false |
+| 36 | Boolean |  | false |
+
+### CAI_INTERFACE_DIRECTOR_BDI_POOL
+
+- Instances: 1
+- Child nodes: CAI_BDI_POOL, CDIR_BDI_POOL
+
+### CAI_INTERFACE_MANAGERS
+
+- Instances: 1
+
+### CAI_MILITARY_STRENGTH_ANALYSER
+
+- Instances: 1
+- Child nodes: CAI_MILITARY_STRENGTH_ANALYSER_ABS_PER_MAN_LAND_UNIT, CAI_MILITARY_STRENGTH_ANALYSER_ABS_PER_MAN_NAVAL_UNIT
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Float32 | 122214.40625 | 122214.41 |
+| 1 | Float32 | 446400 | 446400 |
+| 2 | Float32 | 200532.5625 | 200532.56 |
+| 3 | Float32 | 446400 | 446400 |
+
+### CAI_MILITARY_STRENGTH_ANALYSER_ABS_PER_MAN_LAND_UNIT
+
+- Instances: 1
+
+### CAI_MILITARY_STRENGTH_ANALYSER_ABS_PER_MAN_NAVAL_UNIT
+
+- Instances: 1
+
+### CAI_NAVY_DAMAGE_ANALYSER
+
+- Instances: 1
+
+### CAI_REGION_OCCUPANCY_ANALYSER
+
+- Instances: 1
+
+### CAI_REGION_PROTECTION_AREA_ANALYSER
+
+- Instances: 1
+
+### CAI_RELATION_ANALYSER
+
+- Instances: 1
+
+### CAI_SUPPORT_SPECIFICATION
+
+- Instances: 1
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 796 | 796 |
+| 1 | UInt32 | 7418 | 7418 |
+| 2 | Boolean |  | false |
+
+### CAI_TIME
+
+- Instances: 1
+
+### CAI_TRADE_ROUTE_ANALYSER
+
+- Instances: 1
+
+### CAI_WORLD
+
+- Instances: 1
+- Child nodes: CAI_BDI_COMPONENT_BLOCK_OWNS, CAI_BDI_COMPONENT_PROPERTY_SET, CAI_HISTORY, CAI_TIME, CAI_WORLD_BUILDING_SLOTS, CAI_WORLD_CHARACTERS, CAI_WORLD_FACTIONS, CAI_WORLD_FORTS, CAI_WORLD_GOVERNORSHIPS, CAI_WORLD_REGIONS, CAI_WORLD_REGION_BOUNDARIES, CAI_WORLD_REGION_HLCIS, CAI_WORLD_REGION_SLOTS, CAI_WORLD_RESOURCE_MOBILES, CAI_WORLD_SEA_GRID_CELLS, CAI_WORLD_SETTLEMENTS, CAI_WORLD_TECHNOLOGY_TREES, CAI_WORLD_THEATRES, CAI_WORLD_TRADE_ROUTES, CAI_WORLD_TRADE_ROUTE_SEGMENTS, CAI_WORLD_TRADING_POSTS, CAI_WORLD_TRANSITION_AREAS, CAI_WORLD_UNITS
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 3 | 3 |
+| 1 | Float32 | 100 | 100 |
+| 2 | Float32 | 100 | 100 |
+| 3 | Float32 | 0 | 0 |
+| 4 | Float32 | 100 | 100 |
+| 5 | UInt32 | 1 | 1 |
+| 6 | Boolean |  | false |
+| 7 | UInt32 Array |  | [] |
+| 8 | UInt32 Array |  | [] |
+| 9 | UInt32 | 0 | 0 |
+| 10 | UInt32 | 0 | 0 |
+| 11 | UInt32 Array |  | [] |
+| 12 | UInt32 Array |  | [] |
+| 13 | UInt32 | 0 | 0 |
+| 14 | UInt32 | 0 | 0 |
+| 15 | UInt32 Array |  | [] |
+| 16 | UInt32 Array |  | [] |
+| 17 | UInt32 Array |  | [] |
+| 18 | UInt32 Array |  | [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 1… |
+| 19 | Boolean |  | false |
+| 20 | UInt32 | 0 | 0 |
+| 21 | Boolean |  | false |
+| 22 | UInt32 | 26 | 26 |
+| 23 | Float32 | 100 | 100 |
+| 24 | Float32 | 100 | 100 |
+| 25 | Float32 | 0 | 0 |
+| 26 | Float32 | 100 | 100 |
+| 27 | UInt32 | 1 | 1 |
+| 28 | Boolean |  | false |
+| 29 | UInt32 Array |  | [] |
+| 30 | UInt32 Array |  | [] |
+| 31 | UInt32 | 0 | 0 |
+| 32 | UInt32 | 0 | 0 |
+| 33 | UInt32 Array |  | [] |
+| 34 | UInt32 Array |  | [] |
+| 35 | UInt32 | 0 | 0 |
+| 36 | UInt32 | 0 | 0 |
+| 37 | UInt32 Array |  | [] |
+| 38 | UInt32 Array |  | [] |
+| 39 | UInt32 Array |  | [] |
+
+### CAI_WORLD_BUILDING_SLOTS
+
+- Instances: 1
+
+### CAI_WORLD_CHARACTERS
+
+- Instances: 1
+
+### CAI_WORLD_FACTIONS
+
+- Instances: 1
+
+### CAI_WORLD_FORTS
+
+- Instances: 1
+
+### CAI_WORLD_GOVERNORSHIPS
+
+- Instances: 1
+
+### CAI_WORLD_REGIONS
+
+- Instances: 1
+
+### CAI_WORLD_REGION_BOUNDARIES
+
+- Instances: 1
+
+### CAI_WORLD_REGION_HLCIS
+
+- Instances: 1
+
+### CAI_WORLD_REGION_SLOTS
+
+- Instances: 1
+
+### CAI_WORLD_RESOURCE_MOBILES
+
+- Instances: 1
+
+### CAI_WORLD_SEA_GRID_CELLS
+
+- Instances: 1
+
+### CAI_WORLD_SETTLEMENTS
+
+- Instances: 1
+
+### CAI_WORLD_TECHNOLOGY_TREES
+
+- Instances: 1
+
+### CAI_WORLD_THEATRES
+
+- Instances: 1
+
+### CAI_WORLD_TRADE_ROUTES
+
+- Instances: 1
+
+### CAI_WORLD_TRADE_ROUTE_SEGMENTS
+
+- Instances: 1
+
+### CAI_WORLD_TRADING_POSTS
+
+- Instances: 1
+
+### CAI_WORLD_TRANSITION_AREAS
+
+- Instances: 1
+
+### CAI_WORLD_UNITS
+
+- Instances: 1
+
+### CAMPAIGN_CAMERA
+
+- Instances: 1
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Float32 | 0.747999906539917 | 0.7479999 |
+| 1 | UInt32 | 0 | 0 |
+| 2 | Point3D |  | (-519.6623, 0, 293.42673) |
+
+### CAMPAIGN_CAMERA_MANAGER
+
+- Instances: 1
+- Child nodes: CAMPAIGN_CAMERA
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 0 | 0 |
+
+### CAMPAIGN_DIRECTOR
+
+- Instances: 1
+
+### CAMPAIGN_DIRECTOR[]
+
+- Instances: 1
+- Child nodes: CDIR_INTERFACE
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Boolean |  | false |
+
+### CAMPAIGN_ENV
+
+- Instances: 1
+- Child nodes: CAMPAIGN_CAMERA_MANAGER, CAMPAIGN_MODEL, CAMPAIGN_SETUP, CAMPAIGN_SETUP_LOCAL
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Boolean |  | false |
+| 1 | Boolean |  | true |
+
+### CAMPAIGN_MAP_DATA
+
+- Instances: 1
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UTF-16 |  | campaign_maps/global_map |
+| 1 | UTF-16 |  |  |
+| 2 | UTF-16 |  | global_map |
+| 3 | Boolean |  | true |
+
+### CAMPAIGN_MISSION
+
+- Instances: 1
+- Child nodes: CAMPAIGN_MISSION_LOCALISATION_OVERRIDES, CAMPAIGN_MISSION_OBJECTIVES, CAMPAIGN_MISSION_REWARDS
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 0 | 0 |
+| 1 | UInt32 | 71 | 71 |
+| 2 | Int32 | -738554048 | -738554048 |
+| 3 | Int32 | 144796784 | 144796784 |
+| 4 | Boolean |  | true |
+| 5 | Boolean |  | false |
+| 6 | ASCII |  | spain_protectorate |
+
+### CAMPAIGN_MISSION_LOCALISATION_OVERRIDES
+
+- Instances: 1
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UTF-16 |  |  |
+| 1 | UTF-16 |  | mission_text_text_main_protectorate_new_spain_te… |
+| 2 | UTF-16 |  | mission_text_text_main_protectorate_new_spain_re… |
+
+### CAMPAIGN_MISSION_OBJECTIVES
+
+- Instances: 1
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1 | 1 |
+| 1 | UInt32 | 0 | 0 |
+| 2 | UInt32 | 0 | 0 |
+| 3 | UInt32 | 0 | 0 |
+| 4 | UTF-16 |  |  |
+| 5 | UTF-16 |  |  |
+| 6 | UInt32 Array |  | [842946904, 1019388848, 1021949592] |
+
+### CAMPAIGN_MISSION_REWARDS
+
+- Instances: 1
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 0 | 0 |
+| 1 | UInt32 | 842320704 | 842320704 |
+
+### CAMPAIGN_MODEL
+
+- Instances: 1
+- Child nodes: CAI_INTERFACE, CAMPAIGN_CALENDAR, CAMPAIGN_DIRECTOR, CAMPAIGN_MAP_DATA, CAMPAIGN_PATHFINDER, CAMPAIGN_TRADE_MANAGER, CULTURE_UNIT_CLASS_MAPPING, EPISODIC_RESTRICTIONS, HISTORICAL_CHARACTER_MANAGER, HISTORICAL_EVENT_MANAGER, LOCOMOTION_MANAGER, MARKER_MANAGER, OSMOSIS_CULTURES, PENDING_BATTLE, PORTRAIT_ALLOCATOR, RandSeed, TURN_TIMER, WORLD
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1232648655 | 1232648655 |
+| 1 | Boolean |  | true |
+| 2 | Boolean |  | false |
+| 3 | Boolean |  | false |
+| 4 | Boolean |  | true |
+| 5 | UInt32 | 103134 | 103134 |
+| 6 | Float32 | 1.1621482372283936 | 1.1621482 |
+| 7 | UInt32 | 40 | 40 |
+| 8 | UInt32 | 14 | 14 |
+
+### CAMPAIGN_PATHFINDER
+
+- Instances: 1
+- Child nodes: PATHFINDING_GRID
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Boolean |  | true |
+| 1 | Boolean Array |  | [] |
+
+### CAMPAIGN_PLAYERS_SETUP
+
+- Instances: 1
+- Child nodes: PLAYERS_ARRAY
+
+### CAMPAIGN_SETUP
+
+- Instances: 1
+- Child nodes: CAMPAIGN_PLAYERS_SETUP, CAMPAIGN_SETUP_OPTIONS
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UTF-16 |  | e_etwii |
+| 1 | UInt32 | 43981 | 43981 |
+| 2 | UTF-16 |  |  |
+
+### CAMPAIGN_SETUP_INGAME_MODIFIABLES
+
+- Instances: 1
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 0 | 0 |
+| 1 | UInt32 | 0 | 0 |
+| 2 | Int32 | -1 | -1 |
+| 3 | Int32 | -1 | -1 |
+| 4 | Boolean |  | false |
+| 5 | Boolean |  | true |
+| 6 | Boolean |  | true |
+| 7 | Boolean |  | false |
+
+### CAMPAIGN_SETUP_LOCAL
+
+- Instances: 1
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UTF-16 |  | thirteen_colonies |
+
+### CAMPAIGN_SETUP_OPTIONS
+
+- Instances: 1
+- Child nodes: CAMPAIGN_SETUP_INGAME_MODIFIABLES
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Float32 | 1 | 1 |
+| 1 | Boolean |  | false |
+| 2 | Int32 | 0 | 0 |
+| 3 | Int32 | 0 | 0 |
+| 4 | UInt32 | 1 | 1 |
+| 5 | UInt32 | 20 | 20 |
+| 6 | UInt32 | 14 | 14 |
+
+### CAMPAIGN_TRADE_MANAGER
+
+- Instances: 1
+- Child nodes: COMMODITIES_ORDER, DOMESTIC_TRADE_ROUTES, INTERNATIONAL_TRADE_ROUTES, PORT_INDICES, RESOURCES_ORDER, SETTLEMENT_INDICES, THEATRES, TRADE_NODES, TRADE_ROUTES, TRADE_SEGMENTS
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 Array |  | [9, 8, 11, 12, 24, 11, 12, 16] |
+| 1 | Float32 Array |  | [0.10955299, 0.026818873, 0.041109294, 0.0505674… |
+| 2 | UInt32 Array |  | [30, 34, 40, 25, 24, 54, 43, 25] |
+| 3 | UInt32 Array |  | [30, 34, 39, 25, 24, 53, 42, 25] |
+| 4 | UInt32 Array |  | [30, 34, 39, 25, 24, 53, 43, 25] |
+| 5 | UInt32 Array |  | [2, 2, 2, 2, 2, 2, 2, 2] |
+| 6 | UInt32 Array |  | [25, 25, 0, 0, 0, 30, 25, 50, 0, 25, 30, 50, 0, … |
+
+### CDIR_BDI_POOL
+
+- Instances: 1
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 7846 | 7846 |
+
+### CDIR_DESIRE_BOOST_PLAYER_RIVALS
+
+- Instances: 1
+
+### CDIR_DESIRE_BOOST_PLAYER_RIVALS_AT_WAR
+
+- Instances: 1
+
+### CDIR_DESIRE_FILL_TRADE_THEATRES
+
+- Instances: 1
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 12 | 12 |
+
+### CDIR_DESIRE_TRANSFER_REGION_OWNERSHIP
+
+- Instances: 1
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 4 | 4 |
+
+### CDIR_DESIRE_UNIT_BALANCER
+
+- Instances: 1
+- Child nodes: CDIR_DESIRE_UNIT_BALANCER_FACTION_COUNT, CDIR_DESIRE_UNIT_BALANCER_MOBILE_COUNT, CDIR_DESIRE_UNIT_BALANCER_UNIT_COUNT
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Boolean |  | true |
+
+### CDIR_DESIRE_UNIT_BALANCER_FACTION_COUNT
+
+- Instances: 1
+
+### CDIR_DESIRE_UNIT_BALANCER_MOBILE_COUNT
+
+- Instances: 1
+
+### CDIR_DESIRE_UNIT_BALANCER_UNIT_COUNT
+
+- Instances: 1
+
+### CDIR_DESIRE_UNIT_UPGRADER
+
+- Instances: 1
+- Child nodes: CDIR_DESIRE_UNIT_UPGRADER_FACTION_COUNT, CDIR_DESIRE_UNIT_UPGRADER_MOBILE_COUNT, CDIR_DESIRE_UNIT_UPGRADER_UNIT_COUNT
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Boolean |  | true |
+
+### CDIR_DESIRE_UNIT_UPGRADER_FACTION_COUNT
+
+- Instances: 1
+
+### CDIR_DESIRE_UNIT_UPGRADER_MOBILE_COUNT
+
+- Instances: 1
+
+### CDIR_DESIRE_UNIT_UPGRADER_UNIT_COUNT
+
+- Instances: 1
+
+### CDIR_INTERFACE
+
+- Instances: 1
+- Child nodes: CDIR_INTERFACE_AUTORESOLVER_MODIFIERS, CDIR_INTERFACE_REGION_OWNERSHIP_CHANGES
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 7845 | 7845 |
+
+### CDIR_INTERFACE_AUTORESOLVER_MODIFIERS
+
+- Instances: 1
+
+### CDIR_INTERFACE_REGION_OWNERSHIP_CHANGES
+
+- Instances: 1
+
+### CDIR_PLAYER_RIVAL_SCORE_ANALYSER
+
+- Instances: 1
+
+### CDIR_RELATION_GRAPH
+
+- Instances: 1
+
+### CDIR_TIME
+
+- Instances: 1
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 66 | 66 |
+
+### CDIR_WORLD
+
+- Instances: 1
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 7843 | 7843 |
+| 1 | UInt32 | 7844 | 7844 |
+
+### COMMODITIES_ORDER
+
+- Instances: 1
+
+### CREATED_CHARACTER_ARRAY
+
+- Instances: 1
+
+### CULTURE_UNIT_CLASS_MAPPING
+
+- Instances: 1
+
+### DOMESTIC_TRADE_ROUTES
+
+- Instances: 1
+
+### EPISODIC_RESTRICTIONS
+
+- Instances: 1
+- Child nodes: ATTACK_OF_OPPORTUNITY, BUILDING_RESTRICTIONS, LOCATION_TRIGGER, LUA, TIME_TRIGGER, UNIT_RESTRICTIONS, VISIBILITY_TRIGGER
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Boolean |  | false |
+| 1 | Boolean |  | false |
+| 2 | Boolean |  | false |
+| 3 | Float32 | -1280 | -1280 |
+| 4 | Float32 | -640 | -640 |
+| 5 | Float32 | 1280 | 1280 |
+| 6 | Float32 | 640 | 640 |
+| 7 | Float32 | 0.5 | 0.5 |
+| 8 | Float32 | 1 | 1 |
+| 9 | UTF-16 |  |  |
+| 10 | ASCII |  |  |
+| 11 | Boolean |  | true |
+| 12 | Boolean |  | true |
+| 13 | Boolean |  | true |
+
+### EXCLUSION ZONES
+
+- Instances: 1
+
+### EXPOSED_CHARACTERS[]
+
+- Instances: 1
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Int32 | 839651944 | 839651944 |
+
+### FACTION_ARRAY
+
+- Instances: 1
+
+### FAMOUS_BATTLE_BLOCK
+
+- Instances: 1
+
+### Forward Dependencies
+
+- Instances: 1
+
+### HISTORICAL_CHARACTER_MANAGER
+
+- Instances: 1
+- Child nodes: CREATED_CHARACTER_ARRAY
+
+### HISTORICAL_EVENT_MANAGER
+
+- Instances: 1
+- Child nodes: TRIGGERED_DYNAMIC_EVENT_ARRAY
+
+### INTERNATIONAL_TRADE_ROUTES
+
+- Instances: 1
+
+### LOCATION_TRIGGER
+
+- Instances: 1
+
+### LOCOMOTION_MANAGER
+
+- Instances: 1
+- Child nodes: Forward Dependencies, Reverse Dependencies
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Int32 Array |  | [] |
+
+### LUA
+
+- Instances: 1
+
+### MAPS
+
+- Instances: 1
+
+### MARKER_MANAGER
+
+- Instances: 1
+- Child nodes: FAMOUS_BATTLE_BLOCK
+
+### MISSIONS[]
+
+- Instances: 1
+- Child nodes: CAMPAIGN_MISSION
+
+### MULTIPLAYER_CAMPAIGN_SAVE_GAME
+
+- Instances: 1
+- Child nodes: CAMPAIGN_ENV, SAVE_GAME_HEADER_MULTIPLAYER, multiplayer
+
+### OSMOSIS_CULTURES
+
+- Instances: 1
+
+### PATHFINDING_GRID
+
+- Instances: 1
+
+### PENDING_BATTLE
+
+- Instances: 1
+- Child nodes: PENDING_BATTLE_ALLIANCE, PLAYER_LIST, READY_FOR_ORDERS, READY_TO_FIGHT
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Int32 | 0 | 0 |
+| 1 | Int32 | 0 | 0 |
+| 2 | Int32 | 0 | 0 |
+| 3 | Int32 | 0 | 0 |
+| 4 | UInt32 | 7 | 7 |
+| 5 | Boolean |  | false |
+| 6 | Boolean |  | true |
+| 7 | UInt32 | 14 | 14 |
+| 8 | Boolean |  | true |
+| 9 | Boolean |  | false |
+| 10 | Boolean |  | false |
+| 11 | Boolean |  | false |
+| 12 | Boolean |  | false |
+| 13 | Boolean |  | true |
+| 14 | Boolean |  | false |
+| 15 | Boolean |  | true |
+| 16 | Boolean |  | true |
+| 17 | Boolean |  | false |
+| 18 | Boolean |  | false |
+| 19 | Boolean |  | false |
+| 20 | Int32 | -1 | -1 |
+
+### PLAYERS_ARRAY
+
+- Instances: 1
+
+### PLAYER_LIST
+
+- Instances: 1
+
+### PORTRAIT_ALLOCATOR
+
+- Instances: 1
+
+### PORT_INDICES
+
+- Instances: 1
+
+### PRE_BATTLE_INFORMATION
+
+- Instances: 1
+
+### READY_FOR_ORDERS
+
+- Instances: 1
+
+### READY_TO_FIGHT
+
+- Instances: 1
+
+### REBEL_FACTION
+
+- Instances: 1
+- Child nodes: FACTION
+
+### REBEL_SPYING
+
+- Instances: 1
+- Child nodes: CAMPAIGN_SPYING
+
+### REGIONS_ARRAY
+
+- Instances: 1
+
+### REGION_MANAGER
+
+- Instances: 1
+- Child nodes: REGIONS_ARRAY
+
+### RESOURCES_ORDER
+
+- Instances: 1
+
+### RandSeed
+
+- Instances: 1
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 384460648 | 384460648 |
+
+### Reverse Dependencies
+
+- Instances: 1
+
+### SAVE_GAME_HEADER_MULTIPLAYER
+
+- Instances: 1
+- Child nodes: MAPS
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UTF-16 |  | plsloadlikepls |
+| 1 | UTF-16 |  | Keegan (Thirteen Colonies) vs. Luci (Spain): Sum… |
+| 2 | UTF-16 |  | Keegan |
+| 3 | UTF-16 |  | Luci |
+| 4 | UTF-16 |  | thirteen_colonies |
+| 5 | UTF-16 |  | spain |
+| 6 | UTF-16 |  | data\ui\flags\george_washington |
+| 7 | UTF-16 |  | data\ui\flags\spain |
+| 8 | UInt32 | 72 | 72 |
+| 9 | UInt32 | 1708 | 1708 |
+| 10 | UTF-16 |  | Summer |
+| 11 | UInt64 | 76561198119124320 | 76561198119124316 |
+| 12 | UInt64 | 76561198165951380 | 76561198165951372 |
+| 13 | Boolean |  | false |
+
+### SETTLEMENT_INDICES
+
+- Instances: 1
+
+### SPYING_ARRAY
+
+- Instances: 1
+
+### THEATRES
+
+- Instances: 1
+
+### TIME_TRIGGER
+
+- Instances: 1
+
+### TRADE_NODES
+
+- Instances: 1
+
+### TRADE_ROUTES
+
+- Instances: 1
+
+### TRADE_SEGMENTS
+
+- Instances: 1
+
+### TRIGGERED_DYNAMIC_EVENT_ARRAY
+
+- Instances: 1
+
+### TRIGGERED_DYNAMIC_EVENT_ARRAY[]
+
+- Instances: 1
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UTF-16 |  | euro_porcelain |
+
+### TURN_TIMER
+
+- Instances: 1
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | Float32 | 0 | 0 |
+| 1 | Int32 | -1 | -1 |
+| 2 | Int32 | -1 | -1 |
+
+### UNIT_RESTRICTIONS
+
+- Instances: 1
+
+### VISIBILITY_TRIGGER
+
+- Instances: 1
+
+### WORLD
+
+- Instances: 1
+- Child nodes: ANCILLARY_UNIQUENESS_MONITOR, FACTION_ARRAY, REBEL_FACTION, REBEL_SPYING, REGION_MANAGER, SPYING_ARRAY
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt32 | 1 | 1 |
+| 1 | UInt32 | 1 | 1 |
+| 2 | Boolean |  | false |
+
+### multiplayer
+
+- Instances: 1
+
+| # | Type | Range | Samples |
+|---|---|---|---|
+| 0 | UInt8 | 13 | 13 |
+| 1 | UInt32 | 3 | 3 |
+| 2 | UInt32 | 0 | 0 |
+| 3 | UInt32 | 72 | 72 |
+| 4 | UInt32 | 0 | 0 |
+| 5 | UInt32 | 65538 | 65538 |
+| 6 | UInt32 | 4294967295 | 4294967295 |
+| 7 | UInt32 | 4294967295 | 4294967295 |
+| 8 | UInt32 | 0 | 0 |
+| 9 | UInt32 | 0 | 0 |
+| 10 | UInt32 | 205685644 | 205685644 |
+| 11 | UInt32 | 17825793 | 17825793 |
+| 12 | UInt32 | 3 | 3 |
+| 13 | UInt32 | 1708 | 1708 |
+| 14 | UInt8 | 1 | 1 |
+| 15 | UTF-16 |  | main |
+| 16 | UInt32 | 82 | 82 |
+| 17 | UInt32 | 180403670 | 180403670 |
+| 18 | UInt32 | 660352478 | 660352478 |
+| 19 | UInt32 | 381243639 | 381243639 |
+
