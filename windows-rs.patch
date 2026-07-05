@@ -1,0 +1,185 @@
+diff --git a/crates/libs/reactor/src/app.rs b/crates/libs/reactor/src/app.rs
+index 629004128..a17cf2748 100644
+--- a/crates/libs/reactor/src/app.rs
++++ b/crates/libs/reactor/src/app.rs
+@@ -28,6 +28,7 @@ pub struct App {
+     eager_templated_realization: bool,
+     presenter: PresenterKind,
+     backdrop: Option<Backdrop>,
++    theme_xaml: Option<String>,
+ }
+ 
+ impl Default for App {
+@@ -45,6 +46,7 @@ impl App {
+             eager_templated_realization: false,
+             presenter: PresenterKind::Default,
+             backdrop: None,
++            theme_xaml: None,
+         }
+     }
+ 
+@@ -89,6 +91,17 @@ impl App {
+         self
+     }
+ 
++    /// Merge a XAML `ResourceDictionary` (as markup) into
++    /// `Application.Resources` after the WinUI control resources, enabling
++    /// lightweight-styling overrides (`ButtonBackground`,
++    /// `TextControlBackground`, `ControlCornerRadius`, custom brushes, …).
++    /// Later merged dictionaries win resource lookup, so keys defined here
++    /// replace the stock WinUI theme values app-wide.
++    pub fn theme_resources(mut self, xaml: impl Into<String>) -> Self {
++        self.theme_xaml = Some(xaml.into());
++        self
++    }
++
+     /// Run with custom WinUI setup; the caller manages windows and content.
+     pub fn run_custom<F>(self, setup: F) -> Result<()>
+     where
+@@ -96,16 +109,21 @@ impl App {
+     {
+         init_app_platform()?;
+         let setup = Mutex::new(Some(setup));
++        let theme_xaml = self.theme_xaml;
+         let result_slot: Arc<Mutex<Result<()>>> = Arc::new(Mutex::new(Ok(())));
+         let result_slot_cb = Arc::clone(&result_slot);
+         let start_result =
+             Application::Start(&ApplicationInitializationCallback::new(move |_params| {
+                 let inner = || -> Result<()> {
+                     let setup = setup.lock().unwrap().take().unwrap();
++                    let theme_xaml = theme_xaml.clone();
+ 
+                     let on_launched: Box<dyn FnOnce() -> Result<()>> = Box::new(move || {
+                         let app = APP_SLOT.with(|slot| slot.borrow().clone()).unwrap();
+                         install_xaml_controls_resources(&app)?;
++                        if let Some(xaml) = &theme_xaml {
++                            install_theme_resources(&app, xaml)?;
++                        }
+                         run_callback("setup", || setup(&app))
+                     });
+ 
+@@ -138,6 +156,7 @@ impl App {
+         let constraints = self.inner_constraints;
+         let presenter = self.presenter;
+         let backdrop = self.backdrop;
++        let theme_xaml = self.theme_xaml;
+         let factory = Mutex::new(Some(root_factory));
+         let result_slot: Arc<Mutex<Result<()>>> = Arc::new(Mutex::new(Ok(())));
+         let result_slot_cb = Arc::clone(&result_slot);
+@@ -147,9 +166,13 @@ impl App {
+                     let factory = factory.lock().unwrap().take().unwrap();
+ 
+                     let title = title.clone();
++                    let theme_xaml = theme_xaml.clone();
+                     let on_launched: Box<dyn FnOnce() -> Result<()>> = Box::new(move || {
+                         let app = APP_SLOT.with(|slot| slot.borrow().clone()).unwrap();
+                         install_xaml_controls_resources(&app)?;
++                        if let Some(xaml) = &theme_xaml {
++                            install_theme_resources(&app, xaml)?;
++                        }
+ 
+                         run_callback("OnLaunched", move || {
+                             let root: Box<dyn Component> = Box::new(factory());
+diff --git a/crates/libs/reactor/src/app_shim.rs b/crates/libs/reactor/src/app_shim.rs
+index cf0296317..4a115534a 100644
+--- a/crates/libs/reactor/src/app_shim.rs
++++ b/crates/libs/reactor/src/app_shim.rs
+@@ -68,3 +68,16 @@ pub fn install_xaml_controls_resources(app: &Application) -> Result<()> {
+     merged.Append(&as_rd)?;
+     Ok(())
+ }
++
++/// Parse `xaml` (which must describe a `ResourceDictionary`) and merge it
++/// into `Application.Resources`. Appended after the WinUI control resources,
++/// so its keys take precedence in resource lookup — this is the hook for
++/// lightweight-styling theme overrides.
++pub fn install_theme_resources(app: &Application, xaml: &str) -> Result<()> {
++    let loaded = XamlReader::Load(xaml)?;
++    let dict: ResourceDictionary = loaded.cast()?;
++    let resources = app.Resources()?;
++    let merged = resources.MergedDictionaries()?;
++    merged.Append(&dict)?;
++    Ok(())
++}
+diff --git a/crates/libs/reactor/src/bindings.rs b/crates/libs/reactor/src/bindings.rs
+index 2263dd11a..249c6f087 100644
+--- a/crates/libs/reactor/src/bindings.rs
++++ b/crates/libs/reactor/src/bindings.rs
+@@ -3878,6 +3878,15 @@ impl windows_core::RuntimeType for IAppWindow {
+         windows_core::imp::ConstBuffer::for_interface::<Self>();
+ }
+ impl IAppWindow {
++    pub(crate) fn SetIcon(&self, iconpath: &str) -> windows_core::Result<()> {
++        unsafe {
++            (windows_core::Interface::vtable(self).SetIcon)(
++                windows_core::Interface::as_raw(self),
++                core::mem::transmute_copy(&windows_core::HSTRING::from(iconpath)),
++            )
++            .ok()
++        }
++    }
+     pub(crate) fn Presenter(&self) -> windows_core::Result<AppWindowPresenter> {
+         unsafe {
+             let mut result__ = core::mem::zeroed();
+@@ -3948,7 +3957,10 @@ pub struct IAppWindow_Vtbl {
+     MoveAndResize: usize,
+     MoveAndResizeRelativeToDisplayArea: usize,
+     Resize: usize,
+-    SetIcon: usize,
++    pub SetIcon: unsafe extern "system" fn(
++        *mut core::ffi::c_void,
++        *mut core::ffi::c_void,
++    ) -> windows_core::HRESULT,
+     SetIconWithIconId: usize,
+     SetPresenter: usize,
+     pub SetPresenterByKind: unsafe extern "system" fn(
+diff --git a/crates/libs/reactor/src/host.rs b/crates/libs/reactor/src/host.rs
+index faebe7e2b..dd5bd7e2b 100644
+--- a/crates/libs/reactor/src/host.rs
++++ b/crates/libs/reactor/src/host.rs
+@@ -12,6 +12,9 @@ thread_local! {
+     /// TitleBar height option requested before `ROOT_WINDOW` was set. Applied once
+     /// the window becomes available in `post_render`.
+     static PENDING_TALL: Cell<Option<bool>> = const { Cell::new(None) };
++    /// Window icon path requested before `ROOT_WINDOW` was set. Applied once
++    /// the window becomes available in `post_render`.
++    static PENDING_ICON: RefCell<Option<String>> = const { RefCell::new(None) };
+ }
+ 
+ /// Requested application theme, matching `Microsoft.UI.Xaml.ElementTheme`.
+@@ -69,6 +72,25 @@ fn update_titlebar_theme() {
+     });
+ }
+ 
++/// Set the window (title bar + taskbar) icon from a `.ico` file path.
++/// Queued if the root window isn't attached yet.
++pub fn set_window_icon(path: impl Into<String>) {
++    let path = path.into();
++    let applied = ROOT_WINDOW.with(|wcell| -> Option<()> {
++        let window = wcell.borrow();
++        apply_window_icon(window.as_ref()?, &path)
++    });
++    if applied.is_none() {
++        PENDING_ICON.with(|p| *p.borrow_mut() = Some(path));
++    }
++}
++
++fn apply_window_icon(window: &Window, path: &str) -> Option<()> {
++    let window_2 = window.cast::<IWindow2>().ok()?;
++    let app_window = window_2.AppWindow().ok()?;
++    app_window.SetIcon(path).ok()
++}
++
+ pub fn set_titlebar_height(tall: bool) {
+     let applied = ROOT_WINDOW.with(|wcell| -> Option<()> {
+         let window = wcell.borrow();
+@@ -220,6 +242,9 @@ impl ReactorHost {
+                             subscribed.set(true);
+                             ROOT_WINDOW
+                                 .with(|cell| *cell.borrow_mut() = Some(state.window.clone()));
++                            if let Some(path) = PENDING_ICON.with(|p| p.borrow_mut().take()) {
++                                let _ = apply_window_icon(&state.window, &path);
++                            }
+                             if let Ok(fe) = ui_element.cast::<FrameworkElement>() {
+                                 subscribe_actual_theme_changed(
+                                     &fe,
