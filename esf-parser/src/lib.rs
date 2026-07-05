@@ -9,6 +9,7 @@
 pub mod enums;
 pub mod objects;
 pub mod parser;
+pub mod pack_parser;
 
 pub use enums::*;
 pub use objects::*;

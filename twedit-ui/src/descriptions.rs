@@ -28,11 +28,11 @@ pub struct NodeSchema {
     pub typed: HashMap<String, String>,
 }
 
-/// Merged documentation, keyed by node name. Record nodes share their poly
-/// parent's name, so one entry covers both.
-#[derive(Debug, Default)]
+/// Curated node descriptions and semantic field labels.
+#[derive(Debug, Default, Clone)]
 pub struct Descriptions {
-    nodes: HashMap<String, NodeSchema>,
+    pub nodes: HashMap<String, NodeSchema>,
+    pub loc_map: HashMap<String, String>,
 }
 
 impl Descriptions {
@@ -48,14 +48,33 @@ impl Descriptions {
     /// Label for the value at `pos`, where `classes` is the type class of
     /// every value of the node in order (see [`type_class`]). Typed labels
     /// win over positional ones.
-    pub fn label(&self, name: &str, classes: &[&'static str], pos: usize) -> Option<&str> {
-        let schema = self.nodes.get(name)?;
-        let class = classes.get(pos)?;
-        let nth = classes[..pos].iter().filter(|c| *c == class).count();
-        if let Some(text) = schema.typed.get(&format!("{class}{nth}")) {
-            return Some(text);
+    pub fn label(&self, node_name: &str, classes: &[&str], value_index: usize, raw_value_str: &str) -> Option<String> {
+        let node = self.nodes.get(node_name)?;
+
+        // Try nth-occurrence-of-type (e.g. i0, s1)
+        if value_index < classes.len() {
+            let cls = classes[value_index];
+            let nth = classes[..value_index].iter().filter(|&&c| c == cls).count();
+            let key = format!("{}{}", cls, nth);
+            if let Some(lbl) = node.typed.get(&key) {
+                return Some(self.augment_label_with_loc(lbl, raw_value_str));
+            }
         }
-        schema.fields.get(pos)?.as_deref()
+
+        // Try absolute index (e.g. fields[0])
+        if let Some(lbl) = node.fields.get(value_index).and_then(|o| o.as_ref()) {
+            return Some(self.augment_label_with_loc(lbl, raw_value_str));
+        }
+
+        None
+    }
+
+    fn augment_label_with_loc(&self, lbl: &str, raw_value_str: &str) -> String {
+        if let Some(loc) = self.loc_map.get(raw_value_str) {
+            format!("{} ({})", lbl, loc)
+        } else {
+            lbl.to_string()
+        }
     }
 }
 
@@ -132,7 +151,7 @@ pub fn load(legacy_xml: &str, schema_toml: &str) -> Descriptions {
         }
     }
 
-    Descriptions { nodes }
+    Descriptions { nodes, loc_map: HashMap::new() }
 }
 
 /// Parse the legacy NodesDescriptions.xml into name -> positional labels.
@@ -250,13 +269,13 @@ i1 = "Second int"
         // Values: i32, string, i32, i32 -> classes i, s, i, i.
         let classes = vec!["i", "s", "i", "i"];
         // Position 0: class i nth 0 -> no typed "i0", falls back to legacy.
-        assert_eq!(descs.label("REL", &classes, 0), Some("legacy 0"));
+        assert_eq!(descs.label("REL", &classes, 0, "").as_deref(), Some("legacy 0"));
         // Position 1: class s nth 0 -> typed s0 wins over legacy 1.
-        assert_eq!(descs.label("REL", &classes, 1), Some("First string"));
+        assert_eq!(descs.label("REL", &classes, 1, "").as_deref(), Some("First string"));
         // Position 2: class i nth 1 -> typed i1.
-        assert_eq!(descs.label("REL", &classes, 2), Some("Second int"));
+        assert_eq!(descs.label("REL", &classes, 2, "").as_deref(), Some("Second int"));
         // Position 3: class i nth 2 -> nothing.
-        assert_eq!(descs.label("REL", &classes, 3), None);
+        assert_eq!(descs.label("REL", &classes, 3, ""), None);
     }
 
     #[test]
@@ -274,22 +293,49 @@ i1 = "Second int"
             "i", "bool", "i", "s", "i", "u", "i", "i", "i", "i", "i", "u", "u", "u", "u",
             "u_ary", "u", "s", "bool", "bool", "i",
         ];
-        assert_eq!(descs.label("DIPLOMACY_RELATIONSHIP", &classes, 0), Some("Target faction ID"));
         assert_eq!(
-            descs.label("DIPLOMACY_RELATIONSHIP", &classes, 1),
+            descs.label("DIPLOMACY_RELATIONSHIP", &classes, 0, "").as_deref(),
+            Some("Target faction ID")
+        );
+        assert_eq!(
+            descs.label("DIPLOMACY_RELATIONSHIP", &classes, 1, "").as_deref(),
             Some("Trade agreement active")
         );
         assert_eq!(
-            descs.label("DIPLOMACY_RELATIONSHIP", &classes, 3),
+            descs.label("DIPLOMACY_RELATIONSHIP", &classes, 3, "").as_deref(),
             Some("Relationship state (war / neutral / allied / patron / protectorate)")
         );
         assert_eq!(
-            descs.label("DIPLOMACY_RELATIONSHIP", &classes, 11),
+            descs.label("DIPLOMACY_RELATIONSHIP", &classes, 11, "").as_deref(),
             Some("Turns at war")
         );
         assert_eq!(
-            descs.label("DIPLOMACY_RELATIONSHIP", &classes, 20),
+            descs.label("DIPLOMACY_RELATIONSHIP", &classes, 20, "").as_deref(),
             Some("Overall relation (sum of attitude values)")
+        );
+    }
+
+    #[test]
+    fn label_appends_localised_name_when_value_is_a_loc_key() {
+        let toml = r#"
+[FACTION]
+[FACTION.typed]
+s0 = "Faction key"
+"#;
+        let mut descs = load("<ArrayOfNodeDescription/>", toml);
+        descs.loc_map.insert(
+            "factions_screen_name_britain".to_string(),
+            "Great Britain".to_string(),
+        );
+        let classes = vec!["s"];
+        assert_eq!(
+            descs.label("FACTION", &classes, 0, "factions_screen_name_britain").as_deref(),
+            Some("Faction key (Great Britain)")
+        );
+        // Values that aren't loc keys keep the plain label.
+        assert_eq!(
+            descs.label("FACTION", &classes, 0, "not_a_key").as_deref(),
+            Some("Faction key")
         );
     }
 

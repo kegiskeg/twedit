@@ -427,21 +427,21 @@ fn value_rows(
             );
             break;
         }
-        let description = descs
-            .0
-            .as_ref()
-            .and_then(|d| d.label(name, &classes, index));
         let current_text = match edits.get(&value_id) {
             Some(EsfEdit::Value(v)) => doc.format_value(v),
             Some(EsfEdit::Text(s)) => s.clone(),
             None => doc.format_value(&record.value),
         };
+        let description = descs
+            .0
+            .as_ref()
+            .and_then(|d| d.label(name, &classes, index, &current_text));
         rows.push(value_row(
             doc,
             value_id,
             &record.value,
             current_text,
-            description,
+            description.as_deref(),
             edits,
             set_edits,
             edit_mode,
@@ -554,7 +554,10 @@ fn app_shell(cx: &mut RenderCx) -> Element {
         std::thread::spawn(move || {
             let xml_str = include_str!("../assets/NodesDescriptions.xml");
             let toml_str = include_str!("../assets/esf_schema.toml");
-            let d = descriptions::load(xml_str, toml_str);
+            let mut d = descriptions::load(xml_str, toml_str);
+            if let Some(locs) = esf_parser::pack_parser::get_etw_localisation() {
+                d.loc_map = locs;
+            }
             set_descs.call(DescState(Some(Arc::new(d))));
         });
         set_recent.call(load_recent());
