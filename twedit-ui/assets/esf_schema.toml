@@ -363,3 +363,86 @@ u13 = "HLCIS ID"
 u_ary15 = "BDI Information"
 u_ary19 = "BDI Information"
 u_ary22 = "BDI Information"
+
+[CAMPAIGN_PLAYER_SETUP.typed]
+bool4 = "Playable"
+
+[CAI_REGION]
+doc = "AI view of a region."
+[CAI_REGION.typed]
+u_ary0 = "Theatre IDs"
+u_ary1 = "HLCIS IDs"
+u2 = "Settlement AI ID"
+flt4 = "X Coordinate"
+flt5 = "Y Coordinate"
+u11 = "Region ID"
+u12 = "Governor AI ID"
+
+[CAI_RESOURCE_MOBILE]
+doc = "AI view of a mobile resource (character/army/navy)."
+[CAI_RESOURCE_MOBILE.typed]
+u0 = "Character AI ID"
+u1 = "Settlement AI ID"
+u2 = "Settlement Character AI ID"
+u10 = "Army ID"
+u_ary15 = "Sea Grid ID"
+
+[CAI_WORLD_REGIONS]
+doc = "AI world model: regions."
+[CAI_WORLD_REGIONS.typed]
+u2 = "Region AI ID"
+u_ary10 = "BDI Information"
+
+[CAI_REGION_BOUNDARY]
+doc = "AI region boundary details."
+[CAI_REGION_BOUNDARY.typed]
+u0 = "Region AI ID A"
+u1 = "Region AI ID B"
+flt2 = "Distance Between Regions"
+
+[CAI_WORLD_REGION_BOUNDARIES]
+doc = "AI world model: region boundaries."
+[CAI_WORLD_REGION_BOUNDARIES.typed]
+u1 = "Region Boundary AI ID"
+
+[CAI_REGION_SLOT]
+doc = "AI view of a region slot."
+[CAI_REGION_SLOT.typed]
+u1 = "Building Slot AI ID"
+bool5 = "True = Port, False = Town"
+
+[CAI_SETTLEMENT]
+doc = "AI view of a settlement."
+[CAI_SETTLEMENT.typed]
+u_ary0 = "Building Slot AI IDs"
+u1 = "Faction AI ID (only if capital)"
+u2 = "Settlement ID"
+
+[CAI_WORLD_BUILDING_SLOTS]
+doc = "AI world model: building slots."
+[CAI_WORLD_BUILDING_SLOTS.typed]
+u1 = "Building Slot AI ID"
+u11 = "0 = Unemerged, 1 = Emerged"
+
+[CAI_CHARACTER]
+doc = "AI view of a character."
+[CAI_CHARACTER.typed]
+u0 = "Character Resource AI ID For Leader"
+u3 = "Character ID"
+u4 = "Governor AI ID"
+
+[CAI_WORLD_CHARACTERS]
+doc = "AI world model: characters."
+[CAI_WORLD_CHARACTERS.typed]
+u2 = "Character AI ID"
+
+[CAI_WORLD_TECHNOLOGY_TREES]
+doc = "AI world model: technology trees."
+[CAI_WORLD_TECHNOLOGY_TREES.typed]
+u1 = "Technology Tree AI ID"
+
+[CAI_BUILDING_SLOT]
+doc = "AI view of a building slot."
+[CAI_BUILDING_SLOT.typed]
+u0 = "Building Slot ID"
+u1 = "Building type (0=Settlement, 1=Wall/Road, 3=Port, etc.)"
