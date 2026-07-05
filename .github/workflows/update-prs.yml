@@ -23,7 +23,7 @@ jobs:
     name: Rebase stale Dependabot PRs
     runs-on: ubuntu-latest
     steps:
-      - name: Comment "@dependabot rebase" on out-of-date PRs
+      - name: Comment "@dependabot recreate" on out-of-date PRs
         uses: actions/github-script@v7
         with:
           script: |
@@ -47,11 +47,15 @@ jobs:
                 core.info(`#${pr.number} ${pr.title}: ${full.mergeable_state}, skipping`);
                 continue;
               }
-              core.notice(`#${pr.number} ${pr.title}: behind main, requesting rebase`);
+              // "recreate" rather than "rebase": Dependabot refuses to
+              // rebase a branch that anyone else has pushed to (e.g. a
+              // past "Update branch" click), while recreate always works
+              // and those manual merge commits are disposable anyway.
+              core.notice(`#${pr.number} ${pr.title}: ${full.mergeable_state}, requesting recreate`);
               await github.rest.issues.createComment({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 issue_number: pr.number,
-                body: '@dependabot rebase',
+                body: '@dependabot recreate',
               });
             }
