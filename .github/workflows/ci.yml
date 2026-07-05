@@ -3,24 +3,31 @@ name: CI
 on:
   push:
     branches: [ "main" ]
-    paths-ignore:
-      - '**/*.md'
-      - 'docs/**'
-      - '.github/ISSUE_TEMPLATE/**'
-      - '.gitignore'
   pull_request:
     branches: [ "main" ]
-    paths-ignore:
-      - '**/*.md'
-      - 'docs/**'
-      - '.github/ISSUE_TEMPLATE/**'
-      - '.gitignore'
-
 env:
   CARGO_TERM_COLOR: always
 
 jobs:
+  filter:
+    runs-on: ubuntu-latest
+    outputs:
+      src: ${{ steps.filter.outputs.src }}
+    steps:
+    - uses: dorny/paths-filter@v3
+      id: filter
+      with:
+        filters: |
+          src:
+            - '**'
+            - '!**/*.md'
+            - '!docs/**'
+            - '!.github/ISSUE_TEMPLATE/**'
+            - '!.gitignore'
+
   build:
+    needs: filter
+    if: ${{ needs.filter.outputs.src == 'true' }}
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v4
