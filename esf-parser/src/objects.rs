@@ -466,6 +466,30 @@ impl EsfDocument {
             .map(|idx| idx as NodeId)
     }
 
+    /// Deepest structural node whose byte span contains `offset` — i.e. the
+    /// node that owns the value stored at that offset. Nodes are DFS
+    /// pre-order (sorted by `offset`), so the owner is the last node at or
+    /// before `offset` that still spans it; earlier nodes walking backwards
+    /// are already-closed subtrees and are skipped.
+    pub fn find_owning_node(&self, offset: u32) -> Option<NodeId> {
+        // Candidate: last node starting at or before `offset`. It is the
+        // deepest owner if it spans the offset (no descendant can start
+        // later than it and still be <= offset); otherwise it is a closed
+        // subtree, and the owner is its nearest ancestor spanning `offset`.
+        let first_after = self.nodes.partition_point(|n| n.offset <= offset);
+        let mut current = first_after.checked_sub(1)? as NodeId;
+        loop {
+            let node = self.node(current);
+            if node.offset_end > offset {
+                return Some(current);
+            }
+            if node.parent == NO_PARENT {
+                return None;
+            }
+            current = node.parent;
+        }
+    }
+
     /// Case-insensitive substring search over node names. Returns at most
     /// `limit` matches.
     pub fn search_nodes(&self, query: &str, limit: usize) -> Vec<NodeId> {

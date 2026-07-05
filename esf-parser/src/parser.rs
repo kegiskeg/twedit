@@ -652,6 +652,26 @@ mod tests {
     }
 
     #[test]
+    fn owning_node_resolves_every_value() {
+        let doc = parse_bytes(build_sample()).expect("parse failed");
+
+        // Every value's type-byte offset must resolve to the node whose
+        // item list actually references it.
+        for id in 0..doc.nodes.len() {
+            for (value_id, record) in doc.node_value_entries(id as u32) {
+                assert_eq!(
+                    doc.find_owning_node(record.offset),
+                    Some(id as u32),
+                    "value {value_id} at 0x{:x}",
+                    record.offset
+                );
+            }
+        }
+        // An offset inside the header (before the root node) has no owner.
+        assert_eq!(doc.find_owning_node(0), None);
+    }
+
+    #[test]
     fn search_and_paths() {
         let doc = parse_bytes(build_sample()).expect("parse failed");
 
