@@ -1,0 +1,38 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+jobs:
+  build-and-release:
+    runs-on: windows-latest
+    permissions:
+      contents: write
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Rust
+      uses: dtolnay/rust-toolchain@stable
+    - name: Setup windows-rs dependency
+      shell: bash
+      run: |
+        cp -r reactor_patches ../reactor_patches
+        mkdir -p ../_lib
+        cd ../_lib
+        git clone https://github.com/microsoft/windows-rs.git
+        cd windows-rs
+        git checkout a4f7b2cb7c63c6bb7fc77a2affe57145be1d8c4f
+        cp ../../reactor_patches/* crates/libs/reactor/src/
+    - name: Rust Cache
+      uses: Swatinem/rust-cache@v2
+    - name: Build Release Artifacts
+      run: .\build_release.ps1
+      shell: powershell
+    - name: Create Release
+      uses: softprops/action-gh-release@v2
+      with:
+        files: |
+          twedit-portable-release.zip
+          twedit-ui\target\wix\*.msi
+        generate_release_notes: true
