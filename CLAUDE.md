@@ -79,6 +79,27 @@ The original C# source lives at `C:\Projects\Rust\_old\esfeditor\` for
 reference — but its type enum is wrong in places; `docs/FORMAT.md` and the
 community specs win.
 
+### Running the UI from automation / agents
+
+`cargo run -p twedit-ui` blocks until the window is closed — never run it
+in a foreground shell from an automated flow. The smoke-test pattern:
+
+```sh
+cargo build --release -p twedit-ui
+./target/release/twedit-ui.exe &   # background
+sleep 12                           # long enough to parse the test save
+kill -0 <pid> && echo alive        # still running = theme parsed, load OK
+kill <pid>
+```
+
+Staying alive past load is the pass signal: theme XAML and control
+templates are parsed at startup, so a bad `theme.rs` kills the process
+before the window ever paints. For visual changes, prefer verifying with
+real screenshots (computer-use) over guessing from code — several past
+bugs (dead flyout handlers, mis-styled controls) were only visible live.
+Note: tiny controls (the ToggleSwitch track) are hard to hit via scaled
+screenshot coordinates; drive them with Tab+Space instead.
+
 ## Architecture
 
 ### esf-parser
@@ -111,6 +132,24 @@ community specs win.
   text (`encode_node_id` / `label_node_id` in `main.rs`).
 
 ## Conventions and gotchas
+
+### Failure modes: strict parser, tolerant UI
+
+When something is malformed, unknown, or unsupported, pick the failure
+mode by layer:
+
+- **Parser: hard `EsfError` with the absolute offset, never a skip.** An
+  unknown type byte or inconsistent offset means either a real format
+  discovery (research gold — see the 0x00/0x6D/0x8C note below) or a bug
+  in our byte math that would corrupt every edit after it. Skipping bytes
+  to "keep going" hides both. Errors, not panics: the `rejects_bad_input`
+  tests assert truncated/garbage input returns `Err` cleanly.
+- **Save path: refuse to write rather than write something broken.** The
+  save flow re-parses the bytes it just produced; a re-parse failure is
+  surfaced in the status bar instead of silently leaving a corrupt file.
+- **UI metadata: degrade silently.** Missing field labels, descriptions,
+  or schema entries fall back to raw names/values — an unlabeled field is
+  normal (the schema is forever incomplete), not an error condition.
 
 ### Format / parser
 
@@ -149,6 +188,23 @@ To label more fields (the main ongoing research task):
    `real_assets_parse_and_resolve_diplomacy` if the node matters.
 
 ### windows-reactor UI gotchas
+
+**The reactor source IS the documentation.** `windows-reactor` has no
+published docs; the API reference is the crate source at
+`C:\Projects\Rust\_lib\windows-rs\crates\libs\reactor\src\`:
+
+- `widgets/*.rs` — every builder and its methods (check here before
+  assuming a widget supports something; e.g. `tree_view` has no
+  on_expanding, `text_block` has no wrapping).
+- `element.rs` (`ElementExt`) + `style.rs` — modifiers, `ThemeRef`
+  resource keys, animation configs, `PointerEventInfo`.
+- `generated.rs` + `backend/winui/generated_attach_event.rs` +
+  `backend/winui/mod.rs` — whether a callback is *actually wired* and
+  when it re-attaches. Verify here before building on an event; two past
+  bugs (stale flyout handlers, doubts about ToggleSwitch) were resolved
+  by reading the attach code, not the widget API.
+
+Known sharp edges:
 
 - **Flyout/menu handlers are wired ONCE, at first mount.** If
   `MenuFlyoutItems` never change, `on_item_clicked` closures keep their
@@ -190,3 +246,9 @@ LICENSE file, and the MSI's `License.rtf` must stay in agreement.
   `bindings.rs`/`host.rs` (IAppWindow SetIcon + `set_window_icon` with
   PENDING_ICON applied post-render). Reapply after any re-clone/pull of
   `C:\Projects\Rust\_lib\windows-rs`.
+- **Log the why, not just the what.** Format/byte-layout discoveries go
+  in `docs/FORMAT.md` (with a source citation or scan evidence); field
+  semantics go in `esf_schema.toml` next to the label they justify; new
+  reactor workarounds and sharp edges go in this file's gotchas section.
+  A workaround whose reason isn't written down gets "cleaned up" and
+  reintroduces the bug.
