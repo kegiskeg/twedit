@@ -1,0 +1,28 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+jobs:
+  build-and-release:
+    runs-on: windows-latest
+    permissions:
+      contents: write
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Rust
+      uses: dtolnay/rust-toolchain@stable
+    - name: Rust Cache
+      uses: Swatinem/rust-cache@v2
+    - name: Build Release Artifacts
+      run: .\build_release.ps1
+      shell: powershell
+    - name: Create Release
+      uses: softprops/action-gh-release@v2
+      with:
+        files: |
+          twedit-portable-release.zip
+          twedit-ui\target\wix\*.msi
+        generate_release_notes: true
