@@ -330,3 +330,36 @@ u0 = "Technology tree AI ID"
 
 [CAI_BDI_WAR_AND_PEACE_MANAGER]
 doc = "AI war/peace decision state. Rebuilt as the AI thinks; safe to leave alone when editing diplomacy."
+
+[CAMPAIGN_LOCALISATION]
+doc = "Localised text strings for the campaign."
+[CAMPAIGN_LOCALISATION.typed]
+s0 = "Localisation key"
+s1 = "Localised text"
+
+[DATE]
+doc = "A date in the campaign (year and season)."
+[DATE.typed]
+u0 = "Year"
+s0 = "Season"
+
+[CAI_BDI_COMPONENT_BLOCK_OWNS]
+doc = "AI BDI Component Block Owns."
+[CAI_BDI_COMPONENT_BLOCK_OWNS.typed]
+u0 = "BDI Information"
+u1 = "Character Resource AI ID"
+
+[CAI_WORLD_REGION_HLCIS]
+doc = "AI World Region HLCIS."
+[CAI_WORLD_REGION_HLCIS.typed]
+u1 = "HLCIS ID"
+
+[CAI_WORLD_RESOURCE_MOBILES]
+doc = "AI World Resource Mobiles."
+[CAI_WORLD_RESOURCE_MOBILES.typed]
+u3 = "Character Resource AI ID"
+u_ary11 = "BDI Information"
+u13 = "HLCIS ID"
+u_ary15 = "BDI Information"
+u_ary19 = "BDI Information"
+u_ary22 = "BDI Information"
