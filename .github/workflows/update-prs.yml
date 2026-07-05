@@ -40,9 +40,10 @@ jobs:
                 repo: context.repo.repo,
                 pull_number: pr.number,
               });
-              // "behind" = head is out of date with base, exactly the
-              // state that blocks strict required status checks.
-              if (full.mergeable_state !== 'behind') {
+              // "behind" = head is out of date with base (blocks strict
+              // required status checks); "dirty" = merge conflict, which
+              // Dependabot also resolves by rebasing/recreating its PR.
+              if (!['behind', 'dirty'].includes(full.mergeable_state)) {
                 core.info(`#${pr.number} ${pr.title}: ${full.mergeable_state}, skipping`);
                 continue;
               }
