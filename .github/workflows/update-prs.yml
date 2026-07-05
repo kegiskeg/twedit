@@ -1,0 +1,56 @@
+name: Update Stale PRs
+
+# The main ruleset requires PR branches to be up to date with main
+# (strict status checks), but GitHub never updates them automatically,
+# so auto-merge-enabled PRs stall every time main moves. This workflow
+# asks Dependabot to rebase its stale PRs after each push to main.
+#
+# Dependabot must do the push itself: an "update branch" API call made
+# with GITHUB_TOKEN would create a commit that triggers no workflows,
+# leaving the PR with no ci-success check and still unmergeable.
+# Non-Dependabot PRs (label-based automerge) have the same limitation
+# and need the "Update branch" button or a push from a real user/PAT.
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  pull-requests: write
+
+jobs:
+  rebase-dependabot:
+    name: Rebase stale Dependabot PRs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Comment "@dependabot rebase" on out-of-date PRs
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const prs = await github.paginate(github.rest.pulls.list, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              base: 'main',
+            });
+            for (const pr of prs.filter(p => p.user.login === 'dependabot[bot]')) {
+              // pulls.list omits mergeable_state; fetch the full PR.
+              const { data: full } = await github.rest.pulls.get({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: pr.number,
+              });
+              // "behind" = head is out of date with base, exactly the
+              // state that blocks strict required status checks.
+              if (full.mergeable_state !== 'behind') {
+                core.info(`#${pr.number} ${pr.title}: ${full.mergeable_state}, skipping`);
+                continue;
+              }
+              core.notice(`#${pr.number} ${pr.title}: behind main, requesting rebase`);
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: pr.number,
+                body: '@dependabot rebase',
+              });
+            }

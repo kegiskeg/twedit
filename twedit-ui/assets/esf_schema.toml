@@ -29,6 +29,9 @@ doc = "Campaign environment: holds the campaign model plus setup/preopen data."
 
 [CAMPAIGN_MODEL]
 doc = "The live campaign state: world, players, trade, pathfinding, AI."
+[CAMPAIGN_MODEL.typed]
+u7 = "Maximum Units in Army?"
+u8 = "Maximum Units in Navy?"
 
 [WORLD]
 doc = "The campaign world: factions, regions, theatres, climate, pending battles."
@@ -268,12 +271,39 @@ u0 = "Route ID"
 [FACTION_INTERNATIONAL_TRADE_ROUTES_ARRAY]
 doc = "Route IDs of this faction's international trade routes."
 
+[FACTION_ECONOMICS]
+doc = "A faction's treasury and economic state."
+[FACTION_ECONOMICS.typed]
+i0 = "Treasury"
+
 # ---------------------------------------------------------------- campaign
 
 [THEATRES]
 doc = "The campaign theatres (america, europe, india)."
 [THEATRES.typed]
 s0 = "Theatre key"
+
+[CAMPAIGN_SETUP_OPTIONS]
+doc = "Global campaign options like difficulty and unit sizes."
+[CAMPAIGN_SETUP_OPTIONS.typed]
+flt0 = "Unit Size Multiplier (1.0 = Normal, 1.5 = Large, etc.)"
+i2 = "Campaign Difficulty"
+i3 = "Battle Difficulty"
+u5 = "Maximum Units per Army/Navy"
+
+[FACTION_FLAG_AND_COLOURS]
+doc = "Faction uniform and UI colors."
+[FACTION_FLAG_AND_COLOURS.typed]
+s0 = "Flag Path"
+byte0 = "Primary Color (R)"
+byte1 = "Primary Color (G)"
+byte2 = "Primary Color (B)"
+byte3 = "Secondary Color (R)"
+byte4 = "Secondary Color (G)"
+byte5 = "Secondary Color (B)"
+byte6 = "Tertiary Color (R)"
+byte7 = "Tertiary Color (G)"
+byte8 = "Tertiary Color (B)"
 
 [CAMPAIGN_VICTORY_CONDITIONS]
 doc = "Victory conditions: region list, target year, region count, prestige flag, campaign type (0 short, 1 long, 2 prestige, 3 global domination, 4 unplayable)."

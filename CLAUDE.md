@@ -36,8 +36,14 @@ esf-parser/                      # Core ESF parsing/editing engine (no UI deps)
     enums.rs                     # Magic headers + type tags, doc'd per spec
     objects.rs                   # EsfDocument arena, EsfValue, EsfEdit, editing
     parser.rs                    # Iterative frame-stack parser + tests
+    pack_parser.rs               # Locates ETW via Steam library folders, reads
+                                 #   local_en.pack (PFH0) → localisation.loc →
+                                 #   key→English map (faction/region names);
+                                 #   returns None gracefully without Steam/ETW
     bin/schema_scan.rs           # Field-statistics research tool
     bin/debug_parser.rs          # Quick tree dumper
+    bin/esf_diff.rs              # Semantic save diff (offset-insensitive);
+                                 #   prints node paths of changed values
 
 twedit-ui/                       # Windows-native UI crate
   src/
@@ -179,12 +185,17 @@ To label more fields (the main ongoing research task):
 2. Pick an undocumented node; ranges/samples usually give the meaning away
    (faction/region IDs are huge u32s, turn counters cap at the current
    turn, keys match db table entries).
-3. Cross-reference etwng's `esfxml/lib/esf_semantic_converter.rb`
-   (github.com/taw/etwng) — ~150 node types annotated. Its
-   `annotate_rec_nth` keys (`[:s, 0]`) map directly to `typed` keys (`s0`);
-   its `annotate_rec` keys use **member indices that count child nodes**,
+3. For a specific hypothesis, use the diff technique: change exactly one
+   thing in-game (spend money, move an army), save again, then
+   `cargo run --release -p esf-parser --bin esf_diff -- before after` —
+   the changed paths name the field.
+4. Cross-reference etwng's semantic converter — a local copy is vendored
+   at `docs/esf_semantic_converter.rb` (origin: github.com/taw/etwng,
+   `esfxml/lib/`) — ~150 node types annotated. Its `annotate_rec_nth`
+   keys (`[:s, 0]`) map directly to `typed` keys (`s0`); its
+   `annotate_rec` keys use **member indices that count child nodes**,
    so verify against scan samples before transcribing.
-4. Add to `twedit-ui/assets/esf_schema.toml`; extend
+5. Add to `twedit-ui/assets/esf_schema.toml`; extend
    `real_assets_parse_and_resolve_diplomacy` if the node matters.
 
 ### windows-reactor UI gotchas
