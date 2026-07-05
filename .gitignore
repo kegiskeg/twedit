@@ -5,3 +5,9 @@
 .claude/
 *.log
 /twedit-portable-release.zip
+
+# Local research/scratch material, never committed
+/scratch/
+/steam_test.exe
+/steam_test.pdb
+/CLAUDE-example.md
