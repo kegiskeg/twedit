@@ -19,12 +19,13 @@ jobs:
     - name: Setup windows-rs dependency
       shell: bash
       run: |
+        cp windows-rs.patch ../windows-rs.patch
         mkdir -p ../_lib
         cd ../_lib
         git clone https://github.com/microsoft/windows-rs.git
         cd windows-rs
         git checkout a4f7b2cb7c63c6bb7fc77a2affe57145be1d8c4f
-        git apply ${{ github.workspace }}/windows-rs.patch
+        git apply ../../windows-rs.patch
     - name: Rust Cache
       uses: Swatinem/rust-cache@v2
     - name: Check
