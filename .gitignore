@@ -11,3 +11,20 @@
 /steam_test.exe
 /steam_test.pdb
 /CLAUDE-example.md
+
+# Total War save files — large + personal, never committed
+*.empire_save
+*.empire_save_multiplayer
+*.esf
+*.bak
+
+# Editor / AI-assistant tooling (per-machine, not project source)
+/.antigravity/
+/.clinerules/
+/.cursor/
+/.opencode/
+/.vexp/
+/.windsurf/
+/.github/copilot-instructions.md
+/AGENTS.md
+/vexp.toml

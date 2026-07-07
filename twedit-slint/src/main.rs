@@ -12,7 +12,8 @@
 
 slint::include_modules!();
 
-use esf_parser::campaign::{extract_factions, find_first_node};
+use esf_parser::campaign::{extract_factions, extract_regions, find_first_node};
+use esf_parser::descriptions::{self, type_class, Descriptions};
 use esf_parser::objects::{EsfDocument, EsfEdit, NodeId, NO_PARENT};
 use i_slint_backend_winit::WinitWindowAccessor;
 use slint::{Color, ComponentHandle, ModelRc, SharedString, VecModel};
@@ -40,6 +41,8 @@ struct State {
     edits: Edits,
     expanded: HashSet<NodeId>,
     selected: Option<NodeId>,
+    /// Merged legacy XML + curated TOML field labels (+ ETW localisation).
+    descs: Descriptions,
 }
 
 /// Integer with thousands separators (`-1234567` -> `-1,234,567`).
@@ -95,22 +98,30 @@ fn build_tree(doc: &EsfDocument, st: &State) -> Vec<TreeRow> {
     out
 }
 
-fn build_values(doc: &EsfDocument, id: NodeId, edits: &Edits) -> Vec<ValueRow> {
-    doc.node_value_entries(id)
+fn build_values(doc: &EsfDocument, id: NodeId, edits: &Edits, descs: &Descriptions) -> Vec<ValueRow> {
+    let name = doc.node_name(id);
+    let entries: Vec<_> = doc.node_value_entries(id).collect();
+    // Type class of every value, for the schema's nth-occurrence-of-type
+    // ("s0"/"i1") label addressing.
+    let classes: Vec<&'static str> = entries.iter().map(|(_, r)| type_class(&r.value)).collect();
+    entries
+        .iter()
         .take(MAX_VALUE_ROWS)
-        .map(|(vid, rec)| {
-            let staged = edits.get(&vid);
+        .enumerate()
+        .map(|(i, (vid, rec))| {
+            let staged = edits.get(vid);
             let value = match staged {
                 Some(EsfEdit::Value(v)) => doc.format_value(v),
                 Some(EsfEdit::Text(s)) => s.clone(),
                 None => doc.format_value(&rec.value),
             };
+            let label = descs.label(name, &classes, i, &value).unwrap_or_default();
             ValueRow {
-                value_id: vid as i32,
+                value_id: *vid as i32,
                 value: value.into(),
                 original: doc.format_value(&rec.value).into(),
                 type_name: EsfDocument::value_type_name(&rec.value).into(),
-                label: SharedString::new(),
+                label: label.into(),
                 edited: staged.is_some(),
                 editable: rec.value.is_editable(),
             }
@@ -147,6 +158,35 @@ fn build_factions(doc: &EsfDocument) -> Vec<FactionRow> {
         .collect()
 }
 
+fn build_regions(doc: &EsfDocument) -> Vec<RegionRow> {
+    let owner: HashMap<u32, String> = extract_factions(doc)
+        .into_iter()
+        .map(|f| (f.id, f.name))
+        .collect();
+    extract_regions(doc)
+        .into_iter()
+        .map(|r| RegionRow {
+            key: r.key.as_str().into(),
+            theatre: r.theatre.as_str().into(),
+            owner: owner
+                .get(&r.owner_faction)
+                .map(|s| s.as_str())
+                .unwrap_or("—")
+                .into(),
+            population: r
+                .population
+                .map(|p| fmt_int(p as i64))
+                .unwrap_or_else(|| "—".into())
+                .into(),
+            wealth: r
+                .town_wealth
+                .map(|(_, w)| fmt_int(w as i64))
+                .unwrap_or_else(|| "—".into())
+                .into(),
+        })
+        .collect()
+}
+
 fn model<T: Clone + 'static>(rows: Vec<T>) -> ModelRc<T> {
     ModelRc::from(Rc::new(VecModel::from(rows)))
 }
@@ -163,7 +203,7 @@ fn refresh_tree(app: &AppWindow, st: &State) {
 fn refresh_values(app: &AppWindow, st: &State) {
     match (&st.doc, st.selected) {
         (Some(doc), Some(id)) if (id as usize) < doc.nodes.len() => {
-            app.set_values(model(build_values(doc, id, &st.edits)));
+            app.set_values(model(build_values(doc, id, &st.edits, &st.descs)));
             app.set_node_path(doc.node_path(id).into());
             let node = doc.node(id);
             app.set_node_doc(
@@ -215,6 +255,7 @@ fn refresh_status(app: &AppWindow, st: &State) {
 fn refresh_all(app: &AppWindow, st: &State) {
     if let Some(doc) = &st.doc {
         app.set_factions(model(build_factions(doc)));
+        app.set_regions(model(build_regions(doc)));
     }
     refresh_tree(app, st);
     refresh_values(app, st);
@@ -268,6 +309,16 @@ fn load_into(app: &AppWindow, state: &Rc<RefCell<State>>, path: &str) {
 fn main() -> Result<(), slint::PlatformError> {
     let app = AppWindow::new()?;
     let state: Rc<RefCell<State>> = Rc::new(RefCell::new(State::default()));
+
+    // Field labels: embedded legacy XML + curated TOML, augmented with ETW
+    // localisation (faction/region key -> English) when Steam/ETW is present.
+    {
+        let mut d = descriptions::embedded();
+        if let Some(locs) = esf_parser::pack_parser::get_etw_localisation() {
+            d.loc_map = locs;
+        }
+        state.borrow_mut().descs = d;
+    }
 
     // --- Window chrome (frameless): native drag + close ---
     let weak = app.as_weak();
@@ -410,6 +461,61 @@ fn main() -> Result<(), slint::PlatformError> {
                 app.set_status_text(format!("Saved, but failed to re-parse: {e}").into());
             }
         }
+    });
+
+    // --- Search (node-name substring) ---
+    let weak = app.as_weak();
+    let st_search = state.clone();
+    app.on_search(move |q| {
+        let Some(app) = weak.upgrade() else { return };
+        let doc = {
+            let st = st_search.borrow();
+            st.doc.clone()
+        };
+        let Some(doc) = doc else { return };
+        let q = q.to_string();
+        if q.trim().len() < 2 {
+            app.set_search_results(model(Vec::<SearchResult>::new()));
+            return;
+        }
+        let results: Vec<SearchResult> = doc
+            .search_nodes(&q, 200)
+            .into_iter()
+            .map(|id| SearchResult {
+                node_id: id as i32,
+                path: doc.node_path(id).into(),
+            })
+            .collect();
+        app.set_search_results(model(results));
+    });
+
+    // --- Jump to a search result (select + reveal, then clear) ---
+    let weak = app.as_weak();
+    let st_goto = state.clone();
+    app.on_goto_search(move |id| {
+        let Some(app) = weak.upgrade() else { return };
+        let id = id as NodeId;
+        {
+            let mut st = st_goto.borrow_mut();
+            if let Some(doc) = st.doc.clone() {
+                let mut cur = id;
+                loop {
+                    let parent = doc.node(cur).parent;
+                    if parent == NO_PARENT {
+                        break;
+                    }
+                    st.expanded.insert(parent);
+                    cur = parent;
+                }
+            }
+            st.selected = Some(id);
+        }
+        app.set_search_results(model(Vec::<SearchResult>::new()));
+        app.set_query(SharedString::new());
+        app.set_view(0);
+        let st = st_goto.borrow();
+        refresh_tree(&app, &st);
+        refresh_values(&app, &st);
     });
 
     // --- Initial load ---

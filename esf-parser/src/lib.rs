@@ -9,6 +9,7 @@
 //!   by every front-end.
 
 pub mod campaign;
+pub mod descriptions;
 pub mod enums;
 pub mod objects;
 pub mod parser;

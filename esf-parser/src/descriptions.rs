@@ -11,7 +11,7 @@
 //!    robust when optional values shift positions). Curated from etwng's
 //!    semantic converter and empirical scans; wins over the legacy XML.
 
-use esf_parser::objects::EsfValue;
+use crate::objects::EsfValue;
 use quick_xml::events::Event;
 use quick_xml::Reader;
 use serde::Deserialize;
@@ -78,7 +78,7 @@ impl Descriptions {
 /// etwng's converters (i/u/s/bool/flt/byte/u2/v2/v3, `_ary` suffix for
 /// arrays) so their annotations can be transcribed directly.
 pub fn type_class(value: &EsfValue) -> &'static str {
-    use esf_parser::enums::ArrayElem;
+    use crate::enums::ArrayElem;
     match value {
         EsfValue::Bool(_) => "bool",
         EsfValue::I8(_) => "i8",
@@ -148,6 +148,16 @@ pub fn load(legacy_xml: &str, schema_toml: &str) -> Descriptions {
     }
 
     Descriptions { nodes, loc_map: HashMap::new() }
+}
+
+/// Load the descriptions embedded in the crate (legacy XML + curated TOML).
+/// Both front-ends call this so labels stay identical across UIs. Callers may
+/// then set `loc_map` from [`crate::pack_parser::get_etw_localisation`].
+pub fn embedded() -> Descriptions {
+    load(
+        include_str!("../assets/NodesDescriptions.xml"),
+        include_str!("../assets/esf_schema.toml"),
+    )
 }
 
 /// Parse the legacy NodesDescriptions.xml into name -> positional labels.
@@ -337,7 +347,7 @@ s0 = "Faction key"
 
     #[test]
     fn type_class_vocabulary() {
-        use esf_parser::enums::ArrayElem;
+        use crate::enums::ArrayElem;
         assert_eq!(type_class(&EsfValue::I32(0)), "i");
         assert_eq!(type_class(&EsfValue::U32(0)), "u");
         assert_eq!(type_class(&EsfValue::Utf16 { start: 0, chars: 0 }), "s");

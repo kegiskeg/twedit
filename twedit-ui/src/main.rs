@@ -1,10 +1,9 @@
 #![windows_subsystem = "windows"]
 
-mod descriptions;
 mod theme;
 
-use descriptions::Descriptions;
 use esf_parser::campaign::{extract_factions, extract_regions, FactionRow, RegionRow};
+use esf_parser::descriptions::{self, Descriptions};
 use esf_parser::objects::{EsfDocument, EsfEdit, EsfValue, NodeId, NodeKind, NO_PARENT};
 use std::collections::{HashMap, HashSet};
 use std::sync::atomic::{AtomicU64, Ordering};
@@ -1226,9 +1225,7 @@ fn app_shell(cx: &mut RenderCx) -> Element {
         // twedit's curated schema (which wins on conflicts).
         let set_descs = set_descs.clone();
         std::thread::spawn(move || {
-            let xml_str = include_str!("../assets/NodesDescriptions.xml");
-            let toml_str = include_str!("../assets/esf_schema.toml");
-            let mut d = descriptions::load(xml_str, toml_str);
+            let mut d = descriptions::embedded();
             if let Some(locs) = esf_parser::pack_parser::get_etw_localisation() {
                 d.loc_map = locs;
             }

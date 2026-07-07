@@ -30,11 +30,26 @@ export struct ValueRow {
     editable: bool,
 }
 
+export struct RegionRow {
+    key: string,
+    theatre: string,
+    owner: string,
+    population: string,
+    wealth: string,
+}
+
+export struct SearchResult {
+    node-id: int,
+    path: string,
+}
+
 export component AppWindow inherits Window {
     // Data in.
     in property <[FactionRow]> factions;
+    in property <[RegionRow]> regions;
     in property <[TreeRow]> tree-rows;
     in property <[ValueRow]> values;
+    in property <[SearchResult]> search-results;
     in property <string> status-text;
     in property <string> doc-stats;
     in property <string> node-path;
@@ -45,6 +60,7 @@ export component AppWindow inherits Window {
     // State shared with Rust.
     in-out property <bool> edit-mode: false;
     in-out property <int> view: 0;
+    in-out property <string> query;
     // Events out.
     callback start-drag();
     callback close-clicked();
@@ -54,6 +70,8 @@ export component AppWindow inherits Window {
     callback toggle-expand(int);
     callback edit-value(int, string);
     callback toggle-edit(bool);
+    callback search(string);
+    callback goto-search(int);
 
     title: "Twedit — Total War Save Editor";
     background: Theme.base;
@@ -219,6 +237,43 @@ export component AppWindow inherits Window {
 
                 Rectangle { horizontal-stretch: 1; }
 
+                // Search field.
+                VerticalLayout {
+                    alignment: center;
+                    Rectangle {
+                        width: 240px;
+                        height: 30px;
+                        border-radius: 6px;
+                        border-width: 1px;
+                        border-color: sinput.has-focus ? Theme.accent : Theme.border;
+                        background: Theme.well;
+                        animate border-color { duration: 110ms; }
+                        HorizontalLayout {
+                            padding-left: 10px;
+                            padding-right: 10px;
+                            sinput := TextInput {
+                                text <=> root.query;
+                                color: Theme.text;
+                                font-size: 13px;
+                                vertical-alignment: center;
+                                single-line: true;
+                                selection-background-color: Theme.accent-deep;
+                                edited => {
+                                    root.search(self.text);
+                                }
+                            }
+                        }
+                        if root.query == "": Text {
+                            x: 10px;
+                            height: parent.height;
+                            text: "Search nodes…";
+                            color: Theme.faint;
+                            font-size: 13px;
+                            vertical-alignment: center;
+                        }
+                    }
+                }
+
                 // View switcher.
                 NavTab {
                     label: "Explorer";
@@ -232,6 +287,13 @@ export component AppWindow inherits Window {
                     active: root.view == 1;
                     clicked => {
                         root.view = 1;
+                    }
+                }
+                NavTab {
+                    label: "Regions";
+                    active: root.view == 2;
+                    clicked => {
+                        root.view = 2;
                     }
                 }
             }
@@ -530,6 +592,120 @@ export component AppWindow inherits Window {
                                         font-size: 13px;
                                         vertical-alignment: center;
                                     }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            // ---- Regions table ----
+            if root.view == 2: HorizontalLayout {
+                padding: 12px;
+                Rectangle {
+                    background: Theme.panel;
+                    border-radius: Theme.radius;
+                    border-width: 1px;
+                    border-color: Theme.border;
+                    drop-shadow-blur: 14px;
+                    drop-shadow-color: Theme.shadow;
+                    drop-shadow-offset-y: 3px;
+                    clip: true;
+                    VerticalLayout {
+                        Rectangle {
+                            height: 32px;
+                            background: Theme.panel-alt;
+                            Rectangle {
+                                y: parent.height - 1px;
+                                height: 1px;
+                                background: Theme.border;
+                            }
+                            HorizontalLayout {
+                                padding-left: 14px;
+                                padding-right: 14px;
+                                spacing: 12px;
+                                Text { width: 200px; text: "REGION"; color: Theme.faint; font-size: 10px; letter-spacing: 1px; vertical-alignment: center; }
+                                Text { width: 100px; text: "THEATRE"; color: Theme.faint; font-size: 10px; letter-spacing: 1px; vertical-alignment: center; }
+                                Text { width: 220px; text: "OWNER"; color: Theme.faint; font-size: 10px; letter-spacing: 1px; vertical-alignment: center; }
+                                Text { width: 120px; text: "POPULATION"; color: Theme.faint; font-size: 10px; letter-spacing: 1px; vertical-alignment: center; }
+                                Text { text: "TOWN WEALTH"; color: Theme.faint; font-size: 10px; letter-spacing: 1px; vertical-alignment: center; }
+                            }
+                        }
+                        ListView {
+                            for r[i] in root.regions: Rectangle {
+                                height: 34px;
+                                background: rtouch.has-hover ? Theme.header : (mod(i, 2) == 1 ? Theme.panel-alt : Theme.panel);
+                                animate background { duration: 70ms; }
+                                Rectangle {
+                                    y: parent.height - 1px;
+                                    height: 1px;
+                                    background: Theme.border-soft;
+                                }
+                                rtouch := TouchArea { }
+                                HorizontalLayout {
+                                    padding-left: 14px;
+                                    padding-right: 14px;
+                                    spacing: 12px;
+                                    Text { width: 200px; text: r.key; color: Theme.text; font-size: 13px; vertical-alignment: center; overflow: elide; }
+                                    Text { width: 100px; text: r.theatre; color: Theme.dim; font-size: 12px; vertical-alignment: center; }
+                                    Text { width: 220px; text: r.owner; color: Theme.dim; font-size: 13px; vertical-alignment: center; overflow: elide; }
+                                    Text { width: 120px; text: r.population; color: Theme.dim; font-family: Theme.mono; font-size: 13px; vertical-alignment: center; }
+                                    Text { text: r.wealth; color: Theme.accent-bright; font-family: Theme.mono; font-size: 13px; vertical-alignment: center; }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            // ---- Search results overlay ----
+            if root.search-results.length > 0: Rectangle {
+                x: parent.width - 552px;
+                y: 12px;
+                width: 528px;
+                height: min(parent.height - 24px, root.search-results.length * 28px + 38px);
+                background: Theme.raised;
+                border-radius: Theme.radius;
+                border-width: 1px;
+                border-color: Theme.accent;
+                drop-shadow-blur: 22px;
+                drop-shadow-color: #000000b0;
+                drop-shadow-offset-y: 5px;
+                clip: true;
+                VerticalLayout {
+                    Rectangle {
+                        height: 34px;
+                        background: Theme.header;
+                        HorizontalLayout {
+                            padding-left: 12px;
+                            padding-right: 12px;
+                            Text {
+                                text: "Search results (\{root.search-results.length})";
+                                color: Theme.accent-bright;
+                                font-weight: 700;
+                                font-size: 12px;
+                                vertical-alignment: center;
+                            }
+                        }
+                    }
+                    ListView {
+                        for res in root.search-results: Rectangle {
+                            height: 28px;
+                            background: restouch.has-hover ? Theme.header : transparent;
+                            restouch := TouchArea {
+                                clicked => {
+                                    root.goto-search(res.node-id);
+                                }
+                            }
+                            HorizontalLayout {
+                                padding-left: 12px;
+                                padding-right: 12px;
+                                Text {
+                                    text: res.path;
+                                    color: Theme.text;
+                                    font-size: 12px;
+                                    vertical-alignment: center;
+                                    overflow: elide;
                                 }
                             }
                         }

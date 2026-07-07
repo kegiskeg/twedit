@@ -44,29 +44,33 @@ esf-parser/                      # Core ESF parsing/editing engine (no UI deps)
                                  #   regions) shared by every front-end; field
                                  #   positions follow the schema TOML + scan
                                  #   report
+    descriptions.rs              # Merges legacy XML + esf_schema.toml field
+                                 #   labels; `embedded()` loads both, shared by
+                                 #   every front-end
     bin/schema_scan.rs           # Field-statistics research tool
     bin/debug_parser.rs          # Quick tree dumper
     bin/esf_diff.rs              # Semantic save diff (offset-insensitive);
                                  #   prints node paths of changed values
+  assets/
+    esf_schema.toml              # Curated node docs + field labels (edit this)
+    NodesDescriptions.xml        # Legacy 2009 descriptions (26/678 populated)
 
 twedit-ui/                       # WinUI front-end (windows-reactor) — mature
   src/
     main.rs                      # App shell: Explorer/Factions/Regions views,
                                  #   tree, value grid, pending-edits drawer
-    descriptions.rs              # Merges legacy XML + esf_schema.toml labels
     theme.rs                     # "Imperial ledger" theme (umber/parchment/
                                  #   gold) via XAML overrides
-
-twedit-slint/                    # Slint front-end — in-progress migration off
-  ui/app.slint                   #   WinUI for full styling freedom + to drop
-  src/main.rs                    #   the patched-windows-rs dependency. Shares
-  build.rs                       #   esf-parser (incl. campaign). Frameless
-                                 #   window, custom title bar, imperial-ledger
-                                 #   theme, virtualized ListView tables.
-  assets/
-    esf_schema.toml              # Curated node docs + field labels (edit this)
-    NodesDescriptions.xml        # Legacy 2009 descriptions (26/678 populated)
+  assets/icon.ico                # App/window icon
   wix/                           # MSI installer definition (cargo-wix)
+
+twedit-slint/                    # Slint front-end — migration off WinUI for
+  ui/theme.slint                 #   full styling freedom + to drop the patched
+  ui/app.slint                   #   windows-rs dep. Shares esf-parser (campaign
+  src/main.rs                    #   + descriptions). Frameless custom chrome,
+  build.rs                       #   imperial-ledger theme, Explorer editor
+                                 #   (tree+value grid+edit/save), Factions +
+                                 #   Regions tables, search. Feature-near parity.
 
 docs/                            # Format spec and research (see above)
 ```
