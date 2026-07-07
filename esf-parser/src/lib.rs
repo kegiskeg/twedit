@@ -5,7 +5,10 @@
 //! - `parser`: Functions to load and parse ESF files from bytes or disk.
 //! - `objects`: Structural components like nodes, values, and the document arena.
 //! - `enums`: Constants for magic headers and type tags.
+//! - `campaign`: UI-agnostic semantic extraction of factions/regions, shared
+//!   by every front-end.
 
+pub mod campaign;
 pub mod enums;
 pub mod objects;
 pub mod parser;

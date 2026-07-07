@@ -12,7 +12,7 @@
 //! Nodes missing from a particular game's saves simply yield fewer rows —
 //! metadata degrades silently per the project's failure-mode rules.
 
-use esf_parser::objects::{EsfDocument, EsfValue, NodeId};
+use crate::objects::{EsfDocument, EsfValue, NodeId};
 
 /// One faction, summarized for the Factions view.
 #[derive(Debug, Clone, PartialEq)]
@@ -209,8 +209,8 @@ pub fn extract_regions(doc: &EsfDocument) -> Vec<RegionRow> {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use esf_parser::enums::EsfType;
-    use esf_parser::objects::{
+    use crate::enums::EsfType;
+    use crate::objects::{
         EsfHeader, EsfItem, EsfNodeData, EsfValueRecord, NodeKind, NO_PARENT,
     };
 

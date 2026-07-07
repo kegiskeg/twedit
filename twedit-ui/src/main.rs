@@ -1,11 +1,10 @@
 #![windows_subsystem = "windows"]
 
-mod campaign;
 mod descriptions;
 mod theme;
 
-use campaign::{extract_factions, extract_regions, FactionRow, RegionRow};
 use descriptions::Descriptions;
+use esf_parser::campaign::{extract_factions, extract_regions, FactionRow, RegionRow};
 use esf_parser::objects::{EsfDocument, EsfEdit, EsfValue, NodeId, NodeKind, NO_PARENT};
 use std::collections::{HashMap, HashSet};
 use std::sync::atomic::{AtomicU64, Ordering};
