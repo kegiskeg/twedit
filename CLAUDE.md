@@ -253,6 +253,29 @@ Known sharp edges:
   pending-edits drawer) shifted every later sibling and left ghost
   visuals of the removed row. Render a zero-height placeholder in the
   slot instead of dropping the row (see `drawer_slot` in `main.rs`).
+- **Custom window title bar** works: put a `TitleBar` widget anywhere in
+  the tree and `host.rs` calls `SetExtendsContentIntoTitleBar(true)` +
+  `SetTitleBar`, so the system caption buttons overlay the right and the
+  widget's `.content(el)` (center) / `.footer(el)` (RightHeader) become
+  the drag region. twedit puts the wordmark in `.content` — the app stops
+  reading as a stock Windows window. `.title(..)` on `App` still sets the
+  taskbar text.
+- **`on_pointer_pressed`/`on_tapped` can misfire at mount** when the
+  cursor happens to sit over the element as it's first laid out — a
+  segmented control built from bordered `text_block`s with
+  `on_pointer_pressed` toggled state to `true` on launch. Build clickable
+  chips from `button().on_click(..)` instead: Button `Click` re-attaches
+  every render and does NOT fire on mount (see `segmented` in `main.rs`,
+  which replaced the WinUI `ToggleSwitch`).
+- **Custom `TextBox` ControlTemplate** parses through XamlReader if it
+  keeps the parts the control toggles by name: `ContentElement`
+  (a `ScrollViewer`) and `PlaceholderTextContentPresenter` (a `TextBlock`
+  bound to `PlaceholderText`), plus a `BorderElement` for the visual
+  states. twedit's is a flat umber well with a gold bottom-border on
+  Focused. Full `TreeViewItem` / `ScrollBar` templates were NOT rewritten
+  — their `TreeViewItemPresenter`/multi-part contracts are deep and
+  crash-prone; recoloring via the lightweight `*Brush` resource keys is
+  the low-risk win and already matches the palette.
 - `Thickness` only has `From<f64>`; use `Thickness::xy` or a literal.
 - `ListBox` doesn't impl `ElementExt` — wrap in `Element::from` first.
 - Bad theme XAML fails at app start, not compile time — smoke-launch after

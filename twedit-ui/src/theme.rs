@@ -194,4 +194,70 @@ pub const THEME_XAML: &str = r##"<ResourceDictionary
             </Setter.Value>
         </Setter>
     </Style>
+
+    <!-- Fully custom TextBox: a flat umber well with a gold underline on
+         focus (no WinUI double-border / reveal edge). Requires the named
+         parts ContentElement (ScrollViewer) + PlaceholderTextContentPresenter
+         the control toggles by name. -->
+    <Style TargetType="TextBox">
+        <Setter Property="Background" Value="#0F0D09"/>
+        <Setter Property="Foreground" Value="#EAE3D0"/>
+        <Setter Property="BorderBrush" Value="#3F3826"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Padding" Value="8,5,8,6"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal"/>
+                                <VisualState x:Name="PointerOver">
+                                    <VisualState.Setters>
+                                        <Setter Target="BorderElement.BorderBrush" Value="#57503F"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="Focused">
+                                    <VisualState.Setters>
+                                        <Setter Target="BorderElement.BorderBrush" Value="#C9A23F"/>
+                                        <Setter Target="BorderElement.BorderThickness" Value="1,1,1,2"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="Disabled">
+                                    <VisualState.Setters>
+                                        <Setter Target="BorderElement.Background" Value="#1A1711"/>
+                                        <Setter Target="ContentElement.Foreground" Value="#57503F"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Border x:Name="BorderElement" Grid.Row="1"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="3"/>
+                        <TextBlock x:Name="PlaceholderTextContentPresenter" Grid.Row="1"
+                                Text="{TemplateBinding PlaceholderText}"
+                                Foreground="#736C59"
+                                Margin="{TemplateBinding BorderThickness}"
+                                Padding="{TemplateBinding Padding}"
+                                IsHitTestVisible="False"
+                                TextWrapping="NoWrap"/>
+                        <ScrollViewer x:Name="ContentElement" Grid.Row="1"
+                                Margin="{TemplateBinding BorderThickness}"
+                                Padding="{TemplateBinding Padding}"
+                                HorizontalScrollBarVisibility="Hidden"
+                                VerticalScrollBarVisibility="Hidden"
+                                IsTabStop="False"
+                                AutomationProperties.AccessibilityView="Raw"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>"##;

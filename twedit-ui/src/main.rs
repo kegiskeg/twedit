@@ -1099,6 +1099,37 @@ fn nav_tab(label: &str, active: bool, on_click: impl Fn() + 'static) -> Element 
     vstack((tab, indicator)).spacing(0.0).into()
 }
 
+/// A two-segment pill (e.g. View | Edit) built from Buttons, so it carries
+/// none of the WinUI ToggleSwitch look while keeping reliable Click wiring
+/// (Button clicks re-attach every render — no mount-time misfire, and each
+/// segment is UIA-invokable for headless testing). The active segment fills
+/// gold; clicking a segment reports its bool value through `on_select`.
+fn segmented<F: Fn(bool) + Clone + 'static>(
+    left: &str,
+    right: &str,
+    right_active: bool,
+    on_select: F,
+) -> Element {
+    let seg = |label: &str, active: bool, value: bool, on: F| -> Element {
+        Element::from(button(label).on_click(move || on(value)))
+            .background(if active { theme::ACCENT } else { theme::HEADER })
+            .foreground(if active { theme::BASE } else { theme::TEXT_DIM })
+    };
+    Element::from(
+        border(
+            hstack((
+                seg(left, !right_active, false, on_select.clone()),
+                seg(right, right_active, true, on_select),
+            ))
+            .spacing(0.0),
+        )
+        .border_brush(theme::BORDER)
+        .border_thickness(Thickness::uniform(1.0))
+        .corner_radius(4.0),
+    )
+    .vertical_alignment(VerticalAlignment::Center)
+}
+
 fn app_shell(cx: &mut RenderCx) -> Element {
     let (doc_state, set_doc_state) = cx.use_async_state(DocState::default());
     let (descs, set_descs) = cx.use_async_state(DescState::default());
@@ -1419,12 +1450,6 @@ fn app_shell(cx: &mut RenderCx) -> Element {
     .spacing(8.0);
 
     let toolbar_left = hstack((
-        Element::from(wordmark).margin(Thickness {
-            left: 2.0,
-            top: 0.0,
-            right: 8.0,
-            bottom: 0.0,
-        }),
         button("Open")
             .icon(Symbol::OpenFile)
             .on_click(on_open.clone())
@@ -1476,16 +1501,10 @@ fn app_shell(cx: &mut RenderCx) -> Element {
             .on_click(on_search)
             .enabled(has_doc),
         toolbar_divider(),
-        Element::from(
-            ToggleSwitch::new(edit_mode)
-                .on_content("Edit")
-                .off_content("View")
-                .on_toggled({
-                    let set_edit_mode = set_edit_mode.clone();
-                    move |on| set_edit_mode.call(on)
-                }),
-        )
-        .vertical_alignment(VerticalAlignment::Center),
+        segmented("View", "Edit", edit_mode, {
+            let set_edit_mode = set_edit_mode.clone();
+            move |on: bool| set_edit_mode.call(on)
+        }),
     ))
     .spacing(6.0);
 
@@ -1893,6 +1912,17 @@ fn app_shell(cx: &mut RenderCx) -> Element {
             bottom: 1.0,
         });
 
+    // Custom window title bar: our wordmark replaces the generic Windows
+    // caption. Placing a TitleBar anywhere in the tree makes the reactor call
+    // SetExtendsContentIntoTitleBar(true) + SetTitleBar (see host.rs), so the
+    // system caption buttons overlay the right and the brand becomes the drag
+    // region — the app stops reading as a stock Windows window.
+    let title_bar_el = Element::from(
+        TitleBar::new("").content(
+            Element::from(wordmark).vertical_alignment(VerticalAlignment::Center),
+        ),
+    );
+
     // The drawer slot always exists (zero-height placeholder when empty) so
     // the shell keeps a stable row structure — removing a middle row shifts
     // every later element and confuses the positional reconciler diff.
@@ -1911,13 +1941,15 @@ fn app_shell(cx: &mut RenderCx) -> Element {
     };
 
     let shell_rows: Vec<Element> = vec![
-        Element::from(toolbar_strip).grid_row(0),
-        nav_strip.grid_row(1),
-        body.grid_row(2),
-        drawer_slot.with_key("edit-drawer").grid_row(3),
-        Element::from(status_bar).grid_row(4),
+        title_bar_el.grid_row(0),
+        Element::from(toolbar_strip).grid_row(1),
+        nav_strip.grid_row(2),
+        body.grid_row(3),
+        drawer_slot.with_key("edit-drawer").grid_row(4),
+        Element::from(status_bar).grid_row(5),
     ];
     let shell_row_defs = vec![
+        GridLength::Auto,
         GridLength::Auto,
         GridLength::Auto,
         GridLength::Star(1.0),
