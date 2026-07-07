@@ -1,0 +1,175 @@
+// "Imperial ledger" palette + reusable themed widgets. Kept separate from
+// app.slint so the window file stays about layout/data. Everything here is
+// hand-drawn (no std-widgets), so nothing inherits a foreign Fluent look.
+
+export global Theme {
+    // Surfaces — warm near-black umber, layered for depth.
+    out property <color> base: #100e0a;
+    out property <color> panel: #1a1711;
+    out property <color> panel-alt: #201c14;
+    out property <color> raised: #241f16;
+    out property <color> header: #221e15;
+    out property <color> well: #0d0b07;
+    out property <color> border: #3a3324;
+    out property <color> border-soft: #2a2519;
+    // Ink.
+    out property <color> text: #efe8d5;
+    out property <color> dim: #a89f88;
+    out property <color> faint: #6f6754;
+    // Accents.
+    out property <color> accent: #c9a23f;
+    out property <color> accent-bright: #e7c368;
+    out property <color> accent-deep: #8a6e22;
+    out property <color> crimson: #b4463c;
+    out property <color> shadow: #00000070;
+    // Type / metrics.
+    out property <string> font: "Segoe UI";
+    out property <string> serif: "Georgia";
+    out property <string> mono: "Consolas";
+    out property <length> radius: 8px;
+}
+
+// Toolbar button — rounded chip, soft shadow, gold edge on hover.
+export component Btn inherits Rectangle {
+    in property <string> label;
+    in property <bool> enabled: true;
+    in property <bool> primary: false;
+    callback clicked;
+    height: 32px;
+    horizontal-stretch: 0;
+    border-radius: 6px;
+    border-width: 1px;
+    border-color: touch.has-hover && root.enabled ? Theme.accent : Theme.border;
+    background: touch.has-hover && root.enabled ? Theme.raised : Theme.panel-alt;
+    opacity: root.enabled ? 1.0 : 0.45;
+    drop-shadow-blur: 5px;
+    drop-shadow-color: Theme.shadow;
+    drop-shadow-offset-y: 1px;
+    animate border-color, background { duration: 110ms; }
+    HorizontalLayout {
+        padding-left: 15px;
+        padding-right: 15px;
+        Text {
+            text: root.label;
+            color: root.primary ? Theme.accent-bright : Theme.text;
+            font-family: Theme.font;
+            font-size: 13px;
+            font-weight: root.primary ? 700 : 500;
+            vertical-alignment: center;
+        }
+    }
+    touch := TouchArea {
+        enabled: root.enabled;
+        clicked => {
+            root.clicked();
+        }
+    }
+}
+
+// Caption-bar window control (minimize / maximize / close).
+export component WinBtn inherits Rectangle {
+    in property <string> glyph;
+    in property <bool> danger: false;
+    callback clicked;
+    width: 46px;
+    background: touch.has-hover ? (root.danger ? Theme.crimson : Theme.border) : transparent;
+    animate background { duration: 90ms; }
+    touch := TouchArea {
+        clicked => {
+            root.clicked();
+        }
+    }
+    Text {
+        text: root.glyph;
+        color: Theme.text;
+        font-size: 13px;
+        horizontal-alignment: center;
+        vertical-alignment: center;
+    }
+}
+
+// Top view-switcher tab with a gold underline when active.
+export component NavTab inherits Rectangle {
+    in property <string> label;
+    in property <bool> active;
+    callback clicked;
+    background: touch.has-hover ? Theme.header : transparent;
+    animate background { duration: 100ms; }
+    HorizontalLayout {
+        padding-left: 16px;
+        padding-right: 16px;
+        Text {
+            text: root.label;
+            color: root.active ? Theme.accent-bright : Theme.dim;
+            font-family: Theme.font;
+            font-size: 13px;
+            font-weight: root.active ? 700 : 500;
+            vertical-alignment: center;
+        }
+    }
+    Rectangle {
+        y: parent.height - 2px;
+        height: 2px;
+        background: root.active ? Theme.accent : transparent;
+    }
+    touch := TouchArea {
+        clicked => {
+            root.clicked();
+        }
+    }
+}
+
+// Small rounded type-name badge.
+export component TypeBadge inherits Rectangle {
+    in property <string> label;
+    background: Theme.panel-alt;
+    border-radius: 4px;
+    border-width: 1px;
+    border-color: Theme.border-soft;
+    HorizontalLayout {
+        padding-left: 7px;
+        padding-right: 7px;
+        Text {
+            text: root.label;
+            color: Theme.dim;
+            font-family: Theme.mono;
+            font-size: 11px;
+            vertical-alignment: center;
+        }
+    }
+}
+
+// Themed editable value field (our own well around a raw TextInput, so it
+// has none of the std-widget look). Gold focus underline.
+export component ValueField inherits Rectangle {
+    in-out property <string> text;
+    in property <bool> edited;
+    callback edited-text(string);
+    height: 26px;
+    background: Theme.well;
+    border-radius: 4px;
+    border-width: 1px;
+    border-color: input.has-focus ? Theme.accent : Theme.border;
+    animate border-color { duration: 110ms; }
+    HorizontalLayout {
+        padding-left: 8px;
+        padding-right: 8px;
+        input := TextInput {
+            text <=> root.text;
+            color: root.edited ? Theme.accent-bright : Theme.text;
+            font-family: Theme.mono;
+            font-size: 13px;
+            vertical-alignment: center;
+            single-line: true;
+            selection-background-color: Theme.accent-deep;
+            edited => {
+                root.edited-text(self.text);
+            }
+        }
+    }
+    Rectangle {
+        y: parent.height - 2px;
+        height: 2px;
+        background: input.has-focus ? Theme.accent : transparent;
+    }
+}
