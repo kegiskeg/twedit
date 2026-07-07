@@ -1,6 +1,7 @@
 [workspace]
 members = [
     "esf-parser",
-    "twedit-ui"
+    "twedit-ui",
+    "twedit-slint"
 ]
 resolver = "2"

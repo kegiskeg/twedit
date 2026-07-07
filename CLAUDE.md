@@ -40,21 +40,29 @@ esf-parser/                      # Core ESF parsing/editing engine (no UI deps)
                                  #   local_en.pack (PFH0) → localisation.loc →
                                  #   key→English map (faction/region names);
                                  #   returns None gracefully without Steam/ETW
+    campaign.rs                  # UI-agnostic semantic extraction (factions,
+                                 #   regions) shared by every front-end; field
+                                 #   positions follow the schema TOML + scan
+                                 #   report
     bin/schema_scan.rs           # Field-statistics research tool
     bin/debug_parser.rs          # Quick tree dumper
     bin/esf_diff.rs              # Semantic save diff (offset-insensitive);
                                  #   prints node paths of changed values
 
-twedit-ui/                       # Windows-native UI crate
+twedit-ui/                       # WinUI front-end (windows-reactor) — mature
   src/
     main.rs                      # App shell: Explorer/Factions/Regions views,
                                  #   tree, value grid, pending-edits drawer
-    campaign.rs                  # Semantic extraction (factions, regions)
-                                 #   from the generic tree; field positions
-                                 #   follow the schema TOML + scan report
     descriptions.rs              # Merges legacy XML + esf_schema.toml labels
     theme.rs                     # "Imperial ledger" theme (umber/parchment/
                                  #   gold) via XAML overrides
+
+twedit-slint/                    # Slint front-end — in-progress migration off
+  ui/app.slint                   #   WinUI for full styling freedom + to drop
+  src/main.rs                    #   the patched-windows-rs dependency. Shares
+  build.rs                       #   esf-parser (incl. campaign). Frameless
+                                 #   window, custom title bar, imperial-ledger
+                                 #   theme, virtualized ListView tables.
   assets/
     esf_schema.toml              # Curated node docs + field labels (edit this)
     NodesDescriptions.xml        # Legacy 2009 descriptions (26/678 populated)
@@ -73,7 +81,8 @@ ever re-cloned or hard-reset — the patch inventory is at the bottom of this
 file.
 
 ```sh
-cargo run -p twedit-ui             # run the editor (Windows only)
+cargo run -p twedit-ui             # WinUI editor (needs patched windows-rs)
+cargo run -p twedit-slint          # Slint editor (no patched clone needed)
 cargo check --workspace            # typecheck
 cargo test --workspace             # all tests (parser + UI schema tests)
 cargo clippy --workspace           # pedantic lints are warnings, not errors
@@ -282,6 +291,38 @@ Known sharp edges:
   editing `theme.rs`.
 - Setter types are `AsyncSetState<T>` / `SetState<T>`; controlled
   `text_box` works because the reconciler only pushes `Text` on def change.
+
+### Slint front-end (`twedit-slint`)
+
+Being built to migrate off WinUI: full styling freedom and no patched
+windows-rs clone. `ui/app.slint` is compiled by `build.rs`
+(`slint_build::compile`) and pulled in with `slint::include_modules!()`.
+Pin `slint` and `slint-build` to the SAME version (1.17, released in
+lockstep). GPL-3.0 edition is zero-cost and matches the project licence.
+
+- **Name mangling:** every `-` in a `.slint` identifier becomes `_` in the
+  generated Rust (`display-name` → `display_name`, prop `rows` →
+  `set_rows`, callback `foo-bar` → `on_foo_bar`). Only `in`/`in-out` props
+  get a Rust setter; `out` gets only a getter. Types: `string`→
+  `SharedString`, `int`→`i32`, `[T]`→`ModelRc<T>` (fill with
+  `ModelRc::from(Rc::new(VecModel::from(vec)))`).
+- **Frameless custom chrome:** `Window { no-frame: true; resize-border-width:
+  6px; }`. There is NO built-in title-bar widget — hand-roll it. Window
+  dragging uses the winit accessor: `backend-winit` feature + the
+  `i-slint-backend-winit` crate, then a `.slint` `TouchArea` `pointer-event`
+  fires a `start-drag` callback and Rust does
+  `app.window().with_winit_window(|w| w.drag_window())` (native aero-snap).
+  Minimize/maximize are Window in-out props settable in `.slint`
+  (`root.minimized = true`); close is a callback → `app.window().hide()`.
+- **`ListView` virtualizes** (only visible rows realized) — good for the
+  factions table. But its scroll math gets shaky past ~2–3M rows, so the
+  full 2M-node tree must be fed a WINDOWED model, not a flat VecModel.
+  Prefer a plain `ListView` + custom row template over `StandardTableView`
+  for arbitrary styling.
+- Bad `.slint` fails the BUILD (compile error), unlike the WinUI theme XAML
+  which fails at app start — a nicer feedback loop. Still smoke-launch for
+  layout/render correctness (femtovg default renderer; `renderer-skia`
+  available for crisper text).
 
 ### Licensing
 

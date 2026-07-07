@@ -1,0 +1,282 @@
+import { ListView } from "std-widgets.slint";
+
+// "Imperial ledger" palette — warm umber / parchment / antique gold. Shared
+// singleton so every component reads the same brushes (mirrors theme.rs in
+// the WinUI build).
+export global Theme {
+    out property <color> base: #14120d;
+    out property <color> panel: #1a1711;
+    out property <color> panel-alt: #17140f;
+    out property <color> header: #221e15;
+    out property <color> border: #3a3324;
+    out property <color> text: #eae3d0;
+    out property <color> dim: #a89f88;
+    out property <color> accent: #c9a23f;
+    out property <color> accent-bright: #e3be5c;
+    out property <color> crimson: #a83a32;
+}
+
+export struct FactionRow {
+    name: string,
+    key: string,
+    status: string,
+    treasury: int,
+    swatch: color,
+    major: bool,
+    destroyed: bool,
+}
+
+export struct TreeRow {
+    label: string,
+    depth: int,
+    node-id: int,
+}
+
+// One caption-bar window control (minimize / maximize / close). No OS chrome
+// is drawn (no-frame), so these are ours.
+component WinBtn inherits Rectangle {
+    in property <string> glyph;
+    in property <bool> danger: false;
+    callback clicked;
+    width: 46px;
+    background: touch.has-hover ? (danger ? Theme.crimson : Theme.border) : transparent;
+    animate background { duration: 90ms; }
+    touch := TouchArea {
+        clicked => {
+            root.clicked();
+        }
+    }
+    Text {
+        text: root.glyph;
+        color: Theme.text;
+        font-size: 13px;
+        horizontal-alignment: center;
+        vertical-alignment: center;
+    }
+}
+
+export component AppWindow inherits Window {
+    in property <[FactionRow]> factions;
+    in property <[TreeRow]> tree-rows;
+    in property <string> status-text;
+    in property <string> doc-stats;
+    callback start-drag();
+    callback close-clicked();
+
+    title: "Twedit — Total War Save Editor";
+    background: Theme.base;
+    default-font-size: 13px;
+    preferred-width: 1280px;
+    preferred-height: 840px;
+    no-frame: true;
+    resize-border-width: 6px;
+
+    VerticalLayout {
+        // --- Custom title bar (drag region + window controls) ---
+        Rectangle {
+            height: 42px;
+            background: Theme.header;
+            Rectangle {
+                y: parent.height - 1px;
+                height: 1px;
+                background: Theme.border;
+            }
+            // Drag layer sits underneath the content; plain Text/Rectangles
+            // do not capture pointer events, so drags anywhere on the bar
+            // reach this, while the WinBtn TouchAreas win over themselves.
+            TouchArea {
+                pointer-event(e) => {
+                    if (e.button == PointerEventButton.left && e.kind == PointerEventKind.down) {
+                        root.start-drag();
+                    }
+                }
+                double-clicked => {
+                    root.maximized = !root.maximized;
+                }
+            }
+            HorizontalLayout {
+                padding-left: 14px;
+                spacing: 8px;
+                VerticalLayout {
+                    alignment: center;
+                    HorizontalLayout {
+                        spacing: 8px;
+                        Text {
+                            text: "Twedit";
+                            color: Theme.accent;
+                            font-size: 18px;
+                            font-weight: 700;
+                            vertical-alignment: center;
+                        }
+                        Text {
+                            text: "TOTAL WAR SAVE EDITOR";
+                            color: Theme.dim;
+                            font-size: 9px;
+                            vertical-alignment: center;
+                        }
+                    }
+                }
+                Rectangle { horizontal-stretch: 1; }
+                WinBtn {
+                    glyph: "\u{2013}";
+                    clicked => {
+                        root.minimized = true;
+                    }
+                }
+                WinBtn {
+                    glyph: "\u{25A1}";
+                    clicked => {
+                        root.maximized = !root.maximized;
+                    }
+                }
+                WinBtn {
+                    glyph: "\u{2715}";
+                    danger: true;
+                    clicked => {
+                        root.close-clicked();
+                    }
+                }
+            }
+        }
+
+        // --- Body: tree | factions table ---
+        HorizontalLayout {
+            // Explorer tree
+            Rectangle {
+                width: 320px;
+                background: Theme.panel;
+                Rectangle {
+                    x: parent.width - 1px;
+                    width: 1px;
+                    background: Theme.border;
+                }
+                ListView {
+                    for row in root.tree-rows: Rectangle {
+                        height: 26px;
+                        background: touch.has-hover ? Theme.header : transparent;
+                        touch := TouchArea { }
+                        HorizontalLayout {
+                            padding-left: 8px + row.depth * 16px;
+                            padding-right: 8px;
+                            Text {
+                                text: row.label;
+                                color: Theme.text;
+                                vertical-alignment: center;
+                                overflow: elide;
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Factions table
+            Rectangle {
+                background: Theme.panel;
+                VerticalLayout {
+                    Rectangle {
+                        height: 30px;
+                        background: Theme.header;
+                        Rectangle {
+                            y: parent.height - 1px;
+                            height: 1px;
+                            background: Theme.border;
+                        }
+                        HorizontalLayout {
+                            padding-left: 12px;
+                            padding-right: 12px;
+                            spacing: 10px;
+                            Text { width: 20px; text: ""; }
+                            Text { width: 220px; text: "Faction"; color: Theme.dim; vertical-alignment: center; }
+                            Text { width: 160px; text: "Key"; color: Theme.dim; vertical-alignment: center; }
+                            Text { width: 100px; text: "Status"; color: Theme.dim; vertical-alignment: center; }
+                            Text { text: "Treasury"; color: Theme.dim; vertical-alignment: center; }
+                        }
+                    }
+                    ListView {
+                        for f[i] in root.factions: Rectangle {
+                            height: 34px;
+                            background: mod(i, 2) == 1 ? Theme.panel-alt : Theme.panel;
+                            Rectangle {
+                                y: parent.height - 1px;
+                                height: 1px;
+                                background: Theme.border;
+                            }
+                            HorizontalLayout {
+                                padding-left: 12px;
+                                padding-right: 12px;
+                                spacing: 10px;
+                                VerticalLayout {
+                                    alignment: center;
+                                    width: 20px;
+                                    Rectangle {
+                                        width: 14px;
+                                        height: 14px;
+                                        background: f.swatch;
+                                        border-color: Theme.border;
+                                        border-width: 1px;
+                                        border-radius: 2px;
+                                    }
+                                }
+                                Text {
+                                    width: 220px;
+                                    text: f.name;
+                                    color: f.destroyed ? Theme.dim : Theme.text;
+                                    vertical-alignment: center;
+                                    overflow: elide;
+                                }
+                                Text {
+                                    width: 160px;
+                                    text: f.key;
+                                    color: Theme.dim;
+                                    vertical-alignment: center;
+                                    overflow: elide;
+                                }
+                                Text {
+                                    width: 100px;
+                                    text: f.status;
+                                    color: f.destroyed ? Theme.crimson : Theme.text;
+                                    vertical-alignment: center;
+                                }
+                                Text {
+                                    text: "\{f.treasury}";
+                                    color: Theme.text;
+                                    vertical-alignment: center;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // --- Status bar ---
+        Rectangle {
+            height: 26px;
+            background: Theme.header;
+            Rectangle {
+                y: 0;
+                height: 1px;
+                background: Theme.border;
+            }
+            HorizontalLayout {
+                padding-left: 12px;
+                padding-right: 12px;
+                Text {
+                    text: root.status-text;
+                    color: Theme.dim;
+                    font-size: 12px;
+                    vertical-alignment: center;
+                    horizontal-alignment: left;
+                }
+                Rectangle { horizontal-stretch: 1; }
+                Text {
+                    text: root.doc-stats;
+                    color: Theme.dim;
+                    font-size: 12px;
+                    vertical-alignment: center;
+                    horizontal-alignment: right;
+                }
+            }
+        }
+    }
+}
