@@ -36,10 +36,6 @@ pub struct Descriptions {
 }
 
 impl Descriptions {
-    pub fn node(&self, name: &str) -> Option<&NodeSchema> {
-        self.nodes.get(name)
-    }
-
     /// Node-level doc line for the header above the value grid.
     pub fn doc(&self, name: &str) -> Option<&str> {
         self.nodes.get(name)?.doc.as_deref()

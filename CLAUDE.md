@@ -47,9 +47,14 @@ esf-parser/                      # Core ESF parsing/editing engine (no UI deps)
 
 twedit-ui/                       # Windows-native UI crate
   src/
-    main.rs                      # App shell, tree, value grid (windows-reactor)
+    main.rs                      # App shell: Explorer/Factions/Regions views,
+                                 #   tree, value grid, pending-edits drawer
+    campaign.rs                  # Semantic extraction (factions, regions)
+                                 #   from the generic tree; field positions
+                                 #   follow the schema TOML + scan report
     descriptions.rs              # Merges legacy XML + esf_schema.toml labels
-    theme.rs                     # Custom slate/blue theme via XAML overrides
+    theme.rs                     # "Imperial ledger" theme (umber/parchment/
+                                 #   gold) via XAML overrides
   assets/
     esf_schema.toml              # Curated node docs + field labels (edit this)
     NodesDescriptions.xml        # Legacy 2009 descriptions (26/678 populated)
@@ -101,10 +106,20 @@ kill <pid>
 Staying alive past load is the pass signal: theme XAML and control
 templates are parsed at startup, so a bad `theme.rs` kills the process
 before the window ever paints. For visual changes, prefer verifying with
-real screenshots (computer-use) over guessing from code — several past
-bugs (dead flyout handlers, mis-styled controls) were only visible live.
-Note: tiny controls (the ToggleSwitch track) are hard to hit via scaled
-screenshot coordinates; drive them with Tab+Space instead.
+real screenshots over guessing from code — several past bugs (dead flyout
+handlers, mis-styled controls, a stale drawer ghost) were only visible live.
+
+**Focus-free driving (works even while a game owns the foreground):**
+computer-use's permission resolver cannot see this unpackaged dev exe, and
+stealing focus/cursor is hostile if the user is mid-game. The proven
+pattern instead: capture with `PrintWindow(hwnd, dc, 2)` (flag 2 =
+PW_RENDERFULLCONTENT, required for WinUI composition surfaces), and drive
+controls via **UI Automation** (`System.Windows.Automation` from
+powershell.exe): InvokePattern for buttons (our custom Button template
+exposes its content text as the UIA Name), TogglePattern for the Edit/View
+switch, ValuePattern.SetValue for text boxes — SetValue fires TextChanged,
+so edit staging is fully testable headlessly. Neither API moves focus or
+the cursor.
 
 ## Architecture
 
@@ -227,6 +242,40 @@ Known sharp edges:
 - **`text_block` has no `text_wrapping`** in this reactor version (only
   `text_box` does) — long text must be truncated (see the node doc line,
   capped at 220 chars).
+- **SelectorBar and AutoSuggestBox callbacks are NOT wired** (verified in
+  `backend/winui/generated_attach_event.rs`): `on_selection_changed` /
+  `on_query_submitted` exist on the builders but are never attached —
+  silent no-ops. The view-switcher tabs are custom Buttons for this
+  reason. BreadcrumbBar `ItemClicked` (payload = index) and NumberBox
+  `ValueChanged` ARE wired.
+- **Keep grid row structures stable across renders.** The reconciler
+  diffs children positionally; conditionally removing a middle row (the
+  pending-edits drawer) shifted every later sibling and left ghost
+  visuals of the removed row. Render a zero-height placeholder in the
+  slot instead of dropping the row (see `drawer_slot` in `main.rs`).
+- **Custom window title bar** works: put a `TitleBar` widget anywhere in
+  the tree and `host.rs` calls `SetExtendsContentIntoTitleBar(true)` +
+  `SetTitleBar`, so the system caption buttons overlay the right and the
+  widget's `.content(el)` (center) / `.footer(el)` (RightHeader) become
+  the drag region. twedit puts the wordmark in `.content` — the app stops
+  reading as a stock Windows window. `.title(..)` on `App` still sets the
+  taskbar text.
+- **`on_pointer_pressed`/`on_tapped` can misfire at mount** when the
+  cursor happens to sit over the element as it's first laid out — a
+  segmented control built from bordered `text_block`s with
+  `on_pointer_pressed` toggled state to `true` on launch. Build clickable
+  chips from `button().on_click(..)` instead: Button `Click` re-attaches
+  every render and does NOT fire on mount (see `segmented` in `main.rs`,
+  which replaced the WinUI `ToggleSwitch`).
+- **Custom `TextBox` ControlTemplate** parses through XamlReader if it
+  keeps the parts the control toggles by name: `ContentElement`
+  (a `ScrollViewer`) and `PlaceholderTextContentPresenter` (a `TextBlock`
+  bound to `PlaceholderText`), plus a `BorderElement` for the visual
+  states. twedit's is a flat umber well with a gold bottom-border on
+  Focused. Full `TreeViewItem` / `ScrollBar` templates were NOT rewritten
+  — their `TreeViewItemPresenter`/multi-part contracts are deep and
+  crash-prone; recoloring via the lightweight `*Brush` resource keys is
+  the low-risk win and already matches the palette.
 - `Thickness` only has `From<f64>`; use `Thickness::xy` or a literal.
 - `ListBox` doesn't impl `ElementExt` — wrap in `Element::from` first.
 - Bad theme XAML fails at app start, not compile time — smoke-launch after
